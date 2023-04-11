@@ -1,0 +1,62 @@
+//
+//  cai_message_t.swift
+//  ESD
+//
+//  Created by msi on 2023/4/9.
+//
+
+/* argument
+{{ argument }}
+*/
+
+import Foundation
+import EndpointSecurity
+
+{% for event in argument.events %}
+    {{event}}:{{argument.events[event]}}
+    {% if argument.redirect[argument.events[event]] %}
+        {{argument.redirect[argument.events[event]]}}
+    {% endif %}
+{% endfor %}
+
+struct cai_message_t { //对标es_message_t
+    public var version: UInt32
+    public var time: timespec
+    public var mach_time: UInt64
+    public var deadline: UInt64
+    public var process: UnsafeMutablePointer<es_process_t>
+    public var seq_num: UInt64
+    public var action_type: es_action_type_t
+    public var action: es_message_t.__Unnamed_union_action
+    public var event_type: es_event_type_t
+    public var thread: UnsafeMutablePointer<es_thread_t>? /* field available only if message version >= 4 */
+    public var global_seq_num: UInt64 /* field available only if message version >= 4 */
+    public var event: UnsafeRawPointer //指向具体的es_event_t类型
+    
+    
+    init(es_msg msg: UnsafePointer<es_message_t>) {
+        version = msg.pointee.version
+        time = msg.pointee.time
+        mach_time = msg.pointee.mach_time
+        deadline = msg.pointee.deadline
+        process = msg.pointee.process
+        seq_num = msg.pointee.seq_num
+        action_type = msg.pointee.action_type
+        action = msg.pointee.action
+        event_type = msg.pointee.event_type
+        global_seq_num = msg.pointee.global_seq_num
+
+        switch msg.pointee.event_type {
+        {% for event in argument.events %}
+            {% if argument.redirect[argument.events[event]] %}
+        case ES_EVENT_TYPE_NOTIFY_XP_MALWARE_REMEDIATED :
+            event = UnsafeRawPointer(msg.pointee.event.xp_malware_remediated)
+            {% else %}
+        event = withUnsafePointer(to: msg.pointee.event.chdir) { p -> UnsafeRawPointer in
+            UnsafeRawPointer(p)
+        }
+            {% endif %}
+        {% endfor %}
+        }
+    }
+}

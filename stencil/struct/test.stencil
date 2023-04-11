@@ -1,0 +1,120 @@
+
+/* argument
+{{ argument }}
+*/
+
+import Foundation
+import EndpointSecurity
+
+protocol ES_Memory {
+    associatedtype T:ES_Memory
+    func em_size() -> Int
+    func em_write(_ p: UnsafeMutableRawPointer)
+    static func em_read(_ p: UnsafeMutableRawPointer) -> UnsafeMutablePointer<T>
+}
+
+extension ES_Memory {
+    func em_size() -> Int {
+        return MemoryLayout.size(ofValue: self)
+    }
+    
+    func em_write(_ p: UnsafeMutableRawPointer) {
+        let size = MemoryLayout.size(ofValue: self)
+        p.bindMemory(to: T.self, capacity: 1).pointee = self as! Self.T
+    }
+    
+    static func em_read(_ p: UnsafeMutableRawPointer) -> UnsafeMutablePointer<T> {
+        p.bindMemory(to: T.self, capacity: 1)
+    }
+}
+
+{% for type in argument.types %}
+    {% if not type.points %}
+extension {{ type.name }} : ES_Memory {
+    typealias T = {{type.name}}
+}
+    {% else %}
+extension {{ type.name }} : ES_Memory {
+    typealias T = {{type.name}}
+
+    func em_size() -> Int {
+        var size = MemoryLayout<T>.size
+        {% if type.points %}
+            {% for point in type.points %}
+                {% if point.size %}
+                    p.advanced(by: size).(to: {{point.type}}.self, capacity: self.{{point.size}}).pointee = self.{{point.name}}.bindMemory(to:{{point.type}}.self, capacity: {{point.size}}).pointee
+                    size += MemoryLayout<{{point.type}}>.size*self.{{point.size}}
+                    {% continue %}
+                {% endif %}
+                {% if point.optional %}
+                    if let {{point.name}} = self.{{point.name}} {
+                        size += 1
+                        size += {{point.name}}.pointee.em_size()
+                    } else {
+                        size += 1
+                    }
+                {% else %}
+                    size += self.{{point.name}}.pointee.em_size()
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        return size
+    }
+
+
+    func em_write(_ p: UnsafeMutableRawPointer) {
+        var size = MemoryLayout<T>.size
+        p.bindMemory(to: T.self, capacity: 1).pointee = self
+        {% for point in type.points %}
+            {% if point.size %}
+                p.advanced(by: size).(to: {{point.type}}.self, capacity: self.{{point.size}}).pointee = self.{{point.name}}.bindMemory(to:{{point.type}}.self, capacity: {{point.size}}).pointee
+                size += MemoryLayout<{{point.type}}>.size*self.{{point.size}}
+                {% continue %}
+            {% endif %}
+            {% if point.optional %}
+                if let {{point.name}} = self.{{point.name}} {
+                    p.bindMemory(to: Bool.self, capacity: 1).pointee = true
+                    size += 1
+                    {{point.name}}.pointee.em_write(p.advanced(by: size))
+                    size += {{point.name}}.pointee.em_size()
+                } else {
+                    p.bindMemory(to: Bool.self, capacity: 1).pointee = false
+                    size += 1
+                }
+            {% else %}
+                self.{{point.name}}.pointee.em_write(p.advanced(by: size))
+                size += self.{{point.name}}.pointee.em_size()
+            {% endif %}
+        {% endfor %}
+    }
+
+
+    static func em_read(_ p: UnsafeMutableRawPointer) -> UnsafeMutablePointer<T> {
+        let tp = p.bindMemory(to: T.self, capacity: 1)
+        var size = MemoryLayout<T>.size
+        {% for point in type.points %}
+            {% if point.size %}
+                tp.pointee.{{point.name}} = p.advanced(by: size).bindMemory(to: {{point.type}}, capacity:1)
+                size += MemoryLayout<{{point.type}}>.size*tp.pointee.{{point.size}}
+                {% continue %}
+            {% endif %}
+            {% if point.optional %}
+                if p.advanced(by: size).bindMemory(to: Bool.self, capacity: 1).pointee {
+                    size += 1
+                    tp.pointee.{{point.name}} = {{point.type}}.em_read(p.advanced(by: size))
+                    size += tp.pointee.{{point.name}}!.pointee.em_size()
+                } else {
+                    size += 1
+                    tp.pointee.{{point.name}} = nil
+                }
+            {% else %}
+                tp.pointee.{{point.name}} = {{point.type}}.em_read(p.advanced(by: size))
+                size += tp.pointee.{{point.name}}.pointee.em_size()
+            {% endif %}
+        {% endfor %}
+        return tp
+    }
+}
+
+    {% endif %}
+{% endfor %}

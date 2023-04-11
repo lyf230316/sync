@@ -1,0 +1,114 @@
+sources:
+  - .
+templates:
+  - .
+args:
+  types: 
+    - name: es_message_t
+      points: 
+        - name: process
+          type: es_process_t
+        - name: thread
+          type: es_thread_t
+          optional: true
+    - name: es_process_t
+      points:
+        - name: executable
+          type: es_file_t
+        - name: tty
+          type: es_file_t
+          optional: true
+    - name: es_file_t
+      points:
+        - name: path
+          type: es_string_token_t
+    - name: es_string_token_t
+      points:
+        - name: data
+          type: CChar
+          size: length
+    - name: es_thread_t
+    - name: es_event_access_t
+    - name: es_event_chdir_t
+    - name: es_event_chroot_t
+    - name: es_event_clone_t
+    - name: es_event_close_t
+    - name: es_event_copyfile_t
+    - name: es_event_create_t
+    - name: es_event_cs_invalidated_t
+    - name: es_event_deleteextattr_t
+    - name: es_event_dup_t
+    - name: es_event_exchangedata_t
+    - name: es_event_exec_t
+    - name: es_event_exit_t
+    - name: es_event_file_provider_materialize_t
+    - name: es_event_file_provider_update_t
+    - name: es_event_fcntl_t
+    - name: es_event_fork_t
+    - name: es_event_fsgetpath_t
+    - name: es_event_get_task_t
+    - name: es_event_get_task_read_t
+    - name: es_event_get_task_inspect_t
+    - name: es_event_get_task_name_t
+    - name: es_event_getattrlist_t
+    - name: es_event_getextattr_t
+    - name: es_event_iokit_open_t
+    - name: es_event_kextload_t
+    - name: es_event_kextunload_t
+    - name: es_event_link_t
+    - name: es_event_listextattr_t
+    - name: es_event_lookup_t
+    - name: es_event_mmap_t
+    - name: es_event_mount_t
+    - name: es_event_mprotect_t
+    - name: es_event_open_t
+    - name: es_event_proc_check_t
+    - name: es_event_proc_suspend_resume_t
+    - name: es_event_pty_close_t
+    - name: es_event_pty_grant_t
+    - name: es_event_readdir_t
+    - name: es_event_readlink_t
+    - name: es_event_remote_thread_create_t
+    - name: es_event_remount_t
+    - name: es_event_rename_t
+    - name: es_event_searchfs_t
+    - name: es_event_setacl_t
+    - name: es_event_setattrlist_t
+    - name: es_event_setextattr_t
+    - name: es_event_setflags_t
+    - name: es_event_setmode_t
+    - name: es_event_setowner_t
+    - name: es_event_settime_t
+    - name: es_event_setuid_t
+    - name: es_event_setgid_t
+    - name: es_event_seteuid_t
+    - name: es_event_setegid_t
+    - name: es_event_setreuid_t
+    - name: es_event_setregid_t
+    - name: es_event_signal_t
+    - name: es_event_stat_t
+    - name: es_event_trace_t
+    - name: es_event_truncate_t
+    - name: es_event_uipc_bind_t
+    - name: es_event_uipc_connect_t
+    - name: es_event_unlink_t
+    - name: es_event_unmount_t
+    - name: es_event_utimes_t
+    - name: es_event_write_t
+    - name: es_event_authentication_t
+    - name: es_event_xp_malware_detected_t
+    - name: es_event_xp_malware_remediated_t
+    - name: es_event_lw_session_login_t
+    - name: es_event_lw_session_logout_t
+    - name: es_event_lw_session_lock_t
+    - name: es_event_lw_session_unlock_t
+    - name: es_event_screensharing_attach_t
+    - name: es_event_screensharing_detach_t
+    - name: es_event_openssh_login_t
+    - name: es_event_openssh_logout_t
+    - name: es_event_login_login_t
+    - name: es_event_login_logout_t
+    - name: es_event_btm_launch_item_add_t
+    - name: es_event_btm_launch_item_remove_t
+
+output: .
