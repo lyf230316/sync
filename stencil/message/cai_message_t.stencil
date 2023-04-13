@@ -12,13 +12,6 @@
 import Foundation
 import EndpointSecurity
 
-{% for event in argument.events %}
-    {{event}}:{{argument.events[event]}}
-    {% if argument.redirect[argument.events[event]] %}
-        {{argument.redirect[argument.events[event]]}}
-    {% endif %}
-{% endfor %}
-
 struct cai_message_t { //对标es_message_t
     public var version: UInt32
     public var time: timespec
@@ -48,13 +41,13 @@ struct cai_message_t { //对标es_message_t
 
         switch msg.pointee.event_type {
         {% for event in argument.events %}
+        case {{event}} :
             {% if argument.redirect[argument.events[event]] %}
-        case ES_EVENT_TYPE_NOTIFY_XP_MALWARE_REMEDIATED :
-            event = UnsafeRawPointer(msg.pointee.event.xp_malware_remediated)
-            {% else %}
-        event = withUnsafePointer(to: msg.pointee.event.chdir) { p -> UnsafeRawPointer in
-            UnsafeRawPointer(p)
-        }
+            event = UnsafeRawPointer(msg.pointee.event.{{argument.redirect[argument.events[event]]}})
+            {% else %}   
+            event = withUnsafePointer(to: msg.pointee.event.{{argument.propertyName[argument.events[event]]}}) { p -> UnsafeRawPointer in
+                UnsafeRawPointer(p)
+            }
             {% endif %}
         {% endfor %}
         }
