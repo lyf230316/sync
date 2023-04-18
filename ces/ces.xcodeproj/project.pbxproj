@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C5B7A9829EE95A000A0AE73 /* test.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5B7A9629EE95A000A0AE73 /* test.h */; };
+		1C5B7A9929EE95A000A0AE73 /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5B7A9729EE95A000A0AE73 /* test.c */; };
 		6EB1E94929ED70C7001A2A61 /* ces.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EB1E94729ED70C7001A2A61 /* ces.h */; };
 		6EB1E94A29ED70C7001A2A61 /* ces.c in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1E94829ED70C7001A2A61 /* ces.c */; };
 		6EB1E94D29ED70DE001A2A61 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB1E94C29ED70DE001A2A61 /* libEndpointSecurity.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C5B7A9629EE95A000A0AE73 /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		1C5B7A9729EE95A000A0AE73 /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
 		6EB1E94029ED6F03001A2A61 /* libces.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libces.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB1E94729ED70C7001A2A61 /* ces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ces.h; sourceTree = "<group>"; };
 		6EB1E94829ED70C7001A2A61 /* ces.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ces.c; sourceTree = "<group>"; };
@@ -34,6 +38,8 @@
 		6EB1E93729ED6F03001A2A61 = {
 			isa = PBXGroup;
 			children = (
+				1C5B7A9629EE95A000A0AE73 /* test.h */,
+				1C5B7A9729EE95A000A0AE73 /* test.c */,
 				6EB1E94729ED70C7001A2A61 /* ces.h */,
 				6EB1E94829ED70C7001A2A61 /* ces.c */,
 				6EB1E94129ED6F03001A2A61 /* Products */,
@@ -64,6 +70,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C5B7A9829EE95A000A0AE73 /* test.h in Headers */,
 				6EB1E94929ED70C7001A2A61 /* ces.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EB1E94A29ED70C7001A2A61 /* ces.c in Sources */,
+				1C5B7A9929EE95A000A0AE73 /* test.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,7 +253,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4KDWBQAQFX;
+				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -259,7 +267,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4KDWBQAQFX;
+				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;

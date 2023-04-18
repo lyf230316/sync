@@ -1,0 +1,22 @@
+
+#ifndef ces_h
+#define ces_h
+
+#include <stdio.h>
+#include <EndpointSecurity/EndpointSecurity.h>
+
+{% for type in argument.types %}
+size_t ces_write_{{type.name}}(void *p,{{type.name}} *name_{{type.name}});
+{% if type.points %}
+size_t ces_write_{{type.name}}_points(void *p,{{type.name}} *name_{{type.name}});
+{% endif %}
+{% endfor %}
+
+{% for type in argument.types %}
+{{type.name}}* ces_read_{{type.name}}(void* p, size_t* size);
+{% if type.points %}
+size_t ces_read_{{type.name}}_points(void *p,{{type.name}} *name_{{type.name}});
+{% endif %}
+{% endfor %}
+
+#endif /* ces_h */

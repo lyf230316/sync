@@ -1,0 +1,99 @@
+
+#include "ces.h"
+#include <string.h>
+
+{% for type in argument.types %}
+
+size_t ces_write_{{type.name}}(void *p,{{type.name}} *name_{{type.name}}) {
+    if (!name_{{type.name}}) {
+        return 0;
+    }
+    size_t offset = 0;
+    size_t size = sizeof({{type.name}});
+    if (p) {
+        memcpy(p,name_{{type.name}},size);
+    }
+    offset += size;
+    {% if type.points %}
+    size = ces_write_{{type.name}}_points(p ? p+offset : p, name_{{type.name}});
+    offset += size;
+    {% endif %}
+    {% if type.enum %}
+    switch (name_{{type.name}}->event_type) {
+    {% for event in argument.events %}
+        case {{event}}:{
+        {% if argument.redirect[argument.events[event]] %}
+            size = ces_write_{{argument.events[event]}}(p ? p+offset : p, name_{{type.name}}->event.{{argument.propertyName[argument.events[event]]}});
+            offset += size;
+        {% else %}
+            size = ces_write_{{argument.events[event]}}_points(p ? p+offset : p,&(name_{{type.name}}->event.{{argument.propertyName[argument.events[event]]}}));
+            offset += size;
+        {% endif %}
+        }break;
+    {% endfor %}
+        default:
+            break;
+    }
+    {% endif %}
+    return offset;
+}
+
+{% if type.points %}
+size_t ces_write_{{type.name}}_points(void *p,{{type.name}} *name_{{type.name}}) {
+    if (!name_{{type.name}}) {
+        return 0;
+    }
+    size_t offset = 0;
+    size_t size = 0;
+    {% for point in type.points %}
+        {% if point.size %}
+    if (p) {
+        memcpy(p+offset,name_{{type.name}}->{{point.name}},name_{{type.name}}->{{point.size}});
+    }
+    offset += name_{{type.name}}->{{point.size}};
+        {% else %}
+    size = ces_write_{{point.type}}(p ? p+offset : p, name_{{type.name}}->{{point.name}});
+    offset += size;
+        {% endif %}
+    {% endfor %}
+    return offset;
+}
+{% endif %}
+{% endfor %}
+
+{% for type in argument.types %}
+{{type.name}}* ces_read_{{type.name}}(void* p, size_t* size) {
+    if (!p) {
+        return NULL;
+    }
+    size_t offset = 0;
+    {{type.name}} *name_{{type.name}} = p;
+    offset += sizeof({{type.name}});
+    {% if type.points %}
+    size_t size = ces_read_{{type.name}}_points(p+offset,name_{{type.name}});
+    offset += size;
+    {% endif %}
+    *size = offset;
+    return name_{{type.name}};
+}
+
+{% if type.points %}
+size_t ces_read_{{type.name}}_points(void *p,{{type.name}} *name_{{type.name}}) {
+    size_t offset = 0;
+    {% for point in type.points %}
+        {% if point.size %}
+    name_{{type.name}}->{{point.name}} = p+offset;
+    offset += name_{{type.name}}->{{point.size}};
+        {% else %}
+    if (name_{{type.name}}->{{point.name}}) {
+        size_t {{point.name}}_size = 0;
+        name_{{type.name}}->{{point.name}} = ces_read_{{point.type}}(p+offset, &{{point.name}}_size);
+        offset += {{point.name}}_size;
+    }
+        {% endif %}
+    {% endfor %}
+    return offset;
+}
+{% endif %}
+
+{% endfor %}
