@@ -5,12 +5,13 @@ import Foundation
 @main
 public struct spm_test {
     public private(set) var text = "Hello, World!"
-    public static var typeDic: [String: [String: String]] = [:]
+    public static var typeDic: [String: [[String: String]]] = [:]
+    public static var ntArr: [String] = []
     public static var ntDic: [String: [String: String]] = [:]
     public static var psDic: [String: [[String: String]]] = [:]
     
     public static func main() {
-        let file = "/Users/lyf/Documents/Xcode/SourceKitten/h.swift"
+        let file = "/Users/msi/git/github/sync/spm_test/Sources/h.swift"
         if let st = try? Structure(file: File(path: file)!){
             let dic = st.dictionary as NSDictionary
             if let structs = dic["key.substructure"] as? [NSDictionary] {
@@ -23,30 +24,40 @@ public struct spm_test {
         }
         let rt = "es_message_t"
         self.handleType(name: rt)
+//        print(self.ntArr)
 //        print(self.ntDic as NSDictionary)
         
         for (name,t) in self.ntDic {
             let ps = self.pointsIntype(name: name)
             self.psDic[name] = ps
         }
-        self.psDic.removeValue(forKey: "es_message_t")
         var arr: NSMutableArray = NSMutableArray()
-        for (name,points) in self.psDic {
-            arr.add(["name": name, "points": points])
+        var dic: [String:Any] = [:]
+        var names = [String]()
+        names.append(contentsOf: self.psDic.keys)
+        names.sort()
+        for name in names {
+            arr.add(name)
+            if let points = self.psDic[name],
+               points.count > 0 {
+                dic[name] = ["points": points]
+            }
         }
-        let data = try! JSONSerialization.data(withJSONObject: arr)
-        let str = String(data: data, encoding: .utf8)
-        print(str!)
+        let narr = self.ntArr.filter { n in
+            arr.contains(n)
+        }
+        print(String(data: try! JSONSerialization.data(withJSONObject: narr), encoding: .utf8)!)
+        print(String(data: try! JSONSerialization.data(withJSONObject: dic), encoding: .utf8)!)
     }
     
     public static func handleOne(_ dic: NSDictionary) {
         if let name = dic["key.name"] as? String {
             if let subarr = dic["key.substructure"] as? [NSDictionary] {
-                var vardic : [String: String] = [:]
+                var vardic : [[String: String]] = []
                 for suba in subarr {
                     if let kind = suba["key.kind"] as? String,
                        kind == "source.lang.swift.decl.var.instance" {
-                        vardic[suba["key.name"] as! String] = suba["key.typename"] as! String
+                        vardic.append([suba["key.name"] as! String : suba["key.typename"] as! String])
                     }
                 }
                 self.typeDic[name] = vardic
@@ -55,34 +66,41 @@ public struct spm_test {
     }
     
     static func handleType(name: String) {
+        if !self.ntArr.contains(name) {
+            self.ntArr.append(name)
+        }
         if let type_t = self.typeDic[name] {
             var dic : [String: String] = [:]
-            for (n,t) in type_t {
-                if t.hasPrefix("Unsafe") {//指针类型
-                    if t.hasSuffix(">") {
-                        
-                    } else if t.hasSuffix(">?") {
-                        
-                    } else if t.hasSuffix(">!") {
-                        
-                    } else {
-                        assert(false)
-                    }
-                    self.handleType(name: self.getTypeFromPointerType(name: t))
-                    dic[n] = t
-                } else if (t == "es_events_t") {//枚举类型
-                    if let arr = self.typeDic[t] {
-                        for (_ , at) in arr {
-                            var tp = at
-                            if at.hasPrefix("Unsafe") {
-                                tp = self.getTypeFromPointerType(name: tp)
-                            }
-                            self.handleType(name: tp)
+            for v in type_t {
+                for (n,t) in v {
+                    if t.hasPrefix("Unsafe") {//指针类型
+                        if t.hasSuffix(">") {
+                            
+                        } else if t.hasSuffix(">?") {
+                            
+                        } else if t.hasSuffix(">!") {
+                            
+                        } else {
+                            assert(false)
                         }
+                        self.handleType(name: self.getTypeFromPointerType(name: t))
+                        dic[n] = t
+                    } else if (t == "es_events_t") {//枚举类型
+                        if let arr = self.typeDic[t] {
+                            for v2 in arr {
+                                for (_ , at) in v2 {
+                                    var tp = at
+                                    if at.hasPrefix("Unsafe") {
+                                        tp = self.getTypeFromPointerType(name: tp)
+                                    }
+                                    self.handleType(name: tp)
+                                }
+                            }
+                        }
+                    } else {
+                        self.handleType(name: t)
+                        dic[n] = t
                     }
-                } else {
-                    self.handleType(name: t)
-                    dic[n] = t
                 }
             }
             self.ntDic[name] = dic

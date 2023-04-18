@@ -7,7 +7,7 @@
 
 #include "test.h"
 
-void t() {
+void t(void) {
     int a = 0;
     switch (a) {
         case 1:{

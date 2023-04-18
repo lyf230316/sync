@@ -1,4 +1,4 @@
-// Generated using Sourcery 2.0.2 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 2.0.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 #include "ces.h"
@@ -3051,7 +3051,6 @@ size_t ces_write_es_event_setuid_t(void *p,es_event_setuid_t *name_es_event_setu
 }
 
 
-
 es_message_t* ces_read_es_message_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3061,6 +3060,514 @@ es_message_t* ces_read_es_message_t(void* p, size_t* size) {
     offset += sizeof(es_message_t);
     size_t size = ces_read_es_message_t_points(p+offset,name_es_message_t);
     offset += size;
+    switch (name_es_message_t->event_type) {
+        case ES_EVENT_TYPE_AUTH_CHDIR:{
+            size = ces_read_es_event_chdir_t_points(p+offset,&(name_es_message_t->event.chdir));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_CHROOT:{
+            size = ces_read_es_event_chroot_t_points(p+offset,&(name_es_message_t->event.chroot));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_CLONE:{
+            size = ces_read_es_event_clone_t_points(p+offset,&(name_es_message_t->event.clone));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_COPYFILE:{
+            size = ces_read_es_event_copyfile_t_points(p+offset,&(name_es_message_t->event.copyfile));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_CREATE:{
+            size = ces_read_es_event_create_t_points(p+offset,&(name_es_message_t->event.create));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_DELETEEXTATTR:{
+            size = ces_read_es_event_deleteextattr_t_points(p+offset,&(name_es_message_t->event.deleteextattr));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_EXCHANGEDATA:{
+            size = ces_read_es_event_exchangedata_t_points(p+offset,&(name_es_message_t->event.exchangedata));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_EXEC:{
+            size = ces_read_es_event_exec_t_points(p+offset,&(name_es_message_t->event.exec));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_FCNTL:{
+            size = ces_read_es_event_fcntl_t_points(p+offset,&(name_es_message_t->event.fcntl));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_FILE_PROVIDER_MATERIALIZE:{
+            size = ces_read_es_event_file_provider_materialize_t_points(p+offset,&(name_es_message_t->event.file_provider_materialize));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_FILE_PROVIDER_UPDATE:{
+            size = ces_read_es_event_file_provider_update_t_points(p+offset,&(name_es_message_t->event.file_provider_update));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_FSGETPATH:{
+            size = ces_read_es_event_fsgetpath_t_points(p+offset,&(name_es_message_t->event.fsgetpath));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_GETATTRLIST:{
+            size = ces_read_es_event_getattrlist_t_points(p+offset,&(name_es_message_t->event.getattrlist));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_GETEXTATTR:{
+            size = ces_read_es_event_getextattr_t_points(p+offset,&(name_es_message_t->event.getextattr));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_GET_TASK:{
+            size = ces_read_es_event_get_task_t_points(p+offset,&(name_es_message_t->event.get_task));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_GET_TASK_READ:{
+            size = ces_read_es_event_get_task_read_t_points(p+offset,&(name_es_message_t->event.get_task_read));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_IOKIT_OPEN:{
+            size = ces_read_es_event_iokit_open_t_points(p+offset,&(name_es_message_t->event.iokit_open));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_KEXTLOAD:{
+            size = ces_read_es_event_kextload_t_points(p+offset,&(name_es_message_t->event.kextload));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_LINK:{
+            size = ces_read_es_event_link_t_points(p+offset,&(name_es_message_t->event.link));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_LISTEXTATTR:{
+            size = ces_read_es_event_listextattr_t_points(p+offset,&(name_es_message_t->event.listextattr));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_MMAP:{
+            size = ces_read_es_event_mmap_t_points(p+offset,&(name_es_message_t->event.mmap));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_MOUNT:{
+            size = ces_read_es_event_mount_t_points(p+offset,&(name_es_message_t->event.mount));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_MPROTECT:{
+            size = ces_read_es_event_mprotect_t_points(p+offset,&(name_es_message_t->event.mprotect));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_OPEN:{
+            size = ces_read_es_event_open_t_points(p+offset,&(name_es_message_t->event.open));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_PROC_CHECK:{
+            size = ces_read_es_event_proc_check_t_points(p+offset,&(name_es_message_t->event.proc_check));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_PROC_SUSPEND_RESUME:{
+            size = ces_read_es_event_proc_suspend_resume_t_points(p+offset,&(name_es_message_t->event.proc_suspend_resume));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_READDIR:{
+            size = ces_read_es_event_readdir_t_points(p+offset,&(name_es_message_t->event.readdir));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_READLINK:{
+            size = ces_read_es_event_readlink_t_points(p+offset,&(name_es_message_t->event.readlink));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_REMOUNT:{
+            size = ces_read_es_event_remount_t_points(p+offset,&(name_es_message_t->event.remount));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_RENAME:{
+            size = ces_read_es_event_rename_t_points(p+offset,&(name_es_message_t->event.rename));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_SEARCHFS:{
+            size = ces_read_es_event_searchfs_t_points(p+offset,&(name_es_message_t->event.searchfs));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_SETACL:{
+            size = ces_read_es_event_setacl_t_points(p+offset,&(name_es_message_t->event.setacl));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_SETATTRLIST:{
+            size = ces_read_es_event_setattrlist_t_points(p+offset,&(name_es_message_t->event.setattrlist));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_SETEXTATTR:{
+            size = ces_read_es_event_setextattr_t_points(p+offset,&(name_es_message_t->event.setextattr));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_SETFLAGS:{
+            size = ces_read_es_event_setflags_t_points(p+offset,&(name_es_message_t->event.setflags));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_SETMODE:{
+            size = ces_read_es_event_setmode_t_points(p+offset,&(name_es_message_t->event.setmode));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_SETOWNER:{
+            size = ces_read_es_event_setowner_t_points(p+offset,&(name_es_message_t->event.setowner));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_SETTIME:{
+            size = ces_read_es_event_settime_t_points(p+offset,&(name_es_message_t->event.settime));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_SIGNAL:{
+            size = ces_read_es_event_signal_t_points(p+offset,&(name_es_message_t->event.signal));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_TRUNCATE:{
+            size = ces_read_es_event_truncate_t_points(p+offset,&(name_es_message_t->event.truncate));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_UIPC_BIND:{
+            size = ces_read_es_event_uipc_bind_t_points(p+offset,&(name_es_message_t->event.uipc_bind));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_UIPC_CONNECT:{
+            size = ces_read_es_event_uipc_connect_t_points(p+offset,&(name_es_message_t->event.uipc_connect));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_UNLINK:{
+            size = ces_read_es_event_unlink_t_points(p+offset,&(name_es_message_t->event.unlink));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_AUTH_UTIMES:{
+            size = ces_read_es_event_utimes_t_points(p+offset,&(name_es_message_t->event.utimes));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_ACCESS:{
+            size = ces_read_es_event_access_t_points(p+offset,&(name_es_message_t->event.access));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_AUTHENTICATION:{
+            size = ces_read_es_event_authentication_t(p+offset,name_es_message_t->event.authentication);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_ADD:{
+            size = ces_read_es_event_btm_launch_item_add_t(p+offset,name_es_message_t->event.btm_launch_item_add);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_REMOVE:{
+            size = ces_read_es_event_btm_launch_item_remove_t(p+offset,name_es_message_t->event.btm_launch_item_remove);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_CHDIR:{
+            size = ces_read_es_event_chdir_t_points(p+offset,&(name_es_message_t->event.chdir));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_CHROOT:{
+            size = ces_read_es_event_chroot_t_points(p+offset,&(name_es_message_t->event.chroot));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_CLONE:{
+            size = ces_read_es_event_clone_t_points(p+offset,&(name_es_message_t->event.clone));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_CLOSE:{
+            size = ces_read_es_event_close_t_points(p+offset,&(name_es_message_t->event.close));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_COPYFILE:{
+            size = ces_read_es_event_copyfile_t_points(p+offset,&(name_es_message_t->event.copyfile));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_CREATE:{
+            size = ces_read_es_event_create_t_points(p+offset,&(name_es_message_t->event.create));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_CS_INVALIDATED:{
+            size = ces_read_es_event_cs_invalidated_t_points(p+offset,&(name_es_message_t->event.cs_invalidated));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_DELETEEXTATTR:{
+            size = ces_read_es_event_deleteextattr_t_points(p+offset,&(name_es_message_t->event.deleteextattr));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_DUP:{
+            size = ces_read_es_event_dup_t_points(p+offset,&(name_es_message_t->event.dup));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_EXCHANGEDATA:{
+            size = ces_read_es_event_exchangedata_t_points(p+offset,&(name_es_message_t->event.exchangedata));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_EXEC:{
+            size = ces_read_es_event_exec_t_points(p+offset,&(name_es_message_t->event.exec));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_EXIT:{
+            size = ces_read_es_event_exit_t_points(p+offset,&(name_es_message_t->event.exit));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_FCNTL:{
+            size = ces_read_es_event_fcntl_t_points(p+offset,&(name_es_message_t->event.fcntl));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_FILE_PROVIDER_MATERIALIZE:{
+            size = ces_read_es_event_file_provider_materialize_t_points(p+offset,&(name_es_message_t->event.file_provider_materialize));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_FILE_PROVIDER_UPDATE:{
+            size = ces_read_es_event_file_provider_update_t_points(p+offset,&(name_es_message_t->event.file_provider_update));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_FORK:{
+            size = ces_read_es_event_fork_t_points(p+offset,&(name_es_message_t->event.fork));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_FSGETPATH:{
+            size = ces_read_es_event_fsgetpath_t_points(p+offset,&(name_es_message_t->event.fsgetpath));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_GETATTRLIST:{
+            size = ces_read_es_event_getattrlist_t_points(p+offset,&(name_es_message_t->event.getattrlist));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_GETEXTATTR:{
+            size = ces_read_es_event_getextattr_t_points(p+offset,&(name_es_message_t->event.getextattr));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_GET_TASK:{
+            size = ces_read_es_event_get_task_t_points(p+offset,&(name_es_message_t->event.get_task));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_GET_TASK_INSPECT:{
+            size = ces_read_es_event_get_task_inspect_t_points(p+offset,&(name_es_message_t->event.get_task_inspect));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_GET_TASK_NAME:{
+            size = ces_read_es_event_get_task_name_t_points(p+offset,&(name_es_message_t->event.get_task_name));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_GET_TASK_READ:{
+            size = ces_read_es_event_get_task_read_t_points(p+offset,&(name_es_message_t->event.get_task_read));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_IOKIT_OPEN:{
+            size = ces_read_es_event_iokit_open_t_points(p+offset,&(name_es_message_t->event.iokit_open));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_KEXTLOAD:{
+            size = ces_read_es_event_kextload_t_points(p+offset,&(name_es_message_t->event.kextload));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_KEXTUNLOAD:{
+            size = ces_read_es_event_kextunload_t_points(p+offset,&(name_es_message_t->event.kextunload));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_LINK:{
+            size = ces_read_es_event_link_t_points(p+offset,&(name_es_message_t->event.link));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_LISTEXTATTR:{
+            size = ces_read_es_event_listextattr_t_points(p+offset,&(name_es_message_t->event.listextattr));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_LOGIN_LOGIN:{
+            size = ces_read_es_event_login_login_t(p+offset,name_es_message_t->event.login_login);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_LOGIN_LOGOUT:{
+            size = ces_read_es_event_login_logout_t(p+offset,name_es_message_t->event.login_logout);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_LOOKUP:{
+            size = ces_read_es_event_lookup_t_points(p+offset,&(name_es_message_t->event.lookup));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOCK:{
+            size = ces_read_es_event_lw_session_lock_t(p+offset,name_es_message_t->event.lw_session_lock);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGIN:{
+            size = ces_read_es_event_lw_session_login_t(p+offset,name_es_message_t->event.lw_session_login);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGOUT:{
+            size = ces_read_es_event_lw_session_logout_t(p+offset,name_es_message_t->event.lw_session_logout);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_LW_SESSION_UNLOCK:{
+            size = ces_read_es_event_lw_session_unlock_t(p+offset,name_es_message_t->event.lw_session_unlock);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_MMAP:{
+            size = ces_read_es_event_mmap_t_points(p+offset,&(name_es_message_t->event.mmap));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_MOUNT:{
+            size = ces_read_es_event_mount_t_points(p+offset,&(name_es_message_t->event.mount));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_MPROTECT:{
+            size = ces_read_es_event_mprotect_t_points(p+offset,&(name_es_message_t->event.mprotect));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_OPEN:{
+            size = ces_read_es_event_open_t_points(p+offset,&(name_es_message_t->event.open));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGIN:{
+            size = ces_read_es_event_openssh_login_t(p+offset,name_es_message_t->event.openssh_login);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGOUT:{
+            size = ces_read_es_event_openssh_logout_t(p+offset,name_es_message_t->event.openssh_logout);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_PROC_CHECK:{
+            size = ces_read_es_event_proc_check_t_points(p+offset,&(name_es_message_t->event.proc_check));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_PROC_SUSPEND_RESUME:{
+            size = ces_read_es_event_proc_suspend_resume_t_points(p+offset,&(name_es_message_t->event.proc_suspend_resume));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_PTY_CLOSE:{
+            size = ces_read_es_event_pty_close_t_points(p+offset,&(name_es_message_t->event.pty_close));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_PTY_GRANT:{
+            size = ces_read_es_event_pty_grant_t_points(p+offset,&(name_es_message_t->event.pty_grant));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_READDIR:{
+            size = ces_read_es_event_readdir_t_points(p+offset,&(name_es_message_t->event.readdir));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_READLINK:{
+            size = ces_read_es_event_readlink_t_points(p+offset,&(name_es_message_t->event.readlink));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_REMOTE_THREAD_CREATE:{
+            size = ces_read_es_event_remote_thread_create_t_points(p+offset,&(name_es_message_t->event.remote_thread_create));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_REMOUNT:{
+            size = ces_read_es_event_remount_t_points(p+offset,&(name_es_message_t->event.remount));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_RENAME:{
+            size = ces_read_es_event_rename_t_points(p+offset,&(name_es_message_t->event.rename));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SCREENSHARING_ATTACH:{
+            size = ces_read_es_event_screensharing_attach_t(p+offset,name_es_message_t->event.screensharing_attach);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SCREENSHARING_DETACH:{
+            size = ces_read_es_event_screensharing_detach_t(p+offset,name_es_message_t->event.screensharing_detach);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SEARCHFS:{
+            size = ces_read_es_event_searchfs_t_points(p+offset,&(name_es_message_t->event.searchfs));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETACL:{
+            size = ces_read_es_event_setacl_t_points(p+offset,&(name_es_message_t->event.setacl));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETATTRLIST:{
+            size = ces_read_es_event_setattrlist_t_points(p+offset,&(name_es_message_t->event.setattrlist));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETEGID:{
+            size = ces_read_es_event_setegid_t_points(p+offset,&(name_es_message_t->event.setegid));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETEUID:{
+            size = ces_read_es_event_seteuid_t_points(p+offset,&(name_es_message_t->event.seteuid));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETEXTATTR:{
+            size = ces_read_es_event_setextattr_t_points(p+offset,&(name_es_message_t->event.setextattr));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETFLAGS:{
+            size = ces_read_es_event_setflags_t_points(p+offset,&(name_es_message_t->event.setflags));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETGID:{
+            size = ces_read_es_event_setgid_t_points(p+offset,&(name_es_message_t->event.setgid));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETMODE:{
+            size = ces_read_es_event_setmode_t_points(p+offset,&(name_es_message_t->event.setmode));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETOWNER:{
+            size = ces_read_es_event_setowner_t_points(p+offset,&(name_es_message_t->event.setowner));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETREGID:{
+            size = ces_read_es_event_setregid_t_points(p+offset,&(name_es_message_t->event.setregid));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETREUID:{
+            size = ces_read_es_event_setreuid_t_points(p+offset,&(name_es_message_t->event.setreuid));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETTIME:{
+            size = ces_read_es_event_settime_t_points(p+offset,&(name_es_message_t->event.settime));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SETUID:{
+            size = ces_read_es_event_setuid_t_points(p+offset,&(name_es_message_t->event.setuid));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_SIGNAL:{
+            size = ces_read_es_event_signal_t_points(p+offset,&(name_es_message_t->event.signal));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_STAT:{
+            size = ces_read_es_event_stat_t_points(p+offset,&(name_es_message_t->event.stat));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_TRACE:{
+            size = ces_read_es_event_trace_t_points(p+offset,&(name_es_message_t->event.trace));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_TRUNCATE:{
+            size = ces_read_es_event_truncate_t_points(p+offset,&(name_es_message_t->event.truncate));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_UIPC_BIND:{
+            size = ces_read_es_event_uipc_bind_t_points(p+offset,&(name_es_message_t->event.uipc_bind));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_UIPC_CONNECT:{
+            size = ces_read_es_event_uipc_connect_t_points(p+offset,&(name_es_message_t->event.uipc_connect));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_UNLINK:{
+            size = ces_read_es_event_unlink_t_points(p+offset,&(name_es_message_t->event.unlink));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_UNMOUNT:{
+            size = ces_read_es_event_unmount_t_points(p+offset,&(name_es_message_t->event.unmount));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_UTIMES:{
+            size = ces_read_es_event_utimes_t_points(p+offset,&(name_es_message_t->event.utimes));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_WRITE:{
+            size = ces_read_es_event_write_t_points(p+offset,&(name_es_message_t->event.write));
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_XP_MALWARE_DETECTED:{
+            size = ces_read_es_event_xp_malware_detected_t(p+offset,name_es_message_t->event.xp_malware_detected);
+            offset += size;
+        }break;
+        case ES_EVENT_TYPE_NOTIFY_XP_MALWARE_REMEDIATED:{
+            size = ces_read_es_event_xp_malware_remediated_t(p+offset,name_es_message_t->event.xp_malware_remediated);
+            offset += size;
+        }break;
+        default:
+            break;
+    }
     *size = offset;
     return name_es_message_t;
 }
@@ -3080,7 +3587,6 @@ size_t ces_read_es_message_t_points(void *p,es_message_t *name_es_message_t) {
     return offset;
 }
 
-
 audit_token_t* ces_read_audit_token_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3093,7 +3599,6 @@ audit_token_t* ces_read_audit_token_t(void* p, size_t* size) {
 }
 
 
-
 es_statfs_t* ces_read_es_statfs_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3104,7 +3609,6 @@ es_statfs_t* ces_read_es_statfs_t(void* p, size_t* size) {
     *size = offset;
     return name_es_statfs_t;
 }
-
 
 
 es_event_remote_thread_create_t* ces_read_es_event_remote_thread_create_t(void* p, size_t* size) {
@@ -3135,7 +3639,6 @@ size_t ces_read_es_event_remote_thread_create_t_points(void *p,es_event_remote_t
     return offset;
 }
 
-
 es_action_type_t* ces_read_es_action_type_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3146,7 +3649,6 @@ es_action_type_t* ces_read_es_action_type_t(void* p, size_t* size) {
     *size = offset;
     return name_es_action_type_t;
 }
-
 
 
 es_thread_state_t* ces_read_es_thread_state_t(void* p, size_t* size) {
@@ -3168,7 +3670,6 @@ size_t ces_read_es_thread_state_t_points(void *p,es_thread_state_t *name_es_thre
     offset += name_es_thread_state_t->state.size;
     return offset;
 }
-
 
 es_event_setacl_t* ces_read_es_event_setacl_t(void* p, size_t* size) {
     if (!p) {
@@ -3193,7 +3694,6 @@ size_t ces_read_es_event_setacl_t_points(void *p,es_event_setacl_t *name_es_even
     return offset;
 }
 
-
 es_event_iokit_open_t* ces_read_es_event_iokit_open_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3213,7 +3713,6 @@ size_t ces_read_es_event_iokit_open_t_points(void *p,es_event_iokit_open_t *name
     offset += name_es_event_iokit_open_t->user_client_class.length;
     return offset;
 }
-
 
 es_event_readdir_t* ces_read_es_event_readdir_t(void* p, size_t* size) {
     if (!p) {
@@ -3238,7 +3737,6 @@ size_t ces_read_es_event_readdir_t_points(void *p,es_event_readdir_t *name_es_ev
     return offset;
 }
 
-
 es_event_pty_grant_t* ces_read_es_event_pty_grant_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3249,7 +3747,6 @@ es_event_pty_grant_t* ces_read_es_event_pty_grant_t(void* p, size_t* size) {
     *size = offset;
     return name_es_event_pty_grant_t;
 }
-
 
 
 es_event_listextattr_t* ces_read_es_event_listextattr_t(void* p, size_t* size) {
@@ -3275,7 +3772,6 @@ size_t ces_read_es_event_listextattr_t_points(void *p,es_event_listextattr_t *na
     return offset;
 }
 
-
 es_event_setattrlist_t* ces_read_es_event_setattrlist_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3298,7 +3794,6 @@ size_t ces_read_es_event_setattrlist_t_points(void *p,es_event_setattrlist_t *na
     }
     return offset;
 }
-
 
 es_event_stat_t* ces_read_es_event_stat_t(void* p, size_t* size) {
     if (!p) {
@@ -3323,7 +3818,6 @@ size_t ces_read_es_event_stat_t_points(void *p,es_event_stat_t *name_es_event_st
     return offset;
 }
 
-
 es_event_login_login_t* ces_read_es_event_login_login_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3346,7 +3840,6 @@ size_t ces_read_es_event_login_login_t_points(void *p,es_event_login_login_t *na
     return offset;
 }
 
-
 es_event_lw_session_unlock_t* ces_read_es_event_lw_session_unlock_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3367,7 +3860,6 @@ size_t ces_read_es_event_lw_session_unlock_t_points(void *p,es_event_lw_session_
     return offset;
 }
 
-
 es_event_lw_session_logout_t* ces_read_es_event_lw_session_logout_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3387,7 +3879,6 @@ size_t ces_read_es_event_lw_session_logout_t_points(void *p,es_event_lw_session_
     offset += name_es_event_lw_session_logout_t->username.length;
     return offset;
 }
-
 
 es_event_signal_t* ces_read_es_event_signal_t(void* p, size_t* size) {
     if (!p) {
@@ -3411,7 +3902,6 @@ size_t ces_read_es_event_signal_t_points(void *p,es_event_signal_t *name_es_even
     }
     return offset;
 }
-
 
 es_event_lookup_t* ces_read_es_event_lookup_t(void* p, size_t* size) {
     if (!p) {
@@ -3438,7 +3928,6 @@ size_t ces_read_es_event_lookup_t_points(void *p,es_event_lookup_t *name_es_even
     return offset;
 }
 
-
 es_event_setflags_t* ces_read_es_event_setflags_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3462,7 +3951,6 @@ size_t ces_read_es_event_setflags_t_points(void *p,es_event_setflags_t *name_es_
     return offset;
 }
 
-
 es_file_t* ces_read_es_file_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3482,7 +3970,6 @@ size_t ces_read_es_file_t_points(void *p,es_file_t *name_es_file_t) {
     offset += name_es_file_t->path.length;
     return offset;
 }
-
 
 es_event_setowner_t* ces_read_es_event_setowner_t(void* p, size_t* size) {
     if (!p) {
@@ -3507,7 +3994,6 @@ size_t ces_read_es_event_setowner_t_points(void *p,es_event_setowner_t *name_es_
     return offset;
 }
 
-
 es_event_fork_t* ces_read_es_event_fork_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3531,7 +4017,6 @@ size_t ces_read_es_event_fork_t_points(void *p,es_event_fork_t *name_es_event_fo
     return offset;
 }
 
-
 es_proc_check_type_t* ces_read_es_proc_check_type_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3542,7 +4027,6 @@ es_proc_check_type_t* ces_read_es_proc_check_type_t(void* p, size_t* size) {
     *size = offset;
     return name_es_proc_check_type_t;
 }
-
 
 
 es_event_unlink_t* ces_read_es_event_unlink_t(void* p, size_t* size) {
@@ -3573,7 +4057,6 @@ size_t ces_read_es_event_unlink_t_points(void *p,es_event_unlink_t *name_es_even
     return offset;
 }
 
-
 es_event_mmap_t* ces_read_es_event_mmap_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3597,7 +4080,6 @@ size_t ces_read_es_event_mmap_t_points(void *p,es_event_mmap_t *name_es_event_mm
     return offset;
 }
 
-
 es_thread_t* ces_read_es_thread_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3608,7 +4090,6 @@ es_thread_t* ces_read_es_thread_t(void* p, size_t* size) {
     *size = offset;
     return name_es_thread_t;
 }
-
 
 
 es_set_or_clear_t* ces_read_es_set_or_clear_t(void* p, size_t* size) {
@@ -3623,7 +4104,6 @@ es_set_or_clear_t* ces_read_es_set_or_clear_t(void* p, size_t* size) {
 }
 
 
-
 es_event_authentication_t* ces_read_es_event_authentication_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3634,7 +4114,6 @@ es_event_authentication_t* ces_read_es_event_authentication_t(void* p, size_t* s
     *size = offset;
     return name_es_event_authentication_t;
 }
-
 
 
 es_event_lw_session_lock_t* ces_read_es_event_lw_session_lock_t(void* p, size_t* size) {
@@ -3657,7 +4136,6 @@ size_t ces_read_es_event_lw_session_lock_t_points(void *p,es_event_lw_session_lo
     return offset;
 }
 
-
 es_event_screensharing_detach_t* ces_read_es_event_screensharing_detach_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3679,7 +4157,6 @@ size_t ces_read_es_event_screensharing_detach_t_points(void *p,es_event_screensh
     offset += name_es_event_screensharing_detach_t->source_address.length;
     return offset;
 }
-
 
 es_event_get_task_read_t* ces_read_es_event_get_task_read_t(void* p, size_t* size) {
     if (!p) {
@@ -3704,7 +4181,6 @@ size_t ces_read_es_event_get_task_read_t_points(void *p,es_event_get_task_read_t
     return offset;
 }
 
-
 es_event_truncate_t* ces_read_es_event_truncate_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3727,7 +4203,6 @@ size_t ces_read_es_event_truncate_t_points(void *p,es_event_truncate_t *name_es_
     }
     return offset;
 }
-
 
 es_event_remount_t* ces_read_es_event_remount_t(void* p, size_t* size) {
     if (!p) {
@@ -3752,7 +4227,6 @@ size_t ces_read_es_event_remount_t_points(void *p,es_event_remount_t *name_es_ev
     return offset;
 }
 
-
 es_event_chroot_t* ces_read_es_event_chroot_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3775,7 +4249,6 @@ size_t ces_read_es_event_chroot_t_points(void *p,es_event_chroot_t *name_es_even
     }
     return offset;
 }
-
 
 es_event_dup_t* ces_read_es_event_dup_t(void* p, size_t* size) {
     if (!p) {
@@ -3800,7 +4273,6 @@ size_t ces_read_es_event_dup_t_points(void *p,es_event_dup_t *name_es_event_dup_
     return offset;
 }
 
-
 es_event_setreuid_t* ces_read_es_event_setreuid_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3811,7 +4283,6 @@ es_event_setreuid_t* ces_read_es_event_setreuid_t(void* p, size_t* size) {
     *size = offset;
     return name_es_event_setreuid_t;
 }
-
 
 
 es_event_setmode_t* ces_read_es_event_setmode_t(void* p, size_t* size) {
@@ -3837,7 +4308,6 @@ size_t ces_read_es_event_setmode_t_points(void *p,es_event_setmode_t *name_es_ev
     return offset;
 }
 
-
 es_event_getattrlist_t* ces_read_es_event_getattrlist_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3861,7 +4331,6 @@ size_t ces_read_es_event_getattrlist_t_points(void *p,es_event_getattrlist_t *na
     return offset;
 }
 
-
 es_string_token_t* ces_read_es_string_token_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3881,7 +4350,6 @@ size_t ces_read_es_string_token_t_points(void *p,es_string_token_t *name_es_stri
     offset += name_es_string_token_t->length;
     return offset;
 }
-
 
 es_event_open_t* ces_read_es_event_open_t(void* p, size_t* size) {
     if (!p) {
@@ -3906,7 +4374,6 @@ size_t ces_read_es_event_open_t_points(void *p,es_event_open_t *name_es_event_op
     return offset;
 }
 
-
 es_event_access_t* ces_read_es_event_access_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3929,7 +4396,6 @@ size_t ces_read_es_event_access_t_points(void *p,es_event_access_t *name_es_even
     }
     return offset;
 }
-
 
 es_event_exec_t* ces_read_es_event_exec_t(void* p, size_t* size) {
     if (!p) {
@@ -3966,7 +4432,6 @@ size_t ces_read_es_event_exec_t_points(void *p,es_event_exec_t *name_es_event_ex
     return offset;
 }
 
-
 es_event_seteuid_t* ces_read_es_event_seteuid_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -3977,7 +4442,6 @@ es_event_seteuid_t* ces_read_es_event_seteuid_t(void* p, size_t* size) {
     *size = offset;
     return name_es_event_seteuid_t;
 }
-
 
 
 es_event_lw_session_login_t* ces_read_es_event_lw_session_login_t(void* p, size_t* size) {
@@ -3999,7 +4463,6 @@ size_t ces_read_es_event_lw_session_login_t_points(void *p,es_event_lw_session_l
     offset += name_es_event_lw_session_login_t->username.length;
     return offset;
 }
-
 
 es_event_readlink_t* ces_read_es_event_readlink_t(void* p, size_t* size) {
     if (!p) {
@@ -4024,7 +4487,6 @@ size_t ces_read_es_event_readlink_t_points(void *p,es_event_readlink_t *name_es_
     return offset;
 }
 
-
 es_openssh_login_result_type_t* ces_read_es_openssh_login_result_type_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4035,7 +4497,6 @@ es_openssh_login_result_type_t* ces_read_es_openssh_login_result_type_t(void* p,
     *size = offset;
     return name_es_openssh_login_result_type_t;
 }
-
 
 
 es_token_t* ces_read_es_token_t(void* p, size_t* size) {
@@ -4058,7 +4519,6 @@ size_t ces_read_es_token_t_points(void *p,es_token_t *name_es_token_t) {
     return offset;
 }
 
-
 es_authentication_type_t* ces_read_es_authentication_type_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4069,7 +4529,6 @@ es_authentication_type_t* ces_read_es_authentication_type_t(void* p, size_t* siz
     *size = offset;
     return name_es_authentication_type_t;
 }
-
 
 
 es_event_openssh_logout_t* ces_read_es_event_openssh_logout_t(void* p, size_t* size) {
@@ -4094,7 +4553,6 @@ size_t ces_read_es_event_openssh_logout_t_points(void *p,es_event_openssh_logout
     return offset;
 }
 
-
 es_event_trace_t* ces_read_es_event_trace_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4118,7 +4576,6 @@ size_t ces_read_es_event_trace_t_points(void *p,es_event_trace_t *name_es_event_
     return offset;
 }
 
-
 es_btm_item_type_t* ces_read_es_btm_item_type_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4129,7 +4586,6 @@ es_btm_item_type_t* ces_read_es_btm_item_type_t(void* p, size_t* size) {
     *size = offset;
     return name_es_btm_item_type_t;
 }
-
 
 
 es_event_copyfile_t* ces_read_es_event_copyfile_t(void* p, size_t* size) {
@@ -4167,7 +4623,6 @@ size_t ces_read_es_event_copyfile_t_points(void *p,es_event_copyfile_t *name_es_
     return offset;
 }
 
-
 es_event_chdir_t* ces_read_es_event_chdir_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4191,7 +4646,6 @@ size_t ces_read_es_event_chdir_t_points(void *p,es_event_chdir_t *name_es_event_
     return offset;
 }
 
-
 es_address_type_t* ces_read_es_address_type_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4204,7 +4658,6 @@ es_address_type_t* ces_read_es_address_type_t(void* p, size_t* size) {
 }
 
 
-
 es_get_task_type_t* ces_read_es_get_task_type_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4215,7 +4668,6 @@ es_get_task_type_t* ces_read_es_get_task_type_t(void* p, size_t* size) {
     *size = offset;
     return name_es_get_task_type_t;
 }
-
 
 
 es_event_get_task_name_t* ces_read_es_event_get_task_name_t(void* p, size_t* size) {
@@ -4240,7 +4692,6 @@ size_t ces_read_es_event_get_task_name_t_points(void *p,es_event_get_task_name_t
     }
     return offset;
 }
-
 
 es_event_file_provider_materialize_t* ces_read_es_event_file_provider_materialize_t(void* p, size_t* size) {
     if (!p) {
@@ -4275,7 +4726,6 @@ size_t ces_read_es_event_file_provider_materialize_t_points(void *p,es_event_fil
     return offset;
 }
 
-
 es_btm_launch_item_t* ces_read_es_btm_launch_item_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4297,7 +4747,6 @@ size_t ces_read_es_btm_launch_item_t_points(void *p,es_btm_launch_item_t *name_e
     offset += name_es_btm_launch_item_t->app_url.length;
     return offset;
 }
-
 
 es_event_screensharing_attach_t* ces_read_es_event_screensharing_attach_t(void* p, size_t* size) {
     if (!p) {
@@ -4327,7 +4776,6 @@ size_t ces_read_es_event_screensharing_attach_t_points(void *p,es_event_screensh
     return offset;
 }
 
-
 es_destination_type_t* ces_read_es_destination_type_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4338,7 +4786,6 @@ es_destination_type_t* ces_read_es_destination_type_t(void* p, size_t* size) {
     *size = offset;
     return name_es_destination_type_t;
 }
-
 
 
 es_event_exchangedata_t* ces_read_es_event_exchangedata_t(void* p, size_t* size) {
@@ -4369,7 +4816,6 @@ size_t ces_read_es_event_exchangedata_t_points(void *p,es_event_exchangedata_t *
     return offset;
 }
 
-
 es_event_setegid_t* ces_read_es_event_setegid_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4380,7 +4826,6 @@ es_event_setegid_t* ces_read_es_event_setegid_t(void* p, size_t* size) {
     *size = offset;
     return name_es_event_setegid_t;
 }
-
 
 
 es_event_xp_malware_detected_t* ces_read_es_event_xp_malware_detected_t(void* p, size_t* size) {
@@ -4409,7 +4854,6 @@ size_t ces_read_es_event_xp_malware_detected_t_points(void *p,es_event_xp_malwar
     return offset;
 }
 
-
 es_event_close_t* ces_read_es_event_close_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4433,7 +4877,6 @@ size_t ces_read_es_event_close_t_points(void *p,es_event_close_t *name_es_event_
     return offset;
 }
 
-
 es_event_get_task_t* ces_read_es_event_get_task_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4456,7 +4899,6 @@ size_t ces_read_es_event_get_task_t_points(void *p,es_event_get_task_t *name_es_
     }
     return offset;
 }
-
 
 es_event_btm_launch_item_add_t* ces_read_es_event_btm_launch_item_add_t(void* p, size_t* size) {
     if (!p) {
@@ -4493,7 +4935,6 @@ size_t ces_read_es_event_btm_launch_item_add_t_points(void *p,es_event_btm_launc
     return offset;
 }
 
-
 es_event_deleteextattr_t* ces_read_es_event_deleteextattr_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4519,7 +4960,6 @@ size_t ces_read_es_event_deleteextattr_t_points(void *p,es_event_deleteextattr_t
     return offset;
 }
 
-
 es_event_unmount_t* ces_read_es_event_unmount_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4542,7 +4982,6 @@ size_t ces_read_es_event_unmount_t_points(void *p,es_event_unmount_t *name_es_ev
     }
     return offset;
 }
-
 
 es_event_mount_t* ces_read_es_event_mount_t(void* p, size_t* size) {
     if (!p) {
@@ -4567,7 +5006,6 @@ size_t ces_read_es_event_mount_t_points(void *p,es_event_mount_t *name_es_event_
     return offset;
 }
 
-
 es_event_cs_invalidated_t* ces_read_es_event_cs_invalidated_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4578,7 +5016,6 @@ es_event_cs_invalidated_t* ces_read_es_event_cs_invalidated_t(void* p, size_t* s
     *size = offset;
     return name_es_event_cs_invalidated_t;
 }
-
 
 
 es_event_clone_t* ces_read_es_event_clone_t(void* p, size_t* size) {
@@ -4611,7 +5048,6 @@ size_t ces_read_es_event_clone_t_points(void *p,es_event_clone_t *name_es_event_
     return offset;
 }
 
-
 es_event_setextattr_t* ces_read_es_event_setextattr_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4637,7 +5073,6 @@ size_t ces_read_es_event_setextattr_t_points(void *p,es_event_setextattr_t *name
     return offset;
 }
 
-
 es_event_kextload_t* ces_read_es_event_kextload_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4657,7 +5092,6 @@ size_t ces_read_es_event_kextload_t_points(void *p,es_event_kextload_t *name_es_
     offset += name_es_event_kextload_t->identifier.length;
     return offset;
 }
-
 
 es_event_login_logout_t* ces_read_es_event_login_logout_t(void* p, size_t* size) {
     if (!p) {
@@ -4679,7 +5113,6 @@ size_t ces_read_es_event_login_logout_t_points(void *p,es_event_login_logout_t *
     return offset;
 }
 
-
 es_event_settime_t* ces_read_es_event_settime_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4690,7 +5123,6 @@ es_event_settime_t* ces_read_es_event_settime_t(void* p, size_t* size) {
     *size = offset;
     return name_es_event_settime_t;
 }
-
 
 
 es_event_get_task_inspect_t* ces_read_es_event_get_task_inspect_t(void* p, size_t* size) {
@@ -4716,7 +5148,6 @@ size_t ces_read_es_event_get_task_inspect_t_points(void *p,es_event_get_task_ins
     return offset;
 }
 
-
 es_event_utimes_t* ces_read_es_event_utimes_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4740,7 +5171,6 @@ size_t ces_read_es_event_utimes_t_points(void *p,es_event_utimes_t *name_es_even
     return offset;
 }
 
-
 es_event_type_t* ces_read_es_event_type_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4751,7 +5181,6 @@ es_event_type_t* ces_read_es_event_type_t(void* p, size_t* size) {
     *size = offset;
     return name_es_event_type_t;
 }
-
 
 
 es_event_searchfs_t* ces_read_es_event_searchfs_t(void* p, size_t* size) {
@@ -4776,7 +5205,6 @@ size_t ces_read_es_event_searchfs_t_points(void *p,es_event_searchfs_t *name_es_
     }
     return offset;
 }
-
 
 es_event_file_provider_update_t* ces_read_es_event_file_provider_update_t(void* p, size_t* size) {
     if (!p) {
@@ -4803,7 +5231,6 @@ size_t ces_read_es_event_file_provider_update_t_points(void *p,es_event_file_pro
     return offset;
 }
 
-
 es_event_uipc_bind_t* ces_read_es_event_uipc_bind_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4829,7 +5256,6 @@ size_t ces_read_es_event_uipc_bind_t_points(void *p,es_event_uipc_bind_t *name_e
     return offset;
 }
 
-
 es_event_create_t* ces_read_es_event_create_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4840,7 +5266,6 @@ es_event_create_t* ces_read_es_event_create_t(void* p, size_t* size) {
     *size = offset;
     return name_es_event_create_t;
 }
-
 
 
 es_event_getextattr_t* ces_read_es_event_getextattr_t(void* p, size_t* size) {
@@ -4868,7 +5293,6 @@ size_t ces_read_es_event_getextattr_t_points(void *p,es_event_getextattr_t *name
     return offset;
 }
 
-
 es_event_rename_t* ces_read_es_event_rename_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4892,7 +5316,6 @@ size_t ces_read_es_event_rename_t_points(void *p,es_event_rename_t *name_es_even
     return offset;
 }
 
-
 es_event_setregid_t* ces_read_es_event_setregid_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4903,7 +5326,6 @@ es_event_setregid_t* ces_read_es_event_setregid_t(void* p, size_t* size) {
     *size = offset;
     return name_es_event_setregid_t;
 }
-
 
 
 es_event_proc_suspend_resume_t* ces_read_es_event_proc_suspend_resume_t(void* p, size_t* size) {
@@ -4929,7 +5351,6 @@ size_t ces_read_es_event_proc_suspend_resume_t_points(void *p,es_event_proc_susp
     return offset;
 }
 
-
 es_event_exit_t* ces_read_es_event_exit_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4942,7 +5363,6 @@ es_event_exit_t* ces_read_es_event_exit_t(void* p, size_t* size) {
 }
 
 
-
 es_event_pty_close_t* ces_read_es_event_pty_close_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -4953,7 +5373,6 @@ es_event_pty_close_t* ces_read_es_event_pty_close_t(void* p, size_t* size) {
     *size = offset;
     return name_es_event_pty_close_t;
 }
-
 
 
 es_event_kextunload_t* ces_read_es_event_kextunload_t(void* p, size_t* size) {
@@ -4975,7 +5394,6 @@ size_t ces_read_es_event_kextunload_t_points(void *p,es_event_kextunload_t *name
     offset += name_es_event_kextunload_t->identifier.length;
     return offset;
 }
-
 
 es_event_fcntl_t* ces_read_es_event_fcntl_t(void* p, size_t* size) {
     if (!p) {
@@ -4999,7 +5417,6 @@ size_t ces_read_es_event_fcntl_t_points(void *p,es_event_fcntl_t *name_es_event_
     }
     return offset;
 }
-
 
 es_event_btm_launch_item_remove_t* ces_read_es_event_btm_launch_item_remove_t(void* p, size_t* size) {
     if (!p) {
@@ -5034,7 +5451,6 @@ size_t ces_read_es_event_btm_launch_item_remove_t_points(void *p,es_event_btm_la
     return offset;
 }
 
-
 es_event_write_t* ces_read_es_event_write_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -5058,7 +5474,6 @@ size_t ces_read_es_event_write_t_points(void *p,es_event_write_t *name_es_event_
     return offset;
 }
 
-
 es_event_uipc_connect_t* ces_read_es_event_uipc_connect_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -5081,7 +5496,6 @@ size_t ces_read_es_event_uipc_connect_t_points(void *p,es_event_uipc_connect_t *
     }
     return offset;
 }
-
 
 es_process_t* ces_read_es_process_t(void* p, size_t* size) {
     if (!p) {
@@ -5114,7 +5528,6 @@ size_t ces_read_es_process_t_points(void *p,es_process_t *name_es_process_t) {
     }
     return offset;
 }
-
 
 es_event_xp_malware_remediated_t* ces_read_es_event_xp_malware_remediated_t(void* p, size_t* size) {
     if (!p) {
@@ -5151,7 +5564,6 @@ size_t ces_read_es_event_xp_malware_remediated_t_points(void *p,es_event_xp_malw
     return offset;
 }
 
-
 es_event_proc_check_t* ces_read_es_event_proc_check_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -5175,7 +5587,6 @@ size_t ces_read_es_event_proc_check_t_points(void *p,es_event_proc_check_t *name
     return offset;
 }
 
-
 es_event_mprotect_t* ces_read_es_event_mprotect_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -5188,7 +5599,6 @@ es_event_mprotect_t* ces_read_es_event_mprotect_t(void* p, size_t* size) {
 }
 
 
-
 es_proc_suspend_resume_type_t* ces_read_es_proc_suspend_resume_type_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -5199,7 +5609,6 @@ es_proc_suspend_resume_type_t* ces_read_es_proc_suspend_resume_type_t(void* p, s
     *size = offset;
     return name_es_proc_suspend_resume_type_t;
 }
-
 
 
 es_event_openssh_login_t* ces_read_es_event_openssh_login_t(void* p, size_t* size) {
@@ -5224,7 +5633,6 @@ size_t ces_read_es_event_openssh_login_t_points(void *p,es_event_openssh_login_t
     return offset;
 }
 
-
 es_event_fsgetpath_t* ces_read_es_event_fsgetpath_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -5247,7 +5655,6 @@ size_t ces_read_es_event_fsgetpath_t_points(void *p,es_event_fsgetpath_t *name_e
     }
     return offset;
 }
-
 
 es_event_link_t* ces_read_es_event_link_t(void* p, size_t* size) {
     if (!p) {
@@ -5279,7 +5686,6 @@ size_t ces_read_es_event_link_t_points(void *p,es_event_link_t *name_es_event_li
     return offset;
 }
 
-
 es_event_setgid_t* ces_read_es_event_setgid_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -5292,7 +5698,6 @@ es_event_setgid_t* ces_read_es_event_setgid_t(void* p, size_t* size) {
 }
 
 
-
 es_event_setuid_t* ces_read_es_event_setuid_t(void* p, size_t* size) {
     if (!p) {
         return NULL;
@@ -5303,6 +5708,3 @@ es_event_setuid_t* ces_read_es_event_setuid_t(void* p, size_t* size) {
     *size = offset;
     return name_es_event_setuid_t;
 }
-
-
-

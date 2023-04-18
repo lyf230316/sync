@@ -73,6 +73,23 @@ size_t ces_write_{{type.name}}_points(void *p,{{type.name}} *name_{{type.name}})
     size_t size = ces_read_{{type.name}}_points(p+offset,name_{{type.name}});
     offset += size;
     {% endif %}
+    {% if type.enum %}
+    switch (name_{{type.name}}->event_type) {
+    {% for event in argument.events %}
+        case {{event}}:{
+        {% if argument.redirect[argument.events[event]] %}
+            size = ces_read_{{argument.events[event]}}(p+offset,name_{{type.name}}->event.{{argument.propertyName[argument.events[event]]}});
+            offset += size;
+        {% else %}
+            size = ces_read_{{argument.events[event]}}_points(p+offset,&(name_{{type.name}}->event.{{argument.propertyName[argument.events[event]]}}));
+            offset += size;
+        {% endif %}
+        }break;
+    {% endfor %}
+        default:
+            break;
+    }
+    {% endif %}
     *size = offset;
     return name_{{type.name}};
 }
