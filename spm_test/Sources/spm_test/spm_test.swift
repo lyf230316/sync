@@ -11,7 +11,7 @@ public struct spm_test {
     public static var psDic: [String: [[String: String]]] = [:]
     
     public static func main() {
-        let file = "/Users/msi/git/github/sync/spm_test/Sources/h.swift"
+        let file = "/Users/lyf/git/github/sync/spm_test/Sources/h.swift"
         if let st = try? Structure(file: File(path: file)!){
             let dic = st.dictionary as NSDictionary
             if let structs = dic["key.substructure"] as? [NSDictionary] {

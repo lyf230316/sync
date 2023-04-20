@@ -230,8 +230,113 @@ args:
     es_event_btm_launch_item_add_t: btm_launch_item_add
     es_event_btm_launch_item_remove_t: btm_launch_item_remove
 
-  types:
-    - name: es_message_t
+  typeArr:
+    - es_statfs_t
+    - audit_token_t
+    - es_message_t
+    - es_process_t
+    - es_string_token_t
+    - es_file_t
+    - es_action_type_t
+    - es_event_type_t
+    - es_event_access_t
+    - es_event_chdir_t
+    - es_event_chroot_t
+    - es_event_clone_t
+    - es_event_close_t
+    - es_event_copyfile_t
+    - es_event_create_t
+    - es_destination_type_t
+    - es_event_cs_invalidated_t
+    - es_event_deleteextattr_t
+    - es_event_dup_t
+    - es_event_exchangedata_t
+    - es_event_exec_t
+    - es_token_t
+    - es_event_exit_t
+    - es_event_file_provider_materialize_t
+    - es_event_file_provider_update_t
+    - es_event_fcntl_t
+    - es_event_fork_t
+    - es_event_fsgetpath_t
+    - es_event_get_task_t
+    - es_get_task_type_t
+    - es_event_get_task_read_t
+    - es_event_get_task_inspect_t
+    - es_event_get_task_name_t
+    - es_event_getattrlist_t
+    - es_event_getextattr_t
+    - es_event_iokit_open_t
+    - es_event_kextload_t
+    - es_event_kextunload_t
+    - es_event_link_t
+    - es_event_listextattr_t
+    - es_event_lookup_t
+    - es_event_mmap_t
+    - es_event_mount_t
+    - es_event_mprotect_t
+    - es_event_open_t
+    - es_event_proc_check_t
+    - es_proc_check_type_t
+    - es_event_proc_suspend_resume_t
+    - es_proc_suspend_resume_type_t
+    - es_event_pty_close_t
+    - es_event_pty_grant_t
+    - es_event_readdir_t
+    - es_event_readlink_t
+    - es_event_remote_thread_create_t
+    - es_thread_state_t
+    - es_event_remount_t
+    - es_event_rename_t
+    - es_event_searchfs_t
+    - es_event_setacl_t
+    - es_set_or_clear_t
+    - es_event_setattrlist_t
+    - es_event_setextattr_t
+    - es_event_setflags_t
+    - es_event_setmode_t
+    - es_event_setowner_t
+    - es_event_settime_t
+    - es_event_setuid_t
+    - es_event_setgid_t
+    - es_event_seteuid_t
+    - es_event_setegid_t
+    - es_event_setreuid_t
+    - es_event_setregid_t
+    - es_event_signal_t
+    - es_event_stat_t
+    - es_event_trace_t
+    - es_event_truncate_t
+    - es_event_uipc_bind_t
+    - es_event_uipc_connect_t
+    - es_event_unlink_t
+    - es_event_unmount_t
+    - es_event_utimes_t
+    - es_event_write_t
+    - es_event_authentication_t
+    - es_authentication_type_t
+    - es_event_xp_malware_detected_t
+    - es_event_xp_malware_remediated_t
+    - es_event_lw_session_login_t
+    - es_event_lw_session_logout_t
+    - es_event_lw_session_lock_t
+    - es_event_lw_session_unlock_t
+    - es_event_screensharing_attach_t
+    - es_address_type_t
+    - es_event_screensharing_detach_t
+    - es_event_openssh_login_t
+    - es_openssh_login_result_type_t
+    - es_event_openssh_logout_t
+    - es_event_login_login_t
+    - es_event_login_logout_t
+    - es_event_btm_launch_item_add_t
+    - es_btm_launch_item_t
+    - es_btm_item_type_t
+    - es_event_btm_launch_item_remove_t
+    - es_thread_t
+
+  typeDic:
+    es_message_t:
       points:
         - name: process
           type: es_process_t
@@ -239,497 +344,457 @@ args:
           type: es_thread_t
           optional: true
       enum: true
-    - name: audit_token_t
-    - name: es_statfs_t
-
-    - name: es_action_type_t
-    - name: es_address_type_t
-    - name: es_authentication_type_t
-    - name: es_btm_item_type_t
-    - name: es_btm_launch_item_t
+    es_event_unlink_t:
       points:
-        - type: CChar
-          size: item_url.length
-          name: item_url.data
-        - name: app_url.data
-          size: app_url.length
-          type: CChar
-    - name: es_destination_type_t
-    - points:
+        - type: es_file_t
+          name: parent_dir
+        - name: target
+          type: es_file_t
+    es_event_exec_t:
+      points:
+        - name: script
+          type: es_file_t
+          optional: 'true'
+        - name: cwd
+          type: es_file_t
+        - name: target
+          type: es_process_t
+        - size: reserved0.size
+          name: reserved0.data
+          type: UInt8
+    es_event_fork_t:
+      points:
+        - name: child
+          type: es_process_t
+    es_event_searchfs_t:
+      points:
         - type: es_file_t
           name: target
-      name: es_event_access_t
-    - name: es_event_authentication_t
-    - points:
-        - size: executable_path.length
-          name: executable_path.data
+    es_event_iokit_open_t:
+      points:
+        - type: CChar
+          name: user_client_class.data
+          size: user_client_class.length
+    es_event_screensharing_detach_t:
+      points:
+        - size: viewer_appleid.length
+          name: viewer_appleid.data
           type: CChar
+        - size: source_address.length
+          type: CChar
+          name: source_address.data
+    es_event_getattrlist_t:
+      points:
+        - type: es_file_t
+          name: target
+    es_event_file_provider_update_t:
+      points:
+        - name: source
+          type: es_file_t
+        - name: target_path.data
+          size: target_path.length
+          type: CChar
+    es_event_mmap_t:
+      points:
+        - type: es_file_t
+          name: source
+    es_event_btm_launch_item_add_t:
+      points:
+        - optional: 'true'
+          name: app
+          type: es_process_t
         - optional: 'true'
           name: instigator
           type: es_process_t
-        - optional: 'true'
-          name: app
-          type: es_process_t
-        - type: es_btm_launch_item_t
-          name: item
-      name: es_event_btm_launch_item_add_t
-    - name: es_event_btm_launch_item_remove_t
-      points:
-        - name: instigator
-          type: es_process_t
-          optional: 'true'
-        - type: es_btm_launch_item_t
-          name: item
-        - type: es_process_t
-          optional: 'true'
-          name: app
-    - name: es_event_chdir_t
-      points:
-        - name: target
-          type: es_file_t
-    - name: es_event_chroot_t
-      points:
-        - name: target
-          type: es_file_t
-    - points:
-        - name: target_name.data
-          size: target_name.length
+        - name: item
+          type: es_btm_launch_item_t
+        - size: executable_path.length
           type: CChar
-        - type: es_file_t
-          name: target_dir
-        - name: source
-          type: es_file_t
-      name: es_event_clone_t
-    - name: es_event_close_t
+          name: executable_path.data
+    es_event_get_task_inspect_t:
+      points:
+        - name: target
+          type: es_process_t
+    es_event_get_task_t:
+      points:
+        - name: target
+          type: es_process_t
+    es_event_setattrlist_t:
       points:
         - name: target
           type: es_file_t
-    - points:
-        - name: target_file
+    es_event_rename_t:
+      points:
+        - type: es_file_t
+          name: source
+    es_event_uipc_bind_t:
+      points:
+        - type: CChar
+          name: filename.data
+          size: filename.length
+        - type: es_file_t
+          name: dir
+    es_event_login_logout_t:
+      points:
+        - name: username.data
+          size: username.length
+          type: CChar
+    es_event_mount_t:
+      points:
+        - name: statfs
+          type: es_statfs_t
+    es_event_write_t:
+      points:
+        - name: target
           type: es_file_t
-          optional: 'true'
-        - name: target_dir
-          type: es_file_t
+    es_event_clone_t:
+      points:
         - size: target_name.length
           type: CChar
           name: target_name.data
         - type: es_file_t
           name: source
-      name: es_event_copyfile_t
-    - name: es_event_create_t
-    - name: es_event_cs_invalidated_t
-    - name: es_event_deleteextattr_t
+        - type: es_file_t
+          name: target_dir
+    es_event_openssh_logout_t:
+      points:
+        - type: CChar
+          name: source_address.data
+          size: source_address.length
+        - type: CChar
+          name: username.data
+          size: username.length
+    es_event_close_t:
+      points:
+        - type: es_file_t
+          name: target
+    es_event_kextunload_t:
+      points:
+        - name: identifier.data
+          size: identifier.length
+          type: CChar
+    es_event_readlink_t:
+      points:
+        - name: source
+          type: es_file_t
+    es_event_get_task_name_t:
+      points:
+        - name: target
+          type: es_process_t
+    es_event_get_task_read_t:
+      points:
+        - type: es_process_t
+          name: target
+    es_event_screensharing_attach_t:
+      points:
+        - type: CChar
+          name: source_address.data
+          size: source_address.length
+        - name: authentication_type.data
+          type: CChar
+          size: authentication_type.length
+        - size: viewer_appleid.length
+          name: viewer_appleid.data
+          type: CChar
+        - name: authentication_username.data
+          type: CChar
+          size: authentication_username.length
+        - name: session_username.data
+          type: CChar
+          size: session_username.length
+    es_event_dup_t:
+      points:
+        - name: target
+          type: es_file_t
+    es_event_trace_t:
+      points:
+        - name: target
+          type: es_process_t
+    es_event_fcntl_t:
+      points:
+        - type: es_file_t
+          name: target
+    es_event_exchangedata_t:
+      points:
+        - name: file1
+          type: es_file_t
+        - type: es_file_t
+          name: file2
+    es_event_copyfile_t:
+      points:
+        - name: source
+          type: es_file_t
+        - type: es_file_t
+          name: target_file
+          optional: 'true'
+        - name: target_name.data
+          type: CChar
+          size: target_name.length
+        - name: target_dir
+          type: es_file_t
+    es_event_setowner_t:
+      points:
+        - type: es_file_t
+          name: target
+    es_event_unmount_t:
+      points:
+        - name: statfs
+          type: es_statfs_t
+    es_event_xp_malware_detected_t:
+      points:
+        - size: detected_path.length
+          type: CChar
+          name: detected_path.data
+        - type: CChar
+          name: signature_version.data
+          size: signature_version.length
+        - name: malware_identifier.data
+          type: CChar
+          size: malware_identifier.length
+        - name: incident_identifier.data
+          size: incident_identifier.length
+          type: CChar
+    es_event_remote_thread_create_t:
+      points:
+        - type: es_process_t
+          name: target
+        - optional: 'true'
+          name: thread_state
+          type: es_thread_state_t
+    es_event_chroot_t:
+      points:
+        - name: target
+          type: es_file_t
+    es_event_utimes_t:
+      points:
+        - type: es_file_t
+          name: target
+    es_event_lw_session_logout_t:
+      points:
+        - name: username.data
+          type: CChar
+          size: username.length
+    es_event_uipc_connect_t:
+      points:
+        - name: file
+          type: es_file_t
+    es_process_t:
+      points:
+        - optional: 'true'
+          name: tty
+          type: es_file_t
+        - size: signing_id.length
+          name: signing_id.data
+          type: CChar
+        - name: executable
+          type: es_file_t
+        - name: team_id.data
+          size: team_id.length
+          type: CChar
+    es_event_xp_malware_remediated_t:
+      points:
+        - name: remediated_path.data
+          size: remediated_path.length
+          type: CChar
+        - size: malware_identifier.length
+          name: malware_identifier.data
+          type: CChar
+        - name: action_type.data
+          size: action_type.length
+          type: CChar
+        - name: incident_identifier.data
+          type: CChar
+          size: incident_identifier.length
+        - size: result_description.length
+          name: result_description.data
+          type: CChar
+        - name: signature_version.data
+          size: signature_version.length
+          type: CChar
+        - type: audit_token_t
+          optional: 'true'
+          name: remediated_process_audit_token
+    es_event_kextload_t:
+      points:
+        - name: identifier.data
+          size: identifier.length
+          type: CChar
+    es_btm_launch_item_t:
+      points:
+        - name: item_url.data
+          type: CChar
+          size: item_url.length
+        - type: CChar
+          size: app_url.length
+          name: app_url.data
+    es_string_token_t:
+      points:
+        - name: data
+          size: length
+          type: CChar
+    es_event_access_t:
+      points:
+        - name: target
+          type: es_file_t
+    es_event_openssh_login_t:
+      points:
+        - size: source_address.length
+          type: CChar
+          name: source_address.data
+        - size: username.length
+          type: CChar
+          name: username.data
+    es_event_truncate_t:
+      points:
+        - type: es_file_t
+          name: target
+    es_event_fsgetpath_t:
+      points:
+        - name: target
+          type: es_file_t
+    es_event_setacl_t:
+      points:
+        - name: target
+          type: es_file_t
+    es_event_setextattr_t:
+      points:
+        - type: CChar
+          name: extattr.data
+          size: extattr.length
+        - type: es_file_t
+          name: target
+    es_token_t:
+      points:
+        - name: data
+          size: size
+          type: UInt8
+    es_thread_state_t:
+      points:
+        - type: UInt8
+          name: state.data
+          size: state.size
+    es_event_lw_session_login_t:
+      points:
+        - name: username.data
+          size: username.length
+          type: CChar
+    es_event_setmode_t:
+      points:
+        - type: es_file_t
+          name: target
+    es_event_setflags_t:
+      points:
+        - name: target
+          type: es_file_t
+    es_event_lookup_t:
+      points:
+        - name: relative_target.data
+          type: CChar
+          size: relative_target.length
+        - name: source_dir
+          type: es_file_t
+    es_event_deleteextattr_t:
       points:
         - type: es_file_t
           name: target
         - size: extattr.length
           type: CChar
           name: extattr.data
-    - name: es_event_dup_t
+    es_event_chdir_t:
       points:
         - name: target
           type: es_file_t
-    - name: es_event_exchangedata_t
+    es_event_link_t:
       points:
-        - name: file2
-          type: es_file_t
-        - name: file1
-          type: es_file_t
-    - name: es_event_exec_t
-      points:
-        - name: cwd
-          type: es_file_t
-        - name: target
-          type: es_process_t
-        - size: reserved0.size
-          type: UInt8
-          name: reserved0.data
-        - optional: 'true'
-          name: script
-          type: es_file_t
-    - name: es_event_exit_t
-    - points:
-        - type: es_file_t
-          name: target
-      name: es_event_fcntl_t
-    - points:
-        - name: source
-          type: es_file_t
-        - type: es_file_t
-          name: target
-        - type: es_process_t
-          name: instigator
-      name: es_event_file_provider_materialize_t
-    - points:
-        - name: source
-          type: es_file_t
-        - name: target_path.data
-          type: CChar
-          size: target_path.length
-      name: es_event_file_provider_update_t
-    - points:
-        - name: child
-          type: es_process_t
-      name: es_event_fork_t
-    - name: es_event_fsgetpath_t
-      points:
-        - type: es_file_t
-          name: target
-    - points:
-        - name: target
-          type: es_process_t
-      name: es_event_get_task_inspect_t
-    - name: es_event_get_task_name_t
-      points:
-        - type: es_process_t
-          name: target
-    - name: es_event_get_task_read_t
-      points:
-        - name: target
-          type: es_process_t
-    - name: es_event_get_task_t
-      points:
-        - name: target
-          type: es_process_t
-    - points:
-        - name: target
-          type: es_file_t
-      name: es_event_getattrlist_t
-    - name: es_event_getextattr_t
-      points:
-        - type: es_file_t
-          name: target
-        - type: CChar
-          name: extattr.data
-          size: extattr.length
-    - name: es_event_iokit_open_t
-      points:
-        - type: CChar
-          name: user_client_class.data
-          size: user_client_class.length
-    - name: es_event_kextload_t
-      points:
-        - type: CChar
-          name: identifier.data
-          size: identifier.length
-    - points:
-        - type: CChar
-          name: identifier.data
-          size: identifier.length
-      name: es_event_kextunload_t
-    - name: es_event_link_t
-      points:
-        - name: source
-          type: es_file_t
-        - size: target_filename.length
-          type: CChar
-          name: target_filename.data
         - type: es_file_t
           name: target_dir
-    - points:
-        - name: target
-          type: es_file_t
-      name: es_event_listextattr_t
-    - name: es_event_login_login_t
-      points:
-        - name: failure_message.data
-          size: failure_message.length
-          type: CChar
-        - size: username.length
-          name: username.data
-          type: CChar
-    - name: es_event_login_logout_t
-      points:
-        - size: username.length
-          name: username.data
-          type: CChar
-    - name: es_event_lookup_t
-      points:
-        - name: source_dir
-          type: es_file_t
-        - size: relative_target.length
-          type: CChar
-          name: relative_target.data
-    - name: es_event_lw_session_lock_t
-      points:
-        - name: username.data
-          size: username.length
-          type: CChar
-    - name: es_event_lw_session_login_t
-      points:
-        - size: username.length
-          type: CChar
-          name: username.data
-    - name: es_event_lw_session_logout_t
-      points:
-        - name: username.data
-          size: username.length
-          type: CChar
-    - points:
-        - name: username.data
-          type: CChar
-          size: username.length
-      name: es_event_lw_session_unlock_t
-    - points:
+        - type: CChar
+          size: target_filename.length
+          name: target_filename.data
         - name: source
           type: es_file_t
-      name: es_event_mmap_t
-    - name: es_event_mount_t
+    es_event_stat_t:
       points:
-        - name: statfs
-          type: es_statfs_t
-    - name: es_event_mprotect_t
-    - name: es_event_open_t
+        - name: target
+          type: es_file_t
+    es_event_login_login_t:
+      points:
+        - type: CChar
+          size: username.length
+          name: username.data
+        - type: CChar
+          name: failure_message.data
+          size: failure_message.length
+    es_event_btm_launch_item_remove_t:
+      points:
+        - type: es_btm_launch_item_t
+          name: item
+        - optional: 'true'
+          name: instigator
+          type: es_process_t
+        - name: app
+          type: es_process_t
+          optional: 'true'
+    es_event_readdir_t:
+      points:
+        - name: target
+          type: es_file_t
+    es_event_remount_t:
+      points:
+        - type: es_statfs_t
+          name: statfs
+    es_event_open_t:
       points:
         - type: es_file_t
           name: file
-    - name: es_event_openssh_login_t
+    es_event_proc_suspend_resume_t:
       points:
-        - size: source_address.length
-          name: source_address.data
-          type: CChar
+        - optional: 'true'
+          type: es_process_t
+          name: target
+    es_event_listextattr_t:
+      points:
+        - type: es_file_t
+          name: target
+    es_file_t:
+      points:
         - type: CChar
+          size: path.length
+          name: path.data
+    es_event_signal_t:
+      points:
+        - type: es_process_t
+          name: target
+    es_event_lw_session_lock_t:
+      points:
+        - size: username.length
+          type: CChar
           name: username.data
-          size: username.length
-    - name: es_event_openssh_logout_t
+    es_event_proc_check_t:
+      points:
+        - optional: 'true'
+          type: es_process_t
+          name: target
+    es_event_lw_session_unlock_t:
       points:
         - name: username.data
+          type: CChar
           size: username.length
-          type: CChar
-        - size: source_address.length
-          name: source_address.data
-          type: CChar
-    - points:
-        - optional: 'true'
-          name: target
-          type: es_process_t
-      name: es_event_proc_check_t
-    - points:
-        - optional: 'true'
-          name: target
-          type: es_process_t
-      name: es_event_proc_suspend_resume_t
-    - name: es_event_pty_close_t
-    - name: es_event_pty_grant_t
-    - points:
-        - name: target
-          type: es_file_t
-      name: es_event_readdir_t
-    - points:
+    es_event_file_provider_materialize_t:
+      points:
         - name: source
           type: es_file_t
-      name: es_event_readlink_t
-    - name: es_event_remote_thread_create_t
-      points:
+        - type: es_process_t
+          name: instigator
         - name: target
-          type: es_process_t
-        - optional: 'true'
-          name: thread_state
-          type: es_thread_state_t
-    - name: es_event_remount_t
-      points:
-        - name: statfs
-          type: es_statfs_t
-    - points:
-        - type: es_file_t
-          name: source
-      name: es_event_rename_t
-    - points:
-        - size: authentication_username.length
-          name: authentication_username.data
-          type: CChar
-        - type: CChar
-          name: session_username.data
-          size: session_username.length
-        - name: viewer_appleid.data
-          size: viewer_appleid.length
-          type: CChar
-        - type: CChar
-          size: authentication_type.length
-          name: authentication_type.data
-        - size: source_address.length
-          type: CChar
-          name: source_address.data
-      name: es_event_screensharing_attach_t
-    - points:
-        - type: CChar
-          name: source_address.data
-          size: source_address.length
-        - type: CChar
-          name: viewer_appleid.data
-          size: viewer_appleid.length
-      name: es_event_screensharing_detach_t
-    - points:
-        - type: es_file_t
-          name: target
-      name: es_event_searchfs_t
-    - name: es_event_setacl_t
+          type: es_file_t
+    es_event_getextattr_t:
       points:
         - name: target
           type: es_file_t
-    - name: es_event_setattrlist_t
-      points:
-        - name: target
-          type: es_file_t
-    - name: es_event_setegid_t
-    - name: es_event_seteuid_t
-    - points:
-        - name: target
-          type: es_file_t
-        - type: CChar
-          name: extattr.data
+        - name: extattr.data
+          type: CChar
           size: extattr.length
-      name: es_event_setextattr_t
-    - name: es_event_setflags_t
-      points:
-        - name: target
-          type: es_file_t
-    - name: es_event_setgid_t
-    - name: es_event_setmode_t
-      points:
-        - type: es_file_t
-          name: target
-    - points:
-        - type: es_file_t
-          name: target
-      name: es_event_setowner_t
-    - name: es_event_setregid_t
-    - name: es_event_setreuid_t
-    - name: es_event_settime_t
-    - name: es_event_setuid_t
-    - name: es_event_signal_t
-      points:
-        - name: target
-          type: es_process_t
-    - name: es_event_stat_t
-      points:
-        - type: es_file_t
-          name: target
-    - points:
-        - type: es_process_t
-          name: target
-      name: es_event_trace_t
-    - points:
-        - type: es_file_t
-          name: target
-      name: es_event_truncate_t
-    - name: es_event_type_t
-    - name: es_event_uipc_bind_t
-      points:
-        - name: filename.data
-          type: CChar
-          size: filename.length
-        - name: dir
-          type: es_file_t
-    - name: es_event_uipc_connect_t
-      points:
-        - name: file
-          type: es_file_t
-    - name: es_event_unlink_t
-      points:
-        - name: parent_dir
-          type: es_file_t
-        - name: target
-          type: es_file_t
-    - points:
-        - name: statfs
-          type: es_statfs_t
-      name: es_event_unmount_t
-    - points:
-        - name: target
-          type: es_file_t
-      name: es_event_utimes_t
-    - name: es_event_write_t
-      points:
-        - type: es_file_t
-          name: target
-    - name: es_event_xp_malware_detected_t
-      points:
-        - name: malware_identifier.data
-          size: malware_identifier.length
-          type: CChar
-        - type: CChar
-          name: detected_path.data
-          size: detected_path.length
-        - name: incident_identifier.data
-          type: CChar
-          size: incident_identifier.length
-        - name: signature_version.data
-          size: signature_version.length
-          type: CChar
-    - name: es_event_xp_malware_remediated_t
-      points:
-        - size: action_type.length
-          name: action_type.data
-          type: CChar
-        - size: malware_identifier.length
-          name: malware_identifier.data
-          type: CChar
-        - type: CChar
-          size: remediated_path.length
-          name: remediated_path.data
-        - type: CChar
-          name: result_description.data
-          size: result_description.length
-        - name: incident_identifier.data
-          size: incident_identifier.length
-          type: CChar
-        - optional: 'true'
-          name: remediated_process_audit_token
-          type: audit_token_t
-        - name: signature_version.data
-          size: signature_version.length
-          type: CChar
-    - points:
-        - name: path.data
-          size: path.length
-          type: CChar
-      name: es_file_t
-    - name: es_get_task_type_t
-    - points:
-        - type: es_thread_t
-          name: thread
-          optional: 'true'
-        - type: es_process_t
-          name: process
-      name: es_message_t
-    - name: es_openssh_login_result_type_t
-    - name: es_proc_check_type_t
-    - name: es_proc_suspend_resume_type_t
-    - name: es_process_t
-      points:
-        - name: team_id.data
-          size: team_id.length
-          type: CChar
-        - type: es_file_t
-          name: executable
-        - type: es_file_t
-          name: tty
-          optional: 'true'
-        - size: signing_id.length
-          type: CChar
-          name: signing_id.data
-    - name: es_set_or_clear_t
-    - points:
-        - name: data
-          size: length
-          type: CChar
-      name: es_string_token_t
-    - name: es_thread_state_t
-      points:
-        - size: state.size
-          name: state.data
-          type: UInt8
-    - name: es_thread_t
-    - name: es_token_t
-      points:
-        - name: data
-          size: size
-          type: UInt8
-
-
-
-
 
 
 output: .
