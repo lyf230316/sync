@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		1C7FE6CB29EF7C64007D54B3 /* json */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = json; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C7FE6CE29EF7C64007D54B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6EB1E95129F17BEA001A2A61 /* EndpointSecurity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EndpointSecurity.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +58,7 @@
 		1C7FE6CD29EF7C64007D54B3 /* json */ = {
 			isa = PBXGroup;
 			children = (
+				6EB1E95129F17BEA001A2A61 /* EndpointSecurity.json */,
 				1C7FE6CE29EF7C64007D54B3 /* main.swift */,
 			);
 			path = json;

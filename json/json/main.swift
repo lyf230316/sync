@@ -38,7 +38,9 @@ func printCode(name: String,def:[String: Any],lev:Int = 0) {
     for i in  0 ..< lev {
         sj += "\t"
     }
-    let tag = def["tagUsed"]!
+    guard let tag = def["tagUsed"] else {
+        return
+    }
     print(sj,tag,name,"{")
     var inners = def["inner"]! as! [[String:Any]]
     var i = 0
@@ -46,16 +48,24 @@ func printCode(name: String,def:[String: Any],lev:Int = 0) {
         let inner = inners[i]
         let kind = inner["kind"] as! String
         if kind == "FieldDecl" {
-            let name = inner["name"] as! String
-            var type = ""
-            if let t = inner["type"] as? String {
-                type = t
-            } else if let d = inner["type"] as? [String: String] {
-                type = d["qualType"] ?? ""
+            if let name = inner["name"] {
+                var type = ""
+                if let t = inner["type"] as? String {
+                    type = t
+                } else if let d = inner["type"] as? [String: String] {
+                    type = d["qualType"] ?? ""
+                }
+                print(sj,"\t",type,name)
             }
-            print(sj,"\t",type,name)
         } else {
-            printCode(name: "", def: inner)
+            printCode(name: "", def: inner, lev: lev+1)
+            if i+1 < inners.count {
+                i += 1
+                let inner = inners[i]
+                if let name = inner["name"] {
+                    print(sj,"\t",name)
+                }
+            }
         }
         
         i += 1
@@ -64,7 +74,7 @@ func printCode(name: String,def:[String: Any],lev:Int = 0) {
 }
 
 func astAnalys() {
-    let file = "/Users/lyf/Desktop/EndpointSecurity.json"
+    let file = "/Users/msi/git/github/sync/json/json/EndpointSecurity.json"
     let data = try! Data(contentsOf: URL(filePath: file))
     let dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
 //    print(dic.keys)
