@@ -9,45 +9,35 @@
 #import <sys/socket.h>
 #import <arpa/inet.h>
 
-typedef struct data {
-    char name[30];
-    unsigned int num;
-}Data;
-
 void client(void) {
-    int fd = socket(AF_INET, SOCK_STREAM, 0);
-    struct sockaddr_in addr;
-    addr.sin_family = AF_INET;
-    addr.sin_port = 60082;
-    addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-    Data data = {0};
+    int cfd = socket(AF_INET,SOCK_DGRAM,0);
+    if(cfd<0){
+        perror("socket error");
+        return ;
+    }
     
-    while (true) {
-        ssize_t r = sendto(fd, "abc", 3, 0, (struct sockaddr *)&addr, sizeof(struct sockaddr));
-        if (r >=0 ) {
-            break;
-        } else {
-            [NSThread sleepForTimeInterval:0.01];
-        }
+    int n ;
+    char buf[1024];
+    struct sockaddr_in serv;
+    serv.sin_family = AF_INET;
+    serv.sin_port = htons(8888);
+    inet_pton(AF_INET,"127.0.0.1",&serv.sin_addr.s_addr);
+    
+    while(1){
+        //读取标准输入数据
+        memset(buf,0x00,sizeof(buf));
+        n = read(STDIN_FILENO,buf,sizeof(buf));
+        
+        //发送数据
+        sendto(cfd,buf,n,0,(struct sockaddr*)&serv,sizeof(serv));
+        
+        //读取数据
+        memset(buf,0x00,sizeof(buf));
+        n = recvfrom(cfd,buf,sizeof(buf),0,NULL,NULL);
+        printf("n=[%d],buf=[%s]\n",n,buf);
     }
-    char res[20];
-    ssize_t l = -1;
-    while (l <= 0) {
-        char buf[10];
-        struct sockaddr addr;
-        socklen_t size;
-        ssize_t res_size;
-        res_size = recvfrom(fd, buf, 10, 0, &addr,&size);
-        if (res_size > 0) {
-            struct sockaddr_in *sin = (struct sockaddr_in *)&addr;
-            char s[20];
-            sprintf(s,"%s:%d",inet_ntoa(sin->sin_addr),sin->sin_port);
-            printf("%s\n",s);
-            sendto(fd, s, strlen(s), 0, &addr, sizeof(struct sockaddr));
-        } else {
-            [NSThread sleepForTimeInterval:0.1];
-        }
-    }
+    //关闭套接字
+    close(cfd);
 }
 
 int main(int argc, const char * argv[]) {

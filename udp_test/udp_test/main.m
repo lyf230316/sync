@@ -10,44 +10,44 @@
 #import <arpa/inet.h>
 #import <netinet/in.h>
 
-typedef struct data {
-    char name[30];
-    unsigned int num;
-}Data;
-
 void server(void) {
-    int fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (fd == 0 ) {
-        printf("%d",__LINE__);
-        return;
-    }
-    struct sockaddr_in addr;
-    addr.sin_family = AF_INET;
-    addr.sin_port = 60082;
-    addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-    int res = bind(fd, (struct sockaddr *)&addr, sizeof(struct sockaddr));
-    if (res != 0 ) {
-        printf("res:%d\n",res);
-        printf("%d",__LINE__);
-        return;
-    }
-    
-    char buf[10];
-    struct sockaddr caddr;
-    socklen_t size;
-    ssize_t res_size;
-    while (true) {
-        res_size = recvfrom(fd, buf, 10, 0, &caddr,&size);
-        if (res_size > 0) {
-            struct sockaddr_in *sin = (struct sockaddr_in *)&caddr;
-            char s[20];
-            sprintf(s,"%s:%d",inet_ntoa(sin->sin_addr),sin->sin_port);
-            printf("%s\n",s);
-            sendto(fd, s, strlen(s), 0, &caddr, sizeof(struct sockaddr));
-        } else {
-            [NSThread sleepForTimeInterval:0.1];
+    //1.创建socket
+        int cfd = socket(AF_INET,SOCK_DGRAM,0);
+        if(cfd<0){
+            perror("socket error");
+            return;
         }
-    }
+
+        //绑定
+        struct sockaddr_in serv;
+        struct sockaddr_in client;
+        bzero(&serv,sizeof(serv));
+        serv.sin_family = AF_INET;
+        serv.sin_port = htons(8888);
+        serv.sin_addr.s_addr = htonl(INADDR_ANY);
+        bind(cfd,(struct sockaddr *)&serv,sizeof(serv));
+
+        //3.循环读取读取客户端消息和给客户端回复消息
+        int i;
+        int n;
+        socklen_t len;
+        char buf[1024];
+        while(1){
+            //4.读取数据
+            memset(buf,0x00,sizeof(buf));
+            len = sizeof(client);
+            n = recvfrom(cfd,buf,sizeof(buf),0,(struct sockaddr*)&client,&len);
+
+            //将大写转换为小写
+            for(i=0;i<n;i++){
+                buf[i] = toupper(buf[i]);
+            }
+            printf("[%d]:n=[%d],buf=[%s]\n",ntohs(client.sin_port),n,buf);
+            //5.给客户端回复消息
+            sendto(cfd,buf,n,0,(struct sockaddr*)&client,len);
+        }
+        //关闭套接字
+        close(cfd);
 }
 
 int main(int argc, const char * argv[]) {
