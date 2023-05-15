@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SQLite3
 
 func checkFeatures() {
     let file = "/Users/lyf/Documents/baidu/hi/mac/Sources/BIFAppResources/config/LOCAL_ONLY/features.json"
