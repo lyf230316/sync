@@ -7,12 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7FE6CE29EF7C64007D54B3 /* main.swift */; };
-		6E40FCC42A05409700FE4B5B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E40FCC32A05409700FE4B5B /* libsqlite3.tbd */; };
+		6EBC9D912A1188C5007906CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC9D902A1188C5007906CB /* main.m */; };
+		6EBC9D9E2A119465007906CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC9D9D2A119465007906CB /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1C7FE6C929EF7C64007D54B3 /* CopyFiles */ = {
+		6EBC9D8B2A1188C5007906CB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		6EBC9D992A119465007906CB /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -24,94 +33,119 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1C7FE6CB29EF7C64007D54B3 /* json */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = json; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C7FE6CE29EF7C64007D54B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		6E40FCC32A05409700FE4B5B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		6EB1E95129F17BEA001A2A61 /* EndpointSecurity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EndpointSecurity.json; sourceTree = "<group>"; };
+		6EBC9D8D2A1188C5007906CB /* udp_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = udp_test; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EBC9D902A1188C5007906CB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6EBC9D9B2A119465007906CB /* udp_client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = udp_client; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EBC9D9D2A119465007906CB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1C7FE6C829EF7C64007D54B3 /* Frameworks */ = {
+		6EBC9D8A2A1188C5007906CB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E40FCC42A05409700FE4B5B /* libsqlite3.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EBC9D982A119465007906CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1C7FE6C229EF7C64007D54B3 = {
+		6EBC9D842A1188C5007906CB = {
 			isa = PBXGroup;
 			children = (
-				1C7FE6CD29EF7C64007D54B3 /* json */,
-				1C7FE6CC29EF7C64007D54B3 /* Products */,
-				6E40FCC22A05409700FE4B5B /* Frameworks */,
+				6EBC9D8F2A1188C5007906CB /* udp_test */,
+				6EBC9D9C2A119465007906CB /* udp_client */,
+				6EBC9D8E2A1188C5007906CB /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		1C7FE6CC29EF7C64007D54B3 /* Products */ = {
+		6EBC9D8E2A1188C5007906CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1C7FE6CB29EF7C64007D54B3 /* json */,
+				6EBC9D8D2A1188C5007906CB /* udp_test */,
+				6EBC9D9B2A119465007906CB /* udp_client */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1C7FE6CD29EF7C64007D54B3 /* json */ = {
+		6EBC9D8F2A1188C5007906CB /* udp_test */ = {
 			isa = PBXGroup;
 			children = (
-				6EB1E95129F17BEA001A2A61 /* EndpointSecurity.json */,
-				1C7FE6CE29EF7C64007D54B3 /* main.swift */,
+				6EBC9D902A1188C5007906CB /* main.m */,
 			);
-			path = json;
+			path = udp_test;
 			sourceTree = "<group>";
 		};
-		6E40FCC22A05409700FE4B5B /* Frameworks */ = {
+		6EBC9D9C2A119465007906CB /* udp_client */ = {
 			isa = PBXGroup;
 			children = (
-				6E40FCC32A05409700FE4B5B /* libsqlite3.tbd */,
+				6EBC9D9D2A119465007906CB /* main.m */,
 			);
-			name = Frameworks;
+			path = udp_client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1C7FE6CA29EF7C64007D54B3 /* json */ = {
+		6EBC9D8C2A1188C5007906CB /* udp_test */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1C7FE6D229EF7C64007D54B3 /* Build configuration list for PBXNativeTarget "json" */;
+			buildConfigurationList = 6EBC9D942A1188C5007906CB /* Build configuration list for PBXNativeTarget "udp_test" */;
 			buildPhases = (
-				1C7FE6C729EF7C64007D54B3 /* Sources */,
-				1C7FE6C829EF7C64007D54B3 /* Frameworks */,
-				1C7FE6C929EF7C64007D54B3 /* CopyFiles */,
+				6EBC9D892A1188C5007906CB /* Sources */,
+				6EBC9D8A2A1188C5007906CB /* Frameworks */,
+				6EBC9D8B2A1188C5007906CB /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = json;
-			productName = json;
-			productReference = 1C7FE6CB29EF7C64007D54B3 /* json */;
+			name = udp_test;
+			productName = udp_test;
+			productReference = 6EBC9D8D2A1188C5007906CB /* udp_test */;
+			productType = "com.apple.product-type.tool";
+		};
+		6EBC9D9A2A119465007906CB /* udp_client */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6EBC9D9F2A119465007906CB /* Build configuration list for PBXNativeTarget "udp_client" */;
+			buildPhases = (
+				6EBC9D972A119465007906CB /* Sources */,
+				6EBC9D982A119465007906CB /* Frameworks */,
+				6EBC9D992A119465007906CB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = udp_client;
+			productName = udp_client;
+			productReference = 6EBC9D9B2A119465007906CB /* udp_client */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		1C7FE6C329EF7C64007D54B3 /* Project object */ = {
+		6EBC9D852A1188C5007906CB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					1C7FE6CA29EF7C64007D54B3 = {
+					6EBC9D8C2A1188C5007906CB = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					6EBC9D9A2A119465007906CB = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
-			buildConfigurationList = 1C7FE6C629EF7C64007D54B3 /* Build configuration list for PBXProject "json" */;
+			buildConfigurationList = 6EBC9D882A1188C5007906CB /* Build configuration list for PBXProject "udp_test" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -119,29 +153,38 @@
 				en,
 				Base,
 			);
-			mainGroup = 1C7FE6C229EF7C64007D54B3;
-			productRefGroup = 1C7FE6CC29EF7C64007D54B3 /* Products */;
+			mainGroup = 6EBC9D842A1188C5007906CB;
+			productRefGroup = 6EBC9D8E2A1188C5007906CB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1C7FE6CA29EF7C64007D54B3 /* json */,
+				6EBC9D8C2A1188C5007906CB /* udp_test */,
+				6EBC9D9A2A119465007906CB /* udp_client */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1C7FE6C729EF7C64007D54B3 /* Sources */ = {
+		6EBC9D892A1188C5007906CB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */,
+				6EBC9D912A1188C5007906CB /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EBC9D972A119465007906CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EBC9D9E2A119465007906CB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		1C7FE6D029EF7C64007D54B3 /* Debug */ = {
+		6EBC9D922A1188C5007906CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -196,12 +239,10 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		1C7FE6D129EF7C64007D54B3 /* Release */ = {
+		6EBC9D932A1188C5007906CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -249,55 +290,80 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
-		1C7FE6D329EF7C64007D54B3 /* Debug */ = {
+		6EBC9D952A1188C5007906CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U6G2VLMPPZ;
+				DEVELOPMENT_TEAM = 4KDWBQAQFX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		1C7FE6D429EF7C64007D54B3 /* Release */ = {
+		6EBC9D962A1188C5007906CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U6G2VLMPPZ;
+				DEVELOPMENT_TEAM = 4KDWBQAQFX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6EBC9DA02A119465007906CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4KDWBQAQFX;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6EBC9DA12A119465007906CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4KDWBQAQFX;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1C7FE6C629EF7C64007D54B3 /* Build configuration list for PBXProject "json" */ = {
+		6EBC9D882A1188C5007906CB /* Build configuration list for PBXProject "udp_test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1C7FE6D029EF7C64007D54B3 /* Debug */,
-				1C7FE6D129EF7C64007D54B3 /* Release */,
+				6EBC9D922A1188C5007906CB /* Debug */,
+				6EBC9D932A1188C5007906CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1C7FE6D229EF7C64007D54B3 /* Build configuration list for PBXNativeTarget "json" */ = {
+		6EBC9D942A1188C5007906CB /* Build configuration list for PBXNativeTarget "udp_test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1C7FE6D329EF7C64007D54B3 /* Debug */,
-				1C7FE6D429EF7C64007D54B3 /* Release */,
+				6EBC9D952A1188C5007906CB /* Debug */,
+				6EBC9D962A1188C5007906CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6EBC9D9F2A119465007906CB /* Build configuration list for PBXNativeTarget "udp_client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EBC9DA02A119465007906CB /* Debug */,
+				6EBC9DA12A119465007906CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 1C7FE6C329EF7C64007D54B3 /* Project object */;
+	rootObject = 6EBC9D852A1188C5007906CB /* Project object */;
 }
