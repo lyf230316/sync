@@ -1,0 +1,13 @@
+/Users/lyf/git/github/sync/rust/demo1/target/debug/deps/quote-7e716de2223f12b1.rmeta: /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/lib.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/ext.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/format.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/ident_fragment.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/to_tokens.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/runtime.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/spanned.rs
+
+/Users/lyf/git/github/sync/rust/demo1/target/debug/deps/libquote-7e716de2223f12b1.rlib: /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/lib.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/ext.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/format.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/ident_fragment.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/to_tokens.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/runtime.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/spanned.rs
+
+/Users/lyf/git/github/sync/rust/demo1/target/debug/deps/quote-7e716de2223f12b1.d: /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/lib.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/ext.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/format.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/ident_fragment.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/to_tokens.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/runtime.rs /Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/spanned.rs
+
+/Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/lib.rs:
+/Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/ext.rs:
+/Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/format.rs:
+/Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/ident_fragment.rs:
+/Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/to_tokens.rs:
+/Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/runtime.rs:
+/Users/lyf/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.27/src/spanned.rs:

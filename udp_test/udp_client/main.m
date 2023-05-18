@@ -26,7 +26,8 @@ void client(void) {
     while(1){
         //读取标准输入数据
         memset(buf,0x00,sizeof(buf));
-        n = read(STDIN_FILENO,buf,sizeof(buf));
+        strcpy(buf, "hello");
+        n = strlen(buf);
         
         //发送数据
         sendto(cfd,buf,n,0,(struct sockaddr*)&serv,sizeof(serv));
