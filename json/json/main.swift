@@ -157,6 +157,7 @@ func astAnalys() {
         }
     }
     
+    print((es_structs as NSDictionary))
     //处理每个类型中的指针
     for n in es_union_names {
         let def = es_unions[n]!
