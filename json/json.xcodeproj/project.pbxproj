@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7FE6CE29EF7C64007D54B3 /* main.swift */; };
+		1CD7E0232A38365800FF14E5 /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD7E0222A38365800FF14E5 /* types.swift */; };
+		1CD7E0252A383DD500FF14E5 /* Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD7E0242A383DD500FF14E5 /* Print.swift */; };
 		6E40FCC42A05409700FE4B5B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E40FCC32A05409700FE4B5B /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		1C7FE6CB29EF7C64007D54B3 /* json */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = json; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C7FE6CE29EF7C64007D54B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		1CD7E0222A38365800FF14E5 /* types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
+		1CD7E0242A383DD500FF14E5 /* Print.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Print.swift; sourceTree = "<group>"; };
 		6E40FCC32A05409700FE4B5B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		6EB1E95129F17BEA001A2A61 /* EndpointSecurity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EndpointSecurity.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +68,8 @@
 			children = (
 				6EB1E95129F17BEA001A2A61 /* EndpointSecurity.json */,
 				1C7FE6CE29EF7C64007D54B3 /* main.swift */,
+				1CD7E0222A38365800FF14E5 /* types.swift */,
+				1CD7E0242A383DD500FF14E5 /* Print.swift */,
 			);
 			path = json;
 			sourceTree = "<group>";
@@ -135,6 +141,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */,
+				1CD7E0252A383DD500FF14E5 /* Print.swift in Sources */,
+				1CD7E0232A38365800FF14E5 /* types.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +266,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4KDWBQAQFX;
+				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -269,7 +277,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4KDWBQAQFX;
+				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

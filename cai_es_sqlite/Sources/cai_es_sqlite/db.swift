@@ -137,7 +137,11 @@ class EventCopyfile {
 }
 
 // es_event_create_t
-//
+class EventCreate {
+    static let tableName = Table("tableName")
+    
+    static let existing_file = Expression<UInt64>("existing_file") // File
+}
 // es_event_cs_invalidated_t
 //
 // es_event_deleteextattr_t

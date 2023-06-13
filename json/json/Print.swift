@@ -1,83 +1,106 @@
 //
-//  main.swift
+//  Print.swift
 //  json
 //
-//  Created by lyf on 2023/4/19.
+//  Created by lyf on 2023/6/13.
 //
 
 import Foundation
-import SQLite3
 
-
-
-func enumToModel(name: String, def: [String: Any], lev: Int = 0) -> Enum {
-    var res = Enum(name: name)
-    var inners = def["inner"]! as! [[String:Any]]
-    var i = 0
-    while i < inners.count {
-        let inner = inners[i]
-        let kind = inner["kind"] as! String
-        if kind == "EnumConstantDecl" {
-            if let name = inner["name"] as? String {
-                res.values.append(name)
+func checkFeatures() {
+    let file = "/Users/lyf/Documents/baidu/hi/mac/Sources/BIFAppResources/config/LOCAL_ONLY/features.json"
+    let data = try! Data(contentsOf: URL(filePath: file))
+    let dic = try! JSONSerialization.jsonObject(with: data)
+    var names : NSMutableArray = []
+    if let dic = dic as? [String: Any],let items = dic["items"] as? [[String:Any]] {
+        for itm in items {
+            let n = itm["name"]!
+            if !names.contains(n) {
+                names.add(n)
+            }else{
+                print(n)
             }
         }
-        i += 1
     }
-    return res
 }
+//checkFeatures()
 
-func structToModel(tname: String,def:[String: Any]) -> [Struct]? {
-    guard let tag = def["tagUsed"] as? String else {
-        return nil
+func jsonToPlist() {
+    let file = "/Users/lyf/Desktop/EndpointSecurity.json"
+    let data = try! Data(contentsOf: URL(filePath: file))
+    let dic = try! JSONSerialization.jsonObject(with: data)
+    (dic as! NSDictionary).write(toFile: "/Users/lyf/Desktop/EndpointSecurity.plist", atomically: true)
+}
+//jsonToPlist()
+
+func printStructCode(name: String,def:[String: Any],lev:Int = 0) {
+    var sj = ""
+    for i in  0 ..< lev {
+        sj += "\t"
     }
-    var result: [Struct] = []
-    var mainStruct = Struct(name: tname)
-    if tag == "union" {
-        mainStruct.isUnoin = true
+    guard let tag = def["tagUsed"] else {
+        return
     }
+    print(sj,tag,name,"{")
     var inners = def["inner"]! as! [[String:Any]]
     var i = 0
     while i < inners.count {
         let inner = inners[i]
         let kind = inner["kind"] as! String
         if kind == "FieldDecl" {
-            if let name = inner["name"] as? String {
+            if let name = inner["name"] {
                 var type = ""
                 if let t = inner["type"] as? String {
                     type = t
                 } else if let d = inner["type"] as? [String: String] {
                     type = d["qualType"] ?? ""
                 }
-                let m = Member(name: name, type: type)
-                mainStruct.members.append(m)
+                print(sj,"\t",type,name)
             }
         } else {
-            var lname = tname
+            printStructCode(name: "", def: inner, lev: lev+1)
             if i+1 < inners.count {
                 i += 1
                 let inner = inners[i]
-                if let name = inner["name"] as? String {
-                    lname = lname+"."+name
-                    let m = Member(name: name, type: lname)
-                    mainStruct.members.append(m)
+                if let name = inner["name"] {
+                    print(sj,"\t",name)
                 }
             }
-            if let subStructs = structToModel(tname: lname, def: inner) {
-                result.append(contentsOf: subStructs)
+        }
+        
+        i += 1
+    }
+    print(sj,"}")
+}
+
+func printEnumCode(name: String, def: [String: Any], lev: Int = 0) {
+    var sj = ""
+    for i in  0 ..< lev {
+        sj += "\t"
+    }
+    print(sj,"enum",name,"{")
+    var inners = def["inner"]! as! [[String:Any]]
+    var i = 0
+    while i < inners.count {
+        let inner = inners[i]
+        let kind = inner["kind"] as! String
+        if kind == "EnumConstantDecl" {
+            if let name = inner["name"] {
+                print(sj,"\t",name)
             }
         }
         i += 1
     }
-    result.append(mainStruct)
-    return result
+    print(sj,"}")
 }
 
-func astAnalys2model() {
+func astAnalys() {
     let file = "/Users/lyf/git/github/sync/json/json/EndpointSecurity.json"
 //    let file = "/Users/msi/git/github/sync/json/json/EndpointSecurity.json"
     let data = try! Data(contentsOf: URL(filePath: file))
     let dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
+
+    print((dic as NSDictionary))
     
     var es_struct_names: [String] = []
     var es_structs: [String:[String: Any]] = [:]
@@ -127,32 +150,19 @@ func astAnalys2model() {
                 }
             }
             else {
-                print(kind)
+//                print(kind)
             }
             //last
             i += 1
         }
     }
     //处理每个类型中的指针
-    var enumModels: [Enum] = []
-    var stctModels: [Struct] = []
     for n in es_union_names {
         let def = es_unions[n]!
-        enumModels.append(enumToModel(name: n, def: def))
+        printEnumCode(name: n, def: def)
     }
     for n in es_struct_names {
         let def = es_structs[n]!
-        if let sts = structToModel(tname: n, def: def) {
-            stctModels.append(contentsOf: sts)
-        }
-    }
-    
-//    print(enumModels)
-//    print(stctModels)
-    
-    for sm in stctModels {
-        sm.printTable()
+        printStructCode(name: n, def: def)
     }
 }
-
-astAnalys2model()
