@@ -12,7 +12,7 @@ extension String {
         "uint32_t": "UInt32",
         "uint64_t": "UInt64",
         "struct timespec": "Double",
-        
+        "uint64_t[]": "Data",
     ]
     
     func camelCaseFromSnakeCase() -> String {
@@ -65,5 +65,11 @@ struct Enum {
 struct Typedef {
     var name: String
     var qualType: String
+}
+
+enum ESType {
+    case es_enum(Enum)
+    case typedef(Typedef)
+    case es_struct(Struct)
 }
 

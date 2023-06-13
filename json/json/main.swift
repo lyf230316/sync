@@ -74,8 +74,8 @@ func structToModel(tname: String,def:[String: Any]) -> [Struct]? {
 }
 
 func astAnalys2model() {
-    let file = "/Users/lyf/git/github/sync/json/json/EndpointSecurity.json"
-//    let file = "/Users/msi/git/github/sync/json/json/EndpointSecurity.json"
+//    let file = "/Users/lyf/git/github/sync/json/json/EndpointSecurity.json"
+    let file = "/Users/msi/git/github/sync/json/json/EndpointSecurity.json"
     let data = try! Data(contentsOf: URL(filePath: file))
     let dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
     
