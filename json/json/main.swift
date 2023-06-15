@@ -74,8 +74,8 @@ func structToModel(tname: String,def:[String: Any]) -> [Struct]? {
 }
 
 func astAnalys2model() {
-//    let file = "/Users/lyf/git/github/sync/json/json/EndpointSecurity.json"
-    let file = "/Users/msi/git/github/sync/json/json/EndpointSecurity.json"
+    let file = "/Users/lyf/git/github/sync/json/json/EndpointSecurity.json"
+//    let file = "/Users/msi/git/github/sync/json/json/EndpointSecurity.json"
     let data = try! Data(contentsOf: URL(filePath: file))
     let dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
     
@@ -96,7 +96,7 @@ func astAnalys2model() {
                     let strt = inner
                     let inner = inners[i]
                     if let name = inner["name"] as? String {
-                        if name.hasPrefix("es_") {
+                        if name.hasPrefix("es_") || true {
                             es_struct_names.append(name)
                             es_structs[name] = strt
 //                            print(kind,":",name)
@@ -109,7 +109,7 @@ func astAnalys2model() {
                 
             } else if kind == "EnumDecl" {
                 if let name = inner["name"] as? String {
-                    if name.hasPrefix("es_") {
+                    if name.hasPrefix("es_") || true {
                         es_union_names.append(name)
                         es_unions[name] = inner
                     }
@@ -118,7 +118,7 @@ func astAnalys2model() {
                     let strt = inner
                     let inner = inners[i]
                     if let name = inner["name"] as? String {
-                        if name.hasPrefix("es_") {
+                        if name.hasPrefix("es_") || true {
                             es_union_names.append(name)
                             es_unions[name] = strt
 //                            print(kind,":",name)
@@ -151,7 +151,7 @@ func astAnalys2model() {
 //    print(stctModels)
     
     for sm in stctModels {
-        sm.printTable()
+        sm.printCStruct()
     }
 }
 

@@ -55,6 +55,22 @@ struct Struct {
         }
         print("}\n")
     }
+    
+    func printCStruct() {
+        let clsName = name.camelCaseFromSnakeCase()
+        var tag = "struct"
+        if self.isUnoin {
+            tag = "unoin"
+        }
+        print("\(tag) \(clsName) {")
+        for member in members {
+            if member.name == "reserved" {
+                continue
+            }
+            print("\t\(member.type.camelCaseFromSnakeCase()) \(member.name)")
+        }
+        print("}\n")
+    }
 }
 
 struct Enum {
