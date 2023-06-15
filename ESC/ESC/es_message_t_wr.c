@@ -1726,6 +1726,15 @@ size_t es_message_t_write(es_message_t *message, void*p) {
 
     *((es_action_type_t*)(p+size)) = message->action_type;
     size += sizeof(es_action_type_t);
+    
+    switch (message -> action_type) {
+        case ES_EVENT_TYPE_AUTH_EXEC:
+            size += es_event_exec_t_write(message->event.exec, p+size);
+            break;
+            
+        default:
+            break;
+    }
 
     size += es_message_t__action_write(&message->action,p+size);
 

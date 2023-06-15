@@ -109,7 +109,9 @@ struct Struct {
         let on = name.originName()
         print("size_t \(name)_write(\(name) *\(on), void*p) {")
         print("    size_t size = 0;\n")
-        for member in members {
+        var index = 0
+        while index < members.count {
+            let member = members[index]
             if member.name == "reserved" {
                 continue
             }
@@ -124,6 +126,9 @@ struct Struct {
                 case .es_enum(let e) :
                     print("    *((\(member.type)*)(p+size)) = \(on)->\(member.name);")
                     print("    size += sizeof(\(member.type));\n")
+                    if let dic = enumDic[e.name] {
+                        
+                    }
                     break
                 case .es_struct(let s):
                     if pointer {
@@ -144,7 +149,6 @@ struct Struct {
                     print("    size += sizeof(\(member.type));\n")
                 }
             }
-            
         }
         print("    return size;")
         print("}\n")
@@ -154,6 +158,15 @@ struct Struct {
 struct Enum {
     var name: String
     var values: [String] = []
+    
+    func printCEnum() {
+        let clsName = name
+        print("enum \(clsName) {")
+        for v in values {
+            print("\t\(v)")
+        }
+        print("}\n")
+    }
 }
 
 struct Typedef {
@@ -168,4 +181,11 @@ enum ESType {
 }
 
 var typesDic: [String: ESType] = [:]
+
+var enumDic:[String:[String:String]] = [
+    "es_event_type_t": [
+        "unoinName": "event",
+        "type": "es_events_t",
+    ],
+]
 
