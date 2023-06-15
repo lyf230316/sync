@@ -33,6 +33,36 @@ extension String {
         }
         return self
     }
+    
+    func originName() -> String {
+        var value = self
+        if value.hasPrefix("es_") {
+            value = value.split(separator: "_")
+                .dropFirst()
+                .joined(separator: "_")
+        }
+        if value.hasSuffix("_t") {
+            value = value.split(separator: "_")
+                .dropLast()
+                .joined(separator: "_")
+        }
+        return value
+    }
+    
+    func arraySizeForType() -> (String,Int)? {
+        let arr = self.split(separator: "[")
+        guard var l = arr.last else {
+            return nil
+        }
+        guard l.removeLast() == "]" else {
+            return nil
+        }
+        guard let size = Int(l), size > 0 else {
+            return nil
+        }
+        let t = arr.first!
+        return (String(t),size)
+    }
 }
 
 struct Member {
@@ -71,6 +101,54 @@ struct Struct {
         }
         print("}\n")
     }
+    
+    func printCwrite() {
+        if self.isUnoin {
+            return
+        }
+        let on = name.originName()
+        print("size_t \(name)_write(\(name) *\(on), void*p) {")
+        print("    size_t size = 0;\n")
+        for member in members {
+            if member.name == "reserved" {
+                continue
+            }
+            var mt = member.type
+            var pointer = false
+            if member.type.localizedStandardContains(" * ") {
+                mt = String(member.type.split(separator: " ").first!)
+                pointer = true
+            }
+            if let tp = typesDic[mt] {
+                switch tp {
+                case .es_enum(let e) :
+                    print("    *((\(member.type)*)(p+size)) = \(on)->\(member.name);")
+                    print("    size += sizeof(\(member.type));\n")
+                    break
+                case .es_struct(let s):
+                    if pointer {
+                        print("    size += \(s.name)_write(\(on)->\(member.name),p+size);\n")
+                    }else{
+                        print("    size += \(s.name)_write(&\(on)->\(member.name),p+size);\n")
+                    }
+                    break
+                case .typedef(let t):
+                    break
+                }
+            }else{
+                if let (t,s) = member.type.arraySizeForType() {
+                    print("    memcpy(p+size, \(on)->\(member.name), sizeof(\(t)) * \(s));")
+                    print("    size += sizeof(\(t)) * \(s);\n")
+                } else {
+                    print("    *((\(member.type)*)(p+size)) = \(on)->\(member.name);")
+                    print("    size += sizeof(\(member.type));\n")
+                }
+            }
+            
+        }
+        print("    return size;")
+        print("}\n")
+    }
 }
 
 struct Enum {
@@ -88,4 +166,6 @@ enum ESType {
     case typedef(Typedef)
     case es_struct(Struct)
 }
+
+var typesDic: [String: ESType] = [:]
 

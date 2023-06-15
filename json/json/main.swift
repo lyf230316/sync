@@ -24,6 +24,7 @@ func enumToModel(name: String, def: [String: Any], lev: Int = 0) -> Enum {
         }
         i += 1
     }
+    typesDic[name] = .es_enum(res)
     return res
 }
 
@@ -52,24 +53,27 @@ func structToModel(tname: String,def:[String: Any]) -> [Struct]? {
                 let m = Member(name: name, type: type)
                 mainStruct.members.append(m)
             }
-        } else {
+        } else if kind == "RecordDecl" {
             var lname = tname
             if i+1 < inners.count {
                 i += 1
                 let inner = inners[i]
                 if let name = inner["name"] as? String {
-                    lname = lname+"."+name
+                    lname = lname+"__"+name
                     let m = Member(name: name, type: lname)
                     mainStruct.members.append(m)
                 }
             }
-            if let subStructs = structToModel(tname: lname, def: inner) {
-                result.append(contentsOf: subStructs)
+            if lname != tname {
+                if let subStructs = structToModel(tname: lname, def: inner) {
+                    result.append(contentsOf: subStructs)
+                }
             }
         }
         i += 1
     }
     result.append(mainStruct)
+    typesDic[mainStruct.name] = .es_struct(mainStruct)
     return result
 }
 
@@ -151,7 +155,7 @@ func astAnalys2model() {
 //    print(stctModels)
     
     for sm in stctModels {
-        sm.printCStruct()
+        sm.printCwrite()
     }
 }
 
