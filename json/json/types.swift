@@ -63,6 +63,28 @@ extension String {
         let t = arr.first!
         return (String(t),size)
     }
+    
+    func removePrefix(_ pfs:[String]) -> String {
+        for pf in pfs {
+            if self.hasPrefix(pf) {
+                var res = self
+                res.removeFirst(pf.count)
+                return res
+            }
+        }
+        return self
+    }
+    
+    func removeSuffix(_ sfs: [String]) -> String {
+        for sf in sfs {
+            if self.hasSuffix(sf) {
+                var res = self
+                res.removeLast(sf.count)
+                return res
+            }
+        }
+        return self
+    }
 }
 
 struct Member {
@@ -75,6 +97,14 @@ struct Struct {
     var name: String
     var members: [Member] = []
     
+    func findMember(_ name: String) -> Member? {
+        for member in members {
+            if member.name == name {
+                return member
+            }
+        }
+        return nil
+    }
     
     func printTable() {
         let clsName = name.camelCaseFromSnakeCase()
@@ -112,7 +142,8 @@ struct Struct {
         var index = 0
         while index < members.count {
             let member = members[index]
-            if member.name == "reserved" {
+            if member.name == "reserved" || member.name == "opaque" {
+                index+=1
                 continue
             }
             var mt = member.type
@@ -127,20 +158,64 @@ struct Struct {
                     print("    *((\(member.type)*)(p+size)) = \(on)->\(member.name);")
                     print("    size += sizeof(\(member.type));\n")
                     if let dic = enumDic[e.name] {
-                        let unoinName = dic["unoinName"]!
-                        let unoinType = dic["type"]!
-                        if case .es_enum(let ut) = typesDic[unoinType] {
-                            
+                        let unoinName = dic["unoinName"] as! String
+                        let unoinType = dic["type"] as! String
+                        let prefixs = dic["prefix"] as! [String]
+                        if case .es_struct(let st) = typesDic[unoinType] {
+                            print("\tswitch (\(on)->\(member.name)) {")
+                            for ev in e.values {
+                                let evname = ev.removePrefix(prefixs).lowercased()
+                                if let mb = st.findMember(evname) {
+                                    print("\t\tcase \(ev):")
+                                    if mb.type.localizedStandardContains("*") {
+                                        print("\t\t\tsize += \(mb.type.removeSuffix([" * _Nonnull"]))_write(\(on)->\(unoinName).\(mb.name), p+size);")
+                                    } else {
+                                        print("\t\t\tsize += \(mb.type)_write(&(\(on)->\(unoinName).\(mb.name)), p+size);")
+                                    }
+                                    print("\t\t\tbreak;")
+                                } else {
+//                                    print("not found \(ev)")
+                                }
+                            }
+                            print("        default:")
+                            print("            break;")
+                            print("    }\n")
                         }
-                        print("\tswitch (\(on)->\(member.name)) {")
+                    } else {
+//                        print(e.name)
                     }
                     break
                 case .es_struct(let s):
-                    if !s.isUnoin {
-                        if pointer {
-                            print("    size += \(s.name)_write(\(on)->\(member.name),p+size);\n")
+                    if !s.isUnoin ||
+                        (s.isUnoin && s.name == "es_event_setacl_t__acl") ||
+                        (s.isUnoin && s.name == "es_event_authentication_touchid_t__uid") ||
+                        (s.isUnoin && s.name == "es_event_openssh_login_t__uid") ||
+                        (s.isUnoin && s.name == "es_event_login_login_t__uid"){
+                        if member.type.contains("__"),
+                           case .es_struct(let ms) = typesDic[member.type] {
+                            for sm in ms.members {
+                                print("    *((\(sm.type)*)(p+size)) = \(on)->\(member.name).\(sm.name);")
+                                print("    size += sizeof(\(sm.type));\n")
+                            }
                         }else{
-                            print("    size += \(s.name)_write(&\(on)->\(member.name),p+size);\n")
+                            var src = ""
+                            if pointer {
+                                src = "\(on)->\(member.name)"
+                            }else{
+                                src = "&(\(on)->\(member.name))"
+                            }
+                            print("    size += \(s.name)_write(\(src),p+size);\n")
+                        }
+                    } else {
+                        var has = false
+                        for (_,dic) in enumDic {
+                            if let tp = dic["type"] as? String, tp == s.name {
+                                has = true
+                                break
+                            }
+                        }
+                        if !has {
+//                            print("unoinType:",s.name)
                         }
                     }
                     break
@@ -152,14 +227,25 @@ struct Struct {
                     print("    memcpy(p+size, \(on)->\(member.name), sizeof(\(t)) * \(s));")
                     print("    size += sizeof(\(t)) * \(s);\n")
                 } else {
-                    print("    *((\(member.type)*)(p+size)) = \(on)->\(member.name);")
-                    print("    size += sizeof(\(member.type));\n")
+                    if member.type == "const char *" {
+                        print("    memcpy(p+size, \(on)->\(member.name), \(on)->length);")
+                        print("    size += \(on)->length;\n")
+                    }else{
+                        print("    *((\(member.type)*)(p+size)) = \(on)->\(member.name);")
+                        print("    size += sizeof(\(member.type));\n")
+                    }
                 }
             }
             index += 1
         }
         print("    return size;")
         print("}\n")
+    }
+    
+    func cwrite(_ type: String,_ name: String,_ contex: String,_ pointer: Bool = false,_ useFunc: Bool = false) {
+        if useFunc {
+            print("\t\t\tsize += \(type)_write(.\(name), p+size);")
+        }
     }
 }
 
@@ -192,10 +278,31 @@ enum ESType {
 
 var typesDic: [String: ESType] = [:]
 
-var enumDic:[String:[String:String]] = [
+var enumDic:[String:[String:Any]] = [
     "es_event_type_t": [
+        "prefix":["ES_EVENT_TYPE_AUTH_","ES_EVENT_TYPE_NOTIFY_"],
         "unoinName": "event",
         "type": "es_events_t",
+    ],
+    "es_action_type_t": [
+        "prefix":["ES_ACTION_TYPE_"],
+        "unoinName": "action",
+        "type": "es_message_t__action",
+    ],
+    "es_destination_type_t": [
+        "prefix":["ES_DESTINATION_TYPE_"],
+        "unoinName": "destination",
+        "type": "es_event_rename_t__destination",
+    ],
+    "es_authentication_type_t": [
+        "prefix":["ES_AUTHENTICATION_TYPE_"],
+        "unoinName": "data",
+        "type": "es_event_authentication_t__data",
+    ],
+    "es_result_type_t": [
+        "prefix":["ES_RESULT_TYPE_"],
+        "unoinName": "result",
+        "type": "es_result_t__result",
     ],
 ]
 
