@@ -127,14 +127,21 @@ struct Struct {
                     print("    *((\(member.type)*)(p+size)) = \(on)->\(member.name);")
                     print("    size += sizeof(\(member.type));\n")
                     if let dic = enumDic[e.name] {
-                        
+                        let unoinName = dic["unoinName"]!
+                        let unoinType = dic["type"]!
+                        if case .es_enum(let ut) = typesDic[unoinType] {
+                            
+                        }
+                        print("\tswitch (\(on)->\(member.name)) {")
                     }
                     break
                 case .es_struct(let s):
-                    if pointer {
-                        print("    size += \(s.name)_write(\(on)->\(member.name),p+size);\n")
-                    }else{
-                        print("    size += \(s.name)_write(&\(on)->\(member.name),p+size);\n")
+                    if !s.isUnoin {
+                        if pointer {
+                            print("    size += \(s.name)_write(\(on)->\(member.name),p+size);\n")
+                        }else{
+                            print("    size += \(s.name)_write(&\(on)->\(member.name),p+size);\n")
+                        }
                     }
                     break
                 case .typedef(let t):
@@ -149,6 +156,7 @@ struct Struct {
                     print("    size += sizeof(\(member.type));\n")
                 }
             }
+            index += 1
         }
         print("    return size;")
         print("}\n")
@@ -167,6 +175,8 @@ struct Enum {
         }
         print("}\n")
     }
+    
+    
 }
 
 struct Typedef {
