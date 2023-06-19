@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CEF64B02A3AA92400AD1BE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF64AF2A3AA92400AD1BE9 /* main.m */; };
-		1CEF64BB2A3AA9A800AD1BE9 /* es_message_t_wr.c in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF64BA2A3AA9A800AD1BE9 /* es_message_t_wr.c */; };
+		1CEF64BB2A3AA9A800AD1BE9 /* es_message_t_swr.c in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF64BA2A3AA9A800AD1BE9 /* es_message_t_swr.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +26,8 @@
 /* Begin PBXFileReference section */
 		1CEF64AC2A3AA92400AD1BE9 /* ESC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ESC; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CEF64AF2A3AA92400AD1BE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1CEF64B92A3AA9A800AD1BE9 /* es_message_t_wr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = es_message_t_wr.h; sourceTree = "<group>"; };
-		1CEF64BA2A3AA9A800AD1BE9 /* es_message_t_wr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = es_message_t_wr.c; sourceTree = "<group>"; };
+		1CEF64B92A3AA9A800AD1BE9 /* es_message_t_swr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = es_message_t_swr.h; sourceTree = "<group>"; };
+		1CEF64BA2A3AA9A800AD1BE9 /* es_message_t_swr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = es_message_t_swr.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				1CEF64AF2A3AA92400AD1BE9 /* main.m */,
-				1CEF64B92A3AA9A800AD1BE9 /* es_message_t_wr.h */,
-				1CEF64BA2A3AA9A800AD1BE9 /* es_message_t_wr.c */,
+				1CEF64B92A3AA9A800AD1BE9 /* es_message_t_swr.h */,
+				1CEF64BA2A3AA9A800AD1BE9 /* es_message_t_swr.c */,
 			);
 			path = ESC;
 			sourceTree = "<group>";
@@ -125,7 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CEF64B02A3AA92400AD1BE9 /* main.m in Sources */,
-				1CEF64BB2A3AA9A800AD1BE9 /* es_message_t_wr.c in Sources */,
+				1CEF64BB2A3AA9A800AD1BE9 /* es_message_t_swr.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
