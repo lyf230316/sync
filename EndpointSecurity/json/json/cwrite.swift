@@ -189,7 +189,7 @@ extension Struct {
                         print("\(indentation)size += \(s.name)_size(\(src));")
                     }
                 }
-            case .typedef(let _):
+            case .typedef( _):
                 break
             }
         } else {
@@ -212,68 +212,6 @@ extension Struct {
         }
     }
 }
-
-// Cstruct
-extension Struct {
-    func CStruct() {
-        if self.isUnoin {
-            return
-        }
-        let on = name.originName()
-        print("typedef struct {")
-        for member in members {
-            CStruct(member.type, member.name,"\(on)->", "\t")
-        }
-        print("} cai_\(self.name);\n")
-    }
-    
-    func CStruct(_ type: String,_ name: String,_ ctx: String,_ indentation: String = "\t") {
-        if name == "reserved" || name == "opaque" {
-            return
-        }
-        var type = type
-        var pointer = false
-        if type.contains(" * ") {
-            pointer = true
-        }
-        if let tem = typesDic[type] {
-            switch tem {
-            case .es_enum(let e):
-                print("\(indentation)\(type) \(name);")
-                if let dic = enumDic[e.name] {
-                    let unoinName = dic["unoinName"] as! String
-                    let unoinType = dic["type"] as! String
-                    let prefixs = dic["prefix"] as! [String]
-                    if case .es_struct(let st) = typesDic[unoinType] {
-                        print("\(indentation)void* \(unoinName);")
-                    }
-                } else {
-//                        print(e.name)
-                }
-            case .es_struct(let s):
-                if s.isUnoin {
-                    
-                } else {
-                    if s.name.contains("__") { // 匿名结构体
-                        for mb in s.members {
-                            CStruct(mb.type, mb.name,"\(ctx)\(name).", indentation+"\t")
-                        }
-                    } else {
-                        print("\(indentation)\(s.name) \(name);")
-                    }
-                }
-            case .typedef(let _):
-                break
-            }
-        } else {
-            print("\(indentation)\(type) \(name);")
-        }
-    }
-}
-
-
-
-
 
 extension Struct {
     func CRead() {
@@ -352,7 +290,7 @@ extension Struct {
                         }
                     }
                 }
-            case .typedef(let _):
+            case .typedef( _):
                 break
             }
         } else {
