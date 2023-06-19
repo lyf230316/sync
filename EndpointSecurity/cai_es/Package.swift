@@ -8,16 +8,22 @@ let package = Package(
     platforms: [
         .macOS(.v10_15)
     ],
+    products: [
+        .library(name: "swr", targets: ["swr"]),
+    ],
     dependencies: [
         
     ],
     targets: [
         .executableTarget(
             name: "cai_es",
-            dependencies: [],
+            dependencies: [
+                "swr"
+            ],
             linkerSettings: [
                 .linkedLibrary("EndpointSecurity"),
             ]
         ),
+        .target(name: "swr")
     ]
 )

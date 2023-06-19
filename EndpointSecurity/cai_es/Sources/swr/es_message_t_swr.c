@@ -4409,7 +4409,7 @@ size_t es_result_t_read(es_result_t *result, void *p) {
     return size;
 }
 
-size_t es_message_t_size(es_message_t *message) {
+size_t es_message_t_size(const es_message_t * _Nonnull message) {
     size_t size = 0;
 
     size += sizeof(uint32_t);
@@ -4822,7 +4822,7 @@ size_t es_message_t_size(es_message_t *message) {
     return size;
 }
 
-size_t es_message_t_write(es_message_t *message, void *p) {
+size_t es_message_t_write(const es_message_t * _Nonnull message, void * _Nonnull p) {
     size_t size = 0;
 
     *((uint32_t*)(p+size)) = message->version;

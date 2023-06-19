@@ -57,6 +57,13 @@ class Config {
                 output = fp
             }
         }
+        //补充默认参数
+        if types.count == 0 {
+            types = cai_es.nofifyTypes
+        }
+        if output.isEmpty {
+            output = FileManager.default.currentDirectoryPath
+        }
     }
 }
 
@@ -78,6 +85,14 @@ cai_es [-c <config_file>] [-o <output_dir>]
         guard let es = Es() else {
             exit(1)
         }
+        let writer = EsWriter(cfg.output)
+        
+        es.msgBlock = { c,m in
+            writer.write(m)
+        }
+        _ = es.subscribe(cfg.types)
+        
+        RunLoop.current.run()
     }
     
 }
