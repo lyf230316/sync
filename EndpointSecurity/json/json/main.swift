@@ -154,19 +154,19 @@ func astAnalys2model() {
 //    print(enumModels)
 //    print(stctModels)
 //    
-    for e in enumModels {
-        e.printCEnum()
+//    for e in enumModels {
+//        e.printCEnum()
+//    }
+    
+//    for sm in stctModels {
+//        sm.printCwrite()
+//    }
+    
+    for sm in stctModels {
+        sm.CSize()
+        sm.printCwrite()
+        sm.CRead()
     }
-    
-//    for sm in stctModels {
-//        sm.printCwrite()
-//    }
-    
-//    for sm in stctModels {
-//        sm.CSize()
-//        sm.printCwrite()
-//        sm.CRead()
-//    }
 }
 
 astAnalys2model()

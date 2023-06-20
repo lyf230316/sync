@@ -29,17 +29,24 @@ class FileWriter {
     }
     
     func write(_ buffer: UnsafePointer<UInt8>,_ size: Int) {
-        let idata = NSData(bytesNoCopy: UnsafeMutableRawPointer(&dataOffset), length: MemoryLayout<Int>.size, freeWhenDone: false) as Data
-        indexFh.write(idata)
-        indexOffset += MemoryLayout<Int>.size
-        let data = NSData(bytesNoCopy: UnsafeMutableRawPointer(mutating: buffer), length: size, freeWhenDone: false) as Data
-        dataFh.write(data)
-        dataOffset += size
+        autoreleasepool {
+            let idata = NSData(bytesNoCopy: UnsafeMutableRawPointer(&dataOffset), length: MemoryLayout<Int>.size, freeWhenDone: false) as Data
+            indexFh.write(idata)
+            indexOffset += MemoryLayout<Int>.size
+            let data = NSData(bytesNoCopy: UnsafeMutableRawPointer(mutating: buffer), length: size, freeWhenDone: false) as Data
+            dataFh.write(data)
+            dataOffset += size
+        }
+    }
+    
+    deinit {
+        try? dataFh.close()
+        try? indexFh.close()
     }
 }
 
 class EsWriter {
-    static let maxCountInFile = 10^6
+    static let maxCountInFile = 1024*1024*1024
     let outPath: String
     let profix: String
     var index = 0
@@ -65,11 +72,11 @@ class EsWriter {
     }
     
     public func write(_ msg:UnsafePointer<es_message_t>) {
-        let size = es_message_t_size(msg)
-        print(size)
-        es_message_t_write(msg, buf)
+        let size = es_message_t_size(UnsafeMutablePointer(mutating: msg))
+        es_message_t_write(UnsafeMutablePointer(mutating: msg), buf)
         fwriter.write(buf.bindMemory(to: UInt8.self, capacity: size), size)
-        if fwriter.indexOffset >= EsWriter.maxCountInFile * MemoryLayout<Int>.size {
+        if fwriter.dataOffset >= EsWriter.maxCountInFile * MemoryLayout<Int>.size {
+            print(fwriter.dataOffset)
             createNewFile()
         }
     }

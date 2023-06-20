@@ -11,8 +11,8 @@
 #include <stdio.h>
 #include <EndpointSecurity/EndpointSecurity.h>
 
-size_t es_message_t_size(const es_message_t * _Nonnull message);
-size_t es_message_t_write(const es_message_t * _Nonnull message, void * _Nonnull p);
+size_t es_message_t_size(es_message_t * _Nonnull message);
+size_t es_message_t_write(es_message_t * _Nonnull message, void * _Nonnull p);
 size_t es_message_t_read(es_message_t * _Nonnull message, void * _Nonnull p);
 
 #endif /* es_message_t_swr_h */

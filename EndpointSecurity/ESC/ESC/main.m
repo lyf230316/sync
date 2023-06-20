@@ -11,6 +11,15 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // insert code here...
         NSLog(@"Hello, World!");
+        switch (1) {
+            case 2:
+            {
+                
+            }break;
+            default:{
+                
+            }break;
+        }
     }
     return 0;
 }

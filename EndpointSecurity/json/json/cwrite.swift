@@ -35,6 +35,7 @@ extension Struct {
         }
         var type = type
         var pointer = false
+        var nullable = false
         if type.contains(" * ") {
             type = String(type.split(separator: " * ").first!)
             pointer = true
@@ -53,15 +54,15 @@ extension Struct {
                         for ev in e.values {
                             let evname = ev.removePrefix(prefixs).lowercased()
                             if let mb = st.findMember(evname) {
-                                print("\(indentation)case \(ev) :")
-                                cwrite(mb.type, mb.name,"\(ctx)\(unoinName).",indentation+"\t")
-                                print("\(indentation)\tbreak;")
+                                print("\(indentation)\tcase \(ev) : {")
+                                cwrite(mb.type, mb.name,"\(ctx)\(unoinName).",indentation+"\t\t")
+                                print("\(indentation)\t}break;")
                             } else {
 //                                    print("not found \(ev)")
                             }
                         }
-                        print("\(indentation)default:")
-                        print("\(indentation)\tbreak;")
+                        print("\(indentation)\tdefault:")
+                        print("\(indentation)\t\tbreak;")
                         print("\(indentation)}\n")
                     }
                 } else {
@@ -76,13 +77,18 @@ extension Struct {
                             cwrite(mb.type, mb.name,"\(ctx)\(name).", indentation+"\t")
                         }
                     } else {
-                        var src = ""
                         if pointer {
-                            src = "\(ctx)\(name)"
+                            print("\(indentation)if (\(ctx)\(name)) {")
+                            print("\(indentation)\t*((_Bool*)(p+size)) = true;")
+                            print("\(indentation)\tsize += sizeof(_Bool);")
+                            print("\(indentation)\tsize += \(s.name)_write(\(ctx)\(name),p+size);")
+                            print("\(indentation)} else {")
+                            print("\(indentation)\t*((_Bool*)(p+size)) = false;")
+                            print("\(indentation)\tsize += sizeof(_Bool);")
+                            print("\(indentation)}")
                         }else{
-                            src = "&(\(ctx)\(name))"
+                            print("\(indentation)size += \(s.name)_write(&(\(ctx)\(name)),p+size);")
                         }
-                        print("\(indentation)size += \(s.name)_write(\(src),p+size);")
                     }
                 }
             case .typedef(let _):
@@ -157,15 +163,15 @@ extension Struct {
                         for ev in e.values {
                             let evname = ev.removePrefix(prefixs).lowercased()
                             if let mb = st.findMember(evname) {
-                                print("\(indentation)case \(ev) :")
-                                CSize(mb.type, mb.name,"\(ctx)\(unoinName).",indentation+"\t")
-                                print("\(indentation)\tbreak;")
+                                print("\(indentation)\tcase \(ev) :{")
+                                CSize(mb.type, mb.name,"\(ctx)\(unoinName).",indentation+"\t\t")
+                                print("\(indentation)\t}break;")
                             } else {
 //                                    print("not found \(ev)")
                             }
                         }
-                        print("\(indentation)default:")
-                        print("\(indentation)\tbreak;")
+                        print("\(indentation)\tdefault:")
+                        print("\(indentation)\t\tbreak;")
                         print("\(indentation)}\n")
                     }
                 } else {
@@ -180,13 +186,16 @@ extension Struct {
                             CSize(mb.type, mb.name,"\(ctx)\(name).", indentation+"\t")
                         }
                     } else {
-                        var src = ""
                         if pointer {
-                            src = "\(ctx)\(name)"
+                            print("\(indentation)if (\(ctx)\(name)) {")
+                            print("\(indentation)\tsize += sizeof(_Bool);")
+                            print("\(indentation)\tsize += \(s.name)_size(\(ctx)\(name));")
+                            print("\(indentation)} else {")
+                            print("\(indentation)\tsize += sizeof(_Bool);")
+                            print("\(indentation)}")
                         }else{
-                            src = "&(\(ctx)\(name))"
+                            print("\(indentation)size += \(s.name)_size(&(\(ctx)\(name)));")
                         }
-                        print("\(indentation)size += \(s.name)_size(\(src));")
                     }
                 }
             case .typedef( _):
@@ -259,15 +268,15 @@ extension Struct {
                         for ev in e.values {
                             let evname = ev.removePrefix(prefixs).lowercased()
                             if let mb = st.findMember(evname) {
-                                print("\(indentation)case \(ev) :")
-                                CRead(mb.type, mb.name,"\(ctx)\(unoinName).",indentation+"\t")
-                                print("\(indentation)\tbreak;")
+                                print("\(indentation)\tcase \(ev) :{")
+                                CRead(mb.type, mb.name,"\(ctx)\(unoinName).",indentation+"\t\t")
+                                print("\(indentation)\t}break;")
                             } else {
 //                                    print("not found \(ev)")
                             }
                         }
-                        print("\(indentation)default:")
-                        print("\(indentation)\tbreak;")
+                        print("\(indentation)\tdefault:")
+                        print("\(indentation)\t\tbreak;")
                         print("\(indentation)}\n")
                     }
                 } else {
@@ -283,8 +292,13 @@ extension Struct {
                         }
                     } else {
                         if pointer {
-                            print("\(indentation)\(ctx)\(name) = malloc(sizeof(\(s.name)));")
-                            print("\(indentation)size += \(s.name)_read(\(ctx)\(name),p+size);")
+                            //read bool
+                            print("\(indentation)_Bool \(name)_has = *((_Bool*)(p+size));")
+                            print("\(indentation)size += sizeof(_Bool);")
+                            print("\(indentation)if (\(name)_has) {")
+                            print("\(indentation)\t\(ctx)\(name) = malloc(sizeof(\(s.name)));")
+                            print("\(indentation)\tsize += \(s.name)_read(\(ctx)\(name),p+size);")
+                            print("\(indentation)}")
                         } else {
                             print("\(indentation)size += \(s.name)_read(&(\(ctx)\(name)),p+size);")
                         }
