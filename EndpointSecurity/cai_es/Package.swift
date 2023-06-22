@@ -6,10 +6,12 @@ import PackageDescription
 let package = Package(
     name: "cai_es",
     platforms: [
-        .macOS(.v10_15)
+        .macOS(.v11)
     ],
     products: [
         .library(name: "swr", targets: ["swr"]),
+        .executable(name: "cai_es", targets: "cai_es"),
+        .ex
     ],
     dependencies: [
         
@@ -18,7 +20,16 @@ let package = Package(
         .executableTarget(
             name: "cai_es",
             dependencies: [
-                "swr"
+                "swr",
+            ],
+            linkerSettings: [
+                .linkedLibrary("EndpointSecurity"),
+            ]
+        ),
+        .executableTarget(
+            name: "CaiES",
+            dependencies: [
+                "swr",
             ],
             linkerSettings: [
                 .linkedLibrary("EndpointSecurity"),

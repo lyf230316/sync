@@ -30,8 +30,8 @@ class Config {
                     print("解析配置文件失败")
                     return nil
                 }
-                guard let types = dic["subscribe_es_event_types"] as? [String] else {
-                    print("从配置文件中获取subscribe_es_event_types失败")
+                guard let types = dic["subscribed"] as? [String] else {
+                    print("从配置文件中获取subscribed失败")
                     return nil
                 }
                 for type in types {
@@ -85,14 +85,12 @@ cai_es [-c <config_file>] [-o <output_dir>]
         guard let es = Es() else {
             exit(1)
         }
-        let writer = EsWriter(cfg.output)
+//        let writer = EsWriter(cfg.output)
+//        es.msgBlock = { c,m in
+//            writer.write(m)
+//        }
         
-        es.msgBlock = { c,m in
-            writer.write(m)
-        }
         _ = es.subscribe(cfg.types)
-        
         RunLoop.current.run()
     }
-    
 }
