@@ -1,0 +1,798 @@
+
+
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_ASM_COMPILER
+    CMAKE_ASM_FLAGS
+
+
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/compress.c:22:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT compress2(dest, destLen, source, sourceLen, level)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:48:35: note: expanded from macro 'compress2'
+#    define compress2             fltk_z_compress2
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/compress.c:68:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT compress(dest, destLen, source, sourceLen)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:47:35: note: expanded from macro 'compress'
+#    define compress              fltk_z_compress
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/compress.c:81:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT compressBound(sourceLen)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:49:35: note: expanded from macro 'compressBound'
+#    define compressBound         fltk_z_compressBound
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:126:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local z_word_t byte_swap(word)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/adler32.c:63:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT adler32_z(adler, buf, len)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:45:33: note: expanded from macro 'adler32_z'
+#  define adler32_z             fltk_z_adler32_z
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:126:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:198:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void slide_hash(s)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:198:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:225:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateInit_(strm, level, version, stream_size)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:66:33: note: expanded from macro 'deflateInit_'
+#  define deflateInit_          fltk_z_deflateInit_
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/adler32.c:134:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT adler32(adler, buf, len)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:42:33: note: expanded from macro 'adler32'
+#  define adler32               fltk_z_adler32
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:237:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateInit2_(strm, level, method, windowBits, memLevel, strategy,
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:65:33: note: expanded from macro 'deflateInit2_'
+#  define deflateInit2_         fltk_z_deflateInit2_
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/adler32.c:143:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local uLong adler32_combine_(adler1, adler2, len2)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/adler32.c:143:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/adler32.c:172:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT adler32_combine(adler1, adler2, len2)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:43:33: note: expanded from macro 'adler32_combine'
+#  define adler32_combine       fltk_z_adler32_combine
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/adler32.c:180:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT adler32_combine64(adler1, adler2, len2)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:44:33: note: expanded from macro 'adler32_combine64'
+#  define adler32_combine64     fltk_z_adler32_combine64
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:389:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int deflateStateCheck(strm)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:389:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:412:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateSetDictionary(strm, dictionary, dictLength)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:72:33: note: expanded from macro 'deflateSetDictionary'
+#  define deflateSetDictionary  fltk_z_deflateSetDictionary
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:481:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateGetDictionary(strm, dictionary, dictLength)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:62:33: note: expanded from macro 'deflateGetDictionary'
+#  define deflateGetDictionary  fltk_z_deflateGetDictionary
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:503:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateResetKeep(strm)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:71:33: note: expanded from macro 'deflateResetKeep'
+#  define deflateResetKeep      fltk_z_deflateResetKeep
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:541:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateReset(strm)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:70:33: note: expanded from macro 'deflateReset'
+#  define deflateReset          fltk_z_deflateReset
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:553:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateSetHeader(strm, head)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:73:33: note: expanded from macro 'deflateSetHeader'
+#  define deflateSetHeader      fltk_z_deflateSetHeader
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:564:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflatePending(strm, pending, bits)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:68:33: note: expanded from macro 'deflatePending'
+#  define deflatePending        fltk_z_deflatePending
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:578:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflatePrime(strm, bits, value)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:69:33: note: expanded from macro 'deflatePrime'
+#  define deflatePrime          fltk_z_deflatePrime
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:605:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateParams(strm, level, strategy)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:67:33: note: expanded from macro 'deflateParams'
+#  define deflateParams         fltk_z_deflateParams
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:654:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateTune(strm, good_length, max_lazy, nice_length, max_chain)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:74:33: note: expanded from macro 'deflateTune'
+#  define deflateTune           fltk_z_deflateTune
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:696:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT deflateBound(strm, sourceLen)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:59:33: note: expanded from macro 'deflateBound'
+#  define deflateBound          fltk_z_deflateBound
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:768:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void putShortMSB(s, b)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:768:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:782:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void flush_pending(strm)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:782:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:815:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflate(strm, flush)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:58:33: note: expanded from macro 'deflate'
+#  define deflate               fltk_z_deflate
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:551:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local z_crc_t multmodp(a, b)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:551:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:575:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local z_crc_t x2nmodp(n, k)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:575:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:726:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local z_crc_t crc_word(data)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:726:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:735:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local z_word_t crc_word_big(data)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:735:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:748:23: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+unsigned long ZEXPORT crc32_z(crc, buf, len)
+                      ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:57:33: note: expanded from macro 'crc32_z'
+#  define crc32_z               fltk_z_crc32_z
+                                ^
+3 warnings generated.
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1130:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateEnd(strm)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:61:33: note: expanded from macro 'deflateEnd'
+#  define deflateEnd            fltk_z_deflateEnd
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1156:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT deflateCopy(dest, source)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:60:33: note: expanded from macro 'deflateCopy'
+#  define deflateCopy           fltk_z_deflateCopy
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:1072:23: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+unsigned long ZEXPORT crc32(crc, buf, len)
+                      ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:51:33: note: expanded from macro 'crc32'
+#  define crc32                 fltk_z_crc32
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:1081:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT crc32_combine64(crc1, crc2, len2)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:53:33: note: expanded from macro 'crc32_combine64'
+#  define crc32_combine64       fltk_z_crc32_combine64
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:1093:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT crc32_combine(crc1, crc2, len2)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:52:33: note: expanded from macro 'crc32_combine'
+#  define crc32_combine         fltk_z_crc32_combine
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:1102:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT crc32_combine_gen64(len2)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:55:33: note: expanded from macro 'crc32_combine_gen64'
+#  define crc32_combine_gen64   fltk_z_crc32_combine_gen64
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1215:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local unsigned read_buf(strm, buf, size)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:1112:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT crc32_combine_gen(len2)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:54:33: note: expanded from macro 'crc32_combine_gen'
+#  define crc32_combine_gen     fltk_z_crc32_combine_gen
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1215:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/crc32.c:1119:15: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+uLong ZEXPORT crc32_combine_op(crc1, crc2, op)
+              ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:56:33: note: /Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.cexpanded from macro 'crc32_combine_op'
+:#  define crc32_combine_op      fltk_z_crc32_combine_op1245
+:                                ^12
+: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void lm_init(s)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1245:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1278:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local uInt longest_match(s, cur_match)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1278:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1527:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void fill_window(s)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1527:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1690:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local block_state deflate_stored(s, flush)
+                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1690:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1877:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local block_state deflate_fast(s, flush)
+                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1877:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1979:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local block_state deflate_slow(s, flush)
+                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:1979:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:2110:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local block_state deflate_rle(s, flush)
+                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:2110:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:2184:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local block_state deflate_huff(s, flush)
+                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/deflate.c:2184:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+6 warnings generated.
+17 warnings generated/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzclose.c:11:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzclose(file)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:83:35: note: expanded from macro 'gzclose'
+#    define gzclose               fltk_z_gzclose
+                                  ^
+.
+1 warning generated.
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:75:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void gz_reset(state)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:75:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:93:14: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local gzFile gz_open(path, fd, mode)
+             ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:93:14: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:272:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+gzFile ZEXPORT gzopen(path, mode)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:98:35: note: expanded from macro 'gzopen'
+#    define gzopen                fltk_z_gzopen
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:280:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+gzFile ZEXPORT gzopen64(path, mode)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:99:35: note: expanded from macro 'gzopen64'
+#    define gzopen64              fltk_z_gzopen64
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:288:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+gzFile ZEXPORT gzdopen(fd, mode)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:87:35: note: expanded from macro 'gzdopen'
+#    define gzdopen               fltk_z_gzdopen
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:318:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzbuffer(file, size)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:81:35: note: expanded from macro 'gzbuffer'
+#    define gzbuffer              fltk_z_gzbuffer
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:345:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzrewind(file)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:107:35: note: expanded from macro 'gzrewind'
+#    define gzrewind              fltk_z_gzrewind
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:368:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+z_off64_t ZEXPORT gzseek64(file, offset, whence)
+                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:109:35: note: expanded from macro 'gzseek64'
+#    define gzseek64              fltk_z_gzseek64
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:445:17: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+z_off_t ZEXPORT gzseek(file, offset, whence)
+                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:108:35: note: expanded from macro 'gzseek'
+#    define gzseek                fltk_z_gzseek
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:457:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+z_off64_t ZEXPORT gztell64(file)
+                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:112:35: note: expanded from macro 'gztell64'
+#    define gztell64              fltk_z_gztell64
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:474:17: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+z_off_t ZEXPORT gztell(file)
+                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:111:35: note: expanded from macro 'gztell'
+#    define gztell                fltk_z_gztell
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:484:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+z_off64_t ZEXPORT gzoffset64(file)
+                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:97:35: note: expanded from macro 'gzoffset64'
+#    define gzoffset64            fltk_z_gzoffset64
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:507:17: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+z_off_t ZEXPORT gzoffset(file)
+                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:96:35: note: expanded from macro 'gzoffset'
+#    define gzoffset              fltk_z_gzoffset
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:517:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzeof(file)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:88:35: note: expanded from macro 'gzeof'
+#    define gzeof                 fltk_z_gzeof
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:534:22: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+const char * ZEXPORT gzerror(file, errnum)
+                     ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:89:35: note: expanded from macro 'gzerror'
+#    define gzerror               fltk_z_gzerror
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:555:14: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+void ZEXPORT gzclearerr(file)
+             ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:82:35: note: expanded from macro 'gzclearerr'
+#    define gzclearerr            fltk_z_gzclearerr
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzlib.c:581:20: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+void ZLIB_INTERNAL gz_error(state, err, msg)
+                   ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:78:35: note: expanded from macro 'gz_error'
+#    define gz_error              fltk_z_gz_error
+                                  ^
+19 warnings generated.
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:21:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int gz_load(state, buf, len, have)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:21:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:56:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int gz_avail(state)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:56:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:91:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int gz_look(state)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:91:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:173:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int gz_decomp(state)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:173:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:227:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int gz_fetch(state)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:227:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:257:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int gz_skip(state, len)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:257:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:292:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local z_size_t gz_read(state, buf, len)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:292:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:373:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzread(file, buf, len)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:106:35: note: expanded from macro 'gzread'
+#    define gzread                fltk_z_gzread
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:409:18: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+z_size_t ZEXPORT gzfread(buf, size, nitems, file)
+                 ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:91:35: note: expanded from macro 'gzfread'
+#    define gzfread               fltk_z_gzfread
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:445:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzgetc(file)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:93:35: note: expanded from macro 'gzgetc'
+#    define gzgetc                fltk_z_gzgetc
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:472:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzgetc_(file)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:94:35: note: expanded from macro 'gzgetc_'
+#    define gzgetc_               fltk_z_gzgetc_
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:479:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzungetc(c, file)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:113:35: note: expanded from macro 'gzungetc'
+#    define gzungetc              fltk_z_gzungetc
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:539:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+char * ZEXPORT gzgets(file, buf, len)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:95:35: note: expanded from macro 'gzgets'
+#    define gzgets                fltk_z_gzgets
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:603:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzdirect(file)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:86:35: note: expanded from macro 'gzdirect'
+#    define gzdirect              fltk_z_gzdirect
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzread.c:623:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzclose_r(file)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:84:35: note: expanded from macro 'gzclose_r'
+#    define gzclose_r             fltk_z_gzclose_r
+                                  ^
+22 warnings generated.
+41 warnings generated.
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:17:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int gz_init(state)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:17:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:73:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int gz_comp(state, flush)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:73:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:154:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int gz_zero(state, len)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:154:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:187:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local z_size_t gz_write(state, buf, len)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:187:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:255:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzwrite(file, buf, len)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:115:35: note: expanded from macro 'gzwrite'
+#    define gzwrite               fltk_z_gzwrite
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:283:18: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+z_size_t ZEXPORT gzfwrite(buf, size, nitems, file)
+                 ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:92:35: note: expanded from macro 'gzfwrite'
+#    define gzfwrite              fltk_z_gzfwrite
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:313:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzputc(file, c)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:104:35: note: expanded from macro 'gzputc'
+#    define gzputc                fltk_z_gzputc
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:361:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzputs(file, s)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:105:35: note: expanded from macro 'gzputs'
+#    define gzputs                fltk_z_gzputs
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:565:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzflush(file, flush)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:90:35: note: expanded from macro 'gzflush'
+#    define gzflush               fltk_z_gzflush
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:597:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzsetparams(file, level, strategy)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:110:35: note: expanded from macro 'gzsetparams'
+#    define gzsetparams           fltk_z_gzsetparams
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/gzwrite.c:639:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT gzclose_w(file)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:85:35: note: expanded from macro 'gzclose_w'
+#    define gzclose_w             fltk_z_gzclose_w
+                                  ^
+15 warnings generated.
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:105:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int inflateStateCheck(strm)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:105:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:119:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateResetKeep(strm)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:135:33: note: expanded from macro 'inflateResetKeep'
+#  define inflateResetKeep      fltk_z_inflateResetKeep
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:145:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateReset(strm)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:133:33: note: expanded from macro 'inflateReset'
+#  define inflateReset          fltk_z_inflateReset
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:158:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateReset2(strm, windowBits)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:134:33: note: expanded from macro 'inflateReset2'
+#  define inflateReset2         fltk_z_inflateReset2
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:198:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateInit2_(strm, windowBits, version, stream_size)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:129:33: note: expanded from macro 'inflateInit2_'
+#  define inflateInit2_         fltk_z_inflateInit2_
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:242:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateInit_(strm, version, stream_size)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:130:33: note: expanded from macro 'inflateInit_'
+#  define inflateInit_          fltk_z_inflateInit_
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:250:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflatePrime(strm, bits, value)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:132:33: note: expanded from macro 'inflatePrime'
+#  define inflatePrime          fltk_z_inflatePrime
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:281:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void fixedtables(state)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:281:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:399:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int updatewindow(strm, end, copy)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:399:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:625:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflate(strm, flush)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:117:33: note: expanded from macro 'inflate'
+#  define inflate               fltk_z_inflate
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1304:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateEnd(strm)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:124:33: note: expanded from macro 'inflateEnd'
+#  define inflateEnd            fltk_z_inflateEnd
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1318:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateGetDictionary(strm, dictionary, dictLength)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:125:33: note: expanded from macro 'inflateGetDictionary'
+#  define inflateGetDictionary  fltk_z_inflateGetDictionary
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1341:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateSetDictionary(strm, dictionary, dictLength)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:136:33: note: expanded from macro 'inflateSetDictionary'
+#  define inflateSetDictionary  fltk_z_inflateSetDictionary
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1376:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateGetHeader(strm, head)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:126:33: note: expanded from macro 'inflateGetHeader'
+#  define inflateGetHeader      fltk_z_inflateGetHeader
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1404:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local unsigned syncsearch(have, buf, len)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1404:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1427:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateSync(strm)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:137:33: note: expanded from macro 'inflateSync'
+#  define inflateSync           fltk_z_inflateSync
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1485:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateSyncPoint(strm)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:138:33: note: expanded from macro 'inflateSyncPoint'
+#  define inflateSyncPoint      fltk_z_inflateSyncPoint
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1495:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateCopy(dest, source)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:123:33: note: expanded from macro 'inflateCopy'
+#  define inflateCopy           fltk_z_inflateCopy
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1542:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateUndermine(strm, subvert)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:139:33: note: expanded from macro 'inflateUndermine'
+#  define inflateUndermine      fltk_z_inflateUndermine
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1560:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateValidate(strm, check)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:140:33: note: expanded from macro 'inflateValidate'
+#  define inflateValidate       fltk_z_inflateValidate
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1575:14: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+long ZEXPORT inflateMark(strm)
+             ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:131:33: note: expanded from macro 'inflateMark'
+#  define inflateMark           fltk_z_inflateMark
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inflate.c:1588:23: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+unsigned long ZEXPORT inflateCodesUsed(strm)
+                      ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:122:33: note: expanded from macro 'inflateCodesUsed'
+#  define inflateCodesUsed      fltk_z_inflateCodesUsed
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/infback.c:28:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateBackInit_(strm, windowBits, window, version, stream_size)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:121:33: note: expanded from macro 'inflateBackInit_'
+#  define inflateBackInit_      fltk_z_inflateBackInit_
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/infback.c:83:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void fixedtables(state)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/infback.c:83:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/infback.c:251:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateBack(strm, in, in_desc, out, out_desc)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:118:33: note: expanded from macro 'inflateBack'
+#  define inflateBack           fltk_z_inflateBack
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/infback.c:635:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT inflateBackEnd(strm)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:119:33: note: expanded from macro 'inflateBackEnd'
+#  define inflateBackEnd        fltk_z_inflateBackEnd
+                                ^
+5 warnings generated.
+26 warnings generated.
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inftrees.c:32:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZLIB_INTERNAL inflate_table(type, lens, codes, table, bits, work)
+                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:143:33: note: expanded from macro 'inflate_table'
+#  define inflate_table         fltk_z_inflate_table
+                                ^
+1 warning generated.
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/inffast.c:50:20: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+void ZLIB_INTERNAL inflate_fast(strm, start)
+                   ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:142:33: note: expanded from macro 'inflate_fast'
+#  define inflate_fast          fltk_z_inflate_fast
+                                ^
+1 warning generated.
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:379:20: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+void ZLIB_INTERNAL _tr_init(s)
+                   ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:39:33: note: expanded from macro '_tr_init'
+#  define _tr_init              fltk_z__tr_init
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:407:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void init_block(s)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:407:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:451:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void pqdownheap(s, tree, k)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:451:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:486:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void gen_bitlen(s, desc)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:486:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:572:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void gen_codes(tree, max_code, bl_count)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:572:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:615:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void build_tree(s, desc)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:615:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:703:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void scan_tree(s, tree, max_code)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:703:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:748:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void send_tree(s, tree, max_code)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:748:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:799:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int build_bl_tree(s)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:799:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:834:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void send_all_trees(s, lcodes, dcodes, blcodes)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:834:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:863:20: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+void ZLIB_INTERNAL _tr_stored_block(s, buf, stored_len, last)
+                   ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:40:33: note: expanded from macro '_tr_stored_block'
+#  define _tr_stored_block      fltk_z__tr_stored_block
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:887:20: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+void ZLIB_INTERNAL _tr_flush_bits(s)
+                   ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:37:33: note: expanded from macro '_tr_flush_bits'
+#  define _tr_flush_bits        fltk_z__tr_flush_bits
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:897:20: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+void ZLIB_INTERNAL _tr_align(s)
+                   ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:36:33: note: expanded from macro '_tr_align'
+#  define _tr_align             fltk_z__tr_align
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:912:20: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+void ZLIB_INTERNAL _tr_flush_block(s, buf, stored_len, last)
+                   ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:38:33: note: expanded from macro '_tr_flush_block'
+#  define _tr_flush_block       fltk_z__tr_flush_block
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1014:19: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZLIB_INTERNAL _tr_tally(s, dist, lc)
+                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:41:33: note: expanded from macro '_tr_tally'
+#  define _tr_tally             fltk_z__tr_tally
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1042:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void compress_block(s, ltree, dtree)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1042:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1102:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local int detect_data_type(s)
+          ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1102:11: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1136:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local unsigned bi_reverse(code, len)
+               ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1136:16: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1151:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void bi_flush(s)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1151:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1168:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+local void bi_windup(s)
+           ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/trees.c:1168:12: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/uncompr.c:27:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT uncompress2(dest, destLen, source, sourceLen)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:146:35: note: expanded from macro 'uncompress2'
+#    define uncompress2           fltk_z_uncompress2
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/uncompr.c:86:13: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+int ZEXPORT uncompress(dest, destLen, source, sourceLen)
+            ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:145:35: note: expanded from macro 'uncompress'
+#    define uncompress            fltk_z_uncompress
+                                  ^
+2 warnings generated.
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zutil.c:135:22: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+const char * ZEXPORT zError(err)
+                     ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:148:33: note: expanded from macro 'zError'
+#  define zError                fltk_z_zError
+                                ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zutil.c:307:22: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+voidpf ZLIB_INTERNAL zcalloc(opaque, items, size)
+                     ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:150:35: note: expanded from macro 'zcalloc'
+#    define zcalloc               fltk_z_zcalloc
+                                  ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zutil.c:317:20: warning: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Wdeprecated-non-prototype]
+void ZLIB_INTERNAL zcfree(opaque, ptr)
+                   ^
+/Users/msi/.cargo/git/checkouts/fltk-rs-9307d2141514d51d/34d9fff/fltk-sys/cfltk/fltk/zlib/zconf.h:151:35: note: expanded from macro 'zcfree'
+#    define zcfree                fltk_z_zcfree
+                                  ^
+3 warnings generated.
+34 warnings generated.
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib: file: ../lib/libfltk_png.a(powerpc_init.c.o) has no symbols
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib: file: ../lib/libfltk_png.a(filter_vsx_intrinsics.c.o) has no symbols
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib: file: ../lib/libfltk_png.a(powerpc_init.c.o) has no symbols
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib: file: ../lib/libfltk_png.a(filter_vsx_intrinsics.c.o) has no symbols
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib: file: /Users/msi/git/github/sync/rust/fltk_ex/target/debug/build/fltk-sys-ee4cf0159f0e1760/out/lib/libfltk_png.a(powerpc_init.c.o) has no symbols
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib: file: /Users/msi/git/github/sync/rust/fltk_ex/target/debug/build/fltk-sys-ee4cf0159f0e1760/out/lib/libfltk_png.a(filter_vsx_intrinsics.c.o) has no symbols

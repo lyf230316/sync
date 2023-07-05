@@ -30,7 +30,7 @@ extension Struct {
     }
     
     func cwrite(_ type: String,_ name: String,_ ctx: String,_ indentation: String = "\t") {
-        if name == "reserved" || name == "opaque" {
+        if name.hasPrefix("reserved") || name == "opaque" {
             return
         }
         var type = type
@@ -140,7 +140,7 @@ extension Struct {
     }
     
     func CSize(_ type: String,_ name: String,_ ctx: String,_ indentation: String = "\t") {
-        if name == "reserved" || name == "opaque" {
+        if name.hasPrefix("reserved") || name == "opaque" {
             return
         }
         var type = type
@@ -245,7 +245,7 @@ extension Struct {
     }
     
     func CRead(_ type: String,_ name: String,_ ctx: String,_ indentation: String = "\t") {
-        if name == "reserved" || name == "opaque" {
+        if name.hasPrefix("reserved") || name == "opaque" {
             return
         }
         var type = type
