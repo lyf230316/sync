@@ -10,8 +10,6 @@ let package = Package(
     ],
     products: [
         .library(name: "swr", targets: ["swr"]),
-        .executable(name: "cai_es", targets: "cai_es"),
-        .ex
     ],
     dependencies: [
         
