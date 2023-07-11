@@ -11,7 +11,6 @@ let package = Package(
     products: [
         .executable(name: "CaiES", targets: ["CaiES"]),
         .library(name: "swr", targets: ["swr"]),
-        .executable(name: "cai_es", targets: ["cai_es"]),
     ],
     dependencies: [
         
