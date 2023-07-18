@@ -633,7 +633,7 @@ extension es_event_create_t {
             switch self.destination_type {
                 case ES_DESTINATION_TYPE_EXISTING_FILE :
                     dic["existing_file"] = self.destination.existing_file.pointee.dic()
-                
+
                 case ES_DESTINATION_TYPE_NEW_PATH :
                         dic["dir"] = self.destination.new_path.dir.pointee.dic()
                         dic["filename"] = NSString(bytes: self.destination.new_path.filename.data, length: self.destination.new_path.filename.length, encoding: NSUTF8StringEncoding)! as String

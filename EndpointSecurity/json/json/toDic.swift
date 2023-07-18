@@ -8,12 +8,6 @@
 import Foundation
 
 extension Struct {
-//extension es_message_t {
-//    func dic() -> [String: Any] {
-//        var dic: [String: Any] = [:]
-//        return dic
-//    }
-//}
     func ToDic() {
         if self.isUnoin {
             return

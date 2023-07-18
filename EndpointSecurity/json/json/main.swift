@@ -166,7 +166,8 @@ func astAnalys2model() {
 //        sm.CSize()
 //        sm.printCwrite()
 //        sm.CRead()
-        sm.ToDic()
+//        sm.ToDic()
+        sm.swiftSize()
     }
 }
 

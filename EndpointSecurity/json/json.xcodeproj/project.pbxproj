@@ -10,6 +10,8 @@
 		1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7FE6CE29EF7C64007D54B3 /* main.swift */; };
 		1CD7E0232A38365800FF14E5 /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD7E0222A38365800FF14E5 /* types.swift */; };
 		1CD7E0252A383DD500FF14E5 /* Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD7E0242A383DD500FF14E5 /* Print.swift */; };
+		6E06FD522A6027B800B4B778 /* cwr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E06FD512A6027B800B4B778 /* cwr.swift */; };
+		6E06FD542A6028CA00B4B778 /* swiftSWR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E06FD532A6028CA00B4B778 /* swiftSWR.swift */; };
 		6E179B242A55B3CF008690CD /* toDic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E179B232A55B3CF008690CD /* toDic.swift */; };
 		6E40FCC42A05409700FE4B5B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E40FCC32A05409700FE4B5B /* libsqlite3.tbd */; };
 		6EBB70512A53861A003D3642 /* demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBB70502A53861A003D3642 /* demo.swift */; };
@@ -33,6 +35,8 @@
 		1C7FE6CE29EF7C64007D54B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		1CD7E0222A38365800FF14E5 /* types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
 		1CD7E0242A383DD500FF14E5 /* Print.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Print.swift; sourceTree = "<group>"; };
+		6E06FD512A6027B800B4B778 /* cwr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cwr.swift; sourceTree = "<group>"; };
+		6E06FD532A6028CA00B4B778 /* swiftSWR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftSWR.swift; sourceTree = "<group>"; };
 		6E179B232A55B3CF008690CD /* toDic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toDic.swift; sourceTree = "<group>"; };
 		6E40FCC32A05409700FE4B5B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		6EB1E95129F17BEA001A2A61 /* EndpointSecurity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EndpointSecurity.json; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 				6EED05792A3D487E008B6081 /* cwrite.swift */,
 				6EBB70502A53861A003D3642 /* demo.swift */,
 				6E179B232A55B3CF008690CD /* toDic.swift */,
+				6E06FD512A6027B800B4B778 /* cwr.swift */,
+				6E06FD532A6028CA00B4B778 /* swiftSWR.swift */,
 			);
 			path = json;
 			sourceTree = "<group>";
@@ -151,8 +157,10 @@
 			files = (
 				1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */,
 				6E179B242A55B3CF008690CD /* toDic.swift in Sources */,
+				6E06FD542A6028CA00B4B778 /* swiftSWR.swift in Sources */,
 				6EED057A2A3D487E008B6081 /* cwrite.swift in Sources */,
 				1CD7E0252A383DD500FF14E5 /* Print.swift in Sources */,
+				6E06FD522A6027B800B4B778 /* cwr.swift in Sources */,
 				6EBB70512A53861A003D3642 /* demo.swift in Sources */,
 				1CD7E0232A38365800FF14E5 /* types.swift in Sources */,
 			);
