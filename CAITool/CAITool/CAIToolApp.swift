@@ -13,7 +13,7 @@ struct CAIToolApp: App {
     
     var body: some Scene {        
         Settings {
-            ContentView()
+            Text("Empty")
         }
     }
 }
