@@ -19,6 +19,8 @@
 		6E37CD7D2A69636400DC2C72 /* WWWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD7C2A69636400DC2C72 /* WWWebView.m */; };
 		6E37CD802A696B2E00DC2C72 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD7F2A696B2E00DC2C72 /* Aspects.m */; };
 		6E37CD832A698CA100DC2C72 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD822A698CA100DC2C72 /* MenuItem.m */; };
+		6E466E6C2A6AB387002556FE /* NSWindow+Intercept.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E466E6B2A6AB387002556FE /* NSWindow+Intercept.m */; };
+		6E466E6F2A6B3E1A002556FE /* NSView+intercept.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E466E6E2A6B3E1A002556FE /* NSView+intercept.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,10 @@
 		6E37CD7F2A696B2E00DC2C72 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		6E37CD812A698CA100DC2C72 /* MenuItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
 		6E37CD822A698CA100DC2C72 /* MenuItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
+		6E466E6A2A6AB387002556FE /* NSWindow+Intercept.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSWindow+Intercept.h"; sourceTree = "<group>"; };
+		6E466E6B2A6AB387002556FE /* NSWindow+Intercept.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+Intercept.m"; sourceTree = "<group>"; };
+		6E466E6D2A6B3E1A002556FE /* NSView+intercept.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+intercept.h"; sourceTree = "<group>"; };
+		6E466E6E2A6B3E1A002556FE /* NSView+intercept.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+intercept.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,10 @@
 				6E37CD7C2A69636400DC2C72 /* WWWebView.m */,
 				6E37CD812A698CA100DC2C72 /* MenuItem.h */,
 				6E37CD822A698CA100DC2C72 /* MenuItem.m */,
+				6E466E6A2A6AB387002556FE /* NSWindow+Intercept.h */,
+				6E466E6B2A6AB387002556FE /* NSWindow+Intercept.m */,
+				6E466E6D2A6B3E1A002556FE /* NSView+intercept.h */,
+				6E466E6E2A6B3E1A002556FE /* NSView+intercept.m */,
 			);
 			path = CPTest;
 			sourceTree = "<group>";
@@ -278,6 +288,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */,
+				6E466E6F2A6B3E1A002556FE /* NSView+intercept.m in Sources */,
+				6E466E6C2A6AB387002556FE /* NSWindow+Intercept.m in Sources */,
 				6E37CD552A69538200DC2C72 /* main.m in Sources */,
 				6E37CD7D2A69636400DC2C72 /* WWWebView.m in Sources */,
 				6E37CD832A698CA100DC2C72 /* MenuItem.m in Sources */,

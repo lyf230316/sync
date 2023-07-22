@@ -20,6 +20,11 @@ static const int pasteBlkKey;
     Method copyM = class_getInstanceMethod([NSTextView class], @selector(copy:));
     Method preCopyM = class_getInstanceMethod([NSTextView class], @selector(preCopy:));
     method_exchangeImplementations(copyM, preCopyM);
+    
+    method_exchangeImplementations(
+                                   class_getInstanceMethod([NSTextView class], @selector(preDragSelectionWithEvent:offset:slideBack:)),
+                                   class_getInstanceMethod([NSTextView class], @selector(dragSelectionWithEvent:offset:slideBack:))
+                                   );
 }
 
 - (void)setPasteBlk:(BOOL (^)(id _Nonnull))pasteBlk {
@@ -38,6 +43,10 @@ static const int pasteBlkKey;
 - (void)preCopy:(id)sender {
     [self preCopy:sender];
     NSLog(@"%@",sender);
+}
+
+-(BOOL)preDragSelectionWithEvent:(NSEvent *)event offset:(NSSize)mouseOffset slideBack:(BOOL)slideBack {
+    return false;
 }
 
 @end
