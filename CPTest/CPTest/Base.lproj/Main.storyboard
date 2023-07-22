@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22113.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22113.3"/>
         <plugIn identifier="com.apple.WebKit2IBPlugin" version="22113.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -843,6 +844,7 @@
                             <constraint firstItem="Bcl-bD-qD2" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="Kwe-rm-8EH"/>
                             <constraint firstItem="h9K-b0-1oD" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="LPD-3A-Gj7"/>
                             <constraint firstItem="0Kd-Ux-DKS" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="MSI-0E-eaF"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Bcl-bD-qD2" secondAttribute="trailing" constant="20" symbolic="YES" id="NSh-5e-Lxr"/>
                             <constraint firstItem="fv0-cm-8vS" firstAttribute="top" secondItem="bDO-Zd-6Qb" secondAttribute="bottom" constant="8" symbolic="YES" id="ODL-ga-bCU"/>
                             <constraint firstAttribute="trailing" secondItem="TEe-7H-eWN" secondAttribute="trailing" constant="20" symbolic="YES" id="Q9G-G4-jHv"/>
                             <constraint firstAttribute="trailing" secondItem="bDO-Zd-6Qb" secondAttribute="trailing" constant="20" symbolic="YES" id="QKx-a0-lJ3"/>
