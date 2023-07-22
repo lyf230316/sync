@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C78B8452A6BB1C400F17EB2 /* NSPasteboard+intercept.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C78B8442A6BB1C400F17EB2 /* NSPasteboard+intercept.m */; };
 		6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4A2A69538100DC2C72 /* AppDelegate.m */; };
 		6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4D2A69538100DC2C72 /* ViewController.m */; };
 		6E37CD502A69538200DC2C72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E37CD4F2A69538200DC2C72 /* Assets.xcassets */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C78B8432A6BB1C400F17EB2 /* NSPasteboard+intercept.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPasteboard+intercept.h"; sourceTree = "<group>"; };
+		1C78B8442A6BB1C400F17EB2 /* NSPasteboard+intercept.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSPasteboard+intercept.m"; sourceTree = "<group>"; };
 		6E37CD462A69538100DC2C72 /* CPTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E37CD492A69538100DC2C72 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E37CD4A2A69538100DC2C72 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				6E466E6B2A6AB387002556FE /* NSWindow+Intercept.m */,
 				6E466E6D2A6B3E1A002556FE /* NSView+intercept.h */,
 				6E466E6E2A6B3E1A002556FE /* NSView+intercept.m */,
+				1C78B8432A6BB1C400F17EB2 /* NSPasteboard+intercept.h */,
+				1C78B8442A6BB1C400F17EB2 /* NSPasteboard+intercept.m */,
 			);
 			path = CPTest;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 			files = (
 				6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */,
 				6E466E6F2A6B3E1A002556FE /* NSView+intercept.m in Sources */,
+				1C78B8452A6BB1C400F17EB2 /* NSPasteboard+intercept.m in Sources */,
 				6E466E6C2A6AB387002556FE /* NSWindow+Intercept.m in Sources */,
 				6E37CD552A69538200DC2C72 /* main.m in Sources */,
 				6E37CD7D2A69636400DC2C72 /* WWWebView.m in Sources */,
@@ -467,7 +473,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4KDWBQAQFX;
+				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -493,7 +499,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4KDWBQAQFX;
+				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

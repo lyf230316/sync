@@ -25,6 +25,16 @@ static const int pasteBlkKey;
                                    class_getInstanceMethod([NSTextView class], @selector(preDragSelectionWithEvent:offset:slideBack:)),
                                    class_getInstanceMethod([NSTextView class], @selector(dragSelectionWithEvent:offset:slideBack:))
                                    );
+    
+    method_exchangeImplementations(
+                                   class_getInstanceMethod([self class], @selector(registerForDraggedTypes:)),
+                                   class_getInstanceMethod([self class], @selector(preRegisterForDraggedTypes:))
+                                   );
+    
+//    method_exchangeImplementations(
+//                                   class_getInstanceMethod([self class], @selector(prepareForDragOperation:)),
+//                                   class_getInstanceMethod([self class], @selector(prePrepareForDragOperation:))
+//                                   );
 }
 
 - (void)setPasteBlk:(BOOL (^)(id _Nonnull))pasteBlk {
@@ -46,7 +56,16 @@ static const int pasteBlkKey;
 }
 
 -(BOOL)preDragSelectionWithEvent:(NSEvent *)event offset:(NSSize)mouseOffset slideBack:(BOOL)slideBack {
-    return false;
+//    BOOL res = [self preDragSelectionWithEvent:event offset:mouseOffset slideBack:slideBack];
+    return NO;
+}
+
+- (void)preRegisterForDraggedTypes:(NSArray<NSPasteboardType> *)newTypes {
+    NSLog(@"%@:%@",self, newTypes);
+}
+
+- (BOOL)prePrepareForDragOperation:(id<NSDraggingInfo>)sender {
+    return NO;
 }
 
 @end

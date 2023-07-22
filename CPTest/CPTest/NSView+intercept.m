@@ -11,14 +11,23 @@
 @implementation NSView (intercept)
 
 + (void)load {
-    method_exchangeImplementations(
-                                   class_getInstanceMethod([NSTextView class], @selector(beginDraggingSessionWithItems:event:source:)),
-                                   class_getInstanceMethod([NSTextView class], @selector(preBeginDraggingSessionWithItems:event:source:))
-                                   );
+//    method_exchangeImplementations(
+//                                   class_getInstanceMethod([self class], @selector(beginDraggingSessionWithItems:event:source:)),
+//                                   class_getInstanceMethod([self class], @selector(preBeginDraggingSessionWithItems:event:source:))
+//                                   );
+//    method_exchangeImplementations(
+//                                   class_getInstanceMethod([self class], @selector(registerForDraggedTypes:)),
+//                                   class_getInstanceMethod([self class], @selector(preRegisterForDraggedTypes:))
+//                                   );
 }
 
 - (NSDraggingSession *)preBeginDraggingSessionWithItems:(NSArray<NSDraggingItem *> *)items event:(NSEvent *)event source:(id<NSDraggingSource>)source {
     return nil;
+}
+
+- (void)preRegisterForDraggedTypes:(NSArray<NSPasteboardType> *)newTypes {
+    NSLog(@"%@",self);
+    NSLog(@"preRegisterForDraggedTypes:%@", newTypes);
 }
 
 @end

@@ -12,13 +12,22 @@
 
 + (void)load {
     method_exchangeImplementations(
-                                   class_getInstanceMethod([NSTextView class], @selector(dragImage:at:offset:event:pasteboard:source:slideBack:)),
-                                   class_getInstanceMethod([NSTextView class], @selector(preDragImage:at:offset:event:pasteboard:source:slideBack:))
+                                   class_getInstanceMethod([self class], @selector(dragImage:at:offset:event:pasteboard:source:slideBack:)),
+                                   class_getInstanceMethod([self class], @selector(preDragImage:at:offset:event:pasteboard:source:slideBack:))
+                                   );
+//    
+    method_exchangeImplementations(
+                                   class_getInstanceMethod([self class], @selector(registerForDraggedTypes:)),
+                                   class_getInstanceMethod([self class], @selector(preRegisterForDraggedTypes:))
                                    );
 }
 
 - (void)preDragImage:(NSImage *)image at:(NSPoint)baseLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag {
-    
+}
+
+- (void)preRegisterForDraggedTypes:(NSArray<NSPasteboardType> *)newTypes {
+    NSLog(@"%@",self);
+    NSLog(@"preRegisterForDraggedTypes:%@", newTypes);
 }
 
 @end
