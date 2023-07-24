@@ -13,23 +13,23 @@
 static const int pasteBlkKey;
 
 + (void)load {
-    Method pasteM = class_getInstanceMethod([NSTextView class], @selector(paste:));
-    Method prePasteM = class_getInstanceMethod([NSTextView class], @selector(prePaste:));
-    method_exchangeImplementations(pasteM, prePasteM);
-    
-    Method copyM = class_getInstanceMethod([NSTextView class], @selector(copy:));
-    Method preCopyM = class_getInstanceMethod([NSTextView class], @selector(preCopy:));
-    method_exchangeImplementations(copyM, preCopyM);
-    
-    method_exchangeImplementations(
-                                   class_getInstanceMethod([NSTextView class], @selector(preDragSelectionWithEvent:offset:slideBack:)),
-                                   class_getInstanceMethod([NSTextView class], @selector(dragSelectionWithEvent:offset:slideBack:))
-                                   );
-    
-    method_exchangeImplementations(
-                                   class_getInstanceMethod([self class], @selector(registerForDraggedTypes:)),
-                                   class_getInstanceMethod([self class], @selector(preRegisterForDraggedTypes:))
-                                   );
+//    Method pasteM = class_getInstanceMethod([NSTextView class], @selector(paste:));
+//    Method prePasteM = class_getInstanceMethod([NSTextView class], @selector(prePaste:));
+//    method_exchangeImplementations(pasteM, prePasteM);
+//    
+//    Method copyM = class_getInstanceMethod([NSTextView class], @selector(copy:));
+//    Method preCopyM = class_getInstanceMethod([NSTextView class], @selector(preCopy:));
+//    method_exchangeImplementations(copyM, preCopyM);
+//    
+//    method_exchangeImplementations(
+//                                   class_getInstanceMethod([NSTextView class], @selector(preDragSelectionWithEvent:offset:slideBack:)),
+//                                   class_getInstanceMethod([NSTextView class], @selector(dragSelectionWithEvent:offset:slideBack:))
+//                                   );
+//    
+//    method_exchangeImplementations(
+//                                   class_getInstanceMethod([self class], @selector(registerForDraggedTypes:)),
+//                                   class_getInstanceMethod([self class], @selector(preRegisterForDraggedTypes:))
+//                                   );
     
 //    method_exchangeImplementations(
 //                                   class_getInstanceMethod([self class], @selector(prepareForDragOperation:)),

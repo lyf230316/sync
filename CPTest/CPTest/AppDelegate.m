@@ -259,115 +259,125 @@
 //        [invocation setReturnValue:@(NO)];
 //    } error:&error];
     
-    [NSClassFromString(@"_NSFunctionRowCustomizationDragTarget") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//    [NSClassFromString(@"_NSFunctionRowCustomizationDragTarget") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+//        NSInvocation *invocation = aspectInfo.originalInvocation;
+//        NSLog(@"[_NSFunctionRowCustomizationDragTarget prepareForDragOperation:]");
+//        NSLog(@"%@",item);
+//        NSLog(@"%@",invocation);
+//        NSLog(@"%@\n",arguments);
+//        BOOL res = NO;
+//        [invocation setReturnValue:&res];
+//    } error:&error];
+//    [NSClassFromString(@"NSLocalSavePanel") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+//        NSInvocation *invocation = aspectInfo.originalInvocation;
+//        NSLog(@"[NSLocalSavePanel prepareForDragOperation:]");
+//        NSLog(@"%@",item);
+//        NSLog(@"%@",invocation);
+//        NSLog(@"%@\n",arguments);
+//        BOOL res = NO;
+//        [invocation setReturnValue:&res];
+//    } error:&error];
+//    [NSClassFromString(@"_NSSplitViewSpringLoadingView") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+//        NSInvocation *invocation = aspectInfo.originalInvocation;
+//        NSLog(@"[_NSSplitViewSpringLoadingView prepareForDragOperation:]");
+//        NSLog(@"%@",item);
+//        NSLog(@"%@",invocation);
+//        NSLog(@"%@\n",arguments);
+//        BOOL res = NO;
+//        [invocation setReturnValue:&res];
+//    } error:&error];
+//    [NSClassFromString(@"NSTextView") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+//        NSInvocation *invocation = aspectInfo.originalInvocation;
+//        NSLog(@"[NSTextView prepareForDragOperation:]");
+//        NSLog(@"%@",item);
+//        NSLog(@"%@",invocation);
+//        NSLog(@"%@\n",arguments);
+//        BOOL res = NO;
+//        [invocation setReturnValue:&res];
+//    } error:&error];
+//    [NSClassFromString(@"NSTokenField") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+//        NSInvocation *invocation = aspectInfo.originalInvocation;
+//        NSLog(@"[NSTokenField prepareForDragOperation:]");
+//        NSLog(@"%@",item);
+//        NSLog(@"%@",invocation);
+//        NSLog(@"%@\n",arguments);
+//        BOOL res = NO;
+//        [invocation setReturnValue:&res];
+//    } error:&error];
+//    [NSClassFromString(@"NSTabBarNewTabButton") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+//        NSInvocation *invocation = aspectInfo.originalInvocation;
+//        NSLog(@"[NSTabBarNewTabButton prepareForDragOperation:]");
+//        NSLog(@"%@",item);
+//        NSLog(@"%@",invocation);
+//        NSLog(@"%@\n",arguments);
+//        BOOL res = NO;
+//        [invocation setReturnValue:&res];
+//    } error:&error];
+//    [NSClassFromString(@"_NSCollectionViewDropReceiver") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+//        NSInvocation *invocation = aspectInfo.originalInvocation;
+//        NSLog(@"[_NSCollectionViewDropReceiver prepareForDragOperation:]");
+//        NSLog(@"%@",item);
+//        NSLog(@"%@",invocation);
+//        NSLog(@"%@\n",arguments);
+//        BOOL res = NO;
+//        [invocation setReturnValue:&res];
+//    } error:&error];
+//    [NSClassFromString(@"NSView") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+//        NSInvocation *invocation = aspectInfo.originalInvocation;
+//        NSLog(@"[NSView prepareForDragOperation:]");
+//        NSLog(@"%@",item);
+//        NSLog(@"%@",invocation);
+//        NSLog(@"%@\n",arguments);
+//        BOOL res = NO;
+//        [invocation setReturnValue:&res];
+//    } error:&error];
+//    [NSClassFromString(@"NSWindow") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+//        NSInvocation *invocation = aspectInfo.originalInvocation;
+//        NSLog(@"[NSWindow prepareForDragOperation:]");
+//        NSLog(@"%@",item);
+//        NSLog(@"%@",invocation);
+//        NSLog(@"%@\n",arguments);
+//        BOOL res = NO;
+//        [invocation setReturnValue:&res];
+//    } error:&error];
+//    [NSClassFromString(@"NSTabButton") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+//        NSInvocation *invocation = aspectInfo.originalInvocation;
+//        NSLog(@"[NSTabButton prepareForDragOperation:]");
+//        NSLog(@"%@",item);
+//        NSLog(@"%@",invocation);
+//        NSLog(@"%@\n",arguments);
+//        BOOL res = NO;
+//        [invocation setReturnValue:&res];
+//    } error:&error];
+    
+    [NSClassFromString(@"NSView") aspect_hookSelector:NSSelectorFromString(@"_registerForDraggedTypes:later:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo){
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
         NSInvocation *invocation = aspectInfo.originalInvocation;
-        NSLog(@"[_NSFunctionRowCustomizationDragTarget prepareForDragOperation:]");
+        NSLog(@"[NSView _registerForDraggedTypes:later:]");
         NSLog(@"%@",item);
         NSLog(@"%@",invocation);
         NSLog(@"%@\n",arguments);
-        BOOL res = NO;
-        [invocation setReturnValue:&res];
-    } error:&error];
-    [NSClassFromString(@"NSLocalSavePanel") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
-        NSMenuItem *item = aspectInfo.instance;
-        NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invocation = aspectInfo.originalInvocation;
-        NSLog(@"[NSLocalSavePanel prepareForDragOperation:]");
-        NSLog(@"%@",item);
-        NSLog(@"%@",invocation);
-        NSLog(@"%@\n",arguments);
-        BOOL res = NO;
-        [invocation setReturnValue:&res];
-    } error:&error];
-    [NSClassFromString(@"_NSSplitViewSpringLoadingView") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
-        NSMenuItem *item = aspectInfo.instance;
-        NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invocation = aspectInfo.originalInvocation;
-        NSLog(@"[_NSSplitViewSpringLoadingView prepareForDragOperation:]");
-        NSLog(@"%@",item);
-        NSLog(@"%@",invocation);
-        NSLog(@"%@\n",arguments);
-        BOOL res = NO;
-        [invocation setReturnValue:&res];
-    } error:&error];
-    [NSClassFromString(@"NSTextView") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
-        NSMenuItem *item = aspectInfo.instance;
-        NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invocation = aspectInfo.originalInvocation;
-        NSLog(@"[NSTextView prepareForDragOperation:]");
-        NSLog(@"%@",item);
-        NSLog(@"%@",invocation);
-        NSLog(@"%@\n",arguments);
-        BOOL res = NO;
-        [invocation setReturnValue:&res];
-    } error:&error];
-    [NSClassFromString(@"NSTokenField") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
-        NSMenuItem *item = aspectInfo.instance;
-        NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invocation = aspectInfo.originalInvocation;
-        NSLog(@"[NSTokenField prepareForDragOperation:]");
-        NSLog(@"%@",item);
-        NSLog(@"%@",invocation);
-        NSLog(@"%@\n",arguments);
-        BOOL res = NO;
-        [invocation setReturnValue:&res];
-    } error:&error];
-    [NSClassFromString(@"NSTabBarNewTabButton") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
-        NSMenuItem *item = aspectInfo.instance;
-        NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invocation = aspectInfo.originalInvocation;
-        NSLog(@"[NSTabBarNewTabButton prepareForDragOperation:]");
-        NSLog(@"%@",item);
-        NSLog(@"%@",invocation);
-        NSLog(@"%@\n",arguments);
-        BOOL res = NO;
-        [invocation setReturnValue:&res];
-    } error:&error];
-    [NSClassFromString(@"_NSCollectionViewDropReceiver") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
-        NSMenuItem *item = aspectInfo.instance;
-        NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invocation = aspectInfo.originalInvocation;
-        NSLog(@"[_NSCollectionViewDropReceiver prepareForDragOperation:]");
-        NSLog(@"%@",item);
-        NSLog(@"%@",invocation);
-        NSLog(@"%@\n",arguments);
-        BOOL res = NO;
-        [invocation setReturnValue:&res];
-    } error:&error];
-    [NSClassFromString(@"NSView") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
-        NSMenuItem *item = aspectInfo.instance;
-        NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invocation = aspectInfo.originalInvocation;
-        NSLog(@"[NSView prepareForDragOperation:]");
-        NSLog(@"%@",item);
-        NSLog(@"%@",invocation);
-        NSLog(@"%@\n",arguments);
-        BOOL res = NO;
-        [invocation setReturnValue:&res];
-    } error:&error];
-    [NSClassFromString(@"NSWindow") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
-        NSMenuItem *item = aspectInfo.instance;
-        NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invocation = aspectInfo.originalInvocation;
-        NSLog(@"[NSWindow prepareForDragOperation:]");
-        NSLog(@"%@",item);
-        NSLog(@"%@",invocation);
-        NSLog(@"%@\n",arguments);
-        BOOL res = NO;
-        [invocation setReturnValue:&res];
-    } error:&error];
-    [NSClassFromString(@"NSTabButton") aspect_hookSelector:NSSelectorFromString(@"prepareForDragOperation:") withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){
-        NSMenuItem *item = aspectInfo.instance;
-        NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invocation = aspectInfo.originalInvocation;
-        NSLog(@"[NSTabButton prepareForDragOperation:]");
-        NSLog(@"%@",item);
-        NSLog(@"%@",invocation);
-        NSLog(@"%@\n",arguments);
-        BOOL res = NO;
-        [invocation setReturnValue:&res];
     } error:&error];
 }
 

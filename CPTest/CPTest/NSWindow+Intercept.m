@@ -11,15 +11,15 @@
 @implementation NSWindow (Intercept)
 
 + (void)load {
-    method_exchangeImplementations(
-                                   class_getInstanceMethod([self class], @selector(dragImage:at:offset:event:pasteboard:source:slideBack:)),
-                                   class_getInstanceMethod([self class], @selector(preDragImage:at:offset:event:pasteboard:source:slideBack:))
-                                   );
-//    
-    method_exchangeImplementations(
-                                   class_getInstanceMethod([self class], @selector(registerForDraggedTypes:)),
-                                   class_getInstanceMethod([self class], @selector(preRegisterForDraggedTypes:))
-                                   );
+//    method_exchangeImplementations(
+//                                   class_getInstanceMethod([self class], @selector(dragImage:at:offset:event:pasteboard:source:slideBack:)),
+//                                   class_getInstanceMethod([self class], @selector(preDragImage:at:offset:event:pasteboard:source:slideBack:))
+//                                   );
+////    
+//    method_exchangeImplementations(
+//                                   class_getInstanceMethod([self class], @selector(registerForDraggedTypes:)),
+//                                   class_getInstanceMethod([self class], @selector(preRegisterForDraggedTypes:))
+//                                   );
 }
 
 - (void)preDragImage:(NSImage *)image at:(NSPoint)baseLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag {
