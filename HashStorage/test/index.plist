@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>001</key>
+	<dict>
+		<key>repo</key>
+		<string>git@github.com:cai230625/index.git</string>
+		<key>email</key>
+		<string>cai230625@163.com</string>
+		<key>rsa_key</key>
+		<string>-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACDrlVaM+SFUT6NINcJByK1XGG840wg7PI4/aP1slOnKFgAAAJi6/92ruv/d
+qwAAAAtzc2gtZWQyNTUxOQAAACDrlVaM+SFUT6NINcJByK1XGG840wg7PI4/aP1slOnKFg
+AAAECZ0smhE0UzT0Jv1lH0wc5ibBgbmBpPFk2uCpWWkrAHAeuVVoz5IVRPo0g1wkHIrVcY
+bzjTCDs8jj9o/WyU6coWAAAAEWNhaTIzMDYyNUAxNjMuY29tAQIDBA==
+-----END OPENSSH PRIVATE KEY-----</string>
+		<key>rsa_pub</key>
+		<string>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOuVVoz5IVRPo0g1wkHIrVcYbzjTCDs8jj9o/WyU6coW cai230625@163.com</string>
+	</dict>
+</dict>
+</plist>
