@@ -8,9 +8,5 @@
 import Foundation
 
 class Storage {
-    static let share = Storage()
     
-    func 
-    
-    func upload(file: String, repo: String, )
 }

@@ -35,3 +35,12 @@ struct HSFile: Codable {
         sha512 = hashFile(path, &hasher512)
     }
 }
+
+struct Repo: Codable {
+    var id = UUID()
+    var gitUrl: String
+    var email: String
+    var rsaKey: String
+    var rsaPub: String
+}
+
