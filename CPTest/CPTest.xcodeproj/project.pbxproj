@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C78B8452A6BB1C400F17EB2 /* NSPasteboard+intercept.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C78B8442A6BB1C400F17EB2 /* NSPasteboard+intercept.m */; };
 		6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4A2A69538100DC2C72 /* AppDelegate.m */; };
 		6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4D2A69538100DC2C72 /* ViewController.m */; };
 		6E37CD502A69538200DC2C72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E37CD4F2A69538200DC2C72 /* Assets.xcassets */; };
@@ -16,12 +15,7 @@
 		6E37CD602A69538300DC2C72 /* CPTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD5F2A69538300DC2C72 /* CPTestTests.m */; };
 		6E37CD6A2A69538300DC2C72 /* CPTestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD692A69538300DC2C72 /* CPTestUITests.m */; };
 		6E37CD6C2A69538300DC2C72 /* CPTestUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD6B2A69538300DC2C72 /* CPTestUITestsLaunchTests.m */; };
-		6E37CD7A2A69552700DC2C72 /* NSTextView+Intercept.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD792A69552700DC2C72 /* NSTextView+Intercept.m */; };
-		6E37CD7D2A69636400DC2C72 /* WWWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD7C2A69636400DC2C72 /* WWWebView.m */; };
 		6E37CD802A696B2E00DC2C72 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD7F2A696B2E00DC2C72 /* Aspects.m */; };
-		6E37CD832A698CA100DC2C72 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD822A698CA100DC2C72 /* MenuItem.m */; };
-		6E466E6C2A6AB387002556FE /* NSWindow+Intercept.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E466E6B2A6AB387002556FE /* NSWindow+Intercept.m */; };
-		6E466E6F2A6B3E1A002556FE /* NSView+intercept.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E466E6E2A6B3E1A002556FE /* NSView+intercept.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,8 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1C78B8432A6BB1C400F17EB2 /* NSPasteboard+intercept.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPasteboard+intercept.h"; sourceTree = "<group>"; };
-		1C78B8442A6BB1C400F17EB2 /* NSPasteboard+intercept.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSPasteboard+intercept.m"; sourceTree = "<group>"; };
 		6E37CD462A69538100DC2C72 /* CPTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E37CD492A69538100DC2C72 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E37CD4A2A69538100DC2C72 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -58,18 +50,8 @@
 		6E37CD652A69538300DC2C72 /* CPTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CPTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E37CD692A69538300DC2C72 /* CPTestUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CPTestUITests.m; sourceTree = "<group>"; };
 		6E37CD6B2A69538300DC2C72 /* CPTestUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CPTestUITestsLaunchTests.m; sourceTree = "<group>"; };
-		6E37CD782A69552700DC2C72 /* NSTextView+Intercept.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextView+Intercept.h"; sourceTree = "<group>"; };
-		6E37CD792A69552700DC2C72 /* NSTextView+Intercept.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextView+Intercept.m"; sourceTree = "<group>"; };
-		6E37CD7B2A69636400DC2C72 /* WWWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WWWebView.h; sourceTree = "<group>"; };
-		6E37CD7C2A69636400DC2C72 /* WWWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WWWebView.m; sourceTree = "<group>"; };
 		6E37CD7E2A696B2E00DC2C72 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
 		6E37CD7F2A696B2E00DC2C72 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
-		6E37CD812A698CA100DC2C72 /* MenuItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
-		6E37CD822A698CA100DC2C72 /* MenuItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
-		6E466E6A2A6AB387002556FE /* NSWindow+Intercept.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSWindow+Intercept.h"; sourceTree = "<group>"; };
-		6E466E6B2A6AB387002556FE /* NSWindow+Intercept.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+Intercept.m"; sourceTree = "<group>"; };
-		6E466E6D2A6B3E1A002556FE /* NSView+intercept.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+intercept.h"; sourceTree = "<group>"; };
-		6E466E6E2A6B3E1A002556FE /* NSView+intercept.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+intercept.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,8 +104,6 @@
 			children = (
 				6E37CD7E2A696B2E00DC2C72 /* Aspects.h */,
 				6E37CD7F2A696B2E00DC2C72 /* Aspects.m */,
-				6E37CD782A69552700DC2C72 /* NSTextView+Intercept.h */,
-				6E37CD792A69552700DC2C72 /* NSTextView+Intercept.m */,
 				6E37CD492A69538100DC2C72 /* AppDelegate.h */,
 				6E37CD4A2A69538100DC2C72 /* AppDelegate.m */,
 				6E37CD4C2A69538100DC2C72 /* ViewController.h */,
@@ -132,16 +112,6 @@
 				6E37CD512A69538200DC2C72 /* Main.storyboard */,
 				6E37CD542A69538200DC2C72 /* main.m */,
 				6E37CD562A69538200DC2C72 /* CPTest.entitlements */,
-				6E37CD7B2A69636400DC2C72 /* WWWebView.h */,
-				6E37CD7C2A69636400DC2C72 /* WWWebView.m */,
-				6E37CD812A698CA100DC2C72 /* MenuItem.h */,
-				6E37CD822A698CA100DC2C72 /* MenuItem.m */,
-				6E466E6A2A6AB387002556FE /* NSWindow+Intercept.h */,
-				6E466E6B2A6AB387002556FE /* NSWindow+Intercept.m */,
-				6E466E6D2A6B3E1A002556FE /* NSView+intercept.h */,
-				6E466E6E2A6B3E1A002556FE /* NSView+intercept.m */,
-				1C78B8432A6BB1C400F17EB2 /* NSPasteboard+intercept.h */,
-				1C78B8442A6BB1C400F17EB2 /* NSPasteboard+intercept.m */,
 			);
 			path = CPTest;
 			sourceTree = "<group>";
@@ -293,14 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */,
-				6E466E6F2A6B3E1A002556FE /* NSView+intercept.m in Sources */,
-				1C78B8452A6BB1C400F17EB2 /* NSPasteboard+intercept.m in Sources */,
-				6E466E6C2A6AB387002556FE /* NSWindow+Intercept.m in Sources */,
 				6E37CD552A69538200DC2C72 /* main.m in Sources */,
-				6E37CD7D2A69636400DC2C72 /* WWWebView.m in Sources */,
-				6E37CD832A698CA100DC2C72 /* MenuItem.m in Sources */,
 				6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */,
-				6E37CD7A2A69552700DC2C72 /* NSTextView+Intercept.m in Sources */,
 				6E37CD802A696B2E00DC2C72 /* Aspects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

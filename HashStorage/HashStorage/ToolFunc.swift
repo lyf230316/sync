@@ -66,3 +66,7 @@ func hashFile<T:HashFunction>(_ path: String,_ hasher:inout T) -> String {
     let digest = hasher.finalize()
     return digest.map { String(format: "%02hhx", $0) }.joined()
 }
+
+func upload(_ file:HSFile ,to repo: Repo) {
+    
+}
