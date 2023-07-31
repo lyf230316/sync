@@ -45,11 +45,25 @@
     uint32_t event_count = 0;
     es_event_type_t *events = nil;
     [Convert events:types toPointer:&events count:&event_count];
-    es_subscribe(client, events, event_count);
+    es_return_t rc = es_subscribe(client, events, event_count);
+    callback(rc);
 }
-- (void)unsubscribe:(NSArray *)types callback:(void(^)(es_return_t code))callback;
-- (void)unsubscribeAll:(void(^)(es_return_t code))callback;
-- (void)subScriptions:(void(^)(es_return_t code,NSArray *types))callback;
+- (void)unsubscribe:(NSArray *)types callback:(void(^)(es_return_t code))callback {
+    uint32_t event_count = 0;
+    es_event_type_t *events = nil;
+    [Convert events:types toPointer:&events count:&event_count];
+    es_return_t rc = es_unsubscribe(client, events, event_count);
+    callback(rc);
+}
+- (void)unsubscribeAll:(void(^)(es_return_t code))callback {
+    es_return_t rc = es_unsubscribe_all(client);
+    callback(rc);
+}
+- (void)subScriptions:(void(^)(es_return_t code,NSArray *types))callback {
+    size_t count;
+    es_event_type_t *subscriptions = NULL;
+    es_return_t rc = es_subscriptions(client, &count, &subscriptions);
+}
 
 - (void)muteProcess:(auditinfo_t)audit_token callback:(void(^)(es_return_t code))callback;
 - (void)unmuteProcess:(auditinfo_t)audit_token callback:(void(^)(es_return_t code))callback;
