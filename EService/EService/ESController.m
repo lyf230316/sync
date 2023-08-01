@@ -65,8 +65,14 @@
     es_return_t rc = es_subscriptions(client, &count, &subscriptions);
 }
 
-- (void)muteProcess:(auditinfo_t)audit_token callback:(void(^)(es_return_t code))callback;
-- (void)unmuteProcess:(auditinfo_t)audit_token callback:(void(^)(es_return_t code))callback;
+- (void)muteProcess:(auditinfo_t)audit_token callback:(void(^)(es_return_t code))callback {
+    es_return_t rc = es_mute_process(client, &audit_token);
+    callback(rc);
+}
+- (void)unmuteProcess:(auditinfo_t)audit_token callback:(void(^)(es_return_t code))callback {
+    es_result_t rc = es_unmute_process(client, &audit_token);
+    callback(rc);
+}
 - (void)muteProcess:(auditinfo_t)audit_token envents:(NSArray *)types callback:(void(^)(es_return_t code))callback;
 - (void)unmuteProcess:(auditinfo_t)audit_token envents:(NSArray *)types callback:(void(^)(es_return_t code))callback;
 - (void)mutedProcess:(void(^)(es_return_t code,NSArray *audit_tokens))callback;
