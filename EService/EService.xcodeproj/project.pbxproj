@@ -11,6 +11,9 @@
 		1CA0FE5C2A765C1400EADD14 /* XPCServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA0FE5B2A765C1400EADD14 /* XPCServer.m */; };
 		1CA0FE602A76602700EADD14 /* ESController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA0FE5F2A76602700EADD14 /* ESController.m */; };
 		1CA0FE632A766F3B00EADD14 /* Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA0FE622A766F3B00EADD14 /* Convert.m */; };
+		6EDF4C242A794F9B00626979 /* ESClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDF4C232A794F9B00626979 /* ESClient.m */; };
+		6EDF4C272A7952BB00626979 /* ESData.c in Sources */ = {isa = PBXBuildFile; fileRef = 6EDF4C252A7952BB00626979 /* ESData.c */; };
+		6EDF4C2B2A79593E00626979 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDF4C2A2A79593E00626979 /* libEndpointSecurity.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +38,11 @@
 		1CA0FE5F2A76602700EADD14 /* ESController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESController.m; sourceTree = "<group>"; };
 		1CA0FE612A766F3B00EADD14 /* Convert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Convert.h; sourceTree = "<group>"; };
 		1CA0FE622A766F3B00EADD14 /* Convert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Convert.m; sourceTree = "<group>"; };
+		6EDF4C222A794F9B00626979 /* ESClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESClient.h; sourceTree = "<group>"; };
+		6EDF4C232A794F9B00626979 /* ESClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESClient.m; sourceTree = "<group>"; };
+		6EDF4C252A7952BB00626979 /* ESData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ESData.c; sourceTree = "<group>"; };
+		6EDF4C262A7952BB00626979 /* ESData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESData.h; sourceTree = "<group>"; };
+		6EDF4C2A2A79593E00626979 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EDF4C2B2A79593E00626979 /* libEndpointSecurity.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +62,7 @@
 			children = (
 				1CA0FE522A765BE000EADD14 /* EService */,
 				1CA0FE512A765BE000EADD14 /* Products */,
+				6EDF4C292A79593E00626979 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +77,7 @@
 		1CA0FE522A765BE000EADD14 /* EService */ = {
 			isa = PBXGroup;
 			children = (
+				6EDF4C282A79539600626979 /* ESStructs */,
 				1CA0FE532A765BE000EADD14 /* main.m */,
 				1CA0FE5A2A765C1400EADD14 /* XPCServer.h */,
 				1CA0FE5B2A765C1400EADD14 /* XPCServer.m */,
@@ -75,8 +86,27 @@
 				1CA0FE5F2A76602700EADD14 /* ESController.m */,
 				1CA0FE612A766F3B00EADD14 /* Convert.h */,
 				1CA0FE622A766F3B00EADD14 /* Convert.m */,
+				6EDF4C222A794F9B00626979 /* ESClient.h */,
+				6EDF4C232A794F9B00626979 /* ESClient.m */,
 			);
 			path = EService;
+			sourceTree = "<group>";
+		};
+		6EDF4C282A79539600626979 /* ESStructs */ = {
+			isa = PBXGroup;
+			children = (
+				6EDF4C252A7952BB00626979 /* ESData.c */,
+				6EDF4C262A7952BB00626979 /* ESData.h */,
+			);
+			path = ESStructs;
+			sourceTree = "<group>";
+		};
+		6EDF4C292A79593E00626979 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6EDF4C2A2A79593E00626979 /* libEndpointSecurity.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +169,9 @@
 				1CA0FE5C2A765C1400EADD14 /* XPCServer.m in Sources */,
 				1CA0FE632A766F3B00EADD14 /* Convert.m in Sources */,
 				1CA0FE542A765BE000EADD14 /* main.m in Sources */,
+				6EDF4C242A794F9B00626979 /* ESClient.m in Sources */,
 				1CA0FE602A76602700EADD14 /* ESController.m in Sources */,
+				6EDF4C272A7952BB00626979 /* ESData.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,7 +228,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -248,7 +280,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
