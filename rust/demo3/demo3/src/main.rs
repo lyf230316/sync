@@ -1,9 +1,6 @@
+use std::path::PathBuf;
+use std::string;
 use git2::Repository;
-
-fn main() {
-
-
-}
 
 pub struct GFile {
     pub size: u64,
@@ -15,6 +12,13 @@ pub struct GFile {
     pub sha512: String,
 }
 
-fn upload(repo: Repository, file:GFile) {
+fn main() {
+    upload(string("ac"),string("f"));
+}
 
+fn upload(repoName: string, file:string) {
+    let mut path = PathBuf::new();
+    path.push("/tmp/"+repoName);
+    let repo = Repository::init_bare(path);
+    let mut index = repo.index();
 }
