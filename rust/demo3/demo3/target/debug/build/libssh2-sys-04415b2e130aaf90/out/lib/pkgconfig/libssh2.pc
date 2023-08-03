@@ -1,0 +1,17 @@
+###########################################################################
+# libssh2 installation details
+###########################################################################
+
+prefix=/Users/lyf/git/github/sync/rust/demo3/demo3/target/debug/build/libssh2-sys-04415b2e130aaf90/out
+exec_prefix=
+libdir=/Users/lyf/git/github/sync/rust/demo3/demo3/target/debug/build/libssh2-sys-04415b2e130aaf90/out/lib
+includedir=/Users/lyf/git/github/sync/rust/demo3/demo3/target/debug/build/libssh2-sys-04415b2e130aaf90/out/include
+
+Name: libssh2
+URL: https://www.libssh2.org/
+Description: Library for SSH-based communication
+Version: 1.10.1_DEV
+Requires.private: 
+Libs: -L${libdir} -lssh2 
+Libs.private: 
+Cflags: -I${includedir}
