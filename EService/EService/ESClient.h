@@ -15,6 +15,8 @@ API_AVAILABLE(macos(10.15))
 
 @property(nonatomic, copy)void(^messageBlk)(ESClient *client,const es_message_t *message);
 
+- (es_return_t)mute_process_events:(const audit_token_t *)audit_token events:(NSArray *)events API_AVAILABLE(macosx(10.12));
+
 @end
 
 NS_ASSUME_NONNULL_END

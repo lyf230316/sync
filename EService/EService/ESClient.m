@@ -74,150 +74,53 @@
     return es_respond_auth_result(client, message, result, cache);
 }
 
-/**
- * Respond to an auth event that requires an es_auth_result_t response
- * @param client The client that produced the event
- * @param message The message being responded to
- * @param result A result indicating the action the ES subsystem should take
- * @param cache Indicates if this result should be cached.  The specific
- *        caching semantics depend on es_event_type_t.  Cache key is generally
- *        the involved files, with modifications to those files invalidating
- *        the cache entry.  A cache hit leads to no AUTH event being produced,
- *        while still producing a NOTIFY event normally.
- *        The cache argument is ignored for events that do not support caching.
- * @return es_respond_result_t indicating success or an error
- * @brief Some events must be responded to with `es_respond_flags_result`. Responding to flags events with this function will fail.
- */
-OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_respond_result_t
-es_respond_auth_result(es_client_t * _Nonnull client, const es_message_t * _Nonnull message, es_auth_result_t result, bool cache);
+- (es_respond_result_t)respondFlagsResult:(const es_message_t *)message authorizedFlags:(uint32_t)authorizedFlags cache:(BOOL)cache {
+    return es_respond_flags_result(client, message, authorizedFlags, cache);
+}
 
-/**
- * Respond to an auth event that requires an uint32_t flags response
- * @param client The client that produced the event
- * @param message The message being responded to
- * @param authorized_flags A flags value that will mask the flags in event being
- *        responded to; pass 0 to deny and UINT32_MAX to allow regardless of what
- *        flags are set on the event.
- * @param cache Indicates if this result should be cached.  The specific
- *        caching semantics depend on es_event_type_t.  Cache key is generally
- *        the involved files, with modifications to those files invalidating
- *        the cache entry.  A cache hit leads to no AUTH event being produced,
- *        while still producing a NOTIFY event normally.
- *        The cache argument is ignored for events that do not support caching.
- * @return es_respond_result_t indicating success or an error
- * @brief Some events must be responded to with `es_respond_auth_result`. Responding to auth events with the function will fail.
- * @note Enabling caching caches authorized_flags.  Subsequent cache hits
- *       will result in the event being allowed only if the flags of the
- *       event are a subset of the flags in authorized_flags, and denied
- *       otherwise.  As a result, UINT32_MAX should be passed for
- *       authorized_flags, unless denying events with certain flags is
- *       intentional.  A common mistake is passing the flags from the
- *       event, which together with caching may result in subsequent
- *       events getting unintentionally denied if they have flags set
- *       that were not set in the cached authorized_flags.
- */
-OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_respond_result_t
-es_respond_flags_result(es_client_t * _Nonnull client, const es_message_t * _Nonnull message, uint32_t authorized_flags, bool cache);
+- (es_return_t)muteProcess:(const audit_token_t *)audit_token {
+    return es_mute_process(client, audit_token);
+}
 
-/**
- * @brief Suppress all events from the process described by the given `audit_token`
- *
- * @param client The client for which events will be suppressed
- * @param audit_token The audit token of the process for which events will be suppressed
- *
- * @return es_return_t indicating success or error
- *
- * @see es_mute_process_events
- */
-OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_mute_process(es_client_t * _Nonnull client, const audit_token_t * _Nonnull audit_token);
 
-/**
- * @brief Suppress a subset of events from the process described by the given `audit_token`
- *
- * @param client The client for which events will be suppressed
- * @param audit_token The audit token of the process for which events will be suppressed
- * @param events Array of event types for which the audit_token should be muted.
- * @param event_count The number of items in the `events` array.
- *
- * @return es_return_t A value indicating whether or not the process was successfully muted.
- *
- * @see es_mute_process
- */
-OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_mute_process_events(es_client_t * _Nonnull client, const audit_token_t * _Nonnull audit_token, const es_event_type_t * _Nonnull events, size_t event_count);
+- (es_return_t)mute_process_events:(NSValue *)audit_token events:(NSArray *)events API_AVAILABLE(macosx(10.12)) {
+    audit_token_t _audit_token;
+    [audit_token getValue:&_audit_token];
+    es_event_type_t *_events = nil;
+    size_t event_count = 0;
+    [Convert events:events toPointer:&_events count:(uint32_t *)&event_count];
+    return es_mute_process_events(client, &_audit_token, _events, event_count);
+}
 
-/**
- * @brief Unmute a process for all event types
- *
- * @param client The client for which the process will be unmuted
- * @param audit_token The audit token of the process to be unmuted
- *
- * @return es_return_t indicating success or error
- *
- * @see es_unmute_process_events
- */
-OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_unmute_process(es_client_t * _Nonnull client, const audit_token_t *_Nonnull audit_token);
+- (es_return_t)unmute_process:(const audit_token_t *)audit_token {
+    return es_unmute_process(client, audit_token);
+}
 
-/**
- * @brief Unmute a process for a subset of event types.
- *
- * @param client The client for which events will be unmuted
- * @param audit_token The audit token of the process for which events will be unmuted
- * @param events Array of event types to unmute for the process
- * @param event_count The number of items in the `events` array.
- *
- * @return es_return_t A value indicating whether or not the process was successfully unmuted.
- *
- * @see es_unmute_path
- */
-OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_unmute_process_events(es_client_t * _Nonnull client, const audit_token_t * _Nonnull audit_token, const es_event_type_t * _Nonnull events, size_t event_count);
+- (es_return_t)unmute_process_events:(const audit_token_t *)audit_token events:(NSArray *)events API_AVAILABLE(macosx(10.12)) {
+    es_event_type_t *_events = nil;
+    size_t event_count = 0;
+    [Convert events:events toPointer:&_events count:(uint32_t *)&event_count];
+    return es_unmute_process_events(client, audit_token, _events, event_count);
+}
 
-/**
- * List muted processes
- * @param client The client for which muted processes will be listed
- * @param count Out param that reports the number of audit tokens written
- * @param audit_tokens  Out param for pointer to audit_token data
- * @return es_return_t indicating success or error
- * @brief The caller takes ownership of the memory at `*audit_tokens` and must free it.
- *        If there are no muted processes and the call completes successfully,
- *        `*count` is set to 0 and `*audit_token` is set to NULL.
- * @note The audit tokens are returned in the same state as they were passed to
- *       `es_mute_process` and may not accurately reflect the current state of the
- *       respective processes.
- */
-OS_EXPORT
-API_DEPRECATED("Please use es_muted_processes_events.", macos(10.15, 12.0))
-API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_muted_processes(es_client_t * _Nonnull client, size_t * _Nonnull count, audit_token_t * _Nonnull * _Nullable audit_tokens);
+- (es_return_t)muted_process:(NSArray **)audit_tokens {
+    size_t count = 0;
+    audit_token_t *_audit_tokens = NULL;
+    es_return_t rc = es_muted_processes(client, &count, &_audit_tokens);
+    NSMutableArray *marray = [NSMutableArray array];
+    for (int i = 0; i < count; i++) {
+        [marray addObject:[NSValue valueWithBytes:_audit_tokens+i objCType:@encode(audit_token_t)]];
+    }
+    *audit_tokens = [NSArray arrayWithArray:marray];
+    return rc;
+}
 
-/**
- * @brief Retrieve a list of all muted processes.
- *
- * @param client The es_client_t for which the muted processes will be retrieved.
- * @param muted_processes OUT param the will contain newly created memory describing the set of
- *        muted processes. This memory must be deleted using `es_release_muted_processes`.
- *
- * @return es_return_t A value indicating whether or not the list of muted processes were
- *         successfully retrieved.
- *
- * @see es_release_muted_processes
- */
+- (es_return_t)mutedProcessesEvents:(NSArray **)mutedProcesses {
+    es_muted_processes_t *_muted_processes = NULL;
+    es_return_t rc = es_muted_processes_events(client, &_muted_processes);
+    
+}
+
 OS_EXPORT
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 es_return_t

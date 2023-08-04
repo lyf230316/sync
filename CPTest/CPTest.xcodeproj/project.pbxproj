@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C5AE1D22A7B972A00876D9D /* libSystem.B.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C5AE1D12A7B972A00876D9D /* libSystem.B.tbd */; };
+		1C6A03412A7B3ED700E4EE56 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C6A03402A7B3ED700E4EE56 /* fishhook.c */; };
 		6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4A2A69538100DC2C72 /* AppDelegate.m */; };
 		6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4D2A69538100DC2C72 /* ViewController.m */; };
 		6E37CD502A69538200DC2C72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E37CD4F2A69538200DC2C72 /* Assets.xcassets */; };
@@ -36,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C5AE1D12A7B972A00876D9D /* libSystem.B.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libSystem.B.tbd; path = usr/lib/libSystem.B.tbd; sourceTree = SDKROOT; };
+		1C6A033F2A7B3ED700E4EE56 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
+		1C6A03402A7B3ED700E4EE56 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
 		6E37CD462A69538100DC2C72 /* CPTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E37CD492A69538100DC2C72 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E37CD4A2A69538100DC2C72 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -59,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C5AE1D22A7B972A00876D9D /* libSystem.B.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C5AE1D02A7B972A00876D9D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1C5AE1D12A7B972A00876D9D /* libSystem.B.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6E37CD3D2A69538100DC2C72 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +100,7 @@
 				6E37CD5E2A69538300DC2C72 /* CPTestTests */,
 				6E37CD682A69538300DC2C72 /* CPTestUITests */,
 				6E37CD472A69538100DC2C72 /* Products */,
+				1C5AE1D02A7B972A00876D9D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +117,8 @@
 		6E37CD482A69538100DC2C72 /* CPTest */ = {
 			isa = PBXGroup;
 			children = (
+				1C6A03402A7B3ED700E4EE56 /* fishhook.c */,
+				1C6A033F2A7B3ED700E4EE56 /* fishhook.h */,
 				6E37CD7E2A696B2E00DC2C72 /* Aspects.h */,
 				6E37CD7F2A696B2E00DC2C72 /* Aspects.m */,
 				6E37CD492A69538100DC2C72 /* AppDelegate.h */,
@@ -263,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */,
+				1C6A03412A7B3ED700E4EE56 /* fishhook.c in Sources */,
 				6E37CD552A69538200DC2C72 /* main.m in Sources */,
 				6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */,
 				6E37CD802A696B2E00DC2C72 /* Aspects.m in Sources */,
