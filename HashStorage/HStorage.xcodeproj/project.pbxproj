@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C5AE1DA2A7CC29E00876D9D /* HashStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE1D92A7CC29E00876D9D /* HashStorageTest.swift */; };
+		1C5AE1E12A7CC59600876D9D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C5AE1E02A7CC59600876D9D /* XCTest.framework */; };
+		1C5AE1E42A7CC65900876D9D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED1632A7159F50008871E /* main.swift */; };
+		1C5AE1E52A7CC65900876D9D /* HSFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED16A2A715A200008871E /* HSFile.swift */; };
+		1C5AE1E62A7CC65900876D9D /* ToolFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED16C2A715AD70008871E /* ToolFunc.swift */; };
+		1C5AE1E72A7CC65900876D9D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED1732A7172F40008871E /* Const.swift */; };
+		1C5AE1E82A7CC65900876D9D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED1762A71D4C80008871E /* Storage.swift */; };
 		6E9ED1642A7159F50008871E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED1632A7159F50008871E /* main.swift */; };
 		6E9ED16B2A715A200008871E /* HSFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED16A2A715A200008871E /* HSFile.swift */; };
 		6E9ED16D2A715AD70008871E /* ToolFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED16C2A715AD70008871E /* ToolFunc.swift */; };
@@ -14,6 +21,16 @@
 		6E9ED1742A7172F40008871E /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED1732A7172F40008871E /* Const.swift */; };
 		6E9ED1772A71D4C80008871E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED1762A71D4C80008871E /* Storage.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1C5AE1E22A7CC64700876D9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E9ED1582A7159F50008871E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E9ED15F2A7159F50008871E;
+			remoteInfo = HStorage;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		6E9ED15E2A7159F50008871E /* CopyFiles */ = {
@@ -28,7 +45,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6E9ED1602A7159F50008871E /* HashStorage */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HashStorage; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C5AE1D72A7CC29E00876D9D /* HStorageTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HStorageTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C5AE1D92A7CC29E00876D9D /* HashStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashStorageTest.swift; sourceTree = "<group>"; };
+		1C5AE1E02A7CC59600876D9D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		6E9ED1602A7159F50008871E /* HStorage */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HStorage; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E9ED1632A7159F50008871E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6E9ED16A2A715A200008871E /* HSFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSFile.swift; sourceTree = "<group>"; };
 		6E9ED16C2A715AD70008871E /* ToolFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolFunc.swift; sourceTree = "<group>"; };
@@ -39,6 +59,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1C5AE1D42A7CC29E00876D9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C5AE1E12A7CC59600876D9D /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E9ED15D2A7159F50008871E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -50,10 +78,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C5AE1D82A7CC29E00876D9D /* HashStorageTest */ = {
+			isa = PBXGroup;
+			children = (
+				1C5AE1D92A7CC29E00876D9D /* HashStorageTest.swift */,
+			);
+			path = HashStorageTest;
+			sourceTree = "<group>";
+		};
 		6E9ED1572A7159F50008871E = {
 			isa = PBXGroup;
 			children = (
 				6E9ED1622A7159F50008871E /* HashStorage */,
+				1C5AE1D82A7CC29E00876D9D /* HashStorageTest */,
 				6E9ED1612A7159F50008871E /* Products */,
 				6E9ED16E2A7162260008871E /* Frameworks */,
 			);
@@ -62,7 +99,8 @@
 		6E9ED1612A7159F50008871E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6E9ED1602A7159F50008871E /* HashStorage */,
+				6E9ED1602A7159F50008871E /* HStorage */,
+				1C5AE1D72A7CC29E00876D9D /* HStorageTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +120,7 @@
 		6E9ED16E2A7162260008871E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1C5AE1E02A7CC59600876D9D /* XCTest.framework */,
 				6E9ED1712A71666B0008871E /* libSystem.tbd */,
 				6E9ED16F2A7162260008871E /* libcommonCrypto.tbd */,
 			);
@@ -91,9 +130,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6E9ED15F2A7159F50008871E /* HashStorage */ = {
+		1C5AE1D62A7CC29E00876D9D /* HStorageTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6E9ED1672A7159F50008871E /* Build configuration list for PBXNativeTarget "HashStorage" */;
+			buildConfigurationList = 1C5AE1DD2A7CC29E00876D9D /* Build configuration list for PBXNativeTarget "HStorageTest" */;
+			buildPhases = (
+				1C5AE1D32A7CC29E00876D9D /* Sources */,
+				1C5AE1D42A7CC29E00876D9D /* Frameworks */,
+				1C5AE1D52A7CC29E00876D9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1C5AE1E32A7CC64700876D9D /* PBXTargetDependency */,
+			);
+			name = HStorageTest;
+			productName = HashStorageTest;
+			productReference = 1C5AE1D72A7CC29E00876D9D /* HStorageTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6E9ED15F2A7159F50008871E /* HStorage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E9ED1672A7159F50008871E /* Build configuration list for PBXNativeTarget "HStorage" */;
 			buildPhases = (
 				6E9ED15C2A7159F50008871E /* Sources */,
 				6E9ED15D2A7159F50008871E /* Frameworks */,
@@ -103,9 +160,9 @@
 			);
 			dependencies = (
 			);
-			name = HashStorage;
+			name = HStorage;
 			productName = HashStorage;
-			productReference = 6E9ED1602A7159F50008871E /* HashStorage */;
+			productReference = 6E9ED1602A7159F50008871E /* HStorage */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -115,15 +172,18 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					1C5AE1D62A7CC29E00876D9D = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					6E9ED15F2A7159F50008871E = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
-			buildConfigurationList = 6E9ED15B2A7159F50008871E /* Build configuration list for PBXProject "HashStorage" */;
+			buildConfigurationList = 6E9ED15B2A7159F50008871E /* Build configuration list for PBXProject "HStorage" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -136,12 +196,36 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6E9ED15F2A7159F50008871E /* HashStorage */,
+				6E9ED15F2A7159F50008871E /* HStorage */,
+				1C5AE1D62A7CC29E00876D9D /* HStorageTest */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		1C5AE1D52A7CC29E00876D9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		1C5AE1D32A7CC29E00876D9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C5AE1E42A7CC65900876D9D /* main.swift in Sources */,
+				1C5AE1E52A7CC65900876D9D /* HSFile.swift in Sources */,
+				1C5AE1E62A7CC65900876D9D /* ToolFunc.swift in Sources */,
+				1C5AE1E72A7CC65900876D9D /* Const.swift in Sources */,
+				1C5AE1E82A7CC65900876D9D /* Storage.swift in Sources */,
+				1C5AE1DA2A7CC29E00876D9D /* HashStorageTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E9ED15C2A7159F50008871E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -156,7 +240,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		1C5AE1E32A7CC64700876D9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E9ED15F2A7159F50008871E /* HStorage */;
+			targetProxy = 1C5AE1E22A7CC64700876D9D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		1C5AE1DB2A7CC29E00876D9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U6G2VLMPPZ;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.caidev.HashStorageTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1C5AE1DC2A7CC29E00876D9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U6G2VLMPPZ;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.caidev.HashStorageTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		6E9ED1652A7159F50008871E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -279,7 +407,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4KDWBQAQFX;
+				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -295,7 +423,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4KDWBQAQFX;
+				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -310,7 +438,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6E9ED15B2A7159F50008871E /* Build configuration list for PBXProject "HashStorage" */ = {
+		1C5AE1DD2A7CC29E00876D9D /* Build configuration list for PBXNativeTarget "HStorageTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C5AE1DB2A7CC29E00876D9D /* Debug */,
+				1C5AE1DC2A7CC29E00876D9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E9ED15B2A7159F50008871E /* Build configuration list for PBXProject "HStorage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E9ED1652A7159F50008871E /* Debug */,
@@ -319,7 +456,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6E9ED1672A7159F50008871E /* Build configuration list for PBXNativeTarget "HashStorage" */ = {
+		6E9ED1672A7159F50008871E /* Build configuration list for PBXNativeTarget "HStorage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E9ED1682A7159F50008871E /* Debug */,
