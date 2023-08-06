@@ -9,7 +9,6 @@ import CryptoKit
 import CommonCrypto
 import Foundation
 
-
 func md5File(_ path: String) -> String {
     let fileStream = InputStream(fileAtPath: path)!
     fileStream.open()
@@ -67,6 +66,47 @@ func hashFile<T:HashFunction>(_ path: String,_ hasher:inout T) -> String {
     return digest.map { String(format: "%02hhx", $0) }.joined()
 }
 
-func upload(_ file:HSFile ,to repo: Repo) {
-    
+func execDir() -> String {
+    let path = CommandLine.arguments.first!
+    return (path as NSString).deletingLastPathComponent
+}
+
+
+func sizeOfFile(_ path: String) -> Int64? {
+    guard let fh = FileHandle(forReadingAtPath: path) else {
+        return nil
+    }
+    defer {
+        try! fh.close()
+    }
+    let size: Int64 = Int64(try! fh.seekToEnd())
+    return size
+}
+
+func hashForFile(_ path: String) -> [String] {
+    let fileStream = InputStream(fileAtPath: path)!
+    fileStream.open()
+    defer {
+        fileStream.close()
+    }
+    let bufferSize = NSPageSize() * 8
+    let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+    var md5 = Insecure.MD5()
+    var sha1 = Insecure.SHA1()
+    var sha256 = SHA256()
+    var sha512 = SHA512()
+    while fileStream.hasBytesAvailable {
+        let read = fileStream.read(buffer, maxLength: bufferSize)
+        let bufferPointer = UnsafeRawBufferPointer(start: buffer, count: read)
+        md5.update(bufferPointer: bufferPointer)
+        sha1.update(bufferPointer: bufferPointer)
+        sha256.update(bufferPointer: bufferPointer)
+        sha512.update(bufferPointer: bufferPointer)
+    }
+    var res: [String] = []
+    res.append(md5.finalize().map { String(format: "%02hhx", $0) }.joined())
+    res.append(sha1.finalize().map { String(format: "%02hhx", $0) }.joined())
+    res.append(sha256.finalize().map { String(format: "%02hhx", $0) }.joined())
+    res.append(sha512.finalize().map { String(format: "%02hhx", $0) }.joined())
+    return res
 }

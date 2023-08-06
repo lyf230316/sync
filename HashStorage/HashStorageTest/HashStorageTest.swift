@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CryptoKit
 
 final class HashStorageTest: XCTestCase {
 
@@ -34,11 +35,15 @@ final class HashStorageTest: XCTestCase {
     
     func testUpload() {
         Storage.upload(wd: "/tmp/hashStorage",
-                                   file: "/Users/lyf/Desktop/测试.ppt",
-                                   keyPath: "",
-                                   repo: "",
-                                   branch: "",
-                                   commit: "")
+                                   file: "/Users/msi/Desktop/ast.json",
+                                   keyPath: "/Users/msi/.ssh/id_ed25519",
+                                   repo: "git@github.com:lyf230316/gitTest.git",
+                                   branch: "test",
+                                   commit: "ppt")
     }
 
+    func testHash() {
+        let res = hashForFile("/Users/msi/Desktop/ast.json")
+        print(res)
+    }
 }

@@ -8,39 +8,19 @@
 import Foundation
 import CryptoKit
 
-struct HSFile: Codable {
-    var id = UUID()
-    var path: String
-    var size: UInt64
-    var md5: String
-    var sha1: String
-    var sha256: String
-    var sha512: String
-    
-    init?(path: String) {
-        var isDir: ObjCBool = false
-        guard FileManager.default.fileExists(atPath: path, isDirectory: &isDir) && !isDir.boolValue else {
-            return nil
+struct FileS{
+    static func upload(_ file: String) {
+        let size = sizeOfFile(file)!
+        let hashs = hashForFile(file)
+        let md5 = hashs[0]
+        let sha1 = hashs[1]
+        let sha256 = hashs[2]
+        let sha512 = hashs[3]
+        var f = File.find(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512)
+        if f == nil {
+            f = File(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512, blocks: "", state: 0)
         }
-        guard let fileh = FileHandle(forReadingAtPath: path) else {
-            return nil
-        }
-        self.path = path
-        size = try! fileh.seekToEnd()
-        md5 = md5File(path)
-        sha1 = sha1File(path)
-        var hasher256 = SHA256()
-        sha256 = hashFile(path, &hasher256)
-        var hasher512 = SHA512()
-        sha512 = hashFile(path, &hasher512)
+        
     }
-}
-
-struct Repo: Codable {
-    var id = UUID()
-    var gitUrl: String
-    var email: String
-    var rsaKey: String
-    var rsaPub: String
 }
 
