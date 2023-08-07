@@ -16,10 +16,7 @@ struct FileS{
         let sha1 = hashs[1]
         let sha256 = hashs[2]
         let sha512 = hashs[3]
-        var f = File.find(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512)
-        if f == nil {
-            f = File(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512, blocks: "", state: 0)
-        }
+        var f = File.findOrAdd(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512)
         
     }
 }

@@ -28,6 +28,15 @@ struct File: Codable {
     var blocks: String
     var state: Int = File.State.none.rawValue
     
+    static func findOrAdd(size: Int64, md5: String, sha1: String, sha256: String, sha512: String) {
+        if let f = File.find(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512) {
+            return f
+        } else {
+            let f = File.add(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512, blocks: "", state: 0)
+            return f
+        }
+    }
+    
     func update() {
         try! FileDb.share.connect.run(File.files.filter(File.id == id).update(
             File.size <- size,
