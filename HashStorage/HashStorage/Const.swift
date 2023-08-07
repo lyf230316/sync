@@ -37,3 +37,5 @@ fi
 # Run the git command
 git "$@"
 """
+
+let splitSize = 64*1024*1024

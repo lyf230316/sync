@@ -110,3 +110,32 @@ func hashForFile(_ path: String) -> [String] {
     res.append(sha512.finalize().map { String(format: "%02hhx", $0) }.joined())
     return res
 }
+
+func splitFile(_ file: String, upBlk: (String) -> Bool) -> Bool {
+    let size = sizeOfFile(file)!
+    
+    let tmpDir = "/tmp/"+Bundle.main.bundleIdentifier!
+    let blockDir = tmpDir+"/Blocks"
+    if FileManager.default.fileExists(atPath: blockDir) {
+        try! FileManager.default.removeItem(atPath: blockDir)
+    }
+    
+    let task = Process()
+    task.executableURL = URL(string: "file:///bin/bash")
+    task.environment = [
+        "$PATH": "/Users/msi/radioconda/bin /Users/msi/radioconda/condabin /usr/local/go/bin /Users/msi/.cargo/bin /usr/local/bin /System/Cryptexes/App/usr/bin /usr/bin /bin /usr/sbin /sbin /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin /Library/Apple/usr/bin /Applications/VMware Fusion.app/Contents/Public"
+    ]
+    let shell = String(format: """
+cd %@
+split -b 32M -d -a 6 %@ split_block_
+""", blockDir, file)
+    let num = (size+32*1024*1024-1)/(32*1024*1024)
+    for i in 1 ... num {
+        let blkPath = blockDir+"/split_block_"+String(format: "%.6d", i)
+        let r = upBlk(blkPath)
+        if !r {
+            return false
+        }
+    }
+    return true
+}
