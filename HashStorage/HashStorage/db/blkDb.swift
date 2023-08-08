@@ -13,7 +13,7 @@ class BlkDb {
     var connect:Connection
     
     init() {
-        let path = execDir()+"/blkDb.sqlite"
+        let path = execDir()+"/db/blkDb.sqlite"
         connect = try! Connection(path)
     }
     
@@ -31,6 +31,13 @@ struct Block: Codable {
     var sha512: String
     var repo: Int64
     var state: Int
+}
+
+extension Block {
+    enum State: Int {
+        case none
+        case finish
+    }
 }
 
 extension Block {
@@ -68,6 +75,37 @@ extension Block {
         try! db.run(blks.createIndex(size,md5,sha1,sha256,sha512, unique: true, ifNotExists: true))
     }
     
+    static func findOrAdd(size: Int64, md5: String, sha1: String, sha256: String, sha512: String) -> Block {
+        if let blk = self.find(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512) {
+            return blk
+        }
+        var blk = Block(id: 0, size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512, repo: repo, state: state)
+        blk.id = self.insert(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512, repo: repo, state: state)
+        return blk
+    }
+    
+    static func find(size: Int64,md5: String,sha1: String, sha256: String, sha512: String) -> Block? {
+        let q = try! BlkDb.share.connect.prepareRowIterator(blks.where(
+            Block.size == size &&
+            Block.md5 == md5 &&
+            Block.sha1 == sha1 &&
+            Block.sha256 == sha256 &&
+            Block.sha512 == sha512
+        ))
+        if let row = q.next() {
+            var b = Block(id: try! row.get(Block.id),
+                          size: try! row.get(Block.size),
+                          md5: try! row.get(Block.md5),
+                          sha1: try! row.get(Block.sha1),
+                          sha256: try! row.get(Block.sha256),
+                          sha512: try! row.get(Block.sha512),
+                          repo: try! row.get(Block.repo),
+                          state: try! rog.get(Block.state))
+            return b
+        }
+        return nil
+    }
+    
     static func insert(size: Int64, md5: String, sha1: String, sha256: String, sha512: String, repo: Int64, state: Int) -> Block {
         let id = try! BlkDb.share.connect.run(blks.insert(
             Block.size <- size,
@@ -81,35 +119,15 @@ extension Block {
         return blk
     }
     
-    
-}
-
-struct Repo: Codable {
-    var id: Int64
-    var url: String
-    var email: String
-    var key: String
-    var keyPub: String
-}
-
-extension Repo {
-    static let repos = Table("repo")
-    static let id = Expression<Int64>("id")
-    static let url = Expression<Int64>("url")
-    static let email = Expression<Int64>("email")
-    static let key = Expression<Int64>("key")
-    static let keyPub = Expression<Int64>("keyPub")
-    
-    static func initTable(_ db: Connection) {
-        try! db.run(repos.create(ifNotExists: true, block: { tb in
-            tb.column(id, primaryKey: .autoincrement)
-            tb.column(url)
-            tb.column(email)
-            tb.column(key)
-            tb.column(keyPub)
-        }))
-        
-        try! db.run(repos.createIndex(url, ifNotExists: true))
-        try! db.run(repos.createIndex(email, ifNotExists: true))
+    func update() {
+        try! FileDb.share.connect.run(Block.blks.filter(Block.id == id).update(
+            Block.size <- size,
+            Block.md5 <- md5,
+            Block.sha1 <- sha1,
+            Block.sha256 <- sha256,
+            Block.sha512 <- sha512,
+            Block.repo <- repo,
+            Block.state <- state
+        ))
     }
 }

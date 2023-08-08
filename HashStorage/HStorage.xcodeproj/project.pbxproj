@@ -14,6 +14,8 @@
 		1C5AE1E62A7CC65900876D9D /* ToolFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED16C2A715AD70008871E /* ToolFunc.swift */; };
 		1C5AE1E72A7CC65900876D9D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED1732A7172F40008871E /* Const.swift */; };
 		1C5AE1E82A7CC65900876D9D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED1762A71D4C80008871E /* Storage.swift */; };
+		1C5AE1F02A81CFBB00876D9D /* repoDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE1EF2A81CFBB00876D9D /* repoDb.swift */; };
+		1C5AE1F12A81CFBB00876D9D /* repoDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE1EF2A81CFBB00876D9D /* repoDb.swift */; };
 		6E9ED1642A7159F50008871E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED1632A7159F50008871E /* main.swift */; };
 		6E9ED16B2A715A200008871E /* HSFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED16A2A715A200008871E /* HSFile.swift */; };
 		6E9ED16D2A715AD70008871E /* ToolFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ED16C2A715AD70008871E /* ToolFunc.swift */; };
@@ -121,6 +123,7 @@
 		1C5AE1D72A7CC29E00876D9D /* HStorageTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HStorageTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C5AE1D92A7CC29E00876D9D /* HashStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashStorageTest.swift; sourceTree = "<group>"; };
 		1C5AE1E02A7CC59600876D9D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		1C5AE1EF2A81CFBB00876D9D /* repoDb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = repoDb.swift; sourceTree = "<group>"; };
 		6E9ED1602A7159F50008871E /* HStorage */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HStorage; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E9ED1632A7159F50008871E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6E9ED16A2A715A200008871E /* HSFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSFile.swift; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 			children = (
 				6EDF4C5D2A7E0D0800626979 /* blkDb.swift */,
 				6ED936E62A7F486500028189 /* fileDb.swift */,
+				1C5AE1EF2A81CFBB00876D9D /* repoDb.swift */,
 			);
 			path = db;
 			sourceTree = "<group>";
@@ -384,6 +388,7 @@
 				1C5AE1E62A7CC65900876D9D /* ToolFunc.swift in Sources */,
 				1C5AE1E72A7CC65900876D9D /* Const.swift in Sources */,
 				1C5AE1E82A7CC65900876D9D /* Storage.swift in Sources */,
+				1C5AE1F12A81CFBB00876D9D /* repoDb.swift in Sources */,
 				6ED936E82A7F486500028189 /* fileDb.swift in Sources */,
 				1C5AE1DA2A7CC29E00876D9D /* HashStorageTest.swift in Sources */,
 				6EDF4C5F2A7E0D0800626979 /* blkDb.swift in Sources */,
@@ -397,6 +402,7 @@
 				6E9ED16B2A715A200008871E /* HSFile.swift in Sources */,
 				6E9ED1742A7172F40008871E /* Const.swift in Sources */,
 				6E9ED16D2A715AD70008871E /* ToolFunc.swift in Sources */,
+				1C5AE1F02A81CFBB00876D9D /* repoDb.swift in Sources */,
 				6EDF4C5E2A7E0D0800626979 /* blkDb.swift in Sources */,
 				6ED936E72A7F486500028189 /* fileDb.swift in Sources */,
 				6E9ED1642A7159F50008871E /* main.swift in Sources */,

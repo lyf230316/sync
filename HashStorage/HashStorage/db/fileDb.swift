@@ -12,7 +12,7 @@ struct FileDb {
     static let share = FileDb()
     var connect:Connection
     init() {
-        let path = execDir()+"/blkDb.sqlite"
+        let path = execDir()+"/db/fileDb.sqlite"
         connect = try! Connection(path)
         File.initTable(connect)
     }

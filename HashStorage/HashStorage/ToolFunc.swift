@@ -113,8 +113,6 @@ func hashForFile(_ path: String) -> [String] {
 
 func splitFile(_ file: String, upBlk: (String) -> Bool) -> Bool {
     let size = sizeOfFile(file)!
-    
-    let tmpDir = "/tmp/"+Bundle.main.bundleIdentifier!
     let blockDir = tmpDir+"/Blocks"
     if FileManager.default.fileExists(atPath: blockDir) {
         try! FileManager.default.removeItem(atPath: blockDir)

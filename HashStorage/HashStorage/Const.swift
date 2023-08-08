@@ -38,4 +38,4 @@ fi
 git "$@"
 """
 
-let splitSize = 64*1024*1024
+let tmpDir = "/tmp/"+Bundle.main.bundleIdentifier!
