@@ -27,9 +27,9 @@ struct FileS{
             }
         }
         if r {
-            f.blks = blockIdArray.map({ i in
+            f.blocks = blockIdArray.map({ i in
                 String(i)
-            }).joined(",")
+            }).joined(separator: ",")
             f.state = File.State.finish.rawValue
             f.update()
             return true
@@ -45,20 +45,21 @@ struct FileS{
         let sha1 = hashs[1]
         let sha256 = hashs[2]
         let sha512 = hashs[3]
-        var block = Block.findOrAdd(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512)
-        if block.state == Block.State.finish.rawValue {
-            return block
-        }
         guard let repo = Repo.findEnable() else {
             abort()
         }
+        var block = Block.findOrAdd(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512,repo: repo.id)
+        if block.state == Block.State.finish.rawValue {
+            return block
+        }
+        
         let tmpDir = "/tmp/"+Bundle.main.bundleIdentifier!
         let gitDir = tmpDir+"/gitDir"
         let keyPath = tmpDir+"/key"
-        repo.key.write(toFile: keyPath, atomically: true, encoding: .utf8)
+        try! repo.key.write(toFile: keyPath, atomically: true, encoding: .utf8)
         let r = Storage.upload(wd: gitDir, file: file, keyPath: keyPath, repo: repo.url, branch: sha1, commit: sha512)
         if r {
-            block.state = Block.state.finish.rawValue
+            block.state = Block.State.finish.rawValue
             block.update()
             return block
         } else {

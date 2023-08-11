@@ -7,3 +7,5 @@ DerivedData/
 .swiftpm/config/registries.json
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
+Qt/build-demo001-Qt_6_6_0_for_macOS-Debug/.qtc_clangd/.cache
+Qt/build-demo001-Qt_6_6_0_for_macOS-Debug

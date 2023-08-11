@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SQLite
 
 struct RepoDb {
     static let share = RepoDb()
@@ -29,10 +30,10 @@ struct Repo: Codable {
 extension Repo {
     static let repos = Table("repo")
     static let id = Expression<Int64>("id")
-    static let url = Expression<Int64>("url")
-    static let email = Expression<Int64>("email")
-    static let key = Expression<Int64>("key")
-    static let keyPub = Expression<Int64>("keyPub")
+    static let url = Expression<String>("url")
+    static let email = Expression<String>("email")
+    static let key = Expression<String>("key")
+    static let keyPub = Expression<String>("keyPub")
     static let state = Expression<Int>("state")
     
     static func initTable(_ db: Connection) {
