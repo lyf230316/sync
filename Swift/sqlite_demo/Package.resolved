@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "loggerapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Kitura/LoggerAPI.git",
+      "state" : {
+        "revision" : "e82d34eab3f0b05391082b11ea07d3b70d2f65bb",
+        "version" : "1.9.200"
+      }
+    },
+    {
+      "identity" : "swift-kuery",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Kitura/Swift-Kuery.git",
+      "state" : {
+        "revision" : "94f04e06160e054a31d67cc0c93829fe51002f96",
+        "version" : "3.0.200"
+      }
+    },
+    {
+      "identity" : "swift-kuery-sqlite",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/IBM-Swift/Swift-Kuery-SQLite.git",
+      "state" : {
+        "revision" : "b4ce5facb900c0b9e0929419f3a750aded289ce8",
+        "version" : "2.0.201"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "32e8d724467f8fe623624570367e3d50c5638e46",
+        "version" : "1.5.2"
+      }
+    }
+  ],
+  "version" : 2
+}

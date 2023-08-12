@@ -19,7 +19,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
-//    [self pasteboardAop];
+    [self pasteboardAop];
 
 }
 
