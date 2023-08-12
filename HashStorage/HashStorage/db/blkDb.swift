@@ -75,12 +75,11 @@ extension Block {
         try! db.run(blks.createIndex(size,md5,sha1,sha256,sha512, unique: true, ifNotExists: true))
     }
     
-    static func findOrAdd(size: Int64, md5: String, sha1: String, sha256: String, sha512: String) -> Block {
+    static func findOrAdd(size: Int64, md5: String, sha1: String, sha256: String, sha512: String, repo: Int64) -> Block {
         if let blk = self.find(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512) {
             return blk
         }
-        var blk = Block(id: 0, size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512, repo: repo, state: state)
-        blk.id = self.insert(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512, repo: repo, state: state)
+        var blk = self.insert(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512, repo: repo, state: 0)
         return blk
     }
     
@@ -100,7 +99,7 @@ extension Block {
                           sha256: try! row.get(Block.sha256),
                           sha512: try! row.get(Block.sha512),
                           repo: try! row.get(Block.repo),
-                          state: try! rog.get(Block.state))
+                          state: try! row.get(Block.state))
             return b
         }
         return nil

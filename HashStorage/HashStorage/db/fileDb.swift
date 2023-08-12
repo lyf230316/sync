@@ -28,7 +28,7 @@ struct File: Codable {
     var blocks: String
     var state: Int = File.State.none.rawValue
     
-    static func findOrAdd(size: Int64, md5: String, sha1: String, sha256: String, sha512: String) {
+    static func findOrAdd(size: Int64, md5: String, sha1: String, sha256: String, sha512: String) -> File {
         if let f = File.find(size: size, md5: md5, sha1: sha1, sha256: sha256, sha512: sha512) {
             return f
         } else {
