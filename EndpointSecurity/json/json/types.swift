@@ -145,8 +145,6 @@ struct Enum {
         }
         print("}\n")
     }
-    
-    
 }
 
 struct Typedef {

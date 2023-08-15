@@ -20,7 +20,21 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
     [self pasteboardAop];
-
+//    NSPasteboard *board = NSPasteboard.generalPasteboard;
+//    NSLog(@"%d",[board clearContents]);
+//    [board setString:@"abcd" forType:@"abc"];
+//    NSLog(@"%@", [board stringForType:NSPasteboardTypeString]);
+//    NSLog(@"%@", [board stringForType:@"abc"]);
+//
+//    NSLog(@"======================");
+//    for (NSPasteboardItem * item in board.pasteboardItems) {
+//        for (NSString *type in item.types) {
+//            NSLog(@"%@ --->  %@",type, [item stringForType:type]);
+//            NSLog(@"%@ --->  %@",type, [item dataForType:type]);
+//            NSLog(@"%@ --->  %@",type, [item propertyListForType:type]);
+//        }
+//    }
+//    NSLog(@"======================");
 }
 
 
