@@ -6,13 +6,13 @@ import PackageDescription
 let package = Package(
     name: "sqlite_demo",
     dependencies: [
-        .package(url: "https://github.com/IBM-Swift/Swift-Kuery-SQLite.git", from: "2.0.1")
+        .package(url: "https://github.com/IBM-Swift/Swift-Kuery-SQLite.git", from: "2.0.0")
     ],
     targets: [
         .executableTarget(
             name: "sqlite_demo",
             dependencies: [
-                "SwiftKuerySQLite"
+                .product(name: "SwiftKuerySQLite", package: "Swift-Kuery-SQLite")
             ]),
         .testTarget(
             name: "sqlite_demoTests",
