@@ -145,7 +145,7 @@ extension Struct {
         }
         var type = type
         var pointer = false
-        if type.contains(" * ") {
+        if type.contains(" *") {
             type = String(type.split(separator: " * ").first!)
             pointer = true
         }

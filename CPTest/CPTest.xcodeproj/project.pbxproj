@@ -11,6 +11,7 @@
 		1C4E83BC2A8626BF0069A726 /* NSPasteboard+Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4E83BB2A8626BF0069A726 /* NSPasteboard+Info.m */; };
 		1C5AE1D22A7B972A00876D9D /* libSystem.B.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C5AE1D12A7B972A00876D9D /* libSystem.B.tbd */; };
 		1C6A03412A7B3ED700E4EE56 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C6A03402A7B3ED700E4EE56 /* fishhook.c */; };
+		1C9673B32A8B7A4A00CF056C /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C9673B22A8B7A4A00CF056C /* Util.m */; };
 		6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4A2A69538100DC2C72 /* AppDelegate.m */; };
 		6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4D2A69538100DC2C72 /* ViewController.m */; };
 		6E37CD502A69538200DC2C72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E37CD4F2A69538200DC2C72 /* Assets.xcassets */; };
@@ -46,6 +47,8 @@
 		1C5AE1D12A7B972A00876D9D /* libSystem.B.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libSystem.B.tbd; path = usr/lib/libSystem.B.tbd; sourceTree = SDKROOT; };
 		1C6A033F2A7B3ED700E4EE56 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
 		1C6A03402A7B3ED700E4EE56 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
+		1C9673B12A8B7A4A00CF056C /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		1C9673B22A8B7A4A00CF056C /* Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		6E37CD462A69538100DC2C72 /* CPTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E37CD492A69538100DC2C72 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E37CD4A2A69538100DC2C72 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 				6E37CD562A69538200DC2C72 /* CPTest.entitlements */,
 				1C4E83BA2A8626BF0069A726 /* NSPasteboard+Info.h */,
 				1C4E83BB2A8626BF0069A726 /* NSPasteboard+Info.m */,
+				1C9673B12A8B7A4A00CF056C /* Util.h */,
+				1C9673B22A8B7A4A00CF056C /* Util.m */,
 			);
 			path = CPTest;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				6E37CD552A69538200DC2C72 /* main.m in Sources */,
 				1C4E83BC2A8626BF0069A726 /* NSPasteboard+Info.m in Sources */,
 				6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */,
+				1C9673B32A8B7A4A00CF056C /* Util.m in Sources */,
 				6E37CD802A696B2E00DC2C72 /* Aspects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

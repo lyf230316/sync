@@ -118,7 +118,7 @@
 - (es_return_t)mutedProcessesEvents:(NSArray **)mutedProcesses {
     es_muted_processes_t *_muted_processes = NULL;
     es_return_t rc = es_muted_processes_events(client, &_muted_processes);
-    
+    return rc;
 }
 
 OS_EXPORT
