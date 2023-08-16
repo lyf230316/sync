@@ -41,13 +41,12 @@ void rebind_xpc_connection_create(void) {
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
+        rebind_xpc_connection_create();
         
+        NSString *t = @"a";
+        NSString *sub = [t substringToIndex:t.length];
+        NSLog(@"%@", sub);
+        
+        return NSApplicationMain(argc, argv);
     }
-    rebind_xpc_connection_create();
-    
-    NSString *t = @"a";
-    NSString *sub = [t substringToIndex:t.length];
-    NSLog(@"%@", sub);
-    
-    return NSApplicationMain(argc, argv);
 }

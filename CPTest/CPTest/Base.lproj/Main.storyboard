@@ -817,6 +817,16 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ghe-iS-IAm">
+                                <rect key="frame" x="394" y="474" width="73" height="32"/>
+                                <buttonCell key="cell" type="push" title="export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wVE-ib-rCu">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="export:" target="XfG-lQ-9wD" id="7A5-o6-gsL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="h9K-b0-1oD" firstAttribute="top" secondItem="0Kd-Ux-DKS" secondAttribute="bottom" constant="8" symbolic="YES" id="32n-zM-zP8"/>
@@ -840,11 +850,13 @@
                             <constraint firstAttribute="trailing" secondItem="e43-Dd-Z2R" secondAttribute="trailing" constant="20" symbolic="YES" id="Y19-nV-0HT"/>
                             <constraint firstItem="GWR-30-S0J" firstAttribute="top" secondItem="e43-Dd-Z2R" secondAttribute="bottom" constant="8" symbolic="YES" id="ZPl-R5-mEP"/>
                             <constraint firstAttribute="trailing" secondItem="0Kd-Ux-DKS" secondAttribute="trailing" constant="20" symbolic="YES" id="aSc-Hc-AHI"/>
+                            <constraint firstItem="ghe-iS-IAm" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="alB-NQ-Ptz"/>
                             <constraint firstItem="GWR-30-S0J" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="dgW-Ex-T1f"/>
                             <constraint firstItem="TEe-7H-eWN" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="drS-fP-KgC"/>
                             <constraint firstAttribute="bottom" secondItem="GWR-30-S0J" secondAttribute="bottom" constant="20" symbolic="YES" id="fhT-gO-9kf"/>
                             <constraint firstAttribute="trailing" secondItem="H7o-eQ-8Ca" secondAttribute="trailing" constant="20" symbolic="YES" id="hCU-UG-heW"/>
                             <constraint firstItem="bDO-Zd-6Qb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="hhn-as-v6a"/>
+                            <constraint firstAttribute="trailing" secondItem="ghe-iS-IAm" secondAttribute="trailing" constant="20" symbolic="YES" id="iDO-pu-FLz"/>
                             <constraint firstItem="TEe-7H-eWN" firstAttribute="top" secondItem="Bcl-bD-qD2" secondAttribute="bottom" constant="8" symbolic="YES" id="nAW-CS-aRN"/>
                             <constraint firstAttribute="trailing" secondItem="h9K-b0-1oD" secondAttribute="trailing" constant="20" symbolic="YES" id="nEx-tC-Hzx"/>
                             <constraint firstItem="ddq-8H-79I" firstAttribute="top" secondItem="h9K-b0-1oD" secondAttribute="bottom" constant="8" symbolic="YES" id="p05-YG-B3j"/>

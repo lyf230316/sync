@@ -19,7 +19,10 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
-    [self pasteboardAop];
+    NSPasteboard *board = NSPasteboard.generalPasteboard;
+    [board addObserver:self forKeyPath:@"" options:NSKeyValueObservingOptionNew context:nil];
+    
+//    [self pasteboardAop];
 //    NSPasteboard *board = NSPasteboard.generalPasteboard;
 //    NSLog(@"%d",[board clearContents]);
 //    [board setString:@"abcd" forType:@"abc"];
@@ -52,7 +55,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_typesAtIndex:combinesItems:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _typesAtIndex:combinesItems:]",item);
         NSLog(@"%@",arguments);
@@ -60,7 +63,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_updateTypeCacheIfNeeded") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _updateTypeCacheIfNeeded]",item);
         NSLog(@"%@",arguments);
@@ -68,7 +71,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"name") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  name]",item);
         NSLog(@"%@",arguments);
@@ -76,7 +79,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"availableTypeFromArray:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  availableTypeFromArray:]",item);
         NSLog(@"%@",arguments);
@@ -84,7 +87,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_availableTypeFromArray:inExistingTypes:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _availableTypeFromArray:inExistingTypes:]",item);
         NSLog(@"%@",arguments);
@@ -92,7 +95,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"clearContents") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  clearContents]",item);
         NSLog(@"%@",arguments);
@@ -106,7 +109,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"setPropertyList:forType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  setPropertyList:forType:]",item);
         NSLog(@"%@",arguments);
@@ -114,21 +117,21 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"setData:forType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         NSLog(@"[%@  setData:forType:]",item);
         NSLog(@"%@",arguments);
     } error:&error];
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_setData:forType:index:usesPboardTypes:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         NSLog(@"[%@  _setData:forType:index:usesPboardTypes:]",item);
         NSLog(@"%@",arguments);
     } error:&error];
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"writeObjects:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  writeObjects:]",item);
         NSLog(@"%@",arguments);
@@ -136,14 +139,14 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_setOwner:forTypes:atIndex:selector:usesPboardTypes:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         NSLog(@"[%@  _setOwner:forTypes:atIndex:selector:usesPboardTypes:]",item);
         NSLog(@"%@",arguments);
     } error:&error];
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_pasteboardItems") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _pasteboardItems]",item);
         NSLog(@"%@",arguments);
@@ -151,7 +154,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"propertyListForType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  propertyListForType:]",item);
         NSLog(@"%@",arguments);
@@ -159,7 +162,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"dataForType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  dataForType:]",item);
         NSLog(@"%@",arguments);
@@ -167,7 +170,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_canRequestDataForType:index:usesPboardTypes:combinesItems:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _canRequestDataForType:index:usesPboardTypes:combinesItems:]",item);
         NSLog(@"%@",arguments);
@@ -175,7 +178,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_combinedPasteboardDataForTypeIdentifier:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _combinedPasteboardDataForTypeIdentifier:]",item);
         NSLog(@"%@",arguments);
@@ -183,20 +186,20 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"addTypes:owner:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         NSLog(@"%@",arguments);
     } error:&error];
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"setString:forType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         NSLog(@"[%@  setString:forType:]",item);
         NSLog(@"%@",arguments);
     } error:&error];
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_cachedTypeNameUnion") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _cachedTypeNameUnion]",item);
         NSLog(@"%@",arguments);
@@ -204,7 +207,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_currentGeneration") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _currentGeneration]",item);
         NSLog(@"%@",arguments);
@@ -212,7 +215,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_promiseTypeNameForIdentifier:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _promiseTypeNameForIdentifier:]",item);
         NSLog(@"%@",arguments);
@@ -220,14 +223,14 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_cfPasteboard") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         NSLog(@"[%@  _cfPasteboard]",item);
         NSLog(@"%@",arguments);
     } error:&error];
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"dealloc") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  dealloc]",item);
         NSLog(@"%@",arguments);
@@ -235,7 +238,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_clearOutstandingPromises") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _clearOutstandingPromises]",item);
         NSLog(@"%@",arguments);
@@ -243,7 +246,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_removeFromGlobalTable") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _removeFromGlobalTable]",item);
         NSLog(@"%@",arguments);
@@ -251,7 +254,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"releaseGlobally") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  releaseGlobally]",item);
         NSLog(@"%@",arguments);
@@ -259,7 +262,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_setExpirationDate:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _setExpirationDate:]",item);
         NSLog(@"%@",arguments);
@@ -267,7 +270,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_dataWithoutConversionForTypeIdentifier:index:securityScoped:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _dataWithoutConversionForTypeIdentifier:index:securityScoped:]",item);
         NSLog(@"%@",arguments);
@@ -275,7 +278,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_dataWithoutConversionForTypeIdentifier:securityScoped:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _dataWithoutConversionForTypeIdentifier:securityScoped:]",item);
         NSLog(@"%@",arguments);
@@ -283,7 +286,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_attachSecurityScopeToURL:index:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _attachSecurityScopeToURL:index:]",item);
         NSLog(@"%@",arguments);
@@ -291,7 +294,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_dataForType:index:usesPboardTypes:combinesItems:securityScoped:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _dataForType:index:usesPboardTypes:combinesItems:securityScoped:]",item);
         NSLog(@"%@",arguments);
@@ -299,7 +302,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_dataWithoutConversionForType:securityScoped:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _dataWithoutConversionForType:securityScoped:]",item);
         NSLog(@"%@",arguments);
@@ -307,7 +310,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"prepareForNewContentsWithOptions:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  prepareForNewContentsWithOptions:]",item);
         NSLog(@"%@",arguments);
@@ -315,7 +318,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_contentsOfURL:conformToTypeIdentifiers:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _contentsOfURL:conformToTypeIdentifiers:]",item);
         NSLog(@"%@",arguments);
@@ -323,7 +326,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"readObjectsForClasses:options:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  readObjectsForClasses:options:]",item);
         NSLog(@"%@",arguments);
@@ -331,7 +334,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"pasteboardItems") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  pasteboardItems]",item);
         NSLog(@"%@",arguments);
@@ -339,7 +342,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"indexOfPasteboardItem:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  indexOfPasteboardItem:]",item);
         NSLog(@"%@",arguments);
@@ -347,7 +350,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_conformingTypeIdentifiers") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _conformingTypeIdentifiers]",item);
         NSLog(@"%@",arguments);
@@ -355,7 +358,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"canReadItemWithDataConformingToTypes:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  canReadItemWithDataConformingToTypes:]",item);
         NSLog(@"%@",arguments);
@@ -363,7 +366,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"canReadObjectForClasses:options:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  canReadObjectForClasses:options:]",item);
         NSLog(@"%@",arguments);
@@ -371,7 +374,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_dataForType:securityScoped:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _dataForType:securityScoped:]",item);
         NSLog(@"%@",arguments);
@@ -379,7 +382,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"setDataProvider:forTypes:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  setDataProvider:forTypes:]",item);
         NSLog(@"%@",arguments);
@@ -387,7 +390,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_propertyListForType:securityScoped:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  _propertyListForType:securityScoped:]",item);
         NSLog(@"%@",arguments);
@@ -395,7 +398,7 @@
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"stringForType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
-        NSInvocation *invoation = aspectInfo.originalInvocation;
+////        NSInvocation *invoation = aspectInfo.originalInvocation;
         
         NSLog(@"[%@  stringForType:]",item);
         NSLog(@"%@",arguments);

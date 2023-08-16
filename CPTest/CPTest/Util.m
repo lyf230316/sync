@@ -10,6 +10,20 @@
 
 @implementation Util
 
+static NSMutableSet *set;
+
++(void)add:(id)obj {
+    NSMutableSet *arr = [self globalArray];
+    [arr addObject:obj];
+}
+
++(NSMutableSet *)globalArray {
+    if (!set) {
+        set = [NSMutableSet set];
+    }
+    return set;
+}
+
 +(NSData*)hexToBytes:(NSString *)hex {
     NSMutableData* data = [NSMutableData data];
     unsigned int idx, intValue;
@@ -38,24 +52,21 @@
     return hexString;
 }
 
-+(NSString *)md5:(NSString *)str {
-    const char *cStr = [str UTF8String];
++(NSData*)data_md5:(NSData *)data {
+    const char *cStr = data.bytes;
     unsigned char digest[CC_MD5_DIGEST_LENGTH];
     CC_MD5( cStr, (uint32_t)strlen(cStr), digest );
-    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    
-    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x", digest[i]];
-    
-    return output;
+    NSData *dig = [NSData dataWithBytes:digest length:CC_MD5_DIGEST_LENGTH];
+    return dig;
 }
 
-+(NSString *)AESEncrypt:(NSString *)str key:(NSString *)enKey{
-    
-    NSString *md5Str = [self md5:enKey];
-    NSData *key = [self hexToBytes:md5Str];
-    NSData *content = [str dataUsingEncoding:NSUTF8StringEncoding];
-    
++(NSString *)md5:(NSString *)str {
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *digest = [self data_md5:data];
+    return [self parseByte2HexString:digest];
+}
+
++(NSData * )data_AESEncrypt:(NSData*)content key:(NSData *)key {
     size_t bufferSize = content.length + kCCBlockSizeAES128;
     void *buffer = malloc( bufferSize );
     size_t numBytesEncrypted = 0;
@@ -69,17 +80,24 @@
                      &numBytesEncrypted);
     if(result == kCCSuccess){
         NSData *data = [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
-        NSString *encStr = [self parseByte2HexString:data];
-        return encStr;
+        return data;
     }
-    return @"";
+    return nil;
 }
 
-+(NSString *)AESDecrypt:(NSString *)str key:(NSString *)deKey{
-    NSString *md5Str = [self md5:deKey];
++(NSString *)AESEncrypt:(NSString *)str key:(NSString *)enKey{
+    NSString *md5Str = [self md5:enKey];
     NSData *key = [self hexToBytes:md5Str];
-    NSData *content = [self hexToBytes:str];
-    
+    NSData *content = [str dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [self data_AESEncrypt:content key:key];
+    if (!data) {
+        return nil;
+    }
+    NSString *encStr = [self parseByte2HexString:data];
+    return encStr;
+}
+
++(NSData *)data_AESDecrypt:(NSData *)content key:(NSData *)key {
     size_t bufferSize = content.length + kCCBlockSizeAES128;
     void *buffer = malloc( bufferSize );
     size_t numBytesEncrypted = 0;
@@ -93,10 +111,21 @@
                      &numBytesEncrypted);
     if(result == kCCSuccess){
         NSData *data = [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
-        NSString *encStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];//parseByte2HexString(data);
-        return encStr;
+        return data;
     }
-    return @"";
+    return nil;
+}
+
++(NSString *)AESDecrypt:(NSString *)str key:(NSString *)deKey{
+    NSString *md5Str = [self md5:deKey];
+    NSData *key = [self hexToBytes:md5Str];
+    NSData *content = [self hexToBytes:str];
+    NSData *data = [self data_AESDecrypt:content key:key];
+    if (!data) {
+        return nil;
+    }
+    NSString *encStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return encStr;
 }
 
 @end
