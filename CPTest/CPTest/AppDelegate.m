@@ -20,9 +20,9 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
     NSPasteboard *board = NSPasteboard.generalPasteboard;
-    [board addObserver:self forKeyPath:@"" options:NSKeyValueObservingOptionNew context:nil];
     
-//    [self pasteboardAop];
+    [self pasteboardAop];
+    [self pasteboardItemAop];
 //    NSPasteboard *board = NSPasteboard.generalPasteboard;
 //    NSLog(@"%d",[board clearContents]);
 //    [board setString:@"abcd" forType:@"abc"];
@@ -220,13 +220,13 @@
         NSLog(@"[%@  _promiseTypeNameForIdentifier:]",item);
         NSLog(@"%@",arguments);
     } error:&error];
-    [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_cfPasteboard") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
-        NSMenuItem *item = aspectInfo.instance;
-        NSArray *arguments = aspectInfo.arguments;
-//        NSInvocation *invoation = aspectInfo.originalInvocation;
-        NSLog(@"[%@  _cfPasteboard]",item);
-        NSLog(@"%@",arguments);
-    } error:&error];
+//    [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"_cfPasteboard") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+//        NSMenuItem *item = aspectInfo.instance;
+//        NSArray *arguments = aspectInfo.arguments;
+////        NSInvocation *invoation = aspectInfo.originalInvocation;
+//        NSLog(@"[%@  _cfPasteboard]",item);
+//        NSLog(@"%@",arguments);
+//    } error:&error];
     [NSPasteboard aspect_hookSelector:NSSelectorFromString(@"dealloc") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
         NSMenuItem *item = aspectInfo.instance;
         NSArray *arguments = aspectInfo.arguments;
@@ -402,6 +402,101 @@
         
         NSLog(@"[%@  stringForType:]",item);
         NSLog(@"%@",arguments);
+    } error:&error];
+}
+
+-(void)pasteboardItemAop{
+    void(^aop)(id<AspectInfo> aspectInfo) = ^(id<AspectInfo> aspectInfo) {
+        NSMenuItem *item = aspectInfo.instance;
+        NSArray *arguments = aspectInfo.arguments;
+        NSLog(@"item:%@ \n arguments: %@\n ===================== \n",item,arguments);
+    };
+    
+    NSError * error = nil;
+    
+//    [$1 aspect_hookSelector:NSSelectorFromString(@"$2") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+//        NSLog(@"[$1 $2]");
+//        aop(aspectInfo);
+//    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"init") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem init]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"setString:forType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem setString:forType:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"setData:forType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem setData:forType:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"_auxObject") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem _auxObject]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"_pasteboard") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem _pasteboard]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"_index") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem _index]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"writableTypesForPasteboard:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem writableTypesForPasteboard:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"types") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem types]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"writingOptionsForType:pasteboard:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem writingOptionsForType:pasteboard:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"_dataProviderForType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem _dataProviderForType:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"pasteboardPropertyListForType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem pasteboardPropertyListForType:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"dataForType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem dataForType:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"_setPasteboard:index:generation:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem _setPasteboard:index:generation:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"dealloc") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem dealloc]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"availableTypeFromArray:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem availableTypeFromArray:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"setDataProvider:forTypes:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem setDataProvider:forTypes:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"setPropertyList:forType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem setPropertyList:forType:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"stringForType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem stringForType:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"propertyListForType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem propertyListForType:]");
+        aop(aspectInfo);
+    } error:&error];
+    [NSPasteboardItem aspect_hookSelector:NSSelectorFromString(@"initWithPasteboardPropertyList:ofType:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"[NSPasteboardItem initWithPasteboardPropertyList:ofType:]");
+        aop(aspectInfo);
     } error:&error];
 }
 

@@ -14,16 +14,16 @@
 @implementation NSPasteboard (Info)
 
 + (void)load {
-    method_exchangeImplementations(class_getInstanceMethod(self, @selector(setString:forType:)),
-                                   class_getInstanceMethod(self, @selector(ex_setString:forType:)));
-    method_exchangeImplementations(class_getInstanceMethod(self, @selector(readObjectsForClasses:options:)),
-                                   class_getInstanceMethod(self, @selector(ex_readObjectsForClasses:options:)));
-    method_exchangeImplementations(class_getInstanceMethod(self, @selector(stringForType:)),
-                                   class_getInstanceMethod(self, @selector(ex_stringForType:)));
-    method_exchangeImplementations(class_getInstanceMethod(self, @selector(setData:forType:)),
-                                   class_getInstanceMethod(self, @selector(ex_setData:forType:)));
-    method_exchangeImplementations(class_getInstanceMethod(self, @selector(dataForType:)),
-                                   class_getInstanceMethod(self, @selector(ex_dataForType:)));
+//    method_exchangeImplementations(class_getInstanceMethod(self, @selector(setString:forType:)),
+//                                   class_getInstanceMethod(self, @selector(ex_setString:forType:)));
+//    method_exchangeImplementations(class_getInstanceMethod(self, @selector(readObjectsForClasses:options:)),
+//                                   class_getInstanceMethod(self, @selector(ex_readObjectsForClasses:options:)));
+//    method_exchangeImplementations(class_getInstanceMethod(self, @selector(stringForType:)),
+//                                   class_getInstanceMethod(self, @selector(ex_stringForType:)));
+//    method_exchangeImplementations(class_getInstanceMethod(self, @selector(setData:forType:)),
+//                                   class_getInstanceMethod(self, @selector(ex_setData:forType:)));
+//    method_exchangeImplementations(class_getInstanceMethod(self, @selector(dataForType:)),
+//                                   class_getInstanceMethod(self, @selector(ex_dataForType:)));
 }
 
 - (BOOL)ex_setString:(NSString *)string forType:(NSPasteboardType)dataType {
@@ -35,13 +35,14 @@
 -(BOOL)ex_setData:(NSData *)data forType:(NSPasteboardType)dataType {
     [Util add:self];
     NSLog(@"ex_setData:%@ forType:%@",[data debugDescription],dataType);
-    return [self ex_setData:data forType:dataType];
+    return [self ex_setData:[self data_encrypt:data] forType:dataType];
 }
 
 - (NSData *)ex_dataForType:(NSPasteboardType)dataType {
     [Util add:self];
     NSLog(@"ex_dataForType:%@", dataType);
-    return [self ex_dataForType:dataType];
+    NSData *data = [self ex_dataForType:dataType];
+    return [self data_decrypt:data];
 }
 
 - (NSArray *)ex_readObjectsForClasses:(NSArray<Class> *)classArray options:(NSDictionary<NSPasteboardReadingOptionKey,id> *)options {
@@ -77,6 +78,31 @@
     [res appendData:msg];
     [res appendData:md5Aes];
     return res;
+}
+
+- (NSData *)data_decrypt:(NSData *)data {
+    if (data.length <= 32) {
+        return data;
+    }
+    NSData *key = [Util data_md5:[AESKEY dataUsingEncoding:NSUTF8StringEncoding]];
+    NSData *md5Aes = [NSData dataWithBytes:data.bytes+data.length-32 length:32];
+    NSData *md5 = [Util data_AESDecrypt:md5Aes key:key];
+    if (!md5) {
+        return data;
+    }
+    NSData *msg = [NSData dataWithBytes:data.bytes length:data.length-32];
+    NSData *msgMd5 = [Util data_md5:msg];
+    if (!msgMd5) {
+        return data;
+    }
+    if (![md5 isEqualToData:msgMd5]) {
+        return data;
+    }
+    NSData *omsg = [Util data_AESDecrypt:msg key:key];
+    if (!omsg) {
+        return data;
+    }
+    return omsg;
 }
 
 - (NSString *)Encrypt:(NSString *)string {
