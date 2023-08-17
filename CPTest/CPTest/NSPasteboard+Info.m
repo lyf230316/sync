@@ -20,8 +20,10 @@
 //                                   class_getInstanceMethod(self, @selector(ex_readObjectsForClasses:options:)));
 //    method_exchangeImplementations(class_getInstanceMethod(self, @selector(stringForType:)),
 //                                   class_getInstanceMethod(self, @selector(ex_stringForType:)));
-//    method_exchangeImplementations(class_getInstanceMethod(self, @selector(setData:forType:)),
-//                                   class_getInstanceMethod(self, @selector(ex_setData:forType:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(setData:forType:)),
+                                   class_getInstanceMethod(self, @selector(ex_setData:forType:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, NSSelectorFromString(@"_dataForType:index:usesPboardTypes:combinesItems:securityScoped:")),
+                                   class_getInstanceMethod(self, @selector(ex__dataForType:index:usesPboardTypes:combinesItems:securityScoped:)));
 //    method_exchangeImplementations(class_getInstanceMethod(self, @selector(dataForType:)),
 //                                   class_getInstanceMethod(self, @selector(ex_dataForType:)));
 }
@@ -36,6 +38,12 @@
     [Util add:self];
     NSLog(@"ex_setData:%@ forType:%@",[data debugDescription],dataType);
     return [self ex_setData:[self data_encrypt:data] forType:dataType];
+}
+
+-(NSData *)ex__dataForType:(NSString *)arg1 index:(unsigned long long)arg2 usesPboardTypes:(BOOL)arg3 combinesItems:(BOOL)arg4 securityScoped:(BOOL)arg5 {
+    NSData *res = [self ex__dataForType:arg1 index:arg2 usesPboardTypes:arg3 combinesItems:arg4 securityScoped:arg5];
+    res = [self data_decrypt:res];
+    return res;
 }
 
 - (NSData *)ex_dataForType:(NSPasteboardType)dataType {
@@ -74,33 +82,49 @@
     NSData *msg = [Util data_AESEncrypt:data key:key];
     NSData *md5 = [Util data_md5:msg];
     NSData *md5Aes = [Util data_AESEncrypt:md5 key:key];
+    NSLog(@"\ndata:%@\nkey:%@\nmsg:%@\nmd5:%@\nmd5aes:%@\n",
+          data.debugDescription,
+          key.debugDescription,
+          msg.debugDescription,
+          md5.debugDescription,
+          md5Aes.debugDescription
+          );
     NSMutableData *res = [NSMutableData data];
     [res appendData:msg];
     [res appendData:md5Aes];
-    return res;
+    NSString *bs = [Util parseByte2HexString:res];
+    return [bs dataUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (NSData *)data_decrypt:(NSData *)data {
+- (NSData *)data_decrypt:(NSData *)bsdata {
+    NSString *bs = [[NSString alloc]initWithData:bsdata encoding:NSUTF8StringEncoding];
+    if (!bs) {
+        return bsdata;
+    }
+    NSData *data = [Util hexToBytes:bs];
+    if (!data) {
+        return bsdata;
+    }
     if (data.length <= 32) {
-        return data;
+        return bsdata;
     }
     NSData *key = [Util data_md5:[AESKEY dataUsingEncoding:NSUTF8StringEncoding]];
     NSData *md5Aes = [NSData dataWithBytes:data.bytes+data.length-32 length:32];
     NSData *md5 = [Util data_AESDecrypt:md5Aes key:key];
     if (!md5) {
-        return data;
+        return bsdata;
     }
     NSData *msg = [NSData dataWithBytes:data.bytes length:data.length-32];
     NSData *msgMd5 = [Util data_md5:msg];
     if (!msgMd5) {
-        return data;
+        return bsdata;
     }
     if (![md5 isEqualToData:msgMd5]) {
-        return data;
+        return bsdata;
     }
     NSData *omsg = [Util data_AESDecrypt:msg key:key];
     if (!omsg) {
-        return data;
+        return bsdata;
     }
     return omsg;
 }
