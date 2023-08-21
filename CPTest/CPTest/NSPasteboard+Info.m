@@ -14,24 +14,10 @@
 @implementation NSPasteboard (Info)
 
 + (void)load {
-//    method_exchangeImplementations(class_getInstanceMethod(self, @selector(setString:forType:)),
-//                                   class_getInstanceMethod(self, @selector(ex_setString:forType:)));
-//    method_exchangeImplementations(class_getInstanceMethod(self, @selector(readObjectsForClasses:options:)),
-//                                   class_getInstanceMethod(self, @selector(ex_readObjectsForClasses:options:)));
-//    method_exchangeImplementations(class_getInstanceMethod(self, @selector(stringForType:)),
-//                                   class_getInstanceMethod(self, @selector(ex_stringForType:)));
     method_exchangeImplementations(class_getInstanceMethod(self, @selector(setData:forType:)),
                                    class_getInstanceMethod(self, @selector(ex_setData:forType:)));
     method_exchangeImplementations(class_getInstanceMethod(self, NSSelectorFromString(@"_dataForType:index:usesPboardTypes:combinesItems:securityScoped:")),
                                    class_getInstanceMethod(self, @selector(ex__dataForType:index:usesPboardTypes:combinesItems:securityScoped:)));
-//    method_exchangeImplementations(class_getInstanceMethod(self, @selector(dataForType:)),
-//                                   class_getInstanceMethod(self, @selector(ex_dataForType:)));
-}
-
-- (BOOL)ex_setString:(NSString *)string forType:(NSPasteboardType)dataType {
-    [Util add:self];
-    NSLog(@"ex_setString:%@ forType:%@",string,dataType);
-    return [self ex_setString:[self Encrypt:string] forType:dataType];
 }
 
 -(BOOL)ex_setData:(NSData *)data forType:(NSPasteboardType)dataType {
@@ -44,35 +30,6 @@
     NSData *res = [self ex__dataForType:arg1 index:arg2 usesPboardTypes:arg3 combinesItems:arg4 securityScoped:arg5];
     res = [self data_decrypt:res];
     return res;
-}
-
-- (NSData *)ex_dataForType:(NSPasteboardType)dataType {
-    [Util add:self];
-    NSLog(@"ex_dataForType:%@", dataType);
-    NSData *data = [self ex_dataForType:dataType];
-    return [self data_decrypt:data];
-}
-
-- (NSArray *)ex_readObjectsForClasses:(NSArray<Class> *)classArray options:(NSDictionary<NSPasteboardReadingOptionKey,id> *)options {
-    [Util add:self];
-    NSLog(@"ex_readObjectsForClasses:%@  options:%@", classArray, options);
-    NSArray *res = [self ex_readObjectsForClasses:classArray options:options];
-    NSMutableArray *mres = [NSMutableArray array];
-    for (id item in res) {
-        if ([item isKindOfClass:[NSString class]]) {
-            [mres addObject:[self Decrypt:item]];
-        } else {
-            [mres addObject:item];
-        }
-    }
-    return mres;
-}
-
-- (NSString *)ex_stringForType:(NSPasteboardType)dataType {
-    [Util add:self];
-    NSLog(@"ex_stringForType:%@", dataType);
-    NSString *res = [self ex_stringForType:dataType];
-    return [self Decrypt:res];
 }
 
 #pragma mark - 加密解密
