@@ -1,5 +1,5 @@
 //
-//  NSPasteboard+Info.h
+//  NSPasteboard+Crypto.h
 //  CPTest
 //
 //  Created by lyf on 2023/8/11.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSPasteboard (Info)
+@interface NSPasteboard (Crypto)
 
 @end
 

@@ -19,11 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.webView.UIDelegate = self;
-    self.webView.navigationDelegate = self;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://cn.bing.com"]]];
-    
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear {
+    [super viewDidAppear];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://cn.bing.com"]]];
 }
 
 

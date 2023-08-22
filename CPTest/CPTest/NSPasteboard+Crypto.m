@@ -1,17 +1,17 @@
 //
-//  NSPasteboard+Info.m
+//  NSPasteboard+Crypto.m
 //  CPTest
 //
 //  Created by lyf on 2023/8/11.
 //
 
-#import "NSPasteboard+Info.h"
+#import "NSPasteboard+Crypto.h"
 #import <objc/runtime.h>
 #import <CommonCrypto/CommonCrypto.h>
 
 #define AESKEY @"aesKey"
 
-@implementation NSPasteboard (Info)
+@implementation NSPasteboard (Crypto)
 
 + (void)load {
     method_exchangeImplementations(class_getInstanceMethod(self, @selector(setData:forType:)),
@@ -21,12 +21,19 @@
 }
 
 -(BOOL)ex_setData:(NSData *)data forType:(NSPasteboardType)dataType {
-    NSLog(@"ex_setData:%@ forType:%@",[data debugDescription],dataType);
+    NSLog(@"\n[NSPasteboard ex_setData:%@ forType:%@]",[data debugDescription],dataType);
     return [self ex_setData:[NSPasteboard data_encrypt:data] forType:dataType];
 }
 
 -(NSData *)ex__dataForType:(NSString *)type index:(unsigned long long)index usesPboardTypes:(BOOL)usesPboardTypes combinesItems:(BOOL)combinesItems securityScoped:(BOOL)securityScoped {
     NSData *res = [self ex__dataForType:type index:index usesPboardTypes:usesPboardTypes combinesItems:combinesItems securityScoped:securityScoped];
+    NSLog(@"\n[NSPasteboard ex__dataForType:%@ index:%@ usesPboardTypes:%@ combinesItems:%@ securityScoped:%@] ---> %@",
+          type,
+          @(index),
+          @(usesPboardTypes),
+          @(combinesItems),
+          @(securityScoped),
+          res.debugDescription);
     res = [NSPasteboard data_decrypt:res];
     return res;
 }
@@ -47,13 +54,13 @@
     NSData *msg = [NSPasteboard data_AESEncrypt:data key:key];
     NSData *md5 = [NSPasteboard data_md5:msg];
     NSData *md5Aes = [NSPasteboard data_AESEncrypt:md5 key:key];
-    NSLog(@"\ndata:%@\nkey:%@\nmsg:%@\nmd5:%@\nmd5aes:%@\n",
-          data.debugDescription,
-          key.debugDescription,
-          msg.debugDescription,
-          md5.debugDescription,
-          md5Aes.debugDescription
-          );
+//    NSLog(@"\ndata:%@\nkey:%@\nmsg:%@\nmd5:%@\nmd5aes:%@\n",
+//          data.debugDescription,
+//          key.debugDescription,
+//          msg.debugDescription,
+//          md5.debugDescription,
+//          md5Aes.debugDescription
+//          );
     NSMutableData *res = [NSMutableData data];
     [res appendData:msg];
     [res appendData:md5Aes];
@@ -95,7 +102,7 @@
     unsigned char digest[CC_MD5_DIGEST_LENGTH] = {0};
     CC_MD5( cStr, (CC_LONG)data.length, digest );
     NSData *dig = [NSData dataWithBytes:digest length:CC_MD5_DIGEST_LENGTH];
-    NSLog(@"md5:%@ --> %@",data.debugDescription,dig.debugDescription);
+//    NSLog(@"md5:%@ --> %@",data.debugDescription,dig.debugDescription);
     return dig;
 }
 

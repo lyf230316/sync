@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C4E83B92A8612120069A726 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4E83B82A8612120069A726 /* WebKit.framework */; };
-		1C4E83BC2A8626BF0069A726 /* NSPasteboard+Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4E83BB2A8626BF0069A726 /* NSPasteboard+Info.m */; };
+		1C4E83BC2A8626BF0069A726 /* NSPasteboard+Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4E83BB2A8626BF0069A726 /* NSPasteboard+Crypto.m */; };
 		1C5AE1D22A7B972A00876D9D /* libSystem.B.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C5AE1D12A7B972A00876D9D /* libSystem.B.tbd */; };
 		1C9673B32A8B7A4A00CF056C /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C9673B22A8B7A4A00CF056C /* Util.m */; };
 		6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4A2A69538100DC2C72 /* AppDelegate.m */; };
@@ -40,8 +40,8 @@
 
 /* Begin PBXFileReference section */
 		1C4E83B82A8612120069A726 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		1C4E83BA2A8626BF0069A726 /* NSPasteboard+Info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPasteboard+Info.h"; sourceTree = "<group>"; };
-		1C4E83BB2A8626BF0069A726 /* NSPasteboard+Info.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSPasteboard+Info.m"; sourceTree = "<group>"; };
+		1C4E83BA2A8626BF0069A726 /* NSPasteboard+Crypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPasteboard+Crypto.h"; sourceTree = "<group>"; };
+		1C4E83BB2A8626BF0069A726 /* NSPasteboard+Crypto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSPasteboard+Crypto.m"; sourceTree = "<group>"; };
 		1C5AE1D12A7B972A00876D9D /* libSystem.B.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libSystem.B.tbd; path = usr/lib/libSystem.B.tbd; sourceTree = SDKROOT; };
 		1C9673B12A8B7A4A00CF056C /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		1C9673B22A8B7A4A00CF056C /* Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
@@ -129,8 +129,8 @@
 				6E37CD512A69538200DC2C72 /* Main.storyboard */,
 				6E37CD542A69538200DC2C72 /* main.m */,
 				6E37CD562A69538200DC2C72 /* CPTest.entitlements */,
-				1C4E83BA2A8626BF0069A726 /* NSPasteboard+Info.h */,
-				1C4E83BB2A8626BF0069A726 /* NSPasteboard+Info.m */,
+				1C4E83BA2A8626BF0069A726 /* NSPasteboard+Crypto.h */,
+				1C4E83BB2A8626BF0069A726 /* NSPasteboard+Crypto.m */,
 				1C9673B12A8B7A4A00CF056C /* Util.h */,
 				1C9673B22A8B7A4A00CF056C /* Util.m */,
 			);
@@ -285,7 +285,7 @@
 			files = (
 				6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */,
 				6E37CD552A69538200DC2C72 /* main.m in Sources */,
-				1C4E83BC2A8626BF0069A726 /* NSPasteboard+Info.m in Sources */,
+				1C4E83BC2A8626BF0069A726 /* NSPasteboard+Crypto.m in Sources */,
 				6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */,
 				1C9673B32A8B7A4A00CF056C /* Util.m in Sources */,
 			);
