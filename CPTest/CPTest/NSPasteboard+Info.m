@@ -7,7 +7,7 @@
 
 #import "NSPasteboard+Info.h"
 #import <objc/runtime.h>
-#import "Util.h"
+#import <CommonCrypto/CommonCrypto.h>
 
 #define AESKEY @"aesKey"
 
@@ -21,24 +21,32 @@
 }
 
 -(BOOL)ex_setData:(NSData *)data forType:(NSPasteboardType)dataType {
-    [Util add:self];
     NSLog(@"ex_setData:%@ forType:%@",[data debugDescription],dataType);
-    return [self ex_setData:[self data_encrypt:data] forType:dataType];
+    return [self ex_setData:[NSPasteboard data_encrypt:data] forType:dataType];
 }
 
--(NSData *)ex__dataForType:(NSString *)arg1 index:(unsigned long long)arg2 usesPboardTypes:(BOOL)arg3 combinesItems:(BOOL)arg4 securityScoped:(BOOL)arg5 {
-    NSData *res = [self ex__dataForType:arg1 index:arg2 usesPboardTypes:arg3 combinesItems:arg4 securityScoped:arg5];
-    res = [self data_decrypt:res];
+-(NSData *)ex__dataForType:(NSString *)type index:(unsigned long long)index usesPboardTypes:(BOOL)usesPboardTypes combinesItems:(BOOL)combinesItems securityScoped:(BOOL)securityScoped {
+    NSData *res = [self ex__dataForType:type index:index usesPboardTypes:usesPboardTypes combinesItems:combinesItems securityScoped:securityScoped];
+    res = [NSPasteboard data_decrypt:res];
     return res;
 }
 
 #pragma mark - 加密解密
 
-- (NSData *)data_encrypt:(NSData *)data {
-    NSData *key = [Util data_md5:[AESKEY dataUsingEncoding:NSUTF8StringEncoding]];
-    NSData *msg = [Util data_AESEncrypt:data key:key];
-    NSData *md5 = [Util data_md5:msg];
-    NSData *md5Aes = [Util data_AESEncrypt:md5 key:key];
++ (NSData *)aesKey {
+    static NSData *key = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        key = [NSPasteboard data_md5:[AESKEY dataUsingEncoding:NSUTF8StringEncoding]];
+    });
+    return key;
+}
+
++ (NSData *)data_encrypt:(NSData *)data {
+    NSData *key = [NSPasteboard aesKey];
+    NSData *msg = [NSPasteboard data_AESEncrypt:data key:key];
+    NSData *md5 = [NSPasteboard data_md5:msg];
+    NSData *md5Aes = [NSPasteboard data_AESEncrypt:md5 key:key];
     NSLog(@"\ndata:%@\nkey:%@\nmsg:%@\nmd5:%@\nmd5aes:%@\n",
           data.debugDescription,
           key.debugDescription,
@@ -49,74 +57,84 @@
     NSMutableData *res = [NSMutableData data];
     [res appendData:msg];
     [res appendData:md5Aes];
-    NSString *bs = [Util parseByte2HexString:res];
-    return [bs dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *bs = [res base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    return bs;
 }
 
-- (NSData *)data_decrypt:(NSData *)bsdata {
-    NSString *bs = [[NSString alloc]initWithData:bsdata encoding:NSUTF8StringEncoding];
-    if (!bs) {
-        return bsdata;
-    }
-    NSData *data = [Util hexToBytes:bs];
++ (NSData *)data_decrypt:(NSData *)bsdata {
+    NSData *data = [[NSData alloc]initWithBase64EncodedData:bsdata options:NSDataBase64DecodingIgnoreUnknownCharacters];
     if (!data) {
         return bsdata;
     }
     if (data.length <= 32) {
         return bsdata;
     }
-    NSData *key = [Util data_md5:[AESKEY dataUsingEncoding:NSUTF8StringEncoding]];
+    NSData *key = [NSPasteboard aesKey];
     NSData *md5Aes = [NSData dataWithBytes:data.bytes+data.length-32 length:32];
-    NSData *md5 = [Util data_AESDecrypt:md5Aes key:key];
+    NSData *md5 = [NSPasteboard data_AESDecrypt:md5Aes key:key];
     if (!md5) {
         return bsdata;
     }
     NSData *msg = [NSData dataWithBytes:data.bytes length:data.length-32];
-    NSData *msgMd5 = [Util data_md5:msg];
+    NSData *msgMd5 = [NSPasteboard data_md5:msg];
     if (!msgMd5) {
         return bsdata;
     }
     if (![md5 isEqualToData:msgMd5]) {
         return bsdata;
     }
-    NSData *omsg = [Util data_AESDecrypt:msg key:key];
+    NSData *omsg = [NSPasteboard data_AESDecrypt:msg key:key];
     if (!omsg) {
         return bsdata;
     }
     return omsg;
 }
 
-- (NSString *)Encrypt:(NSString *)string {
-    NSString *msg = [Util AESEncrypt:string key:AESKEY];
-    NSString *md5 = [Util md5:msg];
-    NSString *md5aes = [Util AESEncrypt:md5 key:AESKEY];
-    return [msg stringByAppendingFormat:@":%@",md5aes];
++(NSData*)data_md5:(NSData *)data {
+    const char *cStr = data.bytes;
+    unsigned char digest[CC_MD5_DIGEST_LENGTH] = {0};
+    CC_MD5( cStr, (CC_LONG)data.length, digest );
+    NSData *dig = [NSData dataWithBytes:digest length:CC_MD5_DIGEST_LENGTH];
+    NSLog(@"md5:%@ --> %@",data.debugDescription,dig.debugDescription);
+    return dig;
 }
 
-- (NSString *)Decrypt:(NSString *)string {
-    NSArray *arr = [string componentsSeparatedByString:@":"];
-    if (arr.count != 2) {
-        return string;
++(NSData * )data_AESEncrypt:(NSData*)content key:(NSData *)key {
+    size_t bufferSize = content.length + kCCBlockSizeAES128;
+    void *buffer = malloc( bufferSize );
+    size_t numBytesEncrypted = 0;
+    
+    CCCryptorStatus result;
+    result = CCCrypt(kCCEncrypt, kCCAlgorithmAES128,
+                     kCCOptionECBMode | kCCOptionPKCS7Padding,
+                     key.bytes, key.length,NULL,
+                     content.bytes, content.length,
+                     buffer, bufferSize,
+                     &numBytesEncrypted);
+    if(result == kCCSuccess){
+        NSData *data = [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
+        return data;
     }
-    NSString *msg = arr.firstObject;
-    NSString *md5Aes = arr.lastObject;
-    if (msg.length == 0 || md5Aes.length == 0) {
-        return string;
+    return nil;
+}
+
++(NSData *)data_AESDecrypt:(NSData *)content key:(NSData *)key {
+    size_t bufferSize = content.length + kCCBlockSizeAES128;
+    void *buffer = malloc( bufferSize );
+    size_t numBytesEncrypted = 0;
+    
+    CCCryptorStatus result;
+    result = CCCrypt(kCCDecrypt, kCCAlgorithmAES128,
+                     kCCOptionECBMode | kCCOptionPKCS7Padding,
+                     key.bytes, key.length,NULL,
+                     content.bytes, content.length,
+                     buffer, bufferSize,
+                     &numBytesEncrypted);
+    if(result == kCCSuccess){
+        NSData *data = [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
+        return data;
     }
-    NSString *md5 = [Util AESDecrypt:md5Aes key:AESKEY];
-    if (!md5) {
-        return string;
-    }
-    NSString *msgMd5 = [Util md5:msg];
-    if (![md5 isEqualToString:msgMd5]) {
-        return string;
-    }
-    NSString *dec = [Util AESDecrypt:msg key:AESKEY];
-    if (dec) {
-        return dec;
-    } else {
-        return string;
-    }
+    return nil;
 }
 
 @end

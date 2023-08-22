@@ -24,5 +24,6 @@
 
 +(NSData *)data_AESDecrypt:(NSData *)content key:(NSData *)key;
 +(NSString *)AESDecrypt:(NSString *)str key:(NSString *)deKey;
+
 @end
 

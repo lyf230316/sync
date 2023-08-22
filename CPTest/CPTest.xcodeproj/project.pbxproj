@@ -10,7 +10,6 @@
 		1C4E83B92A8612120069A726 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4E83B82A8612120069A726 /* WebKit.framework */; };
 		1C4E83BC2A8626BF0069A726 /* NSPasteboard+Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4E83BB2A8626BF0069A726 /* NSPasteboard+Info.m */; };
 		1C5AE1D22A7B972A00876D9D /* libSystem.B.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C5AE1D12A7B972A00876D9D /* libSystem.B.tbd */; };
-		1C6A03412A7B3ED700E4EE56 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C6A03402A7B3ED700E4EE56 /* fishhook.c */; };
 		1C9673B32A8B7A4A00CF056C /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C9673B22A8B7A4A00CF056C /* Util.m */; };
 		6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4A2A69538100DC2C72 /* AppDelegate.m */; };
 		6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD4D2A69538100DC2C72 /* ViewController.m */; };
@@ -20,7 +19,6 @@
 		6E37CD602A69538300DC2C72 /* CPTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD5F2A69538300DC2C72 /* CPTestTests.m */; };
 		6E37CD6A2A69538300DC2C72 /* CPTestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD692A69538300DC2C72 /* CPTestUITests.m */; };
 		6E37CD6C2A69538300DC2C72 /* CPTestUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD6B2A69538300DC2C72 /* CPTestUITestsLaunchTests.m */; };
-		6E37CD802A696B2E00DC2C72 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E37CD7F2A696B2E00DC2C72 /* Aspects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +43,6 @@
 		1C4E83BA2A8626BF0069A726 /* NSPasteboard+Info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPasteboard+Info.h"; sourceTree = "<group>"; };
 		1C4E83BB2A8626BF0069A726 /* NSPasteboard+Info.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSPasteboard+Info.m"; sourceTree = "<group>"; };
 		1C5AE1D12A7B972A00876D9D /* libSystem.B.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libSystem.B.tbd; path = usr/lib/libSystem.B.tbd; sourceTree = SDKROOT; };
-		1C6A033F2A7B3ED700E4EE56 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
-		1C6A03402A7B3ED700E4EE56 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
 		1C9673B12A8B7A4A00CF056C /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		1C9673B22A8B7A4A00CF056C /* Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		6E37CD462A69538100DC2C72 /* CPTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,8 +59,6 @@
 		6E37CD652A69538300DC2C72 /* CPTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CPTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E37CD692A69538300DC2C72 /* CPTestUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CPTestUITests.m; sourceTree = "<group>"; };
 		6E37CD6B2A69538300DC2C72 /* CPTestUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CPTestUITestsLaunchTests.m; sourceTree = "<group>"; };
-		6E37CD7E2A696B2E00DC2C72 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
-		6E37CD7F2A696B2E00DC2C72 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,10 +121,6 @@
 		6E37CD482A69538100DC2C72 /* CPTest */ = {
 			isa = PBXGroup;
 			children = (
-				1C6A03402A7B3ED700E4EE56 /* fishhook.c */,
-				1C6A033F2A7B3ED700E4EE56 /* fishhook.h */,
-				6E37CD7E2A696B2E00DC2C72 /* Aspects.h */,
-				6E37CD7F2A696B2E00DC2C72 /* Aspects.m */,
 				6E37CD492A69538100DC2C72 /* AppDelegate.h */,
 				6E37CD4A2A69538100DC2C72 /* AppDelegate.m */,
 				6E37CD4C2A69538100DC2C72 /* ViewController.h */,
@@ -294,12 +284,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E37CD4E2A69538100DC2C72 /* ViewController.m in Sources */,
-				1C6A03412A7B3ED700E4EE56 /* fishhook.c in Sources */,
 				6E37CD552A69538200DC2C72 /* main.m in Sources */,
 				1C4E83BC2A8626BF0069A726 /* NSPasteboard+Info.m in Sources */,
 				6E37CD4B2A69538100DC2C72 /* AppDelegate.m in Sources */,
 				1C9673B32A8B7A4A00CF056C /* Util.m in Sources */,
-				6E37CD802A696B2E00DC2C72 /* Aspects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

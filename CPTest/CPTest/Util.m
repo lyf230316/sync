@@ -12,6 +12,16 @@
 
 static NSMutableSet *set;
 
++(NSData *)base64Encode:(NSData *)sdata {
+    NSData *res = [sdata base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    return res;
+}
+
++(NSData *)base64Decode:(NSData *)sdata {
+    NSData *res = [sdata initWithBase64EncodedData:sdata options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return res;
+}
+
 +(void)add:(id)obj {
     NSMutableSet *arr = [self globalArray];
     [arr addObject:obj];
