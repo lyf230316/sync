@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 
+
 @interface ViewController ()
 
 @end
@@ -17,11 +18,11 @@
     [super viewDidLoad];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://cn.bing.com"]]];
     
-    [NSNotificationCenter.defaultCenter addObserverForName:UIPasteboardChangedNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        NSLog(@"%@", note);
-        UIPasteboard *board = note.object;
-        NSLog(@"board:%@", [board string]);
-    }];
+//    [NSNotificationCenter.defaultCenter addObserverForName:UIPasteboardChangedNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+//        NSLog(@"%@", note);
+//        UIPasteboard *board = note.object;
+//        NSLog(@"board:%@", [board string]);
+//    }];
     // Do any additional setup after loading the view.
 }
 

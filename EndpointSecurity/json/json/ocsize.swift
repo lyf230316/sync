@@ -33,6 +33,36 @@ extension Struct {
         if name.hasPrefix("reserved") || name == "opaque" {
             return
         }
-        
+        if let tem = typesDic[mem.type] {
+            switch tem {
+            case .es_enum(let e):
+                print("\(indentation)\(ctx)\(name) = *((\(mem.orginType())*)(p+size));")
+                print("\(indentation)size += sizeof(\(mem.orginType()));\n")
+            case .es_struct(let s):
+                if s.isUnoin {
+                    
+                } else {
+                    if s.name.contains("__") { // 匿名结构体
+                        for mb in s.members {
+                            CRead(mb.type, mb.name,"\(ctx)\(name).", indentation+"\t")
+                        }
+                    } else {
+                        if mem.isPointer() {
+                            //read bool
+                            print("\(indentation)_Bool \(name)_has = *((_Bool*)(p+size));")
+                            print("\(indentation)size += sizeof(_Bool);")
+                            print("\(indentation)if (\(name)_has) {")
+                            print("\(indentation)\t\(ctx)\(name) = malloc(sizeof(\(s.name)));")
+                            print("\(indentation)\tsize += \(s.name)_read(\(ctx)\(name),p+size);")
+                            print("\(indentation)}")
+                        } else {
+                            print("\(indentation)size += \(s.name)_read(&(\(ctx)\(name)),p+size);")
+                        }
+                    }
+                }
+            case .typedef( _):
+                break
+            }
+        }
     }
 }

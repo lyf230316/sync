@@ -319,7 +319,7 @@ extension Struct {
         } else {
             if let (t,s) = type.arraySizeForType() {
                 print("\(indentation)memcpy(\(ctx)\(name), p+size, sizeof(\(t)) * \(s));")
-                print("\(indentation)size += sizeof(\(t)) * \(s);")
+                print("\(indentation)size += sizeof(\(t)) * \(s);")t
             } else {
                 if type == "const char *" {
                     print("\(indentation)memcpy((void*)(string_token->data), p+size, string_token->length);")

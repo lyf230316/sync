@@ -49,7 +49,7 @@ typedef struct _AspectBlock {
 + (instancetype)identifierWithSelector:(SEL)selector object:(id)object options:(AspectOptions)options block:(id)block error:(NSError **)error;
 - (BOOL)invokeWithInfo:(id<AspectInfo>)info;
 @property (nonatomic, assign) SEL selector;
-@property (nonatomic, strong) id block;
+@property (nonatomic, copy) id block;
 @property (nonatomic, strong) NSMethodSignature *blockSignature;
 @property (nonatomic, weak) id object;
 @property (nonatomic, assign) AspectOptions options;

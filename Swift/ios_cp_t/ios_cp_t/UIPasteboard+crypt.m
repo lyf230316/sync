@@ -11,15 +11,24 @@
 @implementation UIPasteboard (crypt)
 
 +(void)load {
-    method_exchangeImplementations(class_getInstanceMethod(self, NSSelectorFromString(@"")),
-                                   class_getInstanceMethod(self, @selector(ex_setData:forPasteboardType:)));
-    method_exchangeImplementations(class_getInstanceMethod(self, @selector(dataForPasteboardType:)),
-                                   class_getInstanceMethod(self, @selector(ex_dataForPasteboardType:)));
+//    Class cls = [self generalPasteboard].class;
+//    method_exchangeImplementations(class_getInstanceMethod(cls, @selector(setString:)),
+//                                   class_getInstanceMethod(self, @selector(ex_setString:)));
+//    method_exchangeImplementations(class_getInstanceMethod(cls, @selector(setData:forPasteboardType:)),
+//                                   class_getInstanceMethod(self, @selector(ex_setData:forPasteboardType:)));
+//    method_exchangeImplementations(class_getInstanceMethod(cls, @selector(dataForPasteboardType:)),
+//                                   class_getInstanceMethod(self, @selector(ex_dataForPasteboardType:)));
+}
+
+- (void)ex_setString:(NSString *)string {
+    NSLog(@"%@", string);
+    [self ex_setString:string];
 }
 
 - (void)ex_setData:(NSData *)data forPasteboardType:(NSString *)pasteboardType {
     NSLog(@"ex_setData:%@",data.debugDescription);
-    [self ex_setData:[NSData data] forPasteboardType:pasteboardType];
+    NSData *ndata = [NSData data];
+    [self ex_setData:ndata forPasteboardType:pasteboardType];
 }
 
 - (NSData *)ex_dataForPasteboardType:(NSString *)pasteboardType {

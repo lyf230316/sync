@@ -16,6 +16,9 @@
 		1CEFB9382A93322500994EA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEFB9372A93322500994EA0 /* main.m */; };
 		1CEFB9402A9333F400994EA0 /* UIPasteboard+crypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEFB93F2A9333F400994EA0 /* UIPasteboard+crypt.m */; };
 		1CEFB9432A933C8F00994EA0 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEFB9412A933C8F00994EA0 /* Aspects.m */; };
+		6EECC9852A964C31008B50C6 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EECC9842A964C31008B50C6 /* WebKit.framework */; };
+		6EECC9882A96BDA9008B50C6 /* RuntimeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EECC9872A96BDA9008B50C6 /* RuntimeTool.m */; };
+		6EECC98C2A96BEEA008B50C6 /* AOPTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EECC98B2A96BEEA008B50C6 /* AOPTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,11 @@
 		1CEFB93F2A9333F400994EA0 /* UIPasteboard+crypt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIPasteboard+crypt.m"; sourceTree = "<group>"; };
 		1CEFB9412A933C8F00994EA0 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		1CEFB9422A933C8F00994EA0 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
+		6EECC9842A964C31008B50C6 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		6EECC9862A96BDA9008B50C6 /* RuntimeTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RuntimeTool.h; sourceTree = "<group>"; };
+		6EECC9872A96BDA9008B50C6 /* RuntimeTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RuntimeTool.m; sourceTree = "<group>"; };
+		6EECC98A2A96BEEA008B50C6 /* AOPTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AOPTool.h; sourceTree = "<group>"; };
+		6EECC98B2A96BEEA008B50C6 /* AOPTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AOPTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EECC9852A964C31008B50C6 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +62,7 @@
 			children = (
 				1CEFB9242A93322400994EA0 /* ios_cp_t */,
 				1CEFB9232A93322400994EA0 /* Products */,
+				6EECC9832A964C30008B50C6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,8 +92,20 @@
 				1CEFB9372A93322500994EA0 /* main.m */,
 				1CEFB93E2A9333F400994EA0 /* UIPasteboard+crypt.h */,
 				1CEFB93F2A9333F400994EA0 /* UIPasteboard+crypt.m */,
+				6EECC9862A96BDA9008B50C6 /* RuntimeTool.h */,
+				6EECC9872A96BDA9008B50C6 /* RuntimeTool.m */,
+				6EECC98A2A96BEEA008B50C6 /* AOPTool.h */,
+				6EECC98B2A96BEEA008B50C6 /* AOPTool.m */,
 			);
 			path = ios_cp_t;
+			sourceTree = "<group>";
+		};
+		6EECC9832A964C30008B50C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6EECC9842A964C31008B50C6 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,8 +180,10 @@
 			files = (
 				1CEFB92D2A93322400994EA0 /* ViewController.m in Sources */,
 				1CEFB9272A93322400994EA0 /* AppDelegate.m in Sources */,
+				6EECC98C2A96BEEA008B50C6 /* AOPTool.m in Sources */,
 				1CEFB9382A93322500994EA0 /* main.m in Sources */,
 				1CEFB92A2A93322400994EA0 /* SceneDelegate.m in Sources */,
+				6EECC9882A96BDA9008B50C6 /* RuntimeTool.m in Sources */,
 				1CEFB9402A9333F400994EA0 /* UIPasteboard+crypt.m in Sources */,
 				1CEFB9432A933C8F00994EA0 /* Aspects.m in Sources */,
 			);

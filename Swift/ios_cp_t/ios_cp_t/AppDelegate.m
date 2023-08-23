@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "Aspects.h"
 #import <objc/runtime.h>
+#import "AOPTool.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    NSLog(@"%@",[UIPasteboard generalPasteboard]);
+//    NSLog(@"%@",[UIPasteboard generalPasteboard]);
 //    [self pasteboardAop];
 //    [self uipasteboardAop];
 //    [self pbitemAop];
@@ -26,24 +27,41 @@
     UIPasteboard *board = [UIPasteboard generalPasteboard];
     Class cls = board.class;
     
+    [AOPTool addAOP:cls block:^(NSString * _Nonnull methodName, id<AspectInfo>  _Nonnull info) {
+        NSString * clsName = NSStringFromClass(cls);
+        NSLog(@"==================\n[%@ %@]\n%@",clsName, methodName,info.arguments.debugDescription);
+    }];
     
-    NSMutableSet *ms = [NSMutableSet set];
-    unsigned int methodListCount;
-    Method *methodList = class_copyMethodList(cls, &methodListCount);
-    NSUInteger i;
-    for (i = 0; i < methodListCount; i++) {
-        Method currMethod = (methodList[i]);
-        NSString *mName = [NSString stringWithCString:sel_getName(method_getName(currMethod)) encoding:NSASCIIStringEncoding];
-        [ms addObject:mName];
-    }
-    free(methodList);
-    NSLog(@"%@", ms);
+    [AOPTool addAOPToClass:NSClassFromString(@"PBItem") block:^(NSString * _Nonnull methodName, id<AspectInfo>  _Nonnull info) {
+        NSString * clsName = NSStringFromClass(cls);
+        NSLog(@"==================\n[%@ %@]\n%@",clsName, methodName,info.arguments.debugDescription);
+    }];
+    
+    [AOPTool addAOP:NSClassFromString(@"PBItem") block:^(NSString * _Nonnull methodName, id<AspectInfo>  _Nonnull info) {
+        NSString * clsName = NSStringFromClass(cls);
+        NSLog(@"==================\n[%@ %@]\n%@",clsName, methodName,info.arguments.debugDescription);
+    }];
     
     
-    for (NSString * m in ms) {
-        NSString * n = [NSString stringWithFormat:@"ex_%@",m];
-        printf("method_exchangeImplementations(class_getInstanceMethod(self, NSSelectorFromString(@\"%s\")), class_getInstanceMethod(self, @selector(NSSelectorFromString(@\"%s\")));\n",m.UTF8String,n.UTF8String);
-    }
+    
+    
+//    NSMutableSet *ms = [NSMutableSet set];
+//    unsigned int methodListCount;
+//    Method *methodList = class_copyMethodList(cls, &methodListCount);
+//    NSUInteger i;
+//    for (i = 0; i < methodListCount; i++) {
+//        Method currMethod = (methodList[i]);
+//        NSString *mName = [NSString stringWithCString:sel_getName(method_getName(currMethod)) encoding:NSASCIIStringEncoding];
+//        [ms addObject:mName];
+//    }
+//    free(methodList);
+//    NSLog(@"%@", ms);
+//    
+//    
+//    for (NSString * m in ms) {
+//        NSString * n = [NSString stringWithFormat:@"ex_%@",m];
+//        printf("method_exchangeImplementations(class_getInstanceMethod(self, NSSelectorFromString(@\"%s\")), class_getInstanceMethod(self, @selector(NSSelectorFromString(@\"%s\")));\n",m.UTF8String,n.UTF8String);
+//    }
     
     
     return YES;
@@ -331,6 +349,9 @@
                   aspectInfo.instance,
                   NSStringFromSelector(aspectInfo.originalInvocation.selector),
                   aspectInfo.arguments);
+        NSArray *providers = aspectInfo.arguments.firstObject;
+        NSItemProvider *provider = providers.firstObject;
+        NSLog(@"%@",provider);
         } error:&error];
     [NSClassFromString(@"_UIConcretePasteboard") aspect_hookSelector:NSSelectorFromString(@"setItemProviders:localOnly:expirationDate:") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
             NSLog(@"=============================\n[%@ %@] \n args:%@",
@@ -440,6 +461,10 @@
                   NSStringFromSelector(aspectInfo.originalInvocation.selector),
                   aspectInfo.arguments);
         } error:&error];
+}
+
+- (void)NSItemProviderAop {
+    
 }
 
 - (void)uipasteboardAop {
