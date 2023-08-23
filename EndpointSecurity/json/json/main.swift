@@ -163,7 +163,7 @@ func astAnalys2model() {
 //    }
     
     for sm in stctModels {
-        sm.CSize()
+//        sm.CSize()
 //        sm.printCwrite()
 //        sm.CRead()
 //        sm.ToDic()

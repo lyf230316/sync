@@ -7,6 +7,7 @@
 
 #import "AppDelegate.h"
 #import "Aspects.h"
+#import <objc/runtime.h>
 
 @interface AppDelegate ()
 
@@ -18,9 +19,33 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     NSLog(@"%@",[UIPasteboard generalPasteboard]);
-    [self pasteboardAop];
-    [self uipasteboardAop];
-    [self pbitemAop];
+//    [self pasteboardAop];
+//    [self uipasteboardAop];
+//    [self pbitemAop];
+    
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    Class cls = board.class;
+    
+    
+    NSMutableSet *ms = [NSMutableSet set];
+    unsigned int methodListCount;
+    Method *methodList = class_copyMethodList(cls, &methodListCount);
+    NSUInteger i;
+    for (i = 0; i < methodListCount; i++) {
+        Method currMethod = (methodList[i]);
+        NSString *mName = [NSString stringWithCString:sel_getName(method_getName(currMethod)) encoding:NSASCIIStringEncoding];
+        [ms addObject:mName];
+    }
+    free(methodList);
+    NSLog(@"%@", ms);
+    
+    
+    for (NSString * m in ms) {
+        NSString * n = [NSString stringWithFormat:@"ex_%@",m];
+        printf("method_exchangeImplementations(class_getInstanceMethod(self, NSSelectorFromString(@\"%s\")), class_getInstanceMethod(self, @selector(NSSelectorFromString(@\"%s\")));\n",m.UTF8String,n.UTF8String);
+    }
+    
+    
     return YES;
 }
 

@@ -36,8 +36,8 @@ extension Struct {
         var type = type
         var pointer = false
         var nullable = false
-        if type.contains(" * ") {
-            type = String(type.split(separator: " * ").first!)
+        if type.contains(" *") {
+            type = String(type.split(separator: " *").first!)
             pointer = true
         }
         if let tem = typesDic[type] {
@@ -146,7 +146,8 @@ extension Struct {
         var type = type
         var pointer = false
         if type.contains(" *") {
-            type = String(type.split(separator: " * ").first!)
+            type = String(type.split(separator: " *").first!)
+            type = type.removePrefix(["const "])
             pointer = true
         }
         if let tem = typesDic[type] {
@@ -158,21 +159,29 @@ extension Struct {
                     let unoinName = dic["unoinName"] as! String
                     let unoinType = dic["type"] as! String
                     let prefixs = dic["prefix"] as! [String]
-                    if case .es_struct(let st) = typesDic[unoinType] {
-                        print("\(indentation)switch (\(ctx)\(name)) {")
-                        for ev in e.values {
-                            let evname = ev.removePrefix(prefixs).lowercased()
-                            if let mb = st.findMember(evname) {
-                                print("\(indentation)\tcase \(ev) :{")
-                                CSize(mb.type, mb.name,"\(ctx)\(unoinName).",indentation+"\t\t")
-                                print("\(indentation)\t}break;")
-                            } else {
-//                                    print("not found \(ev)")
-                            }
+                    var isUnoin = true;
+                    if let parentType = dic["parentType"] as? [String] {
+                        if !parentType.contains(self.name) {
+                            isUnoin = false
                         }
-                        print("\(indentation)\tdefault:")
-                        print("\(indentation)\t\tbreak;")
-                        print("\(indentation)}\n")
+                    }
+                    if isUnoin {
+                        if case .es_struct(let st) = typesDic[unoinType] {
+                            print("\(indentation)switch (\(ctx)\(name)) {")
+                            for ev in e.values {
+                                let evname = ev.removePrefix(prefixs).lowercased()
+                                if let mb = st.findMember(evname) {
+                                    print("\(indentation)\tcase \(ev) :{")
+                                    CSize(mb.type, mb.name,"\(ctx)\(unoinName).",indentation+"\t\t")
+                                    print("\(indentation)\t}break;")
+                                } else {
+    //                                    print("not found \(ev)")
+                                }
+                            }
+                            print("\(indentation)\tdefault:")
+                            print("\(indentation)\t\tbreak;")
+                            print("\(indentation)}\n")
+                        }
                     }
                 } else {
 //                        print(e.name)

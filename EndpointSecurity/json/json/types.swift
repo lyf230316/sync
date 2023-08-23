@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     static let typeDic = [
         "uint32_t": "UInt32",
         "uint64_t": "UInt64",
@@ -90,6 +90,40 @@ extension String {
 struct Member {
     var name: String
     var type: String
+    
+    func isPointer() -> Bool {
+        type.contains("*")
+    }
+    
+    func arrayInfo() -> (String, Int)? {
+        let arr = type.split(separator: "[")
+        guard var l = arr.last else {
+            return nil
+        }
+        guard l.removeLast() == "]" else {
+            return nil
+        }
+        let t = arr.first!
+        if l.count == 0 {
+            return (String(t), 0)
+        }
+        guard let size = Int(l), size >= 0 else {
+            return nil
+        }
+        return (String(t),size)
+    }
+    
+    func orginType() -> String {
+        var res = type
+        if let ot = type.split(separator: "*").first {
+            if ot.hasPrefix("const ") {
+                res = String(ot).removePrefix(["cosnt "])
+            } else {
+                res = String(ot)
+            }
+        }
+        return res
+    }
 }
 
 struct Struct {
@@ -165,6 +199,7 @@ var enumDic:[String:[String:Any]] = [
         "prefix":["ES_EVENT_TYPE_AUTH_","ES_EVENT_TYPE_NOTIFY_"],
         "unoinName": "event",
         "type": "es_events_t",
+        "parentType": ["es_message_t"]
     ],
     "es_action_type_t": [
         "prefix":["ES_ACTION_TYPE_"],
@@ -187,4 +222,5 @@ var enumDic:[String:[String:Any]] = [
         "type": "es_result_t__result",
     ],
 ]
+
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C241DEB2A960B7B00A5DBF8 /* ocsize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C241DEA2A960B7B00A5DBF8 /* ocsize.swift */; };
 		1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7FE6CE29EF7C64007D54B3 /* main.swift */; };
 		1CD7E0232A38365800FF14E5 /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD7E0222A38365800FF14E5 /* types.swift */; };
 		1CD7E0252A383DD500FF14E5 /* Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD7E0242A383DD500FF14E5 /* Print.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C241DEA2A960B7B00A5DBF8 /* ocsize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ocsize.swift; sourceTree = "<group>"; };
 		1C7FE6CB29EF7C64007D54B3 /* json */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = json; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C7FE6CE29EF7C64007D54B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		1CD7E0222A38365800FF14E5 /* types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				6E179B232A55B3CF008690CD /* toDic.swift */,
 				6E06FD512A6027B800B4B778 /* cwr.swift */,
 				6E06FD532A6028CA00B4B778 /* swiftSWR.swift */,
+				1C241DEA2A960B7B00A5DBF8 /* ocsize.swift */,
 			);
 			path = json;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */,
 				6E179B242A55B3CF008690CD /* toDic.swift in Sources */,
 				6E06FD542A6028CA00B4B778 /* swiftSWR.swift in Sources */,
+				1C241DEB2A960B7B00A5DBF8 /* ocsize.swift in Sources */,
 				6EED057A2A3D487E008B6081 /* cwrite.swift in Sources */,
 				1CD7E0252A383DD500FF14E5 /* Print.swift in Sources */,
 				6E06FD522A6027B800B4B778 /* cwr.swift in Sources */,
