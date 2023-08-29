@@ -115,14 +115,24 @@ struct Member {
     
     func orginType() -> String {
         var res = type
-        if let ot = type.split(separator: "*").first {
+        if let ot = type.split(separator: " *").first {
             if ot.hasPrefix("const ") {
-                res = String(ot).removePrefix(["cosnt "])
+                res = String(ot).removePrefix(["const "])
             } else {
                 res = String(ot)
             }
         }
         return res
+    }
+    
+    func isStructType() -> Bool {
+        if let tem = typesDic[self.orginType()],
+           case .es_struct(let s) = tem {
+            if !s.isUnoin {
+                return true
+            }
+        }
+        return false
     }
 }
 

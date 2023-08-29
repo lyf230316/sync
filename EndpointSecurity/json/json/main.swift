@@ -12,7 +12,7 @@ import SQLite3
 
 func enumToModel(name: String, def: [String: Any], lev: Int = 0) -> Enum {
     var res = Enum(name: name)
-    var inners = def["inner"]! as! [[String:Any]]
+    let inners = def["inner"]! as! [[String:Any]]
     var i = 0
     while i < inners.count {
         let inner = inners[i]
@@ -37,7 +37,7 @@ func structToModel(tname: String,def:[String: Any]) -> [Struct]? {
     if tag == "union" {
         mainStruct.isUnoin = true
     }
-    var inners = def["inner"]! as! [[String:Any]]
+    let inners = def["inner"]! as! [[String:Any]]
     var i = 0
     while i < inners.count {
         let inner = inners[i]
@@ -94,7 +94,7 @@ func astAnalys2model() {
             let inner = inners[i]
             let kind = inner["kind"] as! String
             if kind == "RecordDecl" {
-                if let name = inner["name"] {
+                if inner["name"] != nil {
                 } else {
                     i += 1
                     let strt = inner
@@ -168,6 +168,7 @@ func astAnalys2model() {
 //        sm.CRead()
 //        sm.ToDic()
 //        sm.swiftSize()
+        sm.ocSize()
     }
 }
 

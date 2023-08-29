@@ -35,7 +35,7 @@ extension Struct {
         }
         var type = type
         var pointer = false
-        var nullable = false
+        _ = false
         if type.contains(" * ") {
             type = String(type.split(separator: " * ").first!)
             pointer = true
@@ -91,7 +91,7 @@ extension Struct {
                         }
                     }
                 }
-            case .typedef(let _):
+            case .typedef( _):
                 break
             }
         } else {

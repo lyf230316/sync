@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C241DEB2A960B7B00A5DBF8 /* ocsize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C241DEA2A960B7B00A5DBF8 /* ocsize.swift */; };
+		1C7574E82A9DCDD6007F86FC /* swr.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7574E72A9DCDD6007F86FC /* swr.c */; };
 		1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7FE6CE29EF7C64007D54B3 /* main.swift */; };
 		1CD7E0232A38365800FF14E5 /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD7E0222A38365800FF14E5 /* types.swift */; };
 		1CD7E0252A383DD500FF14E5 /* Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD7E0242A383DD500FF14E5 /* Print.swift */; };
@@ -33,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		1C241DEA2A960B7B00A5DBF8 /* ocsize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ocsize.swift; sourceTree = "<group>"; };
+		1C7574E62A9DCDD6007F86FC /* swr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swr.h; sourceTree = "<group>"; };
+		1C7574E72A9DCDD6007F86FC /* swr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = swr.c; sourceTree = "<group>"; };
 		1C7FE6CB29EF7C64007D54B3 /* json */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = json; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C7FE6CE29EF7C64007D54B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		1CD7E0222A38365800FF14E5 /* types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
@@ -61,6 +64,8 @@
 		1C7FE6C229EF7C64007D54B3 = {
 			isa = PBXGroup;
 			children = (
+				1C7574E62A9DCDD6007F86FC /* swr.h */,
+				1C7574E72A9DCDD6007F86FC /* swr.c */,
 				1C7FE6CD29EF7C64007D54B3 /* json */,
 				1C7FE6CC29EF7C64007D54B3 /* Products */,
 				6E40FCC22A05409700FE4B5B /* Frameworks */,
@@ -132,6 +137,7 @@
 				TargetAttributes = {
 					1C7FE6CA29EF7C64007D54B3 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 					};
 				};
 			};
@@ -160,6 +166,7 @@
 			files = (
 				1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */,
 				6E179B242A55B3CF008690CD /* toDic.swift in Sources */,
+				1C7574E82A9DCDD6007F86FC /* swr.c in Sources */,
 				6E06FD542A6028CA00B4B778 /* swiftSWR.swift in Sources */,
 				1C241DEB2A960B7B00A5DBF8 /* ocsize.swift in Sources */,
 				6EED057A2A3D487E008B6081 /* cwrite.swift in Sources */,
@@ -289,10 +296,17 @@
 		1C7FE6D329EF7C64007D54B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				ENABLE_HARDENED_RUNTIME = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -300,9 +314,15 @@
 		1C7FE6D429EF7C64007D54B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				ENABLE_HARDENED_RUNTIME = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
