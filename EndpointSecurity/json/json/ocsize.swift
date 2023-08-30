@@ -29,7 +29,7 @@ extension Struct {
     }
     
     func ocSize(_ mem: Member,_ ctx: String,_ indentation: String = "\t") {
-        if name.hasPrefix("reserved") || name == "opaque" {
+        if mem.name.hasPrefix("reserved") || mem.name == "opaque" {
             return
         }
         let pointer = mem.isPointer()

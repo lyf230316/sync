@@ -236,7 +236,6 @@ size_t mach_msg_empty_rcv_t_size(mach_msg_empty_rcv_t *mach_msg_empty_rcv) {
 
 size_t es_event_id_t_size(es_event_id_t *event_id) {
     size_t size = 0;
-    size += sizeof(uint8_t) * 32;
     return size;
 }
 
@@ -391,7 +390,6 @@ size_t es_btm_launch_item_t_size(es_btm_launch_item_t *btm_launch_item) {
 size_t es_event_exec_t_size(es_event_exec_t *event_exec) {
     size_t size = 0;
     size += es_process_t_size(event_exec->target);
-    size += es_token_t_size(&(event_exec->reserved0));
     return size;
 }
 
@@ -399,21 +397,18 @@ size_t es_event_open_t_size(es_event_open_t *event_open) {
     size_t size = 0;
     size += sizeof(int32_t);
     size += es_file_t_size(event_open->file);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_kextload_t_size(es_event_kextload_t *event_kextload) {
     size_t size = 0;
     size += es_string_token_t_size(&(event_kextload->identifier));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_kextunload_t_size(es_event_kextunload_t *event_kextunload) {
     size_t size = 0;
     size += es_string_token_t_size(&(event_kextunload->identifier));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -421,7 +416,6 @@ size_t es_event_unlink_t_size(es_event_unlink_t *event_unlink) {
     size_t size = 0;
     size += es_file_t_size(event_unlink->target);
     size += es_file_t_size(event_unlink->parent_dir);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -432,7 +426,6 @@ size_t es_event_mmap_t_size(es_event_mmap_t *event_mmap) {
     size += sizeof(int32_t);
     size += sizeof(uint64_t);
     size += es_file_t_size(event_mmap->source);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -441,35 +434,30 @@ size_t es_event_link_t_size(es_event_link_t *event_link) {
     size += es_file_t_size(event_link->source);
     size += es_file_t_size(event_link->target_dir);
     size += es_string_token_t_size(&(event_link->target_filename));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_mount_t_size(es_event_mount_t *event_mount) {
     size_t size = 0;
     size += sizeof(struct statfs);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_unmount_t_size(es_event_unmount_t *event_unmount) {
     size_t size = 0;
     size += sizeof(struct statfs);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_remount_t_size(es_event_remount_t *event_remount) {
     size_t size = 0;
     size += sizeof(struct statfs);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_fork_t_size(es_event_fork_t *event_fork) {
     size_t size = 0;
     size += es_process_t_size(event_fork->child);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -478,7 +466,6 @@ size_t es_event_mprotect_t_size(es_event_mprotect_t *event_mprotect) {
     size += sizeof(int32_t);
     size += sizeof(user_addr_t);
     size += sizeof(user_size_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -486,7 +473,6 @@ size_t es_event_signal_t_size(es_event_signal_t *event_signal) {
     size_t size = 0;
     size += sizeof(int);
     size += es_process_t_size(event_signal->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -497,7 +483,6 @@ size_t es_event_rename_t_size(es_event_rename_t *event_rename) {
     size += es_file_t_size(event_rename->destination.existing_file);
     size += es_file_t_size(event_rename->destination.new_path.dir);
     size += es_string_token_t_size(&(event_rename->destination.new_path.filename));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -505,7 +490,6 @@ size_t es_event_setextattr_t_size(es_event_setextattr_t *event_setextattr) {
     size_t size = 0;
     size += es_file_t_size(event_setextattr->target);
     size += es_string_token_t_size(&(event_setextattr->extattr));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -513,7 +497,6 @@ size_t es_event_getextattr_t_size(es_event_getextattr_t *event_getextattr) {
     size_t size = 0;
     size += es_file_t_size(event_getextattr->target);
     size += es_string_token_t_size(&(event_getextattr->extattr));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -521,7 +504,6 @@ size_t es_event_deleteextattr_t_size(es_event_deleteextattr_t *event_deleteextat
     size_t size = 0;
     size += es_file_t_size(event_deleteextattr->target);
     size += es_string_token_t_size(&(event_deleteextattr->extattr));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -529,7 +511,6 @@ size_t es_event_setmode_t_size(es_event_setmode_t *event_setmode) {
     size_t size = 0;
     size += sizeof(mode_t);
     size += es_file_t_size(event_setmode->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -537,7 +518,6 @@ size_t es_event_setflags_t_size(es_event_setflags_t *event_setflags) {
     size_t size = 0;
     size += sizeof(uint32_t);
     size += es_file_t_size(event_setflags->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -546,7 +526,6 @@ size_t es_event_setowner_t_size(es_event_setowner_t *event_setowner) {
     size += sizeof(uid_t);
     size += sizeof(gid_t);
     size += es_file_t_size(event_setowner->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -564,14 +543,12 @@ size_t es_event_create_t_size(es_event_create_t *event_create) {
     size += es_file_t_size(event_create->destination.new_path.dir);
     size += es_string_token_t_size(&(event_create->destination.new_path.filename));
     size += sizeof(mode_t);
-    size += sizeof(uint8_t) * 16;
     return size;
 }
 
 size_t es_event_exit_t_size(es_event_exit_t *event_exit) {
     size_t size = 0;
     size += sizeof(int);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -579,49 +556,42 @@ size_t es_event_exchangedata_t_size(es_event_exchangedata_t *event_exchangedata)
     size_t size = 0;
     size += es_file_t_size(event_exchangedata->file1);
     size += es_file_t_size(event_exchangedata->file2);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_write_t_size(es_event_write_t *event_write) {
     size_t size = 0;
     size += es_file_t_size(event_write->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_truncate_t_size(es_event_truncate_t *event_truncate) {
     size_t size = 0;
     size += es_file_t_size(event_truncate->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_chdir_t_size(es_event_chdir_t *event_chdir) {
     size_t size = 0;
     size += es_file_t_size(event_chdir->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_stat_t_size(es_event_stat_t *event_stat) {
     size_t size = 0;
     size += es_file_t_size(event_stat->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_chroot_t_size(es_event_chroot_t *event_chroot) {
     size_t size = 0;
     size += es_file_t_size(event_chroot->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_listextattr_t_size(es_event_listextattr_t *event_listextattr) {
     size_t size = 0;
     size += es_file_t_size(event_listextattr->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -629,7 +599,6 @@ size_t es_event_iokit_open_t_size(es_event_iokit_open_t *event_iokit_open) {
     size_t size = 0;
     size += sizeof(uint32_t);
     size += es_string_token_t_size(&(event_iokit_open->user_client_class));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -637,7 +606,6 @@ size_t es_event_get_task_t_size(es_event_get_task_t *event_get_task) {
     size_t size = 0;
     size += es_process_t_size(event_get_task->target);
     size += sizeof(es_get_task_type_t);
-    size += sizeof(uint8_t) * 60;
     return size;
 }
 
@@ -645,7 +613,6 @@ size_t es_event_get_task_read_t_size(es_event_get_task_read_t *event_get_task_re
     size_t size = 0;
     size += es_process_t_size(event_get_task_read->target);
     size += sizeof(es_get_task_type_t);
-    size += sizeof(uint8_t) * 60;
     return size;
 }
 
@@ -653,7 +620,6 @@ size_t es_event_get_task_inspect_t_size(es_event_get_task_inspect_t *event_get_t
     size_t size = 0;
     size += es_process_t_size(event_get_task_inspect->target);
     size += sizeof(es_get_task_type_t);
-    size += sizeof(uint8_t) * 60;
     return size;
 }
 
@@ -661,7 +627,6 @@ size_t es_event_get_task_name_t_size(es_event_get_task_name_t *event_get_task_na
     size_t size = 0;
     size += es_process_t_size(event_get_task_name->target);
     size += sizeof(es_get_task_type_t);
-    size += sizeof(uint8_t) * 60;
     return size;
 }
 
@@ -669,7 +634,6 @@ size_t es_event_getattrlist_t_size(es_event_getattrlist_t *event_getattrlist) {
     size_t size = 0;
     size += sizeof(struct attrlist);
     size += es_file_t_size(event_getattrlist->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -677,7 +641,6 @@ size_t es_event_setattrlist_t_size(es_event_setattrlist_t *event_setattrlist) {
     size_t size = 0;
     size += sizeof(struct attrlist);
     size += es_file_t_size(event_setattrlist->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -685,7 +648,6 @@ size_t es_event_file_provider_update_t_size(es_event_file_provider_update_t *eve
     size_t size = 0;
     size += es_file_t_size(event_file_provider_update->source);
     size += es_string_token_t_size(&(event_file_provider_update->target_path));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -694,14 +656,12 @@ size_t es_event_file_provider_materialize_t_size(es_event_file_provider_material
     size += es_process_t_size(event_file_provider_materialize->instigator);
     size += es_file_t_size(event_file_provider_materialize->source);
     size += es_file_t_size(event_file_provider_materialize->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_readlink_t_size(es_event_readlink_t *event_readlink) {
     size_t size = 0;
     size += es_file_t_size(event_readlink->source);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -709,7 +669,6 @@ size_t es_event_lookup_t_size(es_event_lookup_t *event_lookup) {
     size_t size = 0;
     size += es_file_t_size(event_lookup->source_dir);
     size += es_string_token_t_size(&(event_lookup->relative_target));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -717,7 +676,6 @@ size_t es_event_access_t_size(es_event_access_t *event_access) {
     size_t size = 0;
     size += sizeof(int32_t);
     size += es_file_t_size(event_access->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -726,7 +684,6 @@ size_t es_event_utimes_t_size(es_event_utimes_t *event_utimes) {
     size += es_file_t_size(event_utimes->target);
     size += sizeof(struct timespec);
     size += sizeof(struct timespec);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -735,7 +692,6 @@ size_t es_event_clone_t_size(es_event_clone_t *event_clone) {
     size += es_file_t_size(event_clone->source);
     size += es_file_t_size(event_clone->target_dir);
     size += es_string_token_t_size(&(event_clone->target_name));
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -747,7 +703,6 @@ size_t es_event_copyfile_t_size(es_event_copyfile_t *event_copyfile) {
     size += es_string_token_t_size(&(event_copyfile->target_name));
     size += sizeof(mode_t);
     size += sizeof(int32_t);
-    size += sizeof(uint8_t) * 56;
     return size;
 }
 
@@ -755,34 +710,29 @@ size_t es_event_fcntl_t_size(es_event_fcntl_t *event_fcntl) {
     size_t size = 0;
     size += es_file_t_size(event_fcntl->target);
     size += sizeof(int32_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_readdir_t_size(es_event_readdir_t *event_readdir) {
     size_t size = 0;
     size += es_file_t_size(event_readdir->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_fsgetpath_t_size(es_event_fsgetpath_t *event_fsgetpath) {
     size_t size = 0;
     size += es_file_t_size(event_fsgetpath->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_settime_t_size(es_event_settime_t *event_settime) {
     size_t size = 0;
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_dup_t_size(es_event_dup_t *event_dup) {
     size_t size = 0;
     size += es_file_t_size(event_dup->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -791,7 +741,6 @@ size_t es_event_uipc_bind_t_size(es_event_uipc_bind_t *event_uipc_bind) {
     size += es_file_t_size(event_uipc_bind->dir);
     size += es_string_token_t_size(&(event_uipc_bind->filename));
     size += sizeof(mode_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -801,7 +750,6 @@ size_t es_event_uipc_connect_t_size(es_event_uipc_connect_t *event_uipc_connect)
     size += sizeof(int);
     size += sizeof(int);
     size += sizeof(int);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -810,21 +758,18 @@ size_t es_event_setacl_t_size(es_event_setacl_t *event_setacl) {
     size += es_file_t_size(event_setacl->target);
     size += sizeof(es_set_or_clear_t);
     size += sizeof(acl_t _Nonnull);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_pty_grant_t_size(es_event_pty_grant_t *event_pty_grant) {
     size_t size = 0;
     size += sizeof(dev_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_pty_close_t_size(es_event_pty_close_t *event_pty_close) {
     size_t size = 0;
     size += sizeof(dev_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -833,7 +778,6 @@ size_t es_event_proc_check_t_size(es_event_proc_check_t *event_proc_check) {
     size += es_process_t_size(event_proc_check->target);
     size += sizeof(es_proc_check_type_t);
     size += sizeof(int);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -841,7 +785,6 @@ size_t es_event_searchfs_t_size(es_event_searchfs_t *event_searchfs) {
     size_t size = 0;
     size += sizeof(struct attrlist);
     size += es_file_t_size(event_searchfs->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -849,20 +792,17 @@ size_t es_event_proc_suspend_resume_t_size(es_event_proc_suspend_resume_t *event
     size_t size = 0;
     size += es_process_t_size(event_proc_suspend_resume->target);
     size += sizeof(es_proc_suspend_resume_type_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_cs_invalidated_t_size(es_event_cs_invalidated_t *event_cs_invalidated) {
     size_t size = 0;
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_trace_t_size(es_event_trace_t *event_trace) {
     size_t size = 0;
     size += es_process_t_size(event_trace->target);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -870,35 +810,30 @@ size_t es_event_remote_thread_create_t_size(es_event_remote_thread_create_t *eve
     size_t size = 0;
     size += es_process_t_size(event_remote_thread_create->target);
     size += es_thread_state_t_size(event_remote_thread_create->thread_state);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_setuid_t_size(es_event_setuid_t *event_setuid) {
     size_t size = 0;
     size += sizeof(uid_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_setgid_t_size(es_event_setgid_t *event_setgid) {
     size_t size = 0;
     size += sizeof(uid_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_seteuid_t_size(es_event_seteuid_t *event_seteuid) {
     size_t size = 0;
     size += sizeof(uid_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
 size_t es_event_setegid_t_size(es_event_setegid_t *event_setegid) {
     size_t size = 0;
     size += sizeof(uid_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -906,7 +841,6 @@ size_t es_event_setreuid_t_size(es_event_setreuid_t *event_setreuid) {
     size_t size = 0;
     size += sizeof(uid_t);
     size += sizeof(uid_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -914,7 +848,6 @@ size_t es_event_setregid_t_size(es_event_setregid_t *event_setregid) {
     size_t size = 0;
     size += sizeof(uid_t);
     size += sizeof(uid_t);
-    size += sizeof(uint8_t) * 64;
     return size;
 }
 
@@ -1097,7 +1030,6 @@ size_t es_result_t_size(es_result_t *result) {
     size += sizeof(es_result_type_t);
     size += sizeof(es_auth_result_t);
     size += sizeof(uint32_t);
-    size += sizeof(uint8_t) * 32;
     return size;
 }
 
