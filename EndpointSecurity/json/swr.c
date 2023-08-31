@@ -390,6 +390,7 @@ size_t es_btm_launch_item_t_size(es_btm_launch_item_t *btm_launch_item) {
 size_t es_event_exec_t_size(es_event_exec_t *event_exec) {
     size_t size = 0;
     size += es_process_t_size(event_exec->target);
+    size += es_string_token_t_size(&(event_exec->dyld_exec_path));
     return size;
 }
 
@@ -480,9 +481,18 @@ size_t es_event_rename_t_size(es_event_rename_t *event_rename) {
     size_t size = 0;
     size += es_file_t_size(event_rename->source);
     size += sizeof(es_destination_type_t);
-    size += es_file_t_size(event_rename->destination.existing_file);
-    size += es_file_t_size(event_rename->destination.new_path.dir);
-    size += es_string_token_t_size(&(event_rename->destination.new_path.filename));
+    switch (event_rename->destination_type) {
+        case ES_DESTINATION_TYPE_EXISTING_FILE :{
+            size += es_file_t_size(event_rename->destination.existing_file);
+        }break;
+        case ES_DESTINATION_TYPE_NEW_PATH :{
+            size += es_file_t_size(event_rename->destination.new_path.dir);
+            size += es_string_token_t_size(&(event_rename->destination.new_path.filename));
+        }break;
+        default:
+            break;
+    }
+
     return size;
 }
 
@@ -890,10 +900,6 @@ size_t es_event_authentication_t_size(es_event_authentication_t *event_authentic
     size_t size = 0;
     size += sizeof(bool);
     size += sizeof(es_authentication_type_t);
-    size += es_event_authentication_od_t_size(event_authentication->data.od);
-    size += es_event_authentication_touchid_t_size(event_authentication->data.touchid);
-    size += es_event_authentication_token_t_size(event_authentication->data.token);
-    size += es_event_authentication_auto_unlock_t_size(event_authentication->data.auto_unlock);
     return size;
 }
 
@@ -1028,8 +1034,17 @@ size_t es_event_btm_launch_item_remove_t_size(es_event_btm_launch_item_remove_t 
 size_t es_result_t_size(es_result_t *result) {
     size_t size = 0;
     size += sizeof(es_result_type_t);
-    size += sizeof(es_auth_result_t);
-    size += sizeof(uint32_t);
+    switch (result->result_type) {
+        case ES_RESULT_TYPE_AUTH :{
+            size += sizeof(es_auth_result_t);
+        }break;
+        case ES_RESULT_TYPE_FLAGS :{
+            size += sizeof(uint32_t);
+        }break;
+        default:
+            break;
+    }
+
     return size;
 }
 
@@ -1042,8 +1057,17 @@ size_t es_message_t_size(es_message_t *message) {
     size += es_process_t_size(message->process);
     size += sizeof(uint64_t);
     size += sizeof(es_action_type_t);
-    size += es_event_id_t_size(&(message->action.auth));
-    size += es_result_t_size(&(message->action.notify));
+    switch (message->action_type) {
+        case ES_ACTION_TYPE_AUTH :{
+            size += es_event_id_t_size(&(message->action.auth));
+        }break;
+        case ES_ACTION_TYPE_NOTIFY :{
+            size += es_result_t_size(&(message->action.notify));
+        }break;
+        default:
+            break;
+    }
+
     size += sizeof(es_event_type_t);
     switch (message->event_type) {
         case ES_EVENT_TYPE_AUTH_EXEC :{

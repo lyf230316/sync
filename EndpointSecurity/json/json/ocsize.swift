@@ -68,20 +68,29 @@ extension Struct {
         } else {
             if st {
                 if otype.contains("__"),
-                          case .es_struct(let it) = typesDic[otype]! {
+                   case .es_struct(let it) = typesDic[otype]! {
                     for memb in it.members {
-                        it.ocSize(memb, "\(ctx)\(mem.name).")
+                        it.ocSize(memb, "\(ctx)\(mem.name).", indentation)
                     }
                 } else {
                     print("\(indentation)size += \(otype)_size(&(\(ctx)\(mem.name)));")
                 }
             } else {
                 if self.name == "es_message_t" && mem.name == "event" {
-                    self.ocSizeOfEnumType(mem, ctx, enu: "event_type",prefixes: ["ES_EVENT_TYPE_AUTH_","ES_EVENT_TYPE_NOTIFY_"])
-                } else if otype.contains("__"),
-                          case .es_struct(let it) = typesDic[otype]! {
+                    self.ocSizeOfEnumType(mem, ctx, indentation, enu: "event_type",prefixes: ["ES_EVENT_TYPE_AUTH_","ES_EVENT_TYPE_NOTIFY_"])
+                } else if self.name == "es_message_t" && mem.name == "action" {
+                    self.ocSizeOfEnumType(mem, ctx, indentation, enu: "action_type",prefixes: ["ES_ACTION_TYPE_"])
+                } else if self.name == "es_event_rename_t" && mem.name == "destination" {
+                    self.ocSizeOfEnumType(mem, ctx, indentation, enu: "destination_type",prefixes: ["ES_DESTINATION_TYPE_"])
+                } else if self.name == "es_event_authentication_t" && mem.name == "data" {
+                    self.ocSizeOfEnumType(mem, ctx, indentation, enu: "authentication_type",prefixes: ["ES_AUTHENTICATION_TYPE_"])
+                } else if self.name == "es_result_t" && mem.name == "result" {
+                    self.ocSizeOfEnumType(mem, ctx, indentation, enu: "result_type",prefixes: ["ES_RESULT_TYPE_"])
+                }
+                else if otype.contains("__"),
+                        case .es_struct(let it) = typesDic[otype]! {
                     for memb in it.members {
-                        it.ocSize(memb, "\(ctx)\(mem.name).")
+                        it.ocSize(memb, "\(ctx)\(mem.name).", indentation)
                     }
                 } else if let (itemT, count) = mem.arrayInfo() {
                     if count > 0 {
