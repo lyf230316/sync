@@ -172,6 +172,7 @@ func astAnalys2model() {
 #include <stdlib.h>
 #include <EndpointSecurity/EndpointSecurity.h>
 
+
 """
     for sm in stctModels {
         Struct.funType = .headerfile

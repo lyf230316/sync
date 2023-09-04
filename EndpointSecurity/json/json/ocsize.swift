@@ -15,7 +15,7 @@ enum FunT {
 }
 
 extension Struct {
-    static var debug: Bool = true
+    static var debug: Bool = false
     static var funType: FunT = .size
     
     static var fileContent: String = ""
@@ -370,7 +370,7 @@ extension Struct {
                 Self.addLine("\(indentation)_Bool \(mem.name)_has = *(_Bool *)(p+size);")
                 Self.addLine("\(indentation)if (\(mem.name)_has) {")
                 Self.addLine("\(indentation)    \(ctx)\(mem.name) = malloc(\(ctx)\(count) * sizeof(\(mem.orginType())));")
-                Self.addLine("\(indentation)    memcpy(\(ctx)\(mem.name),p+size,sizeof(\(mem.orginType())) * \(ctx)\(count));")
+                Self.addLine("\(indentation)    memcpy((void*)\(ctx)\(mem.name),p+size,sizeof(\(mem.orginType())) * \(ctx)\(count));")
                 Self.addLine("\(indentation)    size += \(ctx)\(count) * sizeof(\(mem.orginType()));")
                 Self.addLine("\(indentation)}")
             }
