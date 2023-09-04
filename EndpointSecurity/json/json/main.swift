@@ -78,8 +78,8 @@ func structToModel(tname: String,def:[String: Any]) -> [Struct]? {
 }
 
 func astAnalys2model() {
-//    let file = "/Users/lyf/git/github/sync/EndpointSecurity/json/json/EndpointSecurity.json"
-    let file = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/json/json/EndpointSecurity.json"
+    let file = "/Users/lyf/git/github/sync/EndpointSecurity/json/json/EndpointSecurity.json"
+//    let file = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/json/json/EndpointSecurity.json"
     let data = try! Data(contentsOf: URL(filePath: file))
     let dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
     
@@ -162,14 +162,47 @@ func astAnalys2model() {
 //        sm.printCwrite()
 //    }
     
+    //MARK: H
+    Struct.fileContent = """
+
+#ifndef swr_h
+#define swr_h
+
+#include <string.h>
+#include <stdlib.h>
+#include <EndpointSecurity/EndpointSecurity.h>
+
+"""
     for sm in stctModels {
-//        sm.CSize()
-//        sm.printCwrite()
-//        sm.CRead()
-//        sm.ToDic()
-//        sm.swiftSize()
+        Struct.funType = .headerfile
         sm.ocSize()
     }
+    
+    Struct.fileContent.append("""
+
+#endif /* swr_h */
+
+""")
+    try! Struct.fileContent.write(toFile: "/Users/lyf/git/github/sync/EndpointSecurity/json/swr.h", atomically: true, encoding: .utf8)
+
+    
+    //MARK: C
+    
+    Struct.fileContent = """
+
+#include "swr.h"
+
+"""
+    for sm in stctModels {
+        Struct.funType = .size
+        sm.ocSize()
+        Struct.funType = .write
+        sm.ocSize()
+        Struct.funType = .read
+        sm.ocSize()
+    }
+    
+    try! Struct.fileContent.write(toFile: "/Users/lyf/git/github/sync/EndpointSecurity/json/swr.c", atomically: true, encoding: .utf8)
 }
 
 astAnalys2model()

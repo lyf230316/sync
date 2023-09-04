@@ -7,6 +7,25 @@
 
 import Foundation
 
+enum FunT {
+    case size
+    case write
+    case read
+    case headerfile
+}
+
+extension Struct {
+    static var debug: Bool = true
+    static var funType: FunT = .size
+    
+    static var fileContent: String = ""
+    
+    static func addLine(_ line: String) {
+        Self.fileContent.append(line)
+        Self.fileContent.append("\n")
+    }
+}
+
 extension Struct {
     func ocSize() {
         if self.isUnoin {
@@ -16,16 +35,14 @@ extension Struct {
             return
         }
         let on = name.originName()
-        print("size_t \(name)_size(\(name) *\(on)) {")
-        print("    size_t size = 0;")
+        structStart()
         var index = 0
         while index < members.count {
             let member = members[index]
             ocSize(member,"\(on)->", "\t")
             index += 1
         }
-        print("    return size;")
-        print("}\n")
+        structEnd()
     }
     
     func ocSize(_ mem: Member,_ ctx: String,_ indentation: String = "\t") {
@@ -44,7 +61,7 @@ extension Struct {
                     self.ocSizeOfArray(mem, ctx, count: "count")
                 }
                 else {
-                    print("\(indentation)size += \(otype)_size(\(ctx)\(mem.name));")
+                    onCustomStructPointer(mem, ctx, indentation)
                 }
             } else {
                 if self.name == "es_token_t" && mem.name == "data" {
@@ -56,13 +73,8 @@ extension Struct {
                 } else if self.name == "es_muted_process_t" && mem.name == "events" {
                     self.ocSizeOfArray(mem, ctx, count: "event_count")
                 }
-                else if otype == "void" {
-                    return
-                } else if otype == "struct statfs" {
-                    print("\(indentation)size += sizeof(\(otype));")
-                }
                 else {
-                    print(otype)
+                    onCustomPointer(mem, ctx, indentation)
                 }
             }
         } else {
@@ -73,7 +85,7 @@ extension Struct {
                         it.ocSize(memb, "\(ctx)\(mem.name).", indentation)
                     }
                 } else {
-                    print("\(indentation)size += \(otype)_size(&(\(ctx)\(mem.name)));")
+                    onCustomStruct(mem, ctx, indentation)
                 }
             } else {
                 if self.name == "es_message_t" && mem.name == "event" {
@@ -92,38 +104,10 @@ extension Struct {
                     for memb in it.members {
                         it.ocSize(memb, "\(ctx)\(mem.name).", indentation)
                     }
-                } else if let (itemT, count) = mem.arrayInfo() {
-                    if count > 0 {
-                        print("\(indentation)size += sizeof(\(itemT)) * \(count);")
-                    }
-                }
-                else {
-                    print("\(indentation)size += sizeof(\(otype));")
+                } else {
+                    onCustom(mem, ctx, indentation)
                 }
             }
-        }
-    }
-    
-    func ocSizeOfArray(_ mem: Member,_ ctx: String,_ indentation: String = "\t", count: String) {
-        let otype = mem.orginType()
-        let st = mem.isStructType()
-        
-        if st {
-            print("\(indentation)if (\(ctx)\(mem.name)) {")
-            print("\(indentation)    size += sizeof(_Bool);")
-            print("\(indentation)    for (int i = 0; i < \(ctx)\(count); i++) {")
-            print("\(indentation)        size += \(otype)_size((\(otype)*)&(\(ctx)\(mem.name)[i]));")
-            print("\(indentation)    }")
-            print("\(indentation)} else {")
-            print("\(indentation)    size += sizeof(_Bool);")
-            print("\(indentation)}")
-        } else {
-            print("\(indentation)if (\(ctx)\(mem.name)) {")
-            print("\(indentation)    size += sizeof(_Bool);")
-            print("\(indentation)    size += \(ctx)\(count) * sizeof(\(mem.orginType()));")
-            print("\(indentation)} else {")
-            print("\(indentation)    size += sizeof(_Bool);")
-            print("\(indentation)}")
         }
     }
     
@@ -137,17 +121,261 @@ extension Struct {
         guard case .es_struct(let st) = typesDic[mem.type] else {
             return
         }
-        print("\(indentation)switch (\(ctx)\(enumem.name)) {")
-        for ev in e.values {
-            let evname = ev.removePrefix(prefixes).lowercased()
-            if let mb = st.findMember(evname) {
-                print("\(indentation)\tcase \(ev) :{")
-                ocSize(mb, "\(ctx)\(mem.name).",indentation+"\t\t")
-                print("\(indentation)\t}break;")
+        switch Self.funType {
+        case .headerfile:
+            break
+        default:
+            Self.addLine("\(indentation)switch (\(ctx)\(enumem.name)) {")
+            for ev in e.values {
+                let evname = ev.removePrefix(prefixes).lowercased()
+                if let mb = st.findMember(evname) {
+                    Self.addLine("\(indentation)\tcase \(ev) :{")
+                    ocSize(mb, "\(ctx)\(mem.name).",indentation+"\t\t")
+                    Self.addLine("\(indentation)\t}break;")
+                }
             }
+            Self.addLine("\(indentation)\tdefault:")
+            Self.addLine("\(indentation)\t\tbreak;")
+            Self.addLine("\(indentation)}\n")
         }
-        print("\(indentation)\tdefault:")
-        print("\(indentation)\t\tbreak;")
-        print("\(indentation)}\n")
+    }
+    
+    // 差异输出
+    
+    func structStart() {
+        if Self.debug {
+            Self.addLine("//\(#function)")
+        }
+        
+        switch Self.funType {
+        case .size:
+            Self.addLine("size_t \(name)_size(\(name) *\(name.originName())) {")
+            Self.addLine("    size_t size = 0;")
+        case .write:
+            Self.addLine("size_t \(name)_write(\(name) *\(name.originName()), void *p) {")
+            Self.addLine("    size_t size = 0;")
+        case .read:
+            Self.addLine("size_t \(name)_read(\(name) *\(name.originName()), void *p) {")
+            Self.addLine("    size_t size = 0;")
+        case .headerfile:
+            Self.addLine("size_t \(name)_size(\(name) *\(name.originName()));")
+            Self.addLine("size_t \(name)_write(\(name) *\(name.originName()), void *p);")
+            Self.addLine("size_t \(name)_read(\(name) *\(name.originName()), void *p);")
+        }
+    }
+    
+    func structEnd() {
+        if Self.debug {
+            Self.addLine("//\(#function)")
+        }
+        
+        switch Self.funType {
+        case .size:
+            Self.addLine("    return size;")
+            Self.addLine("}\n")
+        case .write:
+            Self.addLine("    return size;")
+            Self.addLine("}\n")
+        case .read:
+            Self.addLine("    return size;")
+            Self.addLine("}\n")
+        case .headerfile:
+            Self.addLine("")
+        }
+    }
+    
+    func onCustomStructPointer(_ mem: Member,_ ctx: String,_ indentation: String = "\t") {
+        if Self.debug {
+            Self.addLine("\(indentation)//\(#function)")
+        }
+        
+        let otype = mem.orginType()
+        switch Self.funType {
+        case .size:
+            Self.addLine("\(indentation)size += \(otype)_size(\(ctx)\(mem.name));")
+        case .write:
+            Self.addLine("\(indentation)size += \(otype)_write(\(ctx)\(mem.name), p+size);")
+        case .read:
+            Self.addLine("\(indentation)\(ctx)\(mem.name) = malloc(sizeof(\(otype)));")
+            Self.addLine("\(indentation)size += \(otype)_read(\(ctx)\(mem.name), p+size);")
+        case .headerfile:
+            break
+        }
+        
+    }
+    
+    func onCustomStruct(_ mem: Member,_ ctx: String,_ indentation: String = "\t") {
+        if Self.debug {
+            Self.addLine("\(indentation)//\(#function)")
+        }
+        
+        let otype = mem.orginType()
+        switch Self.funType {
+        case .size:
+            Self.addLine("\(indentation)size += \(otype)_size(&(\(ctx)\(mem.name)));")
+        case .write:
+            Self.addLine("\(indentation)size += \(otype)_write(&(\(ctx)\(mem.name)), p+size);")
+        case .read:
+            Self.addLine("\(indentation)size += \(otype)_read(&(\(ctx)\(mem.name)), p+size);")
+        case .headerfile:
+            break
+        }
+    }
+    
+    func onCustomPointer(_ mem: Member,_ ctx: String,_ indentation: String = "\t") {
+        if Self.debug {
+            Self.addLine("\(indentation)//\(#function)")
+        }
+        
+        let otype = mem.orginType()
+        switch Self.funType {
+        case .size:
+            if otype == "void" {
+                return
+            } else if otype == "struct statfs" {
+                Self.addLine("\(indentation)size += sizeof(\(otype));")
+            }
+            else {
+                print(otype)
+            }
+        case .write:
+            if otype == "void" {
+                return
+            } else if otype == "struct statfs" {
+                Self.addLine("\(indentation)memcpy(p+size,\(ctx)\(mem.name),sizeof(\(otype)));")
+                Self.addLine("\(indentation)size += sizeof(\(otype));")
+            }
+            else {
+                print(otype)
+            }
+        case .read:
+            if otype == "void" {
+                return
+            } else if otype == "struct statfs" {
+                Self.addLine("\(indentation)memcpy(\(ctx)\(mem.name), p+size, sizeof(\(otype)));")
+                Self.addLine("\(indentation)size += sizeof(\(otype));")
+            }
+            else {
+                print(otype)
+            }
+        case .headerfile:
+            break
+        }
+    }
+    
+    func onCustom(_ mem: Member,_ ctx: String,_ indentation: String = "\t") {
+        if Self.debug {
+            Self.addLine("\(indentation)//\(#function)")
+        }
+        
+        let otype = mem.orginType()
+        switch Self.funType {
+        case .size:
+            if let (itemT, count) = mem.arrayInfo() {
+                if count > 0 {
+                    Self.addLine("\(indentation)size += sizeof(\(itemT)) * \(count);")
+                }
+            }
+            else {
+                Self.addLine("\(indentation)size += sizeof(\(otype));")
+            }
+        case .write:
+            if let (itemT, count) = mem.arrayInfo() {
+                if count > 0 {
+                    Self.addLine("\(indentation)memcpy(p+size,\(ctx)\(mem.name),sizeof(\(itemT)) * \(count));")
+                    Self.addLine("\(indentation)size += sizeof(\(itemT)) * \(count);")
+                }
+            }
+            else {
+                Self.addLine("\(indentation)*(\(otype)*)(p+size) = \(ctx)\(mem.name);")
+                Self.addLine("\(indentation)size += sizeof(\(otype));")
+            }
+        case .read:
+            if let (itemT, count) = mem.arrayInfo() {
+                if count > 0 {
+                    Self.addLine("\(indentation)memcpy(\(ctx)\(mem.name), p+size, sizeof(\(itemT)) * \(count));")
+                    Self.addLine("\(indentation)size += sizeof(\(itemT)) * \(count);")
+                }
+            }
+            else {
+                Self.addLine("\(indentation)\(ctx)\(mem.name) = *(\(otype)*)(p+size);")
+                Self.addLine("\(indentation)size += sizeof(\(otype));")
+            }
+        case .headerfile:
+            break
+        }
+    }
+    
+    func ocSizeOfArray(_ mem: Member,_ ctx: String,_ indentation: String = "\t", count: String) {
+        if Self.debug {
+            Self.addLine("\(indentation)//\(#function)")
+        }
+
+        let otype = mem.orginType()
+        let st = mem.isStructType()
+        
+        switch Self.funType {
+        case .size:
+            if st {
+                Self.addLine("\(indentation)if (\(ctx)\(mem.name)) {")
+                Self.addLine("\(indentation)    size += sizeof(_Bool);")
+                Self.addLine("\(indentation)    for (int i = 0; i < \(ctx)\(count); i++) {")
+                Self.addLine("\(indentation)        size += \(otype)_size((\(otype)*)&(\(ctx)\(mem.name)[i]));")
+                Self.addLine("\(indentation)    }")
+                Self.addLine("\(indentation)} else {")
+                Self.addLine("\(indentation)    size += sizeof(_Bool);")
+                Self.addLine("\(indentation)}")
+            } else {
+                Self.addLine("\(indentation)if (\(ctx)\(mem.name)) {")
+                Self.addLine("\(indentation)    size += sizeof(_Bool);")
+                Self.addLine("\(indentation)    size += \(ctx)\(count) * sizeof(\(mem.orginType()));")
+                Self.addLine("\(indentation)} else {")
+                Self.addLine("\(indentation)    size += sizeof(_Bool);")
+                Self.addLine("\(indentation)}")
+            }
+        case .write:
+            if st {
+                Self.addLine("\(indentation)if (\(ctx)\(mem.name)) {")
+                Self.addLine("\(indentation)    *(_Bool *)(p+size) = true;")
+                Self.addLine("\(indentation)    size += sizeof(_Bool);")
+                Self.addLine("\(indentation)    for (int i = 0; i < \(ctx)\(count); i++) {")
+                Self.addLine("\(indentation)        size += \(otype)_write((\(otype)*)&(\(ctx)\(mem.name)[i]), p+size);")
+                Self.addLine("\(indentation)    }")
+                Self.addLine("\(indentation)} else {")
+                Self.addLine("\(indentation)    *(_Bool *)(p+size) = false;")
+                Self.addLine("\(indentation)    size += sizeof(_Bool);")
+                Self.addLine("\(indentation)}")
+            } else {
+                Self.addLine("\(indentation)if (\(ctx)\(mem.name)) {")
+                Self.addLine("\(indentation)    *(_Bool *)(p+size) = true;")
+                Self.addLine("\(indentation)    size += sizeof(_Bool);")
+                Self.addLine("\(indentation)    memcpy(p+size,\(ctx)\(mem.name),\(ctx)\(count) * sizeof(\(mem.orginType())));")
+                Self.addLine("\(indentation)    size += \(ctx)\(count) * sizeof(\(mem.orginType()));")
+                Self.addLine("\(indentation)} else {")
+                Self.addLine("\(indentation)    *(_Bool *)(p+size) = false;")
+                Self.addLine("\(indentation)    size += sizeof(_Bool);")
+                Self.addLine("\(indentation)}")
+            }
+        case .read:
+            if st {
+                Self.addLine("\(indentation)_Bool \(mem.name)_has = *(_Bool *)(p+size);")
+                Self.addLine("\(indentation)size += sizeof(_Bool);")
+                Self.addLine("\(indentation)if (\(mem.name)_has) {")
+                Self.addLine("\(indentation)    \(ctx)\(mem.name) = malloc(sizeof(\(otype)*) * \(ctx)\(count));")
+                Self.addLine("\(indentation)    for (int i = 0; i < \(ctx)\(count); i++) {")
+                Self.addLine("\(indentation)        size += \(otype)_read((\(otype)*)&(\(ctx)\(mem.name)[i]), p+size);")
+                Self.addLine("\(indentation)    }")
+                Self.addLine("\(indentation)}")
+            } else {
+                Self.addLine("\(indentation)_Bool \(mem.name)_has = *(_Bool *)(p+size);")
+                Self.addLine("\(indentation)if (\(mem.name)_has) {")
+                Self.addLine("\(indentation)    \(ctx)\(mem.name) = malloc(\(ctx)\(count) * sizeof(\(mem.orginType())));")
+                Self.addLine("\(indentation)    memcpy(\(ctx)\(mem.name),p+size,sizeof(\(mem.orginType())) * \(ctx)\(count));")
+                Self.addLine("\(indentation)    size += \(ctx)\(count) * sizeof(\(mem.orginType()));")
+                Self.addLine("\(indentation)}")
+            }
+        case .headerfile:
+            break
+        }
     }
 }
