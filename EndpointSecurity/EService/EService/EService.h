@@ -9,17 +9,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    ESCTypeMessage,
+    ESCTypeConfigChanged
+} ESCType;
+
 @protocol EServiceClient <NSObject>
 
--(void)message:(NSData *)msg;
+-(void)onType:(ESCType)type data:(NSData *)data;
 
 @end
 
 @protocol EService <NSObject>
 
 //en_event_type_t
--()subscribe:(NSArray *)types;
--(void)unsubscribe:(NSArray *)types;
+-(void)subscribe:(NSData *)types;
+-(void)unsubscribe:(NSData *)types;
 
 @end
 

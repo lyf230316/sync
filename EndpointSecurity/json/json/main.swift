@@ -193,6 +193,7 @@ func astAnalys2model() {
 
 #include "swr.h"
 
+
 """
     for sm in stctModels {
         Struct.funType = .size

@@ -26,6 +26,8 @@ extension Struct {
     }
 }
 
+let funcPrefix = "swr_"
+
 extension Struct {
     func ocSize() {
         if self.isUnoin {
@@ -149,18 +151,18 @@ extension Struct {
         
         switch Self.funType {
         case .size:
-            Self.addLine("size_t \(name)_size(\(name) *\(name.originName())) {")
+            Self.addLine("size_t \(funcPrefix)\(name)_size(\(name) *\(name.originName())) {")
             Self.addLine("    size_t size = 0;")
         case .write:
-            Self.addLine("size_t \(name)_write(\(name) *\(name.originName()), void *p) {")
+            Self.addLine("size_t \(funcPrefix)\(name)_write(\(name) *\(name.originName()), void *p) {")
             Self.addLine("    size_t size = 0;")
         case .read:
-            Self.addLine("size_t \(name)_read(\(name) *\(name.originName()), void *p) {")
+            Self.addLine("size_t \(funcPrefix)\(name)_read(\(name) *\(name.originName()), void *p) {")
             Self.addLine("    size_t size = 0;")
         case .headerfile:
-            Self.addLine("size_t \(name)_size(\(name) *\(name.originName()));")
-            Self.addLine("size_t \(name)_write(\(name) *\(name.originName()), void *p);")
-            Self.addLine("size_t \(name)_read(\(name) *\(name.originName()), void *p);")
+            Self.addLine("size_t \(funcPrefix)\(name)_size(\(name) *\(name.originName()));")
+            Self.addLine("size_t \(funcPrefix)\(name)_write(\(name) *\(name.originName()), void *p);")
+            Self.addLine("size_t \(funcPrefix)\(name)_read(\(name) *\(name.originName()), void *p);")
         }
     }
     
@@ -192,12 +194,12 @@ extension Struct {
         let otype = mem.orginType()
         switch Self.funType {
         case .size:
-            Self.addLine("\(indentation)size += \(otype)_size(\(ctx)\(mem.name));")
+            Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_size(\(ctx)\(mem.name));")
         case .write:
-            Self.addLine("\(indentation)size += \(otype)_write(\(ctx)\(mem.name), p+size);")
+            Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_write(\(ctx)\(mem.name), p+size);")
         case .read:
             Self.addLine("\(indentation)\(ctx)\(mem.name) = malloc(sizeof(\(otype)));")
-            Self.addLine("\(indentation)size += \(otype)_read(\(ctx)\(mem.name), p+size);")
+            Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_read(\(ctx)\(mem.name), p+size);")
         case .headerfile:
             break
         }
@@ -212,11 +214,11 @@ extension Struct {
         let otype = mem.orginType()
         switch Self.funType {
         case .size:
-            Self.addLine("\(indentation)size += \(otype)_size(&(\(ctx)\(mem.name)));")
+            Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_size(&(\(ctx)\(mem.name)));")
         case .write:
-            Self.addLine("\(indentation)size += \(otype)_write(&(\(ctx)\(mem.name)), p+size);")
+            Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_write(&(\(ctx)\(mem.name)), p+size);")
         case .read:
-            Self.addLine("\(indentation)size += \(otype)_read(&(\(ctx)\(mem.name)), p+size);")
+            Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_read(&(\(ctx)\(mem.name)), p+size);")
         case .headerfile:
             break
         }
@@ -320,7 +322,7 @@ extension Struct {
                 Self.addLine("\(indentation)if (\(ctx)\(mem.name)) {")
                 Self.addLine("\(indentation)    size += sizeof(_Bool);")
                 Self.addLine("\(indentation)    for (int i = 0; i < \(ctx)\(count); i++) {")
-                Self.addLine("\(indentation)        size += \(otype)_size((\(otype)*)&(\(ctx)\(mem.name)[i]));")
+                Self.addLine("\(indentation)        size += \(funcPrefix)\(otype)_size((\(otype)*)&(\(ctx)\(mem.name)[i]));")
                 Self.addLine("\(indentation)    }")
                 Self.addLine("\(indentation)} else {")
                 Self.addLine("\(indentation)    size += sizeof(_Bool);")
@@ -339,7 +341,7 @@ extension Struct {
                 Self.addLine("\(indentation)    *(_Bool *)(p+size) = true;")
                 Self.addLine("\(indentation)    size += sizeof(_Bool);")
                 Self.addLine("\(indentation)    for (int i = 0; i < \(ctx)\(count); i++) {")
-                Self.addLine("\(indentation)        size += \(otype)_write((\(otype)*)&(\(ctx)\(mem.name)[i]), p+size);")
+                Self.addLine("\(indentation)        size += \(funcPrefix)\(otype)_write((\(otype)*)&(\(ctx)\(mem.name)[i]), p+size);")
                 Self.addLine("\(indentation)    }")
                 Self.addLine("\(indentation)} else {")
                 Self.addLine("\(indentation)    *(_Bool *)(p+size) = false;")
@@ -363,7 +365,7 @@ extension Struct {
                 Self.addLine("\(indentation)if (\(mem.name)_has) {")
                 Self.addLine("\(indentation)    \(ctx)\(mem.name) = malloc(sizeof(\(otype)*) * \(ctx)\(count));")
                 Self.addLine("\(indentation)    for (int i = 0; i < \(ctx)\(count); i++) {")
-                Self.addLine("\(indentation)        size += \(otype)_read((\(otype)*)&(\(ctx)\(mem.name)[i]), p+size);")
+                Self.addLine("\(indentation)        size += \(funcPrefix)\(otype)_read((\(otype)*)&(\(ctx)\(mem.name)[i]), p+size);")
                 Self.addLine("\(indentation)    }")
                 Self.addLine("\(indentation)}")
             } else {
