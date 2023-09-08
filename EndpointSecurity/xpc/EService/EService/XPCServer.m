@@ -6,6 +6,8 @@
 //
 
 #import "XPCServer.h"
+#import "EService.h"
+#import "ESController.h"
 
 @interface XPCServer ()<NSXPCListenerDelegate>
 
@@ -27,7 +29,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.listener = [[NSXPCListener alloc] initWithMachServiceName:@""];
+        self.listener = [[NSXPCListener alloc] initWithMachServiceName:@"com.caidev.EService"];
         self.listener.delegate = self;
         [self.listener resume];
     }
@@ -37,7 +39,12 @@
 #pragma mark - NSXPCListenerDelegate
 
 - (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)newConnection {
-    //TODO: 接收认证
+    newConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(EServiceClient)];
+    newConnection.exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(EService)];
+    ESController *controller = [[ESController alloc]init];
+    controller.connction = newConnection;
+    newConnection.exportedObject = controller;
+    [newConnection resume];
     return YES;
 }
 

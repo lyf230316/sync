@@ -205,6 +205,16 @@ func astAnalys2model() {
     }
     
     try! Struct.fileContent.write(toFile: "/Users/lyf/git/github/sync/EndpointSecurity/json/swr.c", atomically: true, encoding: .utf8)
+    
+    
+    
+    //todic
+    Struct.fileContent = ""
+    for sm in stctModels {
+        Struct.funType = .toDic
+        sm.ocSize()
+    }
+    print(Struct.fileContent)
 }
 
 astAnalys2model()

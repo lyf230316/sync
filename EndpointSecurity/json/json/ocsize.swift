@@ -12,6 +12,7 @@ enum FunT {
     case write
     case read
     case headerfile
+    case toDic
 }
 
 extension Struct {
@@ -37,11 +38,11 @@ extension Struct {
             return
         }
         let on = name.originName()
-        structStart()
+        let indentation = structStart()
         var index = 0
         while index < members.count {
             let member = members[index]
-            ocSize(member,"\(on)->", "\t")
+            ocSize(member,"\(on)->", indentation)
             index += 1
         }
         structEnd()
@@ -144,11 +145,11 @@ extension Struct {
     
     // 差异输出
     
-    func structStart() {
+    func structStart() -> String {
         if Self.debug {
             Self.addLine("//\(#function)")
         }
-        
+        var res = "\t"
         switch Self.funType {
         case .size:
             Self.addLine("size_t \(funcPrefix)\(name)_size(\(name) *\(name.originName())) {")
@@ -163,7 +164,13 @@ extension Struct {
             Self.addLine("size_t \(funcPrefix)\(name)_size(\(name) *\(name.originName()));")
             Self.addLine("size_t \(funcPrefix)\(name)_write(\(name) *\(name.originName()), void *p);")
             Self.addLine("size_t \(funcPrefix)\(name)_read(\(name) *\(name.originName()), void *p);")
+        case .toDic:
+            Self.addLine("extension \(name.originName()) {")
+            Self.addLine("    func dic() -> [String: Any] {")
+            Self.addLine("        var res: [String: Any] = [:]")
+            res = "\t\t"
         }
+        return res
     }
     
     func structEnd() {
@@ -183,6 +190,10 @@ extension Struct {
             Self.addLine("}\n")
         case .headerfile:
             Self.addLine("")
+        case .toDic:
+            Self.addLine("        return dic")
+            Self.addLine("    }")
+            Self.addLine("}\n")
         }
     }
     
@@ -202,6 +213,8 @@ extension Struct {
             Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_read(\(ctx)\(mem.name), p+size);")
         case .headerfile:
             break
+        case .toDic:
+            Self.addLine("\(indentation)res[\(mem.name)] = self.\(mem.name).pointee.dic()")
         }
         
     }
@@ -221,6 +234,8 @@ extension Struct {
             Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_read(&(\(ctx)\(mem.name)), p+size);")
         case .headerfile:
             break
+        case .toDic:
+            Self.addLine("\(indentation)res[\(mem.name)] = self.\(mem.name).dic()")
         }
     }
     
@@ -262,6 +277,15 @@ extension Struct {
             }
         case .headerfile:
             break
+        case .toDic:
+            if otype == "void" {
+                return
+            } else if otype == "struct statfs" {
+                Self.addLine("\(indentation)res[\(mem.name)] = self.\(mem.name).dic()")
+            }
+            else {
+                print(otype)
+            }
         }
     }
     
@@ -305,6 +329,15 @@ extension Struct {
             }
         case .headerfile:
             break
+        case .toDic:
+            if let (itemT, count) = mem.arrayInfo() {
+                if count > 0 {
+                    Self.addLine("\(indentation)res[\(mem.name)] = self.\(mem.name)")
+                }
+            }
+            else {
+                Self.addLine("\(indentation)res[\(mem.name)] = self.\(mem.name)")
+            }
         }
     }
     
@@ -378,6 +411,24 @@ extension Struct {
             }
         case .headerfile:
             break
+        case .toDic:
+            if st {
+                Self.addLine("\(indentation)if (\(ctx)\(mem.name)) {")
+                Self.addLine("\(indentation)    var arr: [\(otype)] = []")
+                Self.addLine("\(indentation)    for var i in 0 ..< self.\(count) {")
+                Self.addLine("\(indentation)        arr.append(self.\(mem.name)[i].dic()")
+                Self.addLine("\(indentation)    }")
+                Self.addLine("\(indentation)    res[\(mem.name)] = arr")
+                Self.addLine("\(indentation)}")
+            } else {
+                Self.addLine("\(indentation)if (\(ctx)\(mem.name)) {")
+                Self.addLine("\(indentation)    var arr: [\(otype)] = []")
+                Self.addLine("\(indentation)    for var i in 0 ..< self.\(count) {")
+                Self.addLine("\(indentation)        arr.append(self.\(mem.name)[i]")
+                Self.addLine("\(indentation)    }")
+                Self.addLine("\(indentation)    res[\(mem.name)] = arr")
+                Self.addLine("\(indentation)}")
+            }
         }
     }
 }
