@@ -29,7 +29,7 @@ typedef enum : NSUInteger {
 - (void)subScriptions:(void(^)(es_return_t code,NSData *types))callback;
 - (void)muteProcess:(audit_token_t)audit_token callback:(void(^)(es_return_t code))callback;
 - (void)unmuteProcess:(audit_token_t)audit_token callback:(void(^)(es_return_t code))callback;
-- (void)muteProcess:(audit_token_t)audit_token envents:(NSData *)types callback:(void(^)(es_return_t code))callback;
+- (void)muteProcess:(audit_token_t)audit_token events:(NSData *)events callback:(void(^)(es_return_t code))callback;
 - (void)mutedProcessesEvents:(void(^)(es_return_t code, NSData *data))callback;
 - (void)mutedPath:(NSString *)path type:(es_mute_path_type_t)type callback:(void(^)(es_return_t code))callback;
 - (void)mutedPath:(NSString *)path type:(es_mute_path_type_t)type events:(NSData *)events callback:(void(^)(es_return_t code))callback;

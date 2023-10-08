@@ -14,6 +14,7 @@
 		1C151DF12AAAFA6D00CFA6E6 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C151DF02AAAFA6D00CFA6E6 /* libEndpointSecurity.tbd */; };
 		1C151E032AAB004500CFA6E6 /* swr.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C151E022AAB004500CFA6E6 /* swr.c */; };
 		1C151E062AAB03B600CFA6E6 /* XpcClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C151E052AAB03B600CFA6E6 /* XpcClient.swift */; };
+		6E7798382AABC66400137A76 /* XpcClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7798372AABC66400137A76 /* XpcClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		1C151E012AAB004500CFA6E6 /* EService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EService.h; sourceTree = "<group>"; };
 		1C151E022AAB004500CFA6E6 /* swr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swr.c; sourceTree = "<group>"; };
 		1C151E052AAB03B600CFA6E6 /* XpcClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XpcClient.swift; sourceTree = "<group>"; };
+		6E7798362AABC66400137A76 /* XpcClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XpcClient.h; sourceTree = "<group>"; };
+		6E7798372AABC66400137A76 /* XpcClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XpcClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,7 @@
 		1C151DFA2AAAFCE200CFA6E6 /* C */ = {
 			isa = PBXGroup;
 			children = (
+				6E7798352AABC64700137A76 /* Client */,
 				1C151E012AAB004500CFA6E6 /* EService.h */,
 				1C151E022AAB004500CFA6E6 /* swr.c */,
 				1C151E002AAB004500CFA6E6 /* swr.h */,
@@ -97,6 +101,15 @@
 			isa = PBXGroup;
 			children = (
 				1C151E052AAB03B600CFA6E6 /* XpcClient.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		6E7798352AABC64700137A76 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				6E7798362AABC66400137A76 /* XpcClient.h */,
+				6E7798372AABC66400137A76 /* XpcClient.m */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -173,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C151E062AAB03B600CFA6E6 /* XpcClient.swift in Sources */,
+				6E7798382AABC66400137A76 /* XpcClient.m in Sources */,
 				1C151E032AAB004500CFA6E6 /* swr.c in Sources */,
 				1C151DE32AAAF9D400CFA6E6 /* ViewController.swift in Sources */,
 				1C151DE12AAAF9D400CFA6E6 /* AppDelegate.swift in Sources */,
@@ -317,7 +331,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = U6G2VLMPPZ;
+				DEVELOPMENT_TEAM = 4KDWBQAQFX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -350,7 +364,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = U6G2VLMPPZ;
+				DEVELOPMENT_TEAM = 4KDWBQAQFX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

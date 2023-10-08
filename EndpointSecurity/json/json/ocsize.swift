@@ -13,10 +13,14 @@ enum FunT {
     case read
     case headerfile
     case toDic
+    case OCObject_H
+    case CStruct
+    case CStructConvert_H
+    case CStructConvert // es to ces
 }
 
 extension Struct {
-    static var debug: Bool = false
+    static var debug: Bool = true
     static var funType: FunT = .size
     
     static var fileContent: String = ""
@@ -48,7 +52,7 @@ extension Struct {
         structEnd()
     }
     
-    func ocSize(_ mem: Member,_ ctx: String,_ indentation: String = "\t") {
+    func ocSize(_ mem: Member,_ ctx: String,_ indentation: String = "\t", ext: String = "") {
         if mem.name.hasPrefix("reserved") || mem.name == "opaque" {
             return
         }
@@ -59,22 +63,22 @@ extension Struct {
         if pointer {
             if st {
                 if self.name == "es_muted_paths_t" && mem.name == "paths" {
-                    self.ocSizeOfArray(mem, ctx, count: "count")
+                    self.ocSizeOfArray(mem, ctx, indentation, count: "count")
                 } else if self.name == "es_muted_processes_t" && mem.name == "processes" {
                     self.ocSizeOfArray(mem, ctx, count: "count")
                 }
                 else {
-                    onCustomStructPointer(mem, ctx, indentation)
+                    onCustomStructPointer(mem, ctx, indentation, ext: ext)
                 }
             } else {
                 if self.name == "es_token_t" && mem.name == "data" {
-                    self.ocSizeOfArray(mem, ctx, count: "size")
+                    self.ocSizeOfArray(mem, ctx, indentation, count: "size")
                 } else if self.name == "es_string_token_t" && mem.name == "data" {
-                    self.ocSizeOfArray(mem, ctx, count: "length")
+                    self.ocSizeOfArray(mem, ctx, indentation, count: "length")
                 } else if self.name == "es_muted_path_t" && mem.name == "events" {
-                    self.ocSizeOfArray(mem, ctx, count: "event_count")
+                    self.ocSizeOfArray(mem, ctx, indentation, count: "event_count")
                 } else if self.name == "es_muted_process_t" && mem.name == "events" {
-                    self.ocSizeOfArray(mem, ctx, count: "event_count")
+                    self.ocSizeOfArray(mem, ctx, indentation, count: "event_count")
                 }
                 else {
                     onCustomPointer(mem, ctx, indentation)
@@ -84,8 +88,9 @@ extension Struct {
             if st {
                 if otype.contains("__"),
                    case .es_struct(let it) = typesDic[otype]! {
+                    self.parent = self
                     for memb in it.members {
-                        it.ocSize(memb, "\(ctx)\(mem.name).", indentation)
+                        it.ocSize(memb, "\(ctx)\(mem.name).", indentation, ext: "\(ext).\(mem.name)")
                     }
                 } else {
                     onCustomStruct(mem, ctx, indentation)
@@ -126,6 +131,15 @@ extension Struct {
         }
         switch Self.funType {
         case .headerfile:
+            break
+        case .OCObject_H:
+            break
+        case .CStruct:
+            Self.addLine("\(indentation)void * _Nonnull \(mem.name);")
+            break
+        case .CStructConvert_H:
+            break
+        case .CStructConvert:
             break
         default:
             Self.addLine("\(indentation)switch (\(ctx)\(enumem.name)) {")
@@ -169,6 +183,16 @@ extension Struct {
             Self.addLine("    func dic() -> [String: Any] {")
             Self.addLine("        var res: [String: Any] = [:]")
             res = "\t\t"
+        case .OCObject_H:
+            Self.addLine("@interface ES\(name.originName().camelCaseFromSnakeCase()) : NSObject")
+            res = ""
+        case .CStruct:
+            Self.addLine("typedef struct ces_\(name.originName()) {")
+        case .CStructConvert_H:
+            Self.addLine("ces_\(name.originName()) \(name)_convert(\(name) * _Nonnull \(name.originName()));")
+        case .CStructConvert:
+            Self.addLine("ces_\(name.originName()) \(name)_convert(\(name) * _Nonnull \(name.originName())) {")
+            Self.addLine("    ces_\(name.originName()) _\(name.originName()) = {0};")
         }
         return res
     }
@@ -194,10 +218,19 @@ extension Struct {
             Self.addLine("        return dic")
             Self.addLine("    }")
             Self.addLine("}\n")
+        case .OCObject_H:
+            Self.addLine("@end\n")
+        case .CStruct:
+            Self.addLine("}ces_\(name.originName());\n")
+        case .CStructConvert_H:
+            Self.addLine("")
+        case .CStructConvert:
+            Self.addLine("    return _\(name.originName());")
+            Self.addLine("}\n")
         }
     }
     
-    func onCustomStructPointer(_ mem: Member,_ ctx: String,_ indentation: String = "\t") {
+    func onCustomStructPointer(_ mem: Member,_ ctx: String,_ indentation: String = "\t", ext: String = "") {
         if Self.debug {
             Self.addLine("\(indentation)//\(#function)")
         }
@@ -215,8 +248,19 @@ extension Struct {
             break
         case .toDic:
             Self.addLine("\(indentation)res[\(mem.name)] = self.\(mem.name).pointee.dic()")
+        case .OCObject_H:
+            Self.addLine("\(indentation)@property(nonatomic, strong)ES\(otype.originName().camelCaseFromSnakeCase())* \(mem.name);")
+        case .CStruct:
+            Self.addLine("\(indentation)ces_\(otype.originName()) \(mem.name);")
+        case .CStructConvert_H:
+            break
+        case .CStructConvert:
+            if ext.isEmpty {
+                Self.addLine("\(indentation)_\(name.originName()).\(mem.name) = \(otype)_convert(\(ctx)\(mem.name));")
+            } else {
+                Self.addLine("\(indentation)\(ext)\(mem.name) = \(otype)_convert(\(ctx)\(mem.name));")
+            }
         }
-        
     }
     
     func onCustomStruct(_ mem: Member,_ ctx: String,_ indentation: String = "\t") {
@@ -236,6 +280,14 @@ extension Struct {
             break
         case .toDic:
             Self.addLine("\(indentation)res[\(mem.name)] = self.\(mem.name).dic()")
+        case .OCObject_H:
+            Self.addLine("\(indentation)@property(nonatomic, strong)ES\(otype.originName().camelCaseFromSnakeCase())* \(mem.name);")
+        case .CStruct:
+            Self.addLine("\(indentation)ces_\(otype.originName()) \(mem.name);")
+        case .CStructConvert_H:
+            break
+        case .CStructConvert:
+            Self.addLine("\(indentation)_\(name.originName()).\(mem.name) = \(otype)_convert(&(\(ctx)\(mem.name)));")
         }
     }
     
@@ -282,6 +334,35 @@ extension Struct {
                 return
             } else if otype == "struct statfs" {
                 Self.addLine("\(indentation)res[\(mem.name)] = self.\(mem.name).dic()")
+            }
+            else {
+                print(otype)
+            }
+        case .OCObject_H:
+            if otype == "void" {
+                return
+            } else if otype == "struct statfs" {
+                Self.addLine("\(indentation)@property(nonatomic, assign)\(otype) \(mem.name);")
+            }
+            else {
+                print(otype)
+            }
+        case .CStruct:
+            if otype == "void" {
+                return
+            } else if otype == "struct statfs" {
+                Self.addLine("\(indentation)\(otype) \(mem.name);")
+            }
+            else {
+                print(otype)
+            }
+        case .CStructConvert_H:
+            break
+        case .CStructConvert:
+            if otype == "void" {
+                return
+            } else if otype == "struct statfs" {
+                Self.addLine("\(indentation)_\(name.originName()).\(mem.name) = *\(ctx)\(mem.name);")
             }
             else {
                 print(otype)
@@ -337,6 +418,35 @@ extension Struct {
             }
             else {
                 Self.addLine("\(indentation)res[\(mem.name)] = self.\(mem.name)")
+            }
+        case .OCObject_H:
+            if let (itemT, count) = mem.arrayInfo() {
+                if count > 0 {
+                    Self.addLine("\(indentation)@property(nonatomic, assign)NSArray* \(mem.name); //\(otype)")
+                }
+            }
+            else {
+                Self.addLine("\(indentation)@property(nonatomic, assign)\(otype) \(mem.name); //\(otype)")
+            }
+        case .CStruct:
+            if let (itemT, count) = mem.arrayInfo() {
+                if count > 0 {
+                    Self.addLine("\(indentation)\(itemT) \(mem.name)[\(count)];")
+                }
+            }
+            else {
+                Self.addLine("\(indentation)\(otype) \(mem.name);")
+            }
+        case .CStructConvert_H:
+            break
+        case .CStructConvert:
+            if let (itemT, count) = mem.arrayInfo() {
+                if count > 0 {
+                    Self.addLine("\(indentation)memcpy(_\(name.originName()).\(mem.name),\(ctx)\(mem.name),sizeof(\(itemT)) * \(count));")
+                }
+            }
+            else {
+                Self.addLine("\(indentation)_\(name.originName()).\(mem.name) = \(ctx)\(mem.name);")
             }
         }
     }
@@ -428,6 +538,31 @@ extension Struct {
                 Self.addLine("\(indentation)    }")
                 Self.addLine("\(indentation)    res[\(mem.name)] = arr")
                 Self.addLine("\(indentation)}")
+            }
+        case .CStructConvert_H:
+            break
+        case .OCObject_H:
+            Self.addLine("//\(otype) \(mem.name)")
+            if st {
+                Self.addLine("\(indentation)@property(nonatomic, strong)NSArray* \(mem.name);")
+            } else {
+                if otype == "char" ||
+                    otype == "uint8_t" {
+                    Self.addLine("\(indentation)@property(nonatomic, strong)NSData* \(mem.name);")
+                }
+                else {
+                    Self.addLine("\(indentation)@property(nonatomic, strong)NSArray* \(mem.name);")
+                }
+            }
+        case .CStruct:
+            if st {
+                Self.addLine("\(indentation)\(otype)* _Nonnull \(mem.name);")
+            } else {
+                Self.addLine("\(indentation)\(otype)* _Nonnull \(mem.name);")
+            }
+        case .CStructConvert:
+            if st {
+                Self.addLine("\(indentation)_\(name.originName()).\(mem.name) = \(ctx)\(mem.name);")
             }
         }
     }

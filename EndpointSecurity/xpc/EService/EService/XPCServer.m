@@ -39,6 +39,7 @@
 #pragma mark - NSXPCListenerDelegate
 
 - (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)newConnection {
+    NSLog(@"%@", newConnection);
     newConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(EServiceClient)];
     newConnection.exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(EService)];
     ESController *controller = [[ESController alloc]init];

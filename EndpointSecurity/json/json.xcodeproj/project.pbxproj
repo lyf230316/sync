@@ -16,6 +16,8 @@
 		6E06FD542A6028CA00B4B778 /* swiftSWR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E06FD532A6028CA00B4B778 /* swiftSWR.swift */; };
 		6E179B242A55B3CF008690CD /* toDic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E179B232A55B3CF008690CD /* toDic.swift */; };
 		6E40FCC42A05409700FE4B5B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E40FCC32A05409700FE4B5B /* libsqlite3.tbd */; };
+		6E77983C2AABD8DA00137A76 /* ESObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E77983B2AABD8DA00137A76 /* ESObject.m */; };
+		6E7798402AAC8B1E00137A76 /* convert.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E77983F2AAC8B1E00137A76 /* convert.c */; };
 		6EBB70512A53861A003D3642 /* demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBB70502A53861A003D3642 /* demo.swift */; };
 		6EED057A2A3D487E008B6081 /* cwrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED05792A3D487E008B6081 /* cwrite.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +46,11 @@
 		6E06FD532A6028CA00B4B778 /* swiftSWR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftSWR.swift; sourceTree = "<group>"; };
 		6E179B232A55B3CF008690CD /* toDic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toDic.swift; sourceTree = "<group>"; };
 		6E40FCC32A05409700FE4B5B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		6E77983A2AABD8DA00137A76 /* ESObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESObject.h; sourceTree = "<group>"; };
+		6E77983B2AABD8DA00137A76 /* ESObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESObject.m; sourceTree = "<group>"; };
+		6E77983D2AAC318300137A76 /* EStruct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EStruct.h; sourceTree = "<group>"; };
+		6E77983E2AAC8B1E00137A76 /* convert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = convert.h; sourceTree = "<group>"; };
+		6E77983F2AAC8B1E00137A76 /* convert.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = convert.c; sourceTree = "<group>"; };
 		6EB1E95129F17BEA001A2A61 /* EndpointSecurity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EndpointSecurity.json; sourceTree = "<group>"; };
 		6EBB70502A53861A003D3642 /* demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demo.swift; sourceTree = "<group>"; };
 		6EED05792A3D487E008B6081 /* cwrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cwrite.swift; sourceTree = "<group>"; };
@@ -64,6 +71,9 @@
 		1C7FE6C229EF7C64007D54B3 = {
 			isa = PBXGroup;
 			children = (
+				6E77983E2AAC8B1E00137A76 /* convert.h */,
+				6E77983F2AAC8B1E00137A76 /* convert.c */,
+				6E7798392AABD8BB00137A76 /* New Group */,
 				1C7574E62A9DCDD6007F86FC /* swr.h */,
 				1C7574E72A9DCDD6007F86FC /* swr.c */,
 				1C7FE6CD29EF7C64007D54B3 /* json */,
@@ -103,6 +113,16 @@
 				6E40FCC32A05409700FE4B5B /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E7798392AABD8BB00137A76 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				6E77983A2AABD8DA00137A76 /* ESObject.h */,
+				6E77983B2AABD8DA00137A76 /* ESObject.m */,
+				6E77983D2AAC318300137A76 /* EStruct.h */,
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,8 +184,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E77983C2AABD8DA00137A76 /* ESObject.m in Sources */,
 				1C7FE6CF29EF7C64007D54B3 /* main.swift in Sources */,
 				6E179B242A55B3CF008690CD /* toDic.swift in Sources */,
+				6E7798402AAC8B1E00137A76 /* convert.c in Sources */,
 				1C7574E82A9DCDD6007F86FC /* swr.c in Sources */,
 				6E06FD542A6028CA00B4B778 /* swiftSWR.swift in Sources */,
 				1C241DEB2A960B7B00A5DBF8 /* ocsize.swift in Sources */,

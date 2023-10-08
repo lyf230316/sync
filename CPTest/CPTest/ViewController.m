@@ -33,6 +33,12 @@
     // Update the view, if already loaded.
 }
 - (IBAction)export:(id)sender {
+    NSPasteboard * board = [NSPasteboard generalPasteboard];
+    [board clearContents];
+    [board writeObjects:@[@"ddd"]];
+    if ([@"" isEqualToString:sender]) {
+        
+    }
 }
 
 @end

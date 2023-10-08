@@ -33,7 +33,8 @@ func structToModel(tname: String,def:[String: Any]) -> [Struct]? {
         return nil
     }
     var result: [Struct] = []
-    var mainStruct = Struct(name: tname)
+    var mainStruct = Struct()
+    mainStruct.name = tname
     if tag == "union" {
         mainStruct.isUnoin = true
     }
@@ -78,8 +79,8 @@ func structToModel(tname: String,def:[String: Any]) -> [Struct]? {
 }
 
 func astAnalys2model() {
-    let file = "/Users/lyf/git/github/sync/EndpointSecurity/json/json/EndpointSecurity.json"
-//    let file = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/json/json/EndpointSecurity.json"
+//    let file = "/Users/lyf/git/github/sync/EndpointSecurity/json/json/EndpointSecurity.json"
+    let file = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/json/json/EndpointSecurity.json"
     let data = try! Data(contentsOf: URL(filePath: file))
     let dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
     
@@ -184,8 +185,8 @@ func astAnalys2model() {
 #endif /* swr_h */
 
 """)
-    try! Struct.fileContent.write(toFile: "/Users/lyf/git/github/sync/EndpointSecurity/json/swr.h", atomically: true, encoding: .utf8)
-
+//    try! Struct.fileContent.write(toFile: "/Users/lyf/git/github/sync/EndpointSecurity/json/swr.h", atomically: true, encoding: .utf8)
+    try! Struct.fileContent.write(toFile: "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/json/swr.h", atomically: true, encoding: .utf8)
     
     //MARK: C
     
@@ -204,17 +205,82 @@ func astAnalys2model() {
         sm.ocSize()
     }
     
-    try! Struct.fileContent.write(toFile: "/Users/lyf/git/github/sync/EndpointSecurity/json/swr.c", atomically: true, encoding: .utf8)
+    try! Struct.fileContent.write(toFile: "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/json/swr.c", atomically: true, encoding: .utf8)
     
     
     
     //todic
-    Struct.fileContent = ""
+    Struct.fileContent = """
+
+//
+//  ESObject.h
+//  json
+//
+//  Created by msi on 2023/9/9.
+//
+
+#import <Foundation/Foundation.h>
+#import <EndpointSecurity/EndpointSecurity.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+
+"""
     for sm in stctModels {
-        Struct.funType = .toDic
+        Struct.funType = .OCObject_H
         sm.ocSize()
     }
-    print(Struct.fileContent)
+    Struct.fileContent = String(format: "%@\nNS_ASSUME_NONNULL_END\n", Struct.fileContent)
+    try! Struct.fileContent.write(toFile: "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/json/ESObject.h", atomically: true, encoding: .utf8)
+    
+    
+    Struct.fileContent = """
+//
+//  convert.h
+//  json
+//
+//  Created by msi on 2023/9/9.
+//
+
+#ifndef convert_h
+#define convert_h
+
+#include <stdio.h>
+#include <string.h>
+#include <EndpointSecurity/EndpointSecurity.h>
+
+
+"""
+    for sm in stctModels {
+        Struct.funType = .CStruct
+        sm.ocSize()
+    }
+    for sm in stctModels {
+        Struct.funType = .CStructConvert_H
+        sm.ocSize()
+    }
+    
+    Struct.fileContent = String(format: "%@\n\n#endif /* convert_h */\n", Struct.fileContent)
+    try! Struct.fileContent.write(toFile: "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/json/convert.h", atomically: true, encoding: .utf8)
+    
+    Struct.fileContent = """
+//
+//  convert.c
+//  json
+//
+//  Created by msi on 2023/9/9.
+//
+
+#include "convert.h"
+
+
+"""
+    for sm in stctModels {
+        Struct.funType = .CStructConvert
+        sm.ocSize()
+    }
+    try! Struct.fileContent.write(toFile: "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/json/convert.c", atomically: true, encoding: .utf8)
+    
 }
 
 astAnalys2model()

@@ -10,7 +10,7 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
+        XpcClient.share.connectService(name: "com.caidev.EService")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

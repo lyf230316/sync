@@ -21,7 +21,7 @@ public extension String {
                         .drop { $0.isEmpty }
                         .map { $0.prefix(1).uppercased()+$0.dropFirst() }
                         .joined()
-        return value.prefix(1).lowercased()+value.dropFirst()
+        return value
     }
     
     func convertType() -> String {
@@ -87,9 +87,14 @@ public extension String {
     }
 }
 
-struct Member {
-    var name: String
-    var type: String
+class Member {
+    var name: String = ""
+    var type: String = ""
+    
+    init(name: String, type: String) {
+        self.name = name
+        self.type = type
+    }
     
     func isPointer() -> Bool {
         type.contains("*")
@@ -136,9 +141,10 @@ struct Member {
     }
 }
 
-struct Struct {
+class Struct {
+    var parent: Struct? = nil
     var isUnoin: Bool = false
-    var name: String
+    var name: String = ""
     var members: [Member] = []
     
     func findMember(_ name: String) -> Member? {

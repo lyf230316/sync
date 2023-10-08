@@ -16,6 +16,8 @@
 + (void)load {
     method_exchangeImplementations(class_getInstanceMethod(self, @selector(setData:forType:)),
                                    class_getInstanceMethod(self, @selector(ex_setData:forType:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, NSSelectorFromString(@"_setData:forType:index:usesPboardTypes:")),
+                                   class_getInstanceMethod(self, @selector(ex__setData:forType:index:usesPboardTypes:)));
     method_exchangeImplementations(class_getInstanceMethod(self, NSSelectorFromString(@"_dataForType:index:usesPboardTypes:combinesItems:securityScoped:")),
                                    class_getInstanceMethod(self, @selector(ex__dataForType:index:usesPboardTypes:combinesItems:securityScoped:)));
 }
@@ -23,6 +25,12 @@
 -(BOOL)ex_setData:(NSData *)data forType:(NSPasteboardType)dataType {
     NSLog(@"\n[NSPasteboard ex_setData:%@ forType:%@]",[data debugDescription],dataType);
     return [self ex_setData:[NSPasteboard data_encrypt:data] forType:dataType];
+}
+
+- (BOOL)ex__setData:(NSData *)data forType:(NSString *)type index:(unsigned long long)index usesPboardTypes:(BOOL)usesPboardTypes {
+    NSLog(@"\n[NSPasteboard ex_setData:%@ forType:%@]",[data debugDescription],type);
+    BOOL res = [self ex__setData:data forType:type index:index usesPboardTypes:usesPboardTypes];
+    return res;
 }
 
 -(NSData *)ex__dataForType:(NSString *)type index:(unsigned long long)index usesPboardTypes:(BOOL)usesPboardTypes combinesItems:(BOOL)combinesItems securityScoped:(BOOL)securityScoped {
