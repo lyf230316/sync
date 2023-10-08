@@ -9,6 +9,8 @@
 #import "EService.h"
 #import "ESController.h"
 
+NSString *servieceName = @"com.caidev.EService";
+
 @interface XPCServer ()<NSXPCListenerDelegate>
 
 @property(nonatomic, strong)NSXPCListener *listener;
@@ -29,7 +31,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.listener = [[NSXPCListener alloc] initWithMachServiceName:@"com.caidev.EService"];
+        self.listener = [[NSXPCListener alloc] initWithMachServiceName:servieceName];
         self.listener.delegate = self;
         [self.listener resume];
     }

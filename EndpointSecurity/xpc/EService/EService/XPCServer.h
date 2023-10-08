@@ -9,8 +9,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XPCServer : NSObject
+extern NSString *servieceName;
 
+@interface XPCServer : NSObject
++ (instancetype)share;
 @end
 
 NS_ASSUME_NONNULL_END
