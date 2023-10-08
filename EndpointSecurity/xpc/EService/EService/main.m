@@ -10,8 +10,9 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        if (argc == 2) {
+            servieceName = [NSString stringWithCString:argv[1] encoding:NSUTF8StringEncoding];
+        }
         [XPCServer share];
         [[NSRunLoop currentRunLoop] run];
     }
