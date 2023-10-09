@@ -10,6 +10,7 @@ import Cocoa
 public class EmbedViewController: NSViewController {
     public weak var embedController: NSViewController? = nil
     
+    @discardableResult
     public func embed(_ controller: NSViewController, options: NSViewController.TransitionOptions = [], completion: (() -> Void)? = nil) -> Bool {
         let container = view
         if let embedController = embedController {

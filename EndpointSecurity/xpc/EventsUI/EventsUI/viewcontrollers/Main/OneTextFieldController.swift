@@ -10,7 +10,7 @@ import Cocoa
 class OneTextFieldController: NSViewController {
     public var message: String = ""
     public var contentTxt: String = ""
-    public var btnBlock: ((Bool) -> Void)? = nil
+    public var btnBlock: ((OneTextFieldController ,Bool) -> Void)? = nil
     
     @IBOutlet weak var label: NSTextField!
     @IBOutlet weak var tf: NSTextField!
@@ -22,15 +22,20 @@ class OneTextFieldController: NSViewController {
         // Do view setup here.
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        self.view.window?.title = self.title ?? ""
+    }
+    
     @IBAction func sure(_ sender: NSButton) {
         if let btnBlock = btnBlock {
-            btnBlock(true)
+            btnBlock(self, true)
         }
     }
     
     @IBAction func cancle(_ sender: NSButton) {
         if let btnBlock = btnBlock {
-            btnBlock(false)
+            btnBlock(self, false)
         }
     }
     

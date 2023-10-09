@@ -29,8 +29,7 @@ extension XpcClient: EServiceClient {
         switch type {
         case ESCTypeMessage:
             var msg = malloc(MemoryLayout<es_message_t>.size).bindMemory(to: es_message_t.self, capacity: 1)
-            data.by
-            swr_es_message_t_read(msg, (data as NSData).bytes)
+            swr_es_message_t_read(msg, UnsafeMutableRawPointer(mutating: (data as NSData).bytes))
             print(data)
         default:
             print(data)
@@ -105,7 +104,7 @@ extension XpcClient {
         if let proxy = self.connection.synchronousRemoteObjectProxyWithErrorHandler({ error in
             err = error
         }) as? EService {
-            proxy.muteProcess(audit_token, envents: types, callback: callback);
+            proxy.muteProcess(audit_token, events: types, callback: callback);
         }
         return err
     }
