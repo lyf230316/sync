@@ -28,7 +28,7 @@ extension XpcClient: EServiceClient {
     func onType(_ type: ESCType, data: Data) {
         switch type {
         case ESCTypeMessage:
-            var msg = malloc(MemoryLayout<es_message_t>.size).bindMemory(to: es_message_t.self, capacity: 1)
+            let msg = malloc(MemoryLayout<es_message_t>.size).bindMemory(to: es_message_t.self, capacity: 1)
             swr_es_message_t_read(msg, UnsafeMutableRawPointer(mutating: (data as NSData).bytes))
             print(data)
         default:

@@ -17,10 +17,11 @@ class MainViewController: EmbedViewController  {
     }
     
     func getServiceName() {
-        let controller = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "OneTextFieldController") as! OneTextFieldController
-        controller.title = "ServiceName"
-        controller.message = "Name: "
-        controller.btnBlock = {[weak self] ctl, sure in
+        let tfCtl = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "OneTextFieldController") as! OneTextFieldController
+        tfCtl.title = "ServiceName"
+        tfCtl.message = "ServiceName: "
+        tfCtl.contentTxt = "com.caidev.EService"
+        tfCtl.btnBlock = {[weak self] ctl, sure in
             guard let self = self else {
                 return
             }
@@ -31,11 +32,14 @@ class MainViewController: EmbedViewController  {
                 NSApp.terminate(self)
             }
         }
-        embed(controller)
+        embed(tfCtl)
     }
     
     func loadContent() {
-        
+        XpcClient.share.connectService(name: self.serviceName)
+        if let ctl = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ContentController") as? ContentController {
+            self.presentAsModalWindow(ctl)
+        }
     }
     
 }

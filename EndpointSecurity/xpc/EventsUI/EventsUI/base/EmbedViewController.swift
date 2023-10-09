@@ -14,8 +14,7 @@ public class EmbedViewController: NSViewController {
     public func embed(_ controller: NSViewController, options: NSViewController.TransitionOptions = [], completion: (() -> Void)? = nil) -> Bool {
         let container = view
         if let embedController = embedController {
-            addChild(embedController)
-            
+            addChild(controller)
             transition(from: embedController, to: controller, options: options) {[weak self] in
                 guard let self = self else {
                     return
