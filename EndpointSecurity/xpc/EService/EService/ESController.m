@@ -20,6 +20,7 @@
 - (instancetype)init
 {
     self = [super init];
+    OS_ATOMIC_QUEUE_INIT;
     if (self) {
         client = nil;
         __weak typeof(self)weakSelf = self;

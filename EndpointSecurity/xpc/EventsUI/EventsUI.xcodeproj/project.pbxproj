@@ -14,6 +14,10 @@
 		1C151DF12AAAFA6D00CFA6E6 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C151DF02AAAFA6D00CFA6E6 /* libEndpointSecurity.tbd */; };
 		1C151E032AAB004500CFA6E6 /* swr.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C151E022AAB004500CFA6E6 /* swr.c */; };
 		1C151E062AAB03B600CFA6E6 /* XpcClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C151E052AAB03B600CFA6E6 /* XpcClient.swift */; };
+		1C7D5DB92ADE702900FB5D23 /* PropertyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7D5DB52ADE702900FB5D23 /* PropertyCell.swift */; };
+		1C7D5DBA2ADE702900FB5D23 /* PropertyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7D5DB62ADE702900FB5D23 /* PropertyNode.swift */; };
+		1C7D5DBB2ADE702900FB5D23 /* IORPropertyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7D5DB72ADE702900FB5D23 /* IORPropertyController.swift */; };
+		1C7D5DBC2ADE702900FB5D23 /* PropertyDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7D5DB82ADE702900FB5D23 /* PropertyDataCell.swift */; };
 		1CA412DF2AD2AC0E009830C4 /* EmbedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA412DE2AD2AC0E009830C4 /* EmbedViewController.swift */; };
 		1CA412E12AD2B1E3009830C4 /* OneTextFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA412E02AD2B1E3009830C4 /* OneTextFieldController.swift */; };
 		6E7C4A782AD2F47C00E5CE95 /* ContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C4A772AD2F47C00E5CE95 /* ContentController.swift */; };
@@ -32,6 +36,10 @@
 		1C151E012AAB004500CFA6E6 /* EService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EService.h; sourceTree = "<group>"; };
 		1C151E022AAB004500CFA6E6 /* swr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swr.c; sourceTree = "<group>"; };
 		1C151E052AAB03B600CFA6E6 /* XpcClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XpcClient.swift; sourceTree = "<group>"; };
+		1C7D5DB52ADE702900FB5D23 /* PropertyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyCell.swift; sourceTree = "<group>"; };
+		1C7D5DB62ADE702900FB5D23 /* PropertyNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyNode.swift; sourceTree = "<group>"; };
+		1C7D5DB72ADE702900FB5D23 /* IORPropertyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IORPropertyController.swift; sourceTree = "<group>"; };
+		1C7D5DB82ADE702900FB5D23 /* PropertyDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyDataCell.swift; sourceTree = "<group>"; };
 		1CA412DE2AD2AC0E009830C4 /* EmbedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedViewController.swift; sourceTree = "<group>"; };
 		1CA412E02AD2B1E3009830C4 /* OneTextFieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTextFieldController.swift; sourceTree = "<group>"; };
 		6E7C4A772AD2F47C00E5CE95 /* ContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentController.swift; sourceTree = "<group>"; };
@@ -107,6 +115,17 @@
 			path = Client;
 			sourceTree = "<group>";
 		};
+		1C7D5DB42ADE6FE400FB5D23 /* propertyController */ = {
+			isa = PBXGroup;
+			children = (
+				1C7D5DB72ADE702900FB5D23 /* IORPropertyController.swift */,
+				1C7D5DB52ADE702900FB5D23 /* PropertyCell.swift */,
+				1C7D5DB82ADE702900FB5D23 /* PropertyDataCell.swift */,
+				1C7D5DB62ADE702900FB5D23 /* PropertyNode.swift */,
+			);
+			path = propertyController;
+			sourceTree = "<group>";
+		};
 		1CA412DB2AD2A8A5009830C4 /* viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +137,7 @@
 		1CA412DC2AD2A8C8009830C4 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				1C7D5DB42ADE6FE400FB5D23 /* propertyController */,
 				1C151DE62AAAF9D500CFA6E6 /* Main.storyboard */,
 				1C151DE22AAAF9D400CFA6E6 /* MainViewController.swift */,
 				1CA412E02AD2B1E3009830C4 /* OneTextFieldController.swift */,
@@ -207,10 +227,14 @@
 			files = (
 				1C151E062AAB03B600CFA6E6 /* XpcClient.swift in Sources */,
 				1C151E032AAB004500CFA6E6 /* swr.c in Sources */,
+				1C7D5DB92ADE702900FB5D23 /* PropertyCell.swift in Sources */,
 				1CA412E12AD2B1E3009830C4 /* OneTextFieldController.swift in Sources */,
 				1C151DE32AAAF9D400CFA6E6 /* MainViewController.swift in Sources */,
+				1C7D5DBC2ADE702900FB5D23 /* PropertyDataCell.swift in Sources */,
 				1C151DE12AAAF9D400CFA6E6 /* AppDelegate.swift in Sources */,
 				1CA412DF2AD2AC0E009830C4 /* EmbedViewController.swift in Sources */,
+				1C7D5DBB2ADE702900FB5D23 /* IORPropertyController.swift in Sources */,
+				1C7D5DBA2ADE702900FB5D23 /* PropertyNode.swift in Sources */,
 				6E7C4A782AD2F47C00E5CE95 /* ContentController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
