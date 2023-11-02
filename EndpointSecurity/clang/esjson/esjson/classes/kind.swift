@@ -49,6 +49,28 @@ class Record: AstBase {
     }
 }
 
-class UnionRecord {
+class Function: AstBase {
+    var storageClass: String = ""
+    var mangledName: String
+    var type: String = ""
+    var inline: Bool = false
+    var isUsed: Bool = false
     
+    override init(_ dic: [String : Any]) {
+        if let sc = dic["storageClass"] as? String {
+            storageClass = sc
+        }
+        mangledName = dic["mangledName"] as! String
+        if let tdic = dic["type"] as? [String: Any],
+           let t = tdic["qualType"] as? String {
+            type = t
+        }
+        if let il = dic["inline"] as? Bool {
+            inline = il
+        }
+        if let iu = dic["isUsed"] as? Bool {
+            isUsed = iu
+        }
+        super.init(dic)
+    }
 }
