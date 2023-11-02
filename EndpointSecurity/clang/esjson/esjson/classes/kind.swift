@@ -74,3 +74,17 @@ class Function: AstBase {
         super.init(dic)
     }
 }
+
+class Enum: AstBase {
+    var fields: [Field]
+    
+    override init(_ dic: [String : Any]) {
+        let fds = dic["inner"] as! [[String: Any]]
+        var fdarr: [Field] = []
+        fds.forEach { fd in
+            fdarr.append(Field(fd))
+        }
+        fields = fdarr
+        super.init(dic)
+    }
+}

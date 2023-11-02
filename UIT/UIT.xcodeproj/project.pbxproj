@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C9D742F2AF3A05300C444FB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C9D742E2AF3A05300C444FB /* WebKit.framework */; };
 		1CC0642C2ABA925100E6FC6F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC0642B2ABA925100E6FC6F /* AppDelegate.m */; };
 		1CC0642F2ABA925100E6FC6F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC0642E2ABA925100E6FC6F /* ViewController.m */; };
 		1CC064312ABA925200E6FC6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CC064302ABA925200E6FC6F /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C9D742E2AF3A05300C444FB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		1CC064272ABA925100E6FC6F /* UIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC0642A2ABA925100E6FC6F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1CC0642B2ABA925100E6FC6F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -31,17 +33,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C9D742F2AF3A05300C444FB /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C9D742D2AF3A05300C444FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1C9D742E2AF3A05300C444FB /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1CC0641E2ABA925100E6FC6F = {
 			isa = PBXGroup;
 			children = (
 				1CC064292ABA925100E6FC6F /* UIT */,
 				1CC064282ABA925100E6FC6F /* Products */,
+				1C9D742D2AF3A05300C444FB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
