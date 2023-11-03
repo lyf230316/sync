@@ -8,9 +8,11 @@
 import Foundation
 
 class AstBase {
+    var ast: [String: Any]
     var name: String = ""
     
     init(_ dic: [String :Any]) {
+        ast = dic
         if let n = dic["name"] as? String {
             name = n
         }
@@ -27,24 +29,49 @@ class TypeDef: AstBase {
 }
 
 //定义变量
+
 class Field: AstBase {
-    
+    var type: String = ""
+    var record: Record? = nil
+    override init(_ dic: [String : Any]) {
+        if let tdic = dic["type"] as? [String: Any] {
+            if let t = tdic["qualType"] as? String {
+                let regex = try! NSRegularExpression(pattern: "\\(.*\\)", options: NSRegularExpression.Options.caseInsensitive)
+                let range = NSMakeRange(0, t.count)
+                let modString = regex.stringByReplacingMatches(in: t, options: [], range: range, withTemplate: "XX")
+                type = modString
+            }
+        }
+        super.init(dic)
+    }
 }
 
 class Record: AstBase {
-    var completeDefinition: Bool
-    var fields: [Field]
+    var completeDefinition: Bool = false
+    var fields: [Field] = []
     var tagUsed: String
     
     override init(_ dic: [String : Any]) {
-        completeDefinition = dic["completeDefinition"] as! Bool
-        tagUsed = dic["tagUsed"] as! String
-        let fds = dic["inner"] as! [[String: Any]]
-        var fdarr: [Field] = []
-        fds.forEach { fd in
-            fdarr.append(Field(fd))
+        if let cd = dic["completeDefinition"] as? Bool {
+            completeDefinition = cd
         }
-        fields = fdarr
+        tagUsed = dic["tagUsed"] as! String
+        if let fds = dic["inner"] as? [[String: Any]] {
+            var fdarr: [Field] = []
+            fds.forEach { fd in
+                if let kind = fd["kind"] as? String {
+                    if kind == "FieldDecl" {
+                        fdarr.append(Field(fd))
+                    } else if kind == "RecordDecl" {
+                        let rcd = Record(fd)
+                        let fld = Field(fd)
+                        fld.record = rcd
+                        fdarr.append(fld)
+                    }
+                }
+            }
+            fields = fdarr
+        }
         super.init(dic)
     }
 }
@@ -85,6 +112,22 @@ class Enum: AstBase {
             fdarr.append(Field(fd))
         }
         fields = fdarr
+        super.init(dic)
+    }
+}
+
+class Var: AstBase {
+    var type: String = ""
+    var storageClass: String
+    var mangledName: String
+    
+    override init(_ dic: [String : Any]) {
+        if let tdic = dic["type"] as? [String: Any] ,
+           let t = tdic["qualType"] as? String {
+            type = t
+        }
+        storageClass = dic["storageClass"] as! String
+        mangledName = dic["mangledName"] as! String
         super.init(dic)
     }
 }

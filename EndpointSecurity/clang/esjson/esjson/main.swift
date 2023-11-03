@@ -11,10 +11,12 @@ var typedefs: [TypeDef] = []
 var records: [Record] = []
 var functions: [Function] = []
 var enums: [Enum] = []
+var vars: [Var] = []
+
 
 func astAnalys() {
-    let jsonFile = "/Users/lyf/git/github/sync/EndpointSecurity/clang/EndpointSecurity.json"
-//    let jsonFile = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/clang/EndpointSecurity.json"
+//    let jsonFile = "/Users/lyf/git/github/sync/EndpointSecurity/clang/EndpointSecurity.json"
+    let jsonFile = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/clang/EndpointSecurity.json"
     let data = try! Data(contentsOf: URL(filePath: jsonFile))
     let dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
 
@@ -35,12 +37,23 @@ func astAnalys() {
             functions.append(Function(inner))
         case "EnumDecl":
             enums.append(Enum(inner))
+        case "VarDecl":
+            vars.append(Var(inner))
+        case "EmptyDecl":
+            break
         default:
             print("keys:\(inner.keys)")
             print("\(kind) kind 没有处理")
             return
         }
         i += 1
+    }
+    
+    print(records)
+    
+    for rcrd in records {
+        var ccode = rcrd.Ccode()
+        print(ccode)
     }
 }
 
