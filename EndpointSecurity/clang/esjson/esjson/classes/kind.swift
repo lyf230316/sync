@@ -10,9 +10,11 @@ import Foundation
 class AstBase {
     var ast: [String: Any]
     var name: String = ""
+    var id: String
     
     init(_ dic: [String :Any]) {
         ast = dic
+        id = dic["id"] as! String
         if let n = dic["name"] as? String {
             name = n
         }

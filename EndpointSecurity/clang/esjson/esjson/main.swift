@@ -7,16 +7,12 @@
 
 import Foundation
 
-var typedefs: [TypeDef] = []
-var records: [Record] = []
-var functions: [Function] = []
-var enums: [Enum] = []
-var vars: [Var] = []
-
+var astDic: [String: AstBase] = [:]
 
 func astAnalys() {
 //    let jsonFile = "/Users/lyf/git/github/sync/EndpointSecurity/clang/EndpointSecurity.json"
-    let jsonFile = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/clang/EndpointSecurity.json"
+//    let jsonFile = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/clang/EndpointSecurity.json"
+    let jsonFile = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/clang/main.json"
     let data = try! Data(contentsOf: URL(filePath: jsonFile))
     let dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
 
@@ -30,15 +26,20 @@ func astAnalys() {
         let kind = inner["kind"] as! String
         switch kind {
         case "TypedefDecl":
-            typedefs.append(TypeDef(inner))
+            let td = TypeDef(inner)
+            astDic[td.id] = td
         case "RecordDecl":
-            records.append(Record(inner))
+            let rd = Record(inner)
+            astDic[rd.id] = rd
         case "FunctionDecl":
-            functions.append(Function(inner))
+            let f = Function(inner)
+            astDic[f.id] = f
         case "EnumDecl":
-            enums.append(Enum(inner))
+            let ed = Enum(inner)
+            astDic[ed.id] = ed
         case "VarDecl":
-            vars.append(Var(inner))
+            let vd = Var(inner)
+            astDic[vd.id] = vd
         case "EmptyDecl":
             break
         default:
@@ -49,11 +50,29 @@ func astAnalys() {
         i += 1
     }
     
-    print(records)
+    for (k,v) in astDic {
+        if let v = v as? TypeDef {
+            let dic = v.ast;
+            if let inners = dic["inner"] as? [[String: Any]] {
+                for inner in inners {
+                    if let ownedTagDecl = inner["ownedTagDecl"] as? [String: Any] {
+                        if  let id = ownedTagDecl["id"] as? String {
+                            if let rd = astDic[id] as? Record {
+                                rd.name = v.qualType
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
-    for rcrd in records {
-        var ccode = rcrd.Ccode()
-        print(ccode)
+    for (k, v) in astDic {
+        if let v = v as? Record {
+            if v.tagUsed == "struct" {
+                print(v.name)
+            }
+        }
     }
 }
 
