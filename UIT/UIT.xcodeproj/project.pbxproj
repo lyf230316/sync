@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C9D742F2AF3A05300C444FB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C9D742E2AF3A05300C444FB /* WebKit.framework */; };
+		1C9D745A2AF4C14300C444FB /* MyWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C9D74592AF4C14300C444FB /* MyWebView.m */; };
 		1CC0642C2ABA925100E6FC6F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC0642B2ABA925100E6FC6F /* AppDelegate.m */; };
 		1CC0642F2ABA925100E6FC6F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC0642E2ABA925100E6FC6F /* ViewController.m */; };
 		1CC064312ABA925200E6FC6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CC064302ABA925200E6FC6F /* Assets.xcassets */; };
@@ -17,6 +18,9 @@
 
 /* Begin PBXFileReference section */
 		1C9D742E2AF3A05300C444FB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		1C9D74542AF48FA800C444FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1C9D74582AF4C14300C444FB /* MyWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWebView.h; sourceTree = "<group>"; };
+		1C9D74592AF4C14300C444FB /* MyWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWebView.m; sourceTree = "<group>"; };
 		1CC064272ABA925100E6FC6F /* UIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC0642A2ABA925100E6FC6F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1CC0642B2ABA925100E6FC6F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 		1CC064292ABA925100E6FC6F /* UIT */ = {
 			isa = PBXGroup;
 			children = (
+				1C9D74542AF48FA800C444FB /* Info.plist */,
 				1CC0642A2ABA925100E6FC6F /* AppDelegate.h */,
 				1CC0642B2ABA925100E6FC6F /* AppDelegate.m */,
 				1CC0642D2ABA925100E6FC6F /* ViewController.h */,
@@ -76,6 +81,8 @@
 				1CC064322ABA925200E6FC6F /* Main.storyboard */,
 				1CC064352ABA925200E6FC6F /* main.m */,
 				1CC064372ABA925200E6FC6F /* UIT.entitlements */,
+				1C9D74582AF4C14300C444FB /* MyWebView.h */,
+				1C9D74592AF4C14300C444FB /* MyWebView.m */,
 			);
 			path = UIT;
 			sourceTree = "<group>";
@@ -150,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CC0642F2ABA925100E6FC6F /* ViewController.m in Sources */,
+				1C9D745A2AF4C14300C444FB /* MyWebView.m in Sources */,
 				1CC064362ABA925200E6FC6F /* main.m in Sources */,
 				1CC0642C2ABA925100E6FC6F /* AppDelegate.m in Sources */,
 			);
@@ -290,6 +298,7 @@
 				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = UIT/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -297,8 +306,9 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.caidev.UIT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.caidev.UIT1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -316,6 +326,7 @@
 				DEVELOPMENT_TEAM = U6G2VLMPPZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = UIT/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -323,8 +334,9 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.caidev.UIT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.caidev.UIT1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
