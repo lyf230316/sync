@@ -1392,15 +1392,52 @@ size_t swr_es_btm_launch_item_t_read(es_btm_launch_item_t *btm_launch_item, void
     return size;
 }
 
+size_t swr_es_profile_t_size(es_profile_t *profile) {
+    size_t size = 0;
+	size += swr_es_string_token_t_size(&(profile->identifier));
+	size += swr_es_string_token_t_size(&(profile->uuid));
+	size += sizeof(es_profile_source_t);
+	size += swr_es_string_token_t_size(&(profile->organization));
+	size += swr_es_string_token_t_size(&(profile->display_name));
+	size += swr_es_string_token_t_size(&(profile->scope));
+    return size;
+}
+
+size_t swr_es_profile_t_write(es_profile_t *profile, void *p) {
+    size_t size = 0;
+	size += swr_es_string_token_t_write(&(profile->identifier), p+size);
+	size += swr_es_string_token_t_write(&(profile->uuid), p+size);
+	*(es_profile_source_t*)(p+size) = profile->install_source;
+	size += sizeof(es_profile_source_t);
+	size += swr_es_string_token_t_write(&(profile->organization), p+size);
+	size += swr_es_string_token_t_write(&(profile->display_name), p+size);
+	size += swr_es_string_token_t_write(&(profile->scope), p+size);
+    return size;
+}
+
+size_t swr_es_profile_t_read(es_profile_t *profile, void *p) {
+    size_t size = 0;
+	size += swr_es_string_token_t_read(&(profile->identifier), p+size);
+	size += swr_es_string_token_t_read(&(profile->uuid), p+size);
+	profile->install_source = *(es_profile_source_t*)(p+size);
+	size += sizeof(es_profile_source_t);
+	size += swr_es_string_token_t_read(&(profile->organization), p+size);
+	size += swr_es_string_token_t_read(&(profile->display_name), p+size);
+	size += swr_es_string_token_t_read(&(profile->scope), p+size);
+    return size;
+}
+
 size_t swr_es_event_exec_t_size(es_event_exec_t *event_exec) {
     size_t size = 0;
 	size += swr_es_process_t_size(event_exec->target);
+	size += swr_es_string_token_t_size(&(event_exec->dyld_exec_path));
     return size;
 }
 
 size_t swr_es_event_exec_t_write(es_event_exec_t *event_exec, void *p) {
     size_t size = 0;
 	size += swr_es_process_t_write(event_exec->target, p+size);
+	size += swr_es_string_token_t_write(&(event_exec->dyld_exec_path), p+size);
     return size;
 }
 
@@ -1408,6 +1445,7 @@ size_t swr_es_event_exec_t_read(es_event_exec_t *event_exec, void *p) {
     size_t size = 0;
 	event_exec->target = malloc(sizeof(es_process_t));
 	size += swr_es_process_t_read(event_exec->target, p+size);
+	size += swr_es_string_token_t_read(&(event_exec->dyld_exec_path), p+size);
     return size;
 }
 
@@ -3556,6 +3594,868 @@ size_t swr_es_event_btm_launch_item_remove_t_read(es_event_btm_launch_item_remov
     return size;
 }
 
+size_t swr_es_event_su_t_size(es_event_su_t *event_su) {
+    size_t size = 0;
+	size += sizeof(bool);
+	size += swr_es_string_token_t_size(&(event_su->failure_message));
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_size(&(event_su->from_username));
+	size += sizeof(bool);
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_size(&(event_su->to_username));
+	size += swr_es_string_token_t_size(&(event_su->shell));
+	size += sizeof(size_t);
+	size += swr_es_string_token_t_size(event_su->argv);
+	size += sizeof(size_t);
+	size += swr_es_string_token_t_size(event_su->env);
+    return size;
+}
+
+size_t swr_es_event_su_t_write(es_event_su_t *event_su, void *p) {
+    size_t size = 0;
+	*(bool*)(p+size) = event_su->success;
+	size += sizeof(bool);
+	size += swr_es_string_token_t_write(&(event_su->failure_message), p+size);
+	*(uid_t*)(p+size) = event_su->from_uid;
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_write(&(event_su->from_username), p+size);
+	*(bool*)(p+size) = event_su->has_to_uid;
+	size += sizeof(bool);
+	*(uid_t*)(p+size) = event_su->to_uid.uid;
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_write(&(event_su->to_username), p+size);
+	size += swr_es_string_token_t_write(&(event_su->shell), p+size);
+	*(size_t*)(p+size) = event_su->argc;
+	size += sizeof(size_t);
+	size += swr_es_string_token_t_write(event_su->argv, p+size);
+	*(size_t*)(p+size) = event_su->env_count;
+	size += sizeof(size_t);
+	size += swr_es_string_token_t_write(event_su->env, p+size);
+    return size;
+}
+
+size_t swr_es_event_su_t_read(es_event_su_t *event_su, void *p) {
+    size_t size = 0;
+	event_su->success = *(bool*)(p+size);
+	size += sizeof(bool);
+	size += swr_es_string_token_t_read(&(event_su->failure_message), p+size);
+	event_su->from_uid = *(uid_t*)(p+size);
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_read(&(event_su->from_username), p+size);
+	event_su->has_to_uid = *(bool*)(p+size);
+	size += sizeof(bool);
+	event_su->to_uid.uid = *(uid_t*)(p+size);
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_read(&(event_su->to_username), p+size);
+	size += swr_es_string_token_t_read(&(event_su->shell), p+size);
+	event_su->argc = *(size_t*)(p+size);
+	size += sizeof(size_t);
+	event_su->argv = malloc(sizeof(es_string_token_t));
+	size += swr_es_string_token_t_read(event_su->argv, p+size);
+	event_su->env_count = *(size_t*)(p+size);
+	size += sizeof(size_t);
+	event_su->env = malloc(sizeof(es_string_token_t));
+	size += swr_es_string_token_t_read(event_su->env, p+size);
+    return size;
+}
+
+size_t swr_es_sudo_reject_info_t_size(es_sudo_reject_info_t *sudo_reject_info) {
+    size_t size = 0;
+	size += swr_es_string_token_t_size(&(sudo_reject_info->plugin_name));
+	size += sizeof(es_sudo_plugin_type_t);
+	size += swr_es_string_token_t_size(&(sudo_reject_info->failure_message));
+    return size;
+}
+
+size_t swr_es_sudo_reject_info_t_write(es_sudo_reject_info_t *sudo_reject_info, void *p) {
+    size_t size = 0;
+	size += swr_es_string_token_t_write(&(sudo_reject_info->plugin_name), p+size);
+	*(es_sudo_plugin_type_t*)(p+size) = sudo_reject_info->plugin_type;
+	size += sizeof(es_sudo_plugin_type_t);
+	size += swr_es_string_token_t_write(&(sudo_reject_info->failure_message), p+size);
+    return size;
+}
+
+size_t swr_es_sudo_reject_info_t_read(es_sudo_reject_info_t *sudo_reject_info, void *p) {
+    size_t size = 0;
+	size += swr_es_string_token_t_read(&(sudo_reject_info->plugin_name), p+size);
+	sudo_reject_info->plugin_type = *(es_sudo_plugin_type_t*)(p+size);
+	size += sizeof(es_sudo_plugin_type_t);
+	size += swr_es_string_token_t_read(&(sudo_reject_info->failure_message), p+size);
+    return size;
+}
+
+size_t swr_es_event_sudo_t_size(es_event_sudo_t *event_sudo) {
+    size_t size = 0;
+	size += sizeof(bool);
+	size += swr_es_sudo_reject_info_t_size(event_sudo->reject_info);
+	size += sizeof(bool);
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_size(&(event_sudo->from_username));
+	size += sizeof(bool);
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_size(&(event_sudo->to_username));
+	size += swr_es_string_token_t_size(&(event_sudo->command));
+    return size;
+}
+
+size_t swr_es_event_sudo_t_write(es_event_sudo_t *event_sudo, void *p) {
+    size_t size = 0;
+	*(bool*)(p+size) = event_sudo->success;
+	size += sizeof(bool);
+	size += swr_es_sudo_reject_info_t_write(event_sudo->reject_info, p+size);
+	*(bool*)(p+size) = event_sudo->has_from_uid;
+	size += sizeof(bool);
+	*(uid_t*)(p+size) = event_sudo->from_uid.uid;
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_write(&(event_sudo->from_username), p+size);
+	*(bool*)(p+size) = event_sudo->has_to_uid;
+	size += sizeof(bool);
+	*(uid_t*)(p+size) = event_sudo->to_uid.uid;
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_write(&(event_sudo->to_username), p+size);
+	size += swr_es_string_token_t_write(&(event_sudo->command), p+size);
+    return size;
+}
+
+size_t swr_es_event_sudo_t_read(es_event_sudo_t *event_sudo, void *p) {
+    size_t size = 0;
+	event_sudo->success = *(bool*)(p+size);
+	size += sizeof(bool);
+	event_sudo->reject_info = malloc(sizeof(es_sudo_reject_info_t));
+	size += swr_es_sudo_reject_info_t_read(event_sudo->reject_info, p+size);
+	event_sudo->has_from_uid = *(bool*)(p+size);
+	size += sizeof(bool);
+	event_sudo->from_uid.uid = *(uid_t*)(p+size);
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_read(&(event_sudo->from_username), p+size);
+	event_sudo->has_to_uid = *(bool*)(p+size);
+	size += sizeof(bool);
+	event_sudo->to_uid.uid = *(uid_t*)(p+size);
+	size += sizeof(uid_t);
+	size += swr_es_string_token_t_read(&(event_sudo->to_username), p+size);
+	size += swr_es_string_token_t_read(&(event_sudo->command), p+size);
+    return size;
+}
+
+size_t swr_es_event_profile_add_t_size(es_event_profile_add_t *event_profile_add) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_profile_add->instigator);
+	size += sizeof(bool);
+	size += swr_es_profile_t_size(event_profile_add->profile);
+    return size;
+}
+
+size_t swr_es_event_profile_add_t_write(es_event_profile_add_t *event_profile_add, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_profile_add->instigator, p+size);
+	*(bool*)(p+size) = event_profile_add->is_update;
+	size += sizeof(bool);
+	size += swr_es_profile_t_write(event_profile_add->profile, p+size);
+    return size;
+}
+
+size_t swr_es_event_profile_add_t_read(es_event_profile_add_t *event_profile_add, void *p) {
+    size_t size = 0;
+	event_profile_add->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_profile_add->instigator, p+size);
+	event_profile_add->is_update = *(bool*)(p+size);
+	size += sizeof(bool);
+	event_profile_add->profile = malloc(sizeof(es_profile_t));
+	size += swr_es_profile_t_read(event_profile_add->profile, p+size);
+    return size;
+}
+
+size_t swr_es_event_profile_remove_t_size(es_event_profile_remove_t *event_profile_remove) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_profile_remove->instigator);
+	size += swr_es_profile_t_size(event_profile_remove->profile);
+    return size;
+}
+
+size_t swr_es_event_profile_remove_t_write(es_event_profile_remove_t *event_profile_remove, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_profile_remove->instigator, p+size);
+	size += swr_es_profile_t_write(event_profile_remove->profile, p+size);
+    return size;
+}
+
+size_t swr_es_event_profile_remove_t_read(es_event_profile_remove_t *event_profile_remove, void *p) {
+    size_t size = 0;
+	event_profile_remove->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_profile_remove->instigator, p+size);
+	event_profile_remove->profile = malloc(sizeof(es_profile_t));
+	size += swr_es_profile_t_read(event_profile_remove->profile, p+size);
+    return size;
+}
+
+size_t swr_es_event_authorization_petition_t_size(es_event_authorization_petition_t *event_authorization_petition) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_authorization_petition->instigator);
+	size += swr_es_process_t_size(event_authorization_petition->petitioner);
+	size += sizeof(uint32_t);
+	size += sizeof(size_t);
+	size += swr_es_string_token_t_size(event_authorization_petition->rights);
+    return size;
+}
+
+size_t swr_es_event_authorization_petition_t_write(es_event_authorization_petition_t *event_authorization_petition, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_authorization_petition->instigator, p+size);
+	size += swr_es_process_t_write(event_authorization_petition->petitioner, p+size);
+	*(uint32_t*)(p+size) = event_authorization_petition->flags;
+	size += sizeof(uint32_t);
+	*(size_t*)(p+size) = event_authorization_petition->right_count;
+	size += sizeof(size_t);
+	size += swr_es_string_token_t_write(event_authorization_petition->rights, p+size);
+    return size;
+}
+
+size_t swr_es_event_authorization_petition_t_read(es_event_authorization_petition_t *event_authorization_petition, void *p) {
+    size_t size = 0;
+	event_authorization_petition->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_authorization_petition->instigator, p+size);
+	event_authorization_petition->petitioner = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_authorization_petition->petitioner, p+size);
+	event_authorization_petition->flags = *(uint32_t*)(p+size);
+	size += sizeof(uint32_t);
+	event_authorization_petition->right_count = *(size_t*)(p+size);
+	size += sizeof(size_t);
+	event_authorization_petition->rights = malloc(sizeof(es_string_token_t));
+	size += swr_es_string_token_t_read(event_authorization_petition->rights, p+size);
+    return size;
+}
+
+size_t swr_es_authorization_result_t_size(es_authorization_result_t *authorization_result) {
+    size_t size = 0;
+	size += swr_es_string_token_t_size(&(authorization_result->right_name));
+	size += sizeof(es_authorization_rule_class_t);
+	size += sizeof(bool);
+    return size;
+}
+
+size_t swr_es_authorization_result_t_write(es_authorization_result_t *authorization_result, void *p) {
+    size_t size = 0;
+	size += swr_es_string_token_t_write(&(authorization_result->right_name), p+size);
+	*(es_authorization_rule_class_t*)(p+size) = authorization_result->rule_class;
+	size += sizeof(es_authorization_rule_class_t);
+	*(bool*)(p+size) = authorization_result->granted;
+	size += sizeof(bool);
+    return size;
+}
+
+size_t swr_es_authorization_result_t_read(es_authorization_result_t *authorization_result, void *p) {
+    size_t size = 0;
+	size += swr_es_string_token_t_read(&(authorization_result->right_name), p+size);
+	authorization_result->rule_class = *(es_authorization_rule_class_t*)(p+size);
+	size += sizeof(es_authorization_rule_class_t);
+	authorization_result->granted = *(bool*)(p+size);
+	size += sizeof(bool);
+    return size;
+}
+
+size_t swr_es_event_authorization_judgement_t_size(es_event_authorization_judgement_t *event_authorization_judgement) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_authorization_judgement->instigator);
+	size += swr_es_process_t_size(event_authorization_judgement->petitioner);
+	size += sizeof(int);
+	size += sizeof(size_t);
+	size += swr_es_authorization_result_t_size(event_authorization_judgement->results);
+    return size;
+}
+
+size_t swr_es_event_authorization_judgement_t_write(es_event_authorization_judgement_t *event_authorization_judgement, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_authorization_judgement->instigator, p+size);
+	size += swr_es_process_t_write(event_authorization_judgement->petitioner, p+size);
+	*(int*)(p+size) = event_authorization_judgement->return_code;
+	size += sizeof(int);
+	*(size_t*)(p+size) = event_authorization_judgement->result_count;
+	size += sizeof(size_t);
+	size += swr_es_authorization_result_t_write(event_authorization_judgement->results, p+size);
+    return size;
+}
+
+size_t swr_es_event_authorization_judgement_t_read(es_event_authorization_judgement_t *event_authorization_judgement, void *p) {
+    size_t size = 0;
+	event_authorization_judgement->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_authorization_judgement->instigator, p+size);
+	event_authorization_judgement->petitioner = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_authorization_judgement->petitioner, p+size);
+	event_authorization_judgement->return_code = *(int*)(p+size);
+	size += sizeof(int);
+	event_authorization_judgement->result_count = *(size_t*)(p+size);
+	size += sizeof(size_t);
+	event_authorization_judgement->results = malloc(sizeof(es_authorization_result_t));
+	size += swr_es_authorization_result_t_read(event_authorization_judgement->results, p+size);
+    return size;
+}
+
+size_t swr_es_od_member_id_t_size(es_od_member_id_t *od_member_id) {
+    size_t size = 0;
+	size += sizeof(es_od_member_type_t);
+	size += sizeof(uuid_t);
+	size += swr_es_string_token_t_size(&(od_member_id->member_value.name));
+    return size;
+}
+
+size_t swr_es_od_member_id_t_write(es_od_member_id_t *od_member_id, void *p) {
+    size_t size = 0;
+	*(es_od_member_type_t*)(p+size) = od_member_id->member_type;
+	size += sizeof(es_od_member_type_t);
+	memcpy(p+size,od_member_id->member_value.uuid,16);
+	size += 16;
+	size += swr_es_string_token_t_write(&(od_member_id->member_value.name), p+size);
+    return size;
+}
+
+size_t swr_es_od_member_id_t_read(es_od_member_id_t *od_member_id, void *p) {
+    size_t size = 0;
+	od_member_id->member_type = *(es_od_member_type_t*)(p+size);
+	size += sizeof(es_od_member_type_t);
+	memcpy(od_member_id->member_value.uuid, p+size, 16);
+	size += 16;
+	size += swr_es_string_token_t_read(&(od_member_id->member_value.name), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_group_add_t_size(es_event_od_group_add_t *event_od_group_add) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_group_add->instigator);
+	size += sizeof(int);
+	size += swr_es_string_token_t_size(&(event_od_group_add->group_name));
+	size += swr_es_od_member_id_t_size(event_od_group_add->member);
+	size += swr_es_string_token_t_size(&(event_od_group_add->node_name));
+	size += swr_es_string_token_t_size(&(event_od_group_add->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_group_add_t_write(es_event_od_group_add_t *event_od_group_add, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_group_add->instigator, p+size);
+	*(int*)(p+size) = event_od_group_add->error_code;
+	size += sizeof(int);
+	size += swr_es_string_token_t_write(&(event_od_group_add->group_name), p+size);
+	size += swr_es_od_member_id_t_write(event_od_group_add->member, p+size);
+	size += swr_es_string_token_t_write(&(event_od_group_add->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_group_add->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_group_add_t_read(es_event_od_group_add_t *event_od_group_add, void *p) {
+    size_t size = 0;
+	event_od_group_add->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_group_add->instigator, p+size);
+	event_od_group_add->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	size += swr_es_string_token_t_read(&(event_od_group_add->group_name), p+size);
+	event_od_group_add->member = malloc(sizeof(es_od_member_id_t));
+	size += swr_es_od_member_id_t_read(event_od_group_add->member, p+size);
+	size += swr_es_string_token_t_read(&(event_od_group_add->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_group_add->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_group_remove_t_size(es_event_od_group_remove_t *event_od_group_remove) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_group_remove->instigator);
+	size += sizeof(int);
+	size += swr_es_string_token_t_size(&(event_od_group_remove->group_name));
+	size += swr_es_od_member_id_t_size(event_od_group_remove->member);
+	size += swr_es_string_token_t_size(&(event_od_group_remove->node_name));
+	size += swr_es_string_token_t_size(&(event_od_group_remove->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_group_remove_t_write(es_event_od_group_remove_t *event_od_group_remove, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_group_remove->instigator, p+size);
+	*(int*)(p+size) = event_od_group_remove->error_code;
+	size += sizeof(int);
+	size += swr_es_string_token_t_write(&(event_od_group_remove->group_name), p+size);
+	size += swr_es_od_member_id_t_write(event_od_group_remove->member, p+size);
+	size += swr_es_string_token_t_write(&(event_od_group_remove->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_group_remove->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_group_remove_t_read(es_event_od_group_remove_t *event_od_group_remove, void *p) {
+    size_t size = 0;
+	event_od_group_remove->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_group_remove->instigator, p+size);
+	event_od_group_remove->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	size += swr_es_string_token_t_read(&(event_od_group_remove->group_name), p+size);
+	event_od_group_remove->member = malloc(sizeof(es_od_member_id_t));
+	size += swr_es_od_member_id_t_read(event_od_group_remove->member, p+size);
+	size += swr_es_string_token_t_read(&(event_od_group_remove->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_group_remove->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_od_member_id_array_t_size(es_od_member_id_array_t *od_member_id_array) {
+    size_t size = 0;
+	size += sizeof(es_od_member_type_t);
+	size += sizeof(size_t);
+	size += swr_es_string_token_t_size(od_member_id_array->member_array.names);
+    return size;
+}
+
+size_t swr_es_od_member_id_array_t_write(es_od_member_id_array_t *od_member_id_array, void *p) {
+    size_t size = 0;
+	*(es_od_member_type_t*)(p+size) = od_member_id_array->member_type;
+	size += sizeof(es_od_member_type_t);
+	*(size_t*)(p+size) = od_member_id_array->member_count;
+	size += sizeof(size_t);
+	size += swr_es_string_token_t_write(od_member_id_array->member_array.names, p+size);
+    return size;
+}
+
+size_t swr_es_od_member_id_array_t_read(es_od_member_id_array_t *od_member_id_array, void *p) {
+    size_t size = 0;
+	od_member_id_array->member_type = *(es_od_member_type_t*)(p+size);
+	size += sizeof(es_od_member_type_t);
+	od_member_id_array->member_count = *(size_t*)(p+size);
+	size += sizeof(size_t);
+	od_member_id_array->member_array.names = malloc(sizeof(es_string_token_t));
+	size += swr_es_string_token_t_read(od_member_id_array->member_array.names, p+size);
+    return size;
+}
+
+size_t swr_es_event_od_group_set_t_size(es_event_od_group_set_t *event_od_group_set) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_group_set->instigator);
+	size += sizeof(int);
+	size += swr_es_string_token_t_size(&(event_od_group_set->group_name));
+	size += swr_es_od_member_id_array_t_size(event_od_group_set->members);
+	size += swr_es_string_token_t_size(&(event_od_group_set->node_name));
+	size += swr_es_string_token_t_size(&(event_od_group_set->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_group_set_t_write(es_event_od_group_set_t *event_od_group_set, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_group_set->instigator, p+size);
+	*(int*)(p+size) = event_od_group_set->error_code;
+	size += sizeof(int);
+	size += swr_es_string_token_t_write(&(event_od_group_set->group_name), p+size);
+	size += swr_es_od_member_id_array_t_write(event_od_group_set->members, p+size);
+	size += swr_es_string_token_t_write(&(event_od_group_set->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_group_set->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_group_set_t_read(es_event_od_group_set_t *event_od_group_set, void *p) {
+    size_t size = 0;
+	event_od_group_set->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_group_set->instigator, p+size);
+	event_od_group_set->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	size += swr_es_string_token_t_read(&(event_od_group_set->group_name), p+size);
+	event_od_group_set->members = malloc(sizeof(es_od_member_id_array_t));
+	size += swr_es_od_member_id_array_t_read(event_od_group_set->members, p+size);
+	size += swr_es_string_token_t_read(&(event_od_group_set->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_group_set->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_modify_password_t_size(es_event_od_modify_password_t *event_od_modify_password) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_modify_password->instigator);
+	size += sizeof(int);
+	size += sizeof(es_od_account_type_t);
+	size += swr_es_string_token_t_size(&(event_od_modify_password->account_name));
+	size += swr_es_string_token_t_size(&(event_od_modify_password->node_name));
+	size += swr_es_string_token_t_size(&(event_od_modify_password->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_modify_password_t_write(es_event_od_modify_password_t *event_od_modify_password, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_modify_password->instigator, p+size);
+	*(int*)(p+size) = event_od_modify_password->error_code;
+	size += sizeof(int);
+	*(es_od_account_type_t*)(p+size) = event_od_modify_password->account_type;
+	size += sizeof(es_od_account_type_t);
+	size += swr_es_string_token_t_write(&(event_od_modify_password->account_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_modify_password->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_modify_password->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_modify_password_t_read(es_event_od_modify_password_t *event_od_modify_password, void *p) {
+    size_t size = 0;
+	event_od_modify_password->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_modify_password->instigator, p+size);
+	event_od_modify_password->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	event_od_modify_password->account_type = *(es_od_account_type_t*)(p+size);
+	size += sizeof(es_od_account_type_t);
+	size += swr_es_string_token_t_read(&(event_od_modify_password->account_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_modify_password->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_modify_password->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_disable_user_t_size(es_event_od_disable_user_t *event_od_disable_user) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_disable_user->instigator);
+	size += sizeof(int);
+	size += swr_es_string_token_t_size(&(event_od_disable_user->user_name));
+	size += swr_es_string_token_t_size(&(event_od_disable_user->node_name));
+	size += swr_es_string_token_t_size(&(event_od_disable_user->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_disable_user_t_write(es_event_od_disable_user_t *event_od_disable_user, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_disable_user->instigator, p+size);
+	*(int*)(p+size) = event_od_disable_user->error_code;
+	size += sizeof(int);
+	size += swr_es_string_token_t_write(&(event_od_disable_user->user_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_disable_user->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_disable_user->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_disable_user_t_read(es_event_od_disable_user_t *event_od_disable_user, void *p) {
+    size_t size = 0;
+	event_od_disable_user->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_disable_user->instigator, p+size);
+	event_od_disable_user->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	size += swr_es_string_token_t_read(&(event_od_disable_user->user_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_disable_user->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_disable_user->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_enable_user_t_size(es_event_od_enable_user_t *event_od_enable_user) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_enable_user->instigator);
+	size += sizeof(int);
+	size += swr_es_string_token_t_size(&(event_od_enable_user->user_name));
+	size += swr_es_string_token_t_size(&(event_od_enable_user->node_name));
+	size += swr_es_string_token_t_size(&(event_od_enable_user->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_enable_user_t_write(es_event_od_enable_user_t *event_od_enable_user, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_enable_user->instigator, p+size);
+	*(int*)(p+size) = event_od_enable_user->error_code;
+	size += sizeof(int);
+	size += swr_es_string_token_t_write(&(event_od_enable_user->user_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_enable_user->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_enable_user->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_enable_user_t_read(es_event_od_enable_user_t *event_od_enable_user, void *p) {
+    size_t size = 0;
+	event_od_enable_user->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_enable_user->instigator, p+size);
+	event_od_enable_user->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	size += swr_es_string_token_t_read(&(event_od_enable_user->user_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_enable_user->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_enable_user->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_attribute_value_add_t_size(es_event_od_attribute_value_add_t *event_od_attribute_value_add) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_attribute_value_add->instigator);
+	size += sizeof(int);
+	size += sizeof(es_od_record_type_t);
+	size += swr_es_string_token_t_size(&(event_od_attribute_value_add->record_name));
+	size += swr_es_string_token_t_size(&(event_od_attribute_value_add->attribute_name));
+	size += swr_es_string_token_t_size(&(event_od_attribute_value_add->attribute_value));
+	size += swr_es_string_token_t_size(&(event_od_attribute_value_add->node_name));
+	size += swr_es_string_token_t_size(&(event_od_attribute_value_add->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_attribute_value_add_t_write(es_event_od_attribute_value_add_t *event_od_attribute_value_add, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_attribute_value_add->instigator, p+size);
+	*(int*)(p+size) = event_od_attribute_value_add->error_code;
+	size += sizeof(int);
+	*(es_od_record_type_t*)(p+size) = event_od_attribute_value_add->record_type;
+	size += sizeof(es_od_record_type_t);
+	size += swr_es_string_token_t_write(&(event_od_attribute_value_add->record_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_value_add->attribute_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_value_add->attribute_value), p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_value_add->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_value_add->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_attribute_value_add_t_read(es_event_od_attribute_value_add_t *event_od_attribute_value_add, void *p) {
+    size_t size = 0;
+	event_od_attribute_value_add->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_attribute_value_add->instigator, p+size);
+	event_od_attribute_value_add->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	event_od_attribute_value_add->record_type = *(es_od_record_type_t*)(p+size);
+	size += sizeof(es_od_record_type_t);
+	size += swr_es_string_token_t_read(&(event_od_attribute_value_add->record_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_value_add->attribute_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_value_add->attribute_value), p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_value_add->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_value_add->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_attribute_value_remove_t_size(es_event_od_attribute_value_remove_t *event_od_attribute_value_remove) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_attribute_value_remove->instigator);
+	size += sizeof(int);
+	size += sizeof(es_od_record_type_t);
+	size += swr_es_string_token_t_size(&(event_od_attribute_value_remove->record_name));
+	size += swr_es_string_token_t_size(&(event_od_attribute_value_remove->attribute_name));
+	size += swr_es_string_token_t_size(&(event_od_attribute_value_remove->attribute_value));
+	size += swr_es_string_token_t_size(&(event_od_attribute_value_remove->node_name));
+	size += swr_es_string_token_t_size(&(event_od_attribute_value_remove->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_attribute_value_remove_t_write(es_event_od_attribute_value_remove_t *event_od_attribute_value_remove, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_attribute_value_remove->instigator, p+size);
+	*(int*)(p+size) = event_od_attribute_value_remove->error_code;
+	size += sizeof(int);
+	*(es_od_record_type_t*)(p+size) = event_od_attribute_value_remove->record_type;
+	size += sizeof(es_od_record_type_t);
+	size += swr_es_string_token_t_write(&(event_od_attribute_value_remove->record_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_value_remove->attribute_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_value_remove->attribute_value), p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_value_remove->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_value_remove->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_attribute_value_remove_t_read(es_event_od_attribute_value_remove_t *event_od_attribute_value_remove, void *p) {
+    size_t size = 0;
+	event_od_attribute_value_remove->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_attribute_value_remove->instigator, p+size);
+	event_od_attribute_value_remove->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	event_od_attribute_value_remove->record_type = *(es_od_record_type_t*)(p+size);
+	size += sizeof(es_od_record_type_t);
+	size += swr_es_string_token_t_read(&(event_od_attribute_value_remove->record_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_value_remove->attribute_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_value_remove->attribute_value), p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_value_remove->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_value_remove->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_attribute_set_t_size(es_event_od_attribute_set_t *event_od_attribute_set) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_attribute_set->instigator);
+	size += sizeof(int);
+	size += sizeof(es_od_record_type_t);
+	size += swr_es_string_token_t_size(&(event_od_attribute_set->record_name));
+	size += swr_es_string_token_t_size(&(event_od_attribute_set->attribute_name));
+	size += sizeof(size_t);
+	size += swr_es_string_token_t_size(event_od_attribute_set->attribute_values);
+	size += swr_es_string_token_t_size(&(event_od_attribute_set->node_name));
+	size += swr_es_string_token_t_size(&(event_od_attribute_set->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_attribute_set_t_write(es_event_od_attribute_set_t *event_od_attribute_set, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_attribute_set->instigator, p+size);
+	*(int*)(p+size) = event_od_attribute_set->error_code;
+	size += sizeof(int);
+	*(es_od_record_type_t*)(p+size) = event_od_attribute_set->record_type;
+	size += sizeof(es_od_record_type_t);
+	size += swr_es_string_token_t_write(&(event_od_attribute_set->record_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_set->attribute_name), p+size);
+	*(size_t*)(p+size) = event_od_attribute_set->attribute_value_count;
+	size += sizeof(size_t);
+	size += swr_es_string_token_t_write(event_od_attribute_set->attribute_values, p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_set->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_attribute_set->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_attribute_set_t_read(es_event_od_attribute_set_t *event_od_attribute_set, void *p) {
+    size_t size = 0;
+	event_od_attribute_set->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_attribute_set->instigator, p+size);
+	event_od_attribute_set->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	event_od_attribute_set->record_type = *(es_od_record_type_t*)(p+size);
+	size += sizeof(es_od_record_type_t);
+	size += swr_es_string_token_t_read(&(event_od_attribute_set->record_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_set->attribute_name), p+size);
+	event_od_attribute_set->attribute_value_count = *(size_t*)(p+size);
+	size += sizeof(size_t);
+	event_od_attribute_set->attribute_values = malloc(sizeof(es_string_token_t));
+	size += swr_es_string_token_t_read(event_od_attribute_set->attribute_values, p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_set->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_attribute_set->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_create_user_t_size(es_event_od_create_user_t *event_od_create_user) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_create_user->instigator);
+	size += sizeof(int);
+	size += swr_es_string_token_t_size(&(event_od_create_user->user_name));
+	size += swr_es_string_token_t_size(&(event_od_create_user->node_name));
+	size += swr_es_string_token_t_size(&(event_od_create_user->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_create_user_t_write(es_event_od_create_user_t *event_od_create_user, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_create_user->instigator, p+size);
+	*(int*)(p+size) = event_od_create_user->error_code;
+	size += sizeof(int);
+	size += swr_es_string_token_t_write(&(event_od_create_user->user_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_create_user->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_create_user->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_create_user_t_read(es_event_od_create_user_t *event_od_create_user, void *p) {
+    size_t size = 0;
+	event_od_create_user->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_create_user->instigator, p+size);
+	event_od_create_user->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	size += swr_es_string_token_t_read(&(event_od_create_user->user_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_create_user->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_create_user->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_create_group_t_size(es_event_od_create_group_t *event_od_create_group) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_create_group->instigator);
+	size += sizeof(int);
+	size += swr_es_string_token_t_size(&(event_od_create_group->group_name));
+	size += swr_es_string_token_t_size(&(event_od_create_group->node_name));
+	size += swr_es_string_token_t_size(&(event_od_create_group->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_create_group_t_write(es_event_od_create_group_t *event_od_create_group, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_create_group->instigator, p+size);
+	*(int*)(p+size) = event_od_create_group->error_code;
+	size += sizeof(int);
+	size += swr_es_string_token_t_write(&(event_od_create_group->group_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_create_group->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_create_group->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_create_group_t_read(es_event_od_create_group_t *event_od_create_group, void *p) {
+    size_t size = 0;
+	event_od_create_group->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_create_group->instigator, p+size);
+	event_od_create_group->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	size += swr_es_string_token_t_read(&(event_od_create_group->group_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_create_group->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_create_group->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_delete_user_t_size(es_event_od_delete_user_t *event_od_delete_user) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_delete_user->instigator);
+	size += sizeof(int);
+	size += swr_es_string_token_t_size(&(event_od_delete_user->user_name));
+	size += swr_es_string_token_t_size(&(event_od_delete_user->node_name));
+	size += swr_es_string_token_t_size(&(event_od_delete_user->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_delete_user_t_write(es_event_od_delete_user_t *event_od_delete_user, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_delete_user->instigator, p+size);
+	*(int*)(p+size) = event_od_delete_user->error_code;
+	size += sizeof(int);
+	size += swr_es_string_token_t_write(&(event_od_delete_user->user_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_delete_user->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_delete_user->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_delete_user_t_read(es_event_od_delete_user_t *event_od_delete_user, void *p) {
+    size_t size = 0;
+	event_od_delete_user->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_delete_user->instigator, p+size);
+	event_od_delete_user->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	size += swr_es_string_token_t_read(&(event_od_delete_user->user_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_delete_user->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_delete_user->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_delete_group_t_size(es_event_od_delete_group_t *event_od_delete_group) {
+    size_t size = 0;
+	size += swr_es_process_t_size(event_od_delete_group->instigator);
+	size += sizeof(int);
+	size += swr_es_string_token_t_size(&(event_od_delete_group->group_name));
+	size += swr_es_string_token_t_size(&(event_od_delete_group->node_name));
+	size += swr_es_string_token_t_size(&(event_od_delete_group->db_path));
+    return size;
+}
+
+size_t swr_es_event_od_delete_group_t_write(es_event_od_delete_group_t *event_od_delete_group, void *p) {
+    size_t size = 0;
+	size += swr_es_process_t_write(event_od_delete_group->instigator, p+size);
+	*(int*)(p+size) = event_od_delete_group->error_code;
+	size += sizeof(int);
+	size += swr_es_string_token_t_write(&(event_od_delete_group->group_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_delete_group->node_name), p+size);
+	size += swr_es_string_token_t_write(&(event_od_delete_group->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_od_delete_group_t_read(es_event_od_delete_group_t *event_od_delete_group, void *p) {
+    size_t size = 0;
+	event_od_delete_group->instigator = malloc(sizeof(es_process_t));
+	size += swr_es_process_t_read(event_od_delete_group->instigator, p+size);
+	event_od_delete_group->error_code = *(int*)(p+size);
+	size += sizeof(int);
+	size += swr_es_string_token_t_read(&(event_od_delete_group->group_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_delete_group->node_name), p+size);
+	size += swr_es_string_token_t_read(&(event_od_delete_group->db_path), p+size);
+    return size;
+}
+
+size_t swr_es_event_xpc_connect_t_size(es_event_xpc_connect_t *event_xpc_connect) {
+    size_t size = 0;
+	size += swr_es_string_token_t_size(&(event_xpc_connect->service_name));
+	size += sizeof(es_xpc_domain_type_t);
+    return size;
+}
+
+size_t swr_es_event_xpc_connect_t_write(es_event_xpc_connect_t *event_xpc_connect, void *p) {
+    size_t size = 0;
+	size += swr_es_string_token_t_write(&(event_xpc_connect->service_name), p+size);
+	*(es_xpc_domain_type_t*)(p+size) = event_xpc_connect->service_domain_type;
+	size += sizeof(es_xpc_domain_type_t);
+    return size;
+}
+
+size_t swr_es_event_xpc_connect_t_read(es_event_xpc_connect_t *event_xpc_connect, void *p) {
+    size_t size = 0;
+	size += swr_es_string_token_t_read(&(event_xpc_connect->service_name), p+size);
+	event_xpc_connect->service_domain_type = *(es_xpc_domain_type_t*)(p+size);
+	size += sizeof(es_xpc_domain_type_t);
+    return size;
+}
+
 size_t swr_es_result_t_size(es_result_t *result) {
     size_t size = 0;
 	size += sizeof(es_result_type_t);
@@ -4013,6 +4913,66 @@ size_t swr_es_message_t_size(es_message_t *message) {
 		case ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_REMOVE :{
 			size += swr_es_event_btm_launch_item_remove_t_size(message->event.btm_launch_item_remove);
 		}break;
+		case ES_EVENT_TYPE_NOTIFY_PROFILE_ADD :{
+			size += swr_es_event_profile_add_t_size(message->event.profile_add);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_PROFILE_REMOVE :{
+			size += swr_es_event_profile_remove_t_size(message->event.profile_remove);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_SU :{
+			size += swr_es_event_su_t_size(message->event.su);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_PETITION :{
+			size += swr_es_event_authorization_petition_t_size(message->event.authorization_petition);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_JUDGEMENT :{
+			size += swr_es_event_authorization_judgement_t_size(message->event.authorization_judgement);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_SUDO :{
+			size += swr_es_event_sudo_t_size(message->event.sudo);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_GROUP_ADD :{
+			size += swr_es_event_od_group_add_t_size(message->event.od_group_add);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_GROUP_REMOVE :{
+			size += swr_es_event_od_group_remove_t_size(message->event.od_group_remove);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_GROUP_SET :{
+			size += swr_es_event_od_group_set_t_size(message->event.od_group_set);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_MODIFY_PASSWORD :{
+			size += swr_es_event_od_modify_password_t_size(message->event.od_modify_password);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_DISABLE_USER :{
+			size += swr_es_event_od_disable_user_t_size(message->event.od_disable_user);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ENABLE_USER :{
+			size += swr_es_event_od_enable_user_t_size(message->event.od_enable_user);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_ADD :{
+			size += swr_es_event_od_attribute_value_add_t_size(message->event.od_attribute_value_add);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_REMOVE :{
+			size += swr_es_event_od_attribute_value_remove_t_size(message->event.od_attribute_value_remove);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_SET :{
+			size += swr_es_event_od_attribute_set_t_size(message->event.od_attribute_set);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_CREATE_USER :{
+			size += swr_es_event_od_create_user_t_size(message->event.od_create_user);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_CREATE_GROUP :{
+			size += swr_es_event_od_create_group_t_size(message->event.od_create_group);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_DELETE_USER :{
+			size += swr_es_event_od_delete_user_t_size(message->event.od_delete_user);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_DELETE_GROUP :{
+			size += swr_es_event_od_delete_group_t_size(message->event.od_delete_group);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_XPC_CONNECT :{
+			size += swr_es_event_xpc_connect_t_size(message->event.xpc_connect);
+		}break;
 		default:
 			break;
 	}
@@ -4428,6 +5388,66 @@ size_t swr_es_message_t_write(es_message_t *message, void *p) {
 		}break;
 		case ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_REMOVE :{
 			size += swr_es_event_btm_launch_item_remove_t_write(message->event.btm_launch_item_remove, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_PROFILE_ADD :{
+			size += swr_es_event_profile_add_t_write(message->event.profile_add, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_PROFILE_REMOVE :{
+			size += swr_es_event_profile_remove_t_write(message->event.profile_remove, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_SU :{
+			size += swr_es_event_su_t_write(message->event.su, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_PETITION :{
+			size += swr_es_event_authorization_petition_t_write(message->event.authorization_petition, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_JUDGEMENT :{
+			size += swr_es_event_authorization_judgement_t_write(message->event.authorization_judgement, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_SUDO :{
+			size += swr_es_event_sudo_t_write(message->event.sudo, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_GROUP_ADD :{
+			size += swr_es_event_od_group_add_t_write(message->event.od_group_add, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_GROUP_REMOVE :{
+			size += swr_es_event_od_group_remove_t_write(message->event.od_group_remove, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_GROUP_SET :{
+			size += swr_es_event_od_group_set_t_write(message->event.od_group_set, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_MODIFY_PASSWORD :{
+			size += swr_es_event_od_modify_password_t_write(message->event.od_modify_password, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_DISABLE_USER :{
+			size += swr_es_event_od_disable_user_t_write(message->event.od_disable_user, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ENABLE_USER :{
+			size += swr_es_event_od_enable_user_t_write(message->event.od_enable_user, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_ADD :{
+			size += swr_es_event_od_attribute_value_add_t_write(message->event.od_attribute_value_add, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_REMOVE :{
+			size += swr_es_event_od_attribute_value_remove_t_write(message->event.od_attribute_value_remove, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_SET :{
+			size += swr_es_event_od_attribute_set_t_write(message->event.od_attribute_set, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_CREATE_USER :{
+			size += swr_es_event_od_create_user_t_write(message->event.od_create_user, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_CREATE_GROUP :{
+			size += swr_es_event_od_create_group_t_write(message->event.od_create_group, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_DELETE_USER :{
+			size += swr_es_event_od_delete_user_t_write(message->event.od_delete_user, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_DELETE_GROUP :{
+			size += swr_es_event_od_delete_group_t_write(message->event.od_delete_group, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_XPC_CONNECT :{
+			size += swr_es_event_xpc_connect_t_write(message->event.xpc_connect, p+size);
 		}break;
 		default:
 			break;
@@ -4861,6 +5881,86 @@ size_t swr_es_message_t_read(es_message_t *message, void *p) {
 		case ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_REMOVE :{
 			message->event.btm_launch_item_remove = malloc(sizeof(es_event_btm_launch_item_remove_t));
 			size += swr_es_event_btm_launch_item_remove_t_read(message->event.btm_launch_item_remove, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_PROFILE_ADD :{
+			message->event.profile_add = malloc(sizeof(es_event_profile_add_t));
+			size += swr_es_event_profile_add_t_read(message->event.profile_add, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_PROFILE_REMOVE :{
+			message->event.profile_remove = malloc(sizeof(es_event_profile_remove_t));
+			size += swr_es_event_profile_remove_t_read(message->event.profile_remove, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_SU :{
+			message->event.su = malloc(sizeof(es_event_su_t));
+			size += swr_es_event_su_t_read(message->event.su, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_PETITION :{
+			message->event.authorization_petition = malloc(sizeof(es_event_authorization_petition_t));
+			size += swr_es_event_authorization_petition_t_read(message->event.authorization_petition, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_JUDGEMENT :{
+			message->event.authorization_judgement = malloc(sizeof(es_event_authorization_judgement_t));
+			size += swr_es_event_authorization_judgement_t_read(message->event.authorization_judgement, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_SUDO :{
+			message->event.sudo = malloc(sizeof(es_event_sudo_t));
+			size += swr_es_event_sudo_t_read(message->event.sudo, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_GROUP_ADD :{
+			message->event.od_group_add = malloc(sizeof(es_event_od_group_add_t));
+			size += swr_es_event_od_group_add_t_read(message->event.od_group_add, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_GROUP_REMOVE :{
+			message->event.od_group_remove = malloc(sizeof(es_event_od_group_remove_t));
+			size += swr_es_event_od_group_remove_t_read(message->event.od_group_remove, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_GROUP_SET :{
+			message->event.od_group_set = malloc(sizeof(es_event_od_group_set_t));
+			size += swr_es_event_od_group_set_t_read(message->event.od_group_set, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_MODIFY_PASSWORD :{
+			message->event.od_modify_password = malloc(sizeof(es_event_od_modify_password_t));
+			size += swr_es_event_od_modify_password_t_read(message->event.od_modify_password, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_DISABLE_USER :{
+			message->event.od_disable_user = malloc(sizeof(es_event_od_disable_user_t));
+			size += swr_es_event_od_disable_user_t_read(message->event.od_disable_user, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ENABLE_USER :{
+			message->event.od_enable_user = malloc(sizeof(es_event_od_enable_user_t));
+			size += swr_es_event_od_enable_user_t_read(message->event.od_enable_user, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_ADD :{
+			message->event.od_attribute_value_add = malloc(sizeof(es_event_od_attribute_value_add_t));
+			size += swr_es_event_od_attribute_value_add_t_read(message->event.od_attribute_value_add, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_REMOVE :{
+			message->event.od_attribute_value_remove = malloc(sizeof(es_event_od_attribute_value_remove_t));
+			size += swr_es_event_od_attribute_value_remove_t_read(message->event.od_attribute_value_remove, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_SET :{
+			message->event.od_attribute_set = malloc(sizeof(es_event_od_attribute_set_t));
+			size += swr_es_event_od_attribute_set_t_read(message->event.od_attribute_set, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_CREATE_USER :{
+			message->event.od_create_user = malloc(sizeof(es_event_od_create_user_t));
+			size += swr_es_event_od_create_user_t_read(message->event.od_create_user, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_CREATE_GROUP :{
+			message->event.od_create_group = malloc(sizeof(es_event_od_create_group_t));
+			size += swr_es_event_od_create_group_t_read(message->event.od_create_group, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_DELETE_USER :{
+			message->event.od_delete_user = malloc(sizeof(es_event_od_delete_user_t));
+			size += swr_es_event_od_delete_user_t_read(message->event.od_delete_user, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_OD_DELETE_GROUP :{
+			message->event.od_delete_group = malloc(sizeof(es_event_od_delete_group_t));
+			size += swr_es_event_od_delete_group_t_read(message->event.od_delete_group, p+size);
+		}break;
+		case ES_EVENT_TYPE_NOTIFY_XPC_CONNECT :{
+			message->event.xpc_connect = malloc(sizeof(es_event_xpc_connect_t));
+			size += swr_es_event_xpc_connect_t_read(message->event.xpc_connect, p+size);
 		}break;
 		default:
 			break;

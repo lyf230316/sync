@@ -23,6 +23,8 @@ typedef enum : NSUInteger {
 
 @protocol EService <NSObject>
 
+- (void)connectionTest:(void(^)(BOOL))callback;
+
 - (void)subscribe:(NSData *)types callback:(void (^)(es_return_t))callback;
 - (void)unsubscribe:(NSData *)types callback:(void(^)(es_return_t code))callback;
 - (void)unsubscribeAll:(void(^)(es_return_t code))callback;

@@ -510,9 +510,28 @@ typedef struct ces_btm_launch_item {
 }ces_btm_launch_item;
 
 //structStart()
+typedef struct ces_profile {
+	//onCustomStruct(_:_:_:)
+	ces_string_token identifier;
+	//onCustomStruct(_:_:_:)
+	ces_string_token uuid;
+	//onCustom(_:_:_:)
+	es_profile_source_t install_source;
+	//onCustomStruct(_:_:_:)
+	ces_string_token organization;
+	//onCustomStruct(_:_:_:)
+	ces_string_token display_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token scope;
+//structEnd()
+}ces_profile;
+
+//structStart()
 typedef struct ces_event_exec {
 	//onCustomStructPointer(_:_:_:ext:)
 	ces_process target;
+	//onCustomStruct(_:_:_:)
+	ces_string_token dyld_exec_path;
 //structEnd()
 }ces_event_exec;
 
@@ -1343,6 +1362,385 @@ typedef struct ces_event_btm_launch_item_remove {
 }ces_event_btm_launch_item_remove;
 
 //structStart()
+typedef struct ces_event_su {
+	//onCustom(_:_:_:)
+	bool success;
+	//onCustomStruct(_:_:_:)
+	ces_string_token failure_message;
+	//onCustom(_:_:_:)
+	uid_t from_uid;
+	//onCustomStruct(_:_:_:)
+	ces_string_token from_username;
+	//onCustom(_:_:_:)
+	bool has_to_uid;
+	//onCustom(_:_:_:)
+	uid_t uid;
+	//onCustomStruct(_:_:_:)
+	ces_string_token to_username;
+	//onCustomStruct(_:_:_:)
+	ces_string_token shell;
+	//onCustom(_:_:_:)
+	size_t argc;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_string_token argv;
+	//onCustom(_:_:_:)
+	size_t env_count;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_string_token env;
+//structEnd()
+}ces_event_su;
+
+//structStart()
+typedef struct ces_sudo_reject_info {
+	//onCustomStruct(_:_:_:)
+	ces_string_token plugin_name;
+	//onCustom(_:_:_:)
+	es_sudo_plugin_type_t plugin_type;
+	//onCustomStruct(_:_:_:)
+	ces_string_token failure_message;
+//structEnd()
+}ces_sudo_reject_info;
+
+//structStart()
+typedef struct ces_event_sudo {
+	//onCustom(_:_:_:)
+	bool success;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_sudo_reject_info reject_info;
+	//onCustom(_:_:_:)
+	bool has_from_uid;
+	//onCustom(_:_:_:)
+	uid_t uid;
+	//onCustomStruct(_:_:_:)
+	ces_string_token from_username;
+	//onCustom(_:_:_:)
+	bool has_to_uid;
+	//onCustom(_:_:_:)
+	uid_t uid;
+	//onCustomStruct(_:_:_:)
+	ces_string_token to_username;
+	//onCustomStruct(_:_:_:)
+	ces_string_token command;
+//structEnd()
+}ces_event_sudo;
+
+//structStart()
+typedef struct ces_event_profile_add {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	bool is_update;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_profile profile;
+//structEnd()
+}ces_event_profile_add;
+
+//structStart()
+typedef struct ces_event_profile_remove {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_profile profile;
+//structEnd()
+}ces_event_profile_remove;
+
+//structStart()
+typedef struct ces_event_authorization_petition {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process petitioner;
+	//onCustom(_:_:_:)
+	uint32_t flags;
+	//onCustom(_:_:_:)
+	size_t right_count;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_string_token rights;
+//structEnd()
+}ces_event_authorization_petition;
+
+//structStart()
+typedef struct ces_authorization_result {
+	//onCustomStruct(_:_:_:)
+	ces_string_token right_name;
+	//onCustom(_:_:_:)
+	es_authorization_rule_class_t rule_class;
+	//onCustom(_:_:_:)
+	bool granted;
+//structEnd()
+}ces_authorization_result;
+
+//structStart()
+typedef struct ces_event_authorization_judgement {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process petitioner;
+	//onCustom(_:_:_:)
+	int return_code;
+	//onCustom(_:_:_:)
+	size_t result_count;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_authorization_result results;
+//structEnd()
+}ces_event_authorization_judgement;
+
+//structStart()
+typedef struct ces_od_member_id {
+	//onCustom(_:_:_:)
+	es_od_member_type_t member_type;
+	//onCustom(_:_:_:)
+	uuid_t uuid;
+	//onCustomStruct(_:_:_:)
+	ces_string_token name;
+//structEnd()
+}ces_od_member_id;
+
+//structStart()
+typedef struct ces_event_od_group_add {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustomStruct(_:_:_:)
+	ces_string_token group_name;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_od_member_id member;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_group_add;
+
+//structStart()
+typedef struct ces_event_od_group_remove {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustomStruct(_:_:_:)
+	ces_string_token group_name;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_od_member_id member;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_group_remove;
+
+//structStart()
+typedef struct ces_od_member_id_array {
+	//onCustom(_:_:_:)
+	es_od_member_type_t member_type;
+	//onCustom(_:_:_:)
+	size_t member_count;
+	//onCustomPointer(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_string_token names;
+//structEnd()
+}ces_od_member_id_array;
+
+//structStart()
+typedef struct ces_event_od_group_set {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustomStruct(_:_:_:)
+	ces_string_token group_name;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_od_member_id_array members;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_group_set;
+
+//structStart()
+typedef struct ces_event_od_modify_password {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustom(_:_:_:)
+	es_od_account_type_t account_type;
+	//onCustomStruct(_:_:_:)
+	ces_string_token account_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_modify_password;
+
+//structStart()
+typedef struct ces_event_od_disable_user {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustomStruct(_:_:_:)
+	ces_string_token user_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_disable_user;
+
+//structStart()
+typedef struct ces_event_od_enable_user {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustomStruct(_:_:_:)
+	ces_string_token user_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_enable_user;
+
+//structStart()
+typedef struct ces_event_od_attribute_value_add {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustom(_:_:_:)
+	es_od_record_type_t record_type;
+	//onCustomStruct(_:_:_:)
+	ces_string_token record_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token attribute_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token attribute_value;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_attribute_value_add;
+
+//structStart()
+typedef struct ces_event_od_attribute_value_remove {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustom(_:_:_:)
+	es_od_record_type_t record_type;
+	//onCustomStruct(_:_:_:)
+	ces_string_token record_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token attribute_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token attribute_value;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_attribute_value_remove;
+
+//structStart()
+typedef struct ces_event_od_attribute_set {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustom(_:_:_:)
+	es_od_record_type_t record_type;
+	//onCustomStruct(_:_:_:)
+	ces_string_token record_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token attribute_name;
+	//onCustom(_:_:_:)
+	size_t attribute_value_count;
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_string_token attribute_values;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_attribute_set;
+
+//structStart()
+typedef struct ces_event_od_create_user {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustomStruct(_:_:_:)
+	ces_string_token user_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_create_user;
+
+//structStart()
+typedef struct ces_event_od_create_group {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustomStruct(_:_:_:)
+	ces_string_token group_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_create_group;
+
+//structStart()
+typedef struct ces_event_od_delete_user {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustomStruct(_:_:_:)
+	ces_string_token user_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_delete_user;
+
+//structStart()
+typedef struct ces_event_od_delete_group {
+	//onCustomStructPointer(_:_:_:ext:)
+	ces_process instigator;
+	//onCustom(_:_:_:)
+	int error_code;
+	//onCustomStruct(_:_:_:)
+	ces_string_token group_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token node_name;
+	//onCustomStruct(_:_:_:)
+	ces_string_token db_path;
+//structEnd()
+}ces_event_od_delete_group;
+
+//structStart()
+typedef struct ces_event_xpc_connect {
+	//onCustomStruct(_:_:_:)
+	ces_string_token service_name;
+	//onCustom(_:_:_:)
+	es_xpc_domain_type_t service_domain_type;
+//structEnd()
+}ces_event_xpc_connect;
+
+//structStart()
 typedef struct ces_result {
 	//onCustom(_:_:_:)
 	es_result_type_t result_type;
@@ -1686,8 +2084,19 @@ ces_btm_launch_item es_btm_launch_item_t_convert(es_btm_launch_item_t * _Nonnull
 //structEnd()
 
 //structStart()
+ces_profile es_profile_t_convert(es_profile_t * _Nonnull profile);
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
 ces_event_exec es_event_exec_t_convert(es_event_exec_t * _Nonnull event_exec);
 	//onCustomStructPointer(_:_:_:ext:)
+	//onCustomStruct(_:_:_:)
 //structEnd()
 
 //structStart()
@@ -2228,6 +2637,232 @@ ces_event_btm_launch_item_remove es_event_btm_launch_item_remove_t_convert(es_ev
 	//onCustomStructPointer(_:_:_:ext:)
 	//onCustomStructPointer(_:_:_:ext:)
 	//onCustomStructPointer(_:_:_:ext:)
+//structEnd()
+
+//structStart()
+ces_event_su es_event_su_t_convert(es_event_su_t * _Nonnull event_su);
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+//structEnd()
+
+//structStart()
+ces_sudo_reject_info es_sudo_reject_info_t_convert(es_sudo_reject_info_t * _Nonnull sudo_reject_info);
+	//onCustomStruct(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_sudo es_event_sudo_t_convert(es_event_sudo_t * _Nonnull event_sudo);
+	//onCustom(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_profile_add es_event_profile_add_t_convert(es_event_profile_add_t * _Nonnull event_profile_add);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+//structEnd()
+
+//structStart()
+ces_event_profile_remove es_event_profile_remove_t_convert(es_event_profile_remove_t * _Nonnull event_profile_remove);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustomStructPointer(_:_:_:ext:)
+//structEnd()
+
+//structStart()
+ces_event_authorization_petition es_event_authorization_petition_t_convert(es_event_authorization_petition_t * _Nonnull event_authorization_petition);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+//structEnd()
+
+//structStart()
+ces_authorization_result es_authorization_result_t_convert(es_authorization_result_t * _Nonnull authorization_result);
+	//onCustomStruct(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_authorization_judgement es_event_authorization_judgement_t_convert(es_event_authorization_judgement_t * _Nonnull event_authorization_judgement);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+//structEnd()
+
+//structStart()
+ces_od_member_id es_od_member_id_t_convert(es_od_member_id_t * _Nonnull od_member_id);
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_group_add es_event_od_group_add_t_convert(es_event_od_group_add_t * _Nonnull event_od_group_add);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_group_remove es_event_od_group_remove_t_convert(es_event_od_group_remove_t * _Nonnull event_od_group_remove);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_od_member_id_array es_od_member_id_array_t_convert(es_od_member_id_array_t * _Nonnull od_member_id_array);
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomPointer(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+//structEnd()
+
+//structStart()
+ces_event_od_group_set es_event_od_group_set_t_convert(es_event_od_group_set_t * _Nonnull event_od_group_set);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_modify_password es_event_od_modify_password_t_convert(es_event_od_modify_password_t * _Nonnull event_od_modify_password);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_disable_user es_event_od_disable_user_t_convert(es_event_od_disable_user_t * _Nonnull event_od_disable_user);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_enable_user es_event_od_enable_user_t_convert(es_event_od_enable_user_t * _Nonnull event_od_enable_user);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_attribute_value_add es_event_od_attribute_value_add_t_convert(es_event_od_attribute_value_add_t * _Nonnull event_od_attribute_value_add);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_attribute_value_remove es_event_od_attribute_value_remove_t_convert(es_event_od_attribute_value_remove_t * _Nonnull event_od_attribute_value_remove);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_attribute_set es_event_od_attribute_set_t_convert(es_event_od_attribute_set_t * _Nonnull event_od_attribute_set);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustom(_:_:_:)
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_create_user es_event_od_create_user_t_convert(es_event_od_create_user_t * _Nonnull event_od_create_user);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_create_group es_event_od_create_group_t_convert(es_event_od_create_group_t * _Nonnull event_od_create_group);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_delete_user es_event_od_delete_user_t_convert(es_event_od_delete_user_t * _Nonnull event_od_delete_user);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_od_delete_group es_event_od_delete_group_t_convert(es_event_od_delete_group_t * _Nonnull event_od_delete_group);
+	//onCustomStructPointer(_:_:_:ext:)
+	//onCustom(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+	//onCustomStruct(_:_:_:)
+//structEnd()
+
+//structStart()
+ces_event_xpc_connect es_event_xpc_connect_t_convert(es_event_xpc_connect_t * _Nonnull event_xpc_connect);
+	//onCustomStruct(_:_:_:)
+	//onCustom(_:_:_:)
 //structEnd()
 
 //structStart()

@@ -6,16 +6,3 @@
 //
 
 #import "ESObject.h"
-
-@implementation ESMessage
-
-- (instancetype)init:(void *)p
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
-
-@end

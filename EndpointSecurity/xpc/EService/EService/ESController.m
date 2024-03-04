@@ -20,7 +20,6 @@
 - (instancetype)init
 {
     self = [super init];
-    OS_ATOMIC_QUEUE_INIT;
     if (self) {
         client = nil;
         __weak typeof(self)weakSelf = self;
@@ -54,6 +53,10 @@
 }
 
 #pragma mark - ESService
+
+- (void)connectionTest:(void (^)(BOOL))callback {
+    callback(true);
+}
 
 - (void)subscribe:(NSData *)types callback:(void (^)(es_return_t))callback {
     uint32_t event_count = (uint32_t)types.length/sizeof(es_event_type_t);

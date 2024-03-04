@@ -162,6 +162,10 @@ size_t swr_es_btm_launch_item_t_size(es_btm_launch_item_t *btm_launch_item);
 size_t swr_es_btm_launch_item_t_write(es_btm_launch_item_t *btm_launch_item, void *p);
 size_t swr_es_btm_launch_item_t_read(es_btm_launch_item_t *btm_launch_item, void *p);
 
+size_t swr_es_profile_t_size(es_profile_t *profile);
+size_t swr_es_profile_t_write(es_profile_t *profile, void *p);
+size_t swr_es_profile_t_read(es_profile_t *profile, void *p);
+
 size_t swr_es_event_exec_t_size(es_event_exec_t *event_exec);
 size_t swr_es_event_exec_t_write(es_event_exec_t *event_exec, void *p);
 size_t swr_es_event_exec_t_read(es_event_exec_t *event_exec, void *p);
@@ -505,6 +509,102 @@ size_t swr_es_event_btm_launch_item_add_t_read(es_event_btm_launch_item_add_t *e
 size_t swr_es_event_btm_launch_item_remove_t_size(es_event_btm_launch_item_remove_t *event_btm_launch_item_remove);
 size_t swr_es_event_btm_launch_item_remove_t_write(es_event_btm_launch_item_remove_t *event_btm_launch_item_remove, void *p);
 size_t swr_es_event_btm_launch_item_remove_t_read(es_event_btm_launch_item_remove_t *event_btm_launch_item_remove, void *p);
+
+size_t swr_es_event_su_t_size(es_event_su_t *event_su);
+size_t swr_es_event_su_t_write(es_event_su_t *event_su, void *p);
+size_t swr_es_event_su_t_read(es_event_su_t *event_su, void *p);
+
+size_t swr_es_sudo_reject_info_t_size(es_sudo_reject_info_t *sudo_reject_info);
+size_t swr_es_sudo_reject_info_t_write(es_sudo_reject_info_t *sudo_reject_info, void *p);
+size_t swr_es_sudo_reject_info_t_read(es_sudo_reject_info_t *sudo_reject_info, void *p);
+
+size_t swr_es_event_sudo_t_size(es_event_sudo_t *event_sudo);
+size_t swr_es_event_sudo_t_write(es_event_sudo_t *event_sudo, void *p);
+size_t swr_es_event_sudo_t_read(es_event_sudo_t *event_sudo, void *p);
+
+size_t swr_es_event_profile_add_t_size(es_event_profile_add_t *event_profile_add);
+size_t swr_es_event_profile_add_t_write(es_event_profile_add_t *event_profile_add, void *p);
+size_t swr_es_event_profile_add_t_read(es_event_profile_add_t *event_profile_add, void *p);
+
+size_t swr_es_event_profile_remove_t_size(es_event_profile_remove_t *event_profile_remove);
+size_t swr_es_event_profile_remove_t_write(es_event_profile_remove_t *event_profile_remove, void *p);
+size_t swr_es_event_profile_remove_t_read(es_event_profile_remove_t *event_profile_remove, void *p);
+
+size_t swr_es_event_authorization_petition_t_size(es_event_authorization_petition_t *event_authorization_petition);
+size_t swr_es_event_authorization_petition_t_write(es_event_authorization_petition_t *event_authorization_petition, void *p);
+size_t swr_es_event_authorization_petition_t_read(es_event_authorization_petition_t *event_authorization_petition, void *p);
+
+size_t swr_es_authorization_result_t_size(es_authorization_result_t *authorization_result);
+size_t swr_es_authorization_result_t_write(es_authorization_result_t *authorization_result, void *p);
+size_t swr_es_authorization_result_t_read(es_authorization_result_t *authorization_result, void *p);
+
+size_t swr_es_event_authorization_judgement_t_size(es_event_authorization_judgement_t *event_authorization_judgement);
+size_t swr_es_event_authorization_judgement_t_write(es_event_authorization_judgement_t *event_authorization_judgement, void *p);
+size_t swr_es_event_authorization_judgement_t_read(es_event_authorization_judgement_t *event_authorization_judgement, void *p);
+
+size_t swr_es_od_member_id_t_size(es_od_member_id_t *od_member_id);
+size_t swr_es_od_member_id_t_write(es_od_member_id_t *od_member_id, void *p);
+size_t swr_es_od_member_id_t_read(es_od_member_id_t *od_member_id, void *p);
+
+size_t swr_es_event_od_group_add_t_size(es_event_od_group_add_t *event_od_group_add);
+size_t swr_es_event_od_group_add_t_write(es_event_od_group_add_t *event_od_group_add, void *p);
+size_t swr_es_event_od_group_add_t_read(es_event_od_group_add_t *event_od_group_add, void *p);
+
+size_t swr_es_event_od_group_remove_t_size(es_event_od_group_remove_t *event_od_group_remove);
+size_t swr_es_event_od_group_remove_t_write(es_event_od_group_remove_t *event_od_group_remove, void *p);
+size_t swr_es_event_od_group_remove_t_read(es_event_od_group_remove_t *event_od_group_remove, void *p);
+
+size_t swr_es_od_member_id_array_t_size(es_od_member_id_array_t *od_member_id_array);
+size_t swr_es_od_member_id_array_t_write(es_od_member_id_array_t *od_member_id_array, void *p);
+size_t swr_es_od_member_id_array_t_read(es_od_member_id_array_t *od_member_id_array, void *p);
+
+size_t swr_es_event_od_group_set_t_size(es_event_od_group_set_t *event_od_group_set);
+size_t swr_es_event_od_group_set_t_write(es_event_od_group_set_t *event_od_group_set, void *p);
+size_t swr_es_event_od_group_set_t_read(es_event_od_group_set_t *event_od_group_set, void *p);
+
+size_t swr_es_event_od_modify_password_t_size(es_event_od_modify_password_t *event_od_modify_password);
+size_t swr_es_event_od_modify_password_t_write(es_event_od_modify_password_t *event_od_modify_password, void *p);
+size_t swr_es_event_od_modify_password_t_read(es_event_od_modify_password_t *event_od_modify_password, void *p);
+
+size_t swr_es_event_od_disable_user_t_size(es_event_od_disable_user_t *event_od_disable_user);
+size_t swr_es_event_od_disable_user_t_write(es_event_od_disable_user_t *event_od_disable_user, void *p);
+size_t swr_es_event_od_disable_user_t_read(es_event_od_disable_user_t *event_od_disable_user, void *p);
+
+size_t swr_es_event_od_enable_user_t_size(es_event_od_enable_user_t *event_od_enable_user);
+size_t swr_es_event_od_enable_user_t_write(es_event_od_enable_user_t *event_od_enable_user, void *p);
+size_t swr_es_event_od_enable_user_t_read(es_event_od_enable_user_t *event_od_enable_user, void *p);
+
+size_t swr_es_event_od_attribute_value_add_t_size(es_event_od_attribute_value_add_t *event_od_attribute_value_add);
+size_t swr_es_event_od_attribute_value_add_t_write(es_event_od_attribute_value_add_t *event_od_attribute_value_add, void *p);
+size_t swr_es_event_od_attribute_value_add_t_read(es_event_od_attribute_value_add_t *event_od_attribute_value_add, void *p);
+
+size_t swr_es_event_od_attribute_value_remove_t_size(es_event_od_attribute_value_remove_t *event_od_attribute_value_remove);
+size_t swr_es_event_od_attribute_value_remove_t_write(es_event_od_attribute_value_remove_t *event_od_attribute_value_remove, void *p);
+size_t swr_es_event_od_attribute_value_remove_t_read(es_event_od_attribute_value_remove_t *event_od_attribute_value_remove, void *p);
+
+size_t swr_es_event_od_attribute_set_t_size(es_event_od_attribute_set_t *event_od_attribute_set);
+size_t swr_es_event_od_attribute_set_t_write(es_event_od_attribute_set_t *event_od_attribute_set, void *p);
+size_t swr_es_event_od_attribute_set_t_read(es_event_od_attribute_set_t *event_od_attribute_set, void *p);
+
+size_t swr_es_event_od_create_user_t_size(es_event_od_create_user_t *event_od_create_user);
+size_t swr_es_event_od_create_user_t_write(es_event_od_create_user_t *event_od_create_user, void *p);
+size_t swr_es_event_od_create_user_t_read(es_event_od_create_user_t *event_od_create_user, void *p);
+
+size_t swr_es_event_od_create_group_t_size(es_event_od_create_group_t *event_od_create_group);
+size_t swr_es_event_od_create_group_t_write(es_event_od_create_group_t *event_od_create_group, void *p);
+size_t swr_es_event_od_create_group_t_read(es_event_od_create_group_t *event_od_create_group, void *p);
+
+size_t swr_es_event_od_delete_user_t_size(es_event_od_delete_user_t *event_od_delete_user);
+size_t swr_es_event_od_delete_user_t_write(es_event_od_delete_user_t *event_od_delete_user, void *p);
+size_t swr_es_event_od_delete_user_t_read(es_event_od_delete_user_t *event_od_delete_user, void *p);
+
+size_t swr_es_event_od_delete_group_t_size(es_event_od_delete_group_t *event_od_delete_group);
+size_t swr_es_event_od_delete_group_t_write(es_event_od_delete_group_t *event_od_delete_group, void *p);
+size_t swr_es_event_od_delete_group_t_read(es_event_od_delete_group_t *event_od_delete_group, void *p);
+
+size_t swr_es_event_xpc_connect_t_size(es_event_xpc_connect_t *event_xpc_connect);
+size_t swr_es_event_xpc_connect_t_write(es_event_xpc_connect_t *event_xpc_connect, void *p);
+size_t swr_es_event_xpc_connect_t_read(es_event_xpc_connect_t *event_xpc_connect, void *p);
 
 size_t swr_es_result_t_size(es_result_t *result);
 size_t swr_es_result_t_write(es_result_t *result, void *p);

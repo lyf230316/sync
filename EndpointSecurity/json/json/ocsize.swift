@@ -20,7 +20,7 @@ enum FunT {
 }
 
 extension Struct {
-    static var debug: Bool = true
+    static var debug: Bool = false
     static var funType: FunT = .size
     
     static var fileContent: String = ""
@@ -394,8 +394,13 @@ extension Struct {
                 }
             }
             else {
-                Self.addLine("\(indentation)*(\(otype)*)(p+size) = \(ctx)\(mem.name);")
-                Self.addLine("\(indentation)size += sizeof(\(otype));")
+                if (otype == "uuid_t") {
+                    Self.addLine("\(indentation)memcpy(p+size,\(ctx)\(mem.name),16);")
+                    Self.addLine("\(indentation)size += 16;")
+                } else {
+                    Self.addLine("\(indentation)*(\(otype)*)(p+size) = \(ctx)\(mem.name);")
+                    Self.addLine("\(indentation)size += sizeof(\(otype));")
+                }
             }
         case .read:
             if let (itemT, count) = mem.arrayInfo() {
@@ -405,8 +410,13 @@ extension Struct {
                 }
             }
             else {
-                Self.addLine("\(indentation)\(ctx)\(mem.name) = *(\(otype)*)(p+size);")
-                Self.addLine("\(indentation)size += sizeof(\(otype));")
+                if (otype == "uuid_t") {
+                    Self.addLine("\(indentation)memcpy(\(ctx)\(mem.name), p+size, 16);")
+                    Self.addLine("\(indentation)size += 16;")
+                } else {
+                    Self.addLine("\(indentation)\(ctx)\(mem.name) = *(\(otype)*)(p+size);")
+                    Self.addLine("\(indentation)size += sizeof(\(otype));")
+                }
             }
         case .headerfile:
             break

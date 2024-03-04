@@ -14,14 +14,28 @@ class XpcClient: NSObject {
     
     var connection: NSXPCConnection!
     
+    var invalidation: Bool = false
+    var interdruption: Bool = false
+    
     func connectService(name: String) {
+        if (self.connection != nil && self.connection.serviceName == name) {
+            return
+        }
+        if (self.connection != nil) {
+            self.connection.invalidate()
+        }
         self.connection = NSXPCConnection(machServiceName: name)
         self.connection.remoteObjectInterface = NSXPCInterface(with: EService.self)
         self.connection.exportedInterface = NSXPCInterface(with:EServiceClient.self)
         self.connection.exportedObject = self;
+        self.connection.interruptionHandler = { [weak self] in
+            self?.interdruption = true
+        }
+        self.connection.invalidationHandler = {[weak self] in
+            self?.invalidation = true
+        }
         self.connection.resume()
     }
-
 }
 
 extension XpcClient: EServiceClient {

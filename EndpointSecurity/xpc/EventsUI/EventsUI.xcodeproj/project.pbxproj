@@ -14,6 +14,7 @@
 		1C151DF12AAAFA6D00CFA6E6 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C151DF02AAAFA6D00CFA6E6 /* libEndpointSecurity.tbd */; };
 		1C151E032AAB004500CFA6E6 /* swr.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C151E022AAB004500CFA6E6 /* swr.c */; };
 		1C151E062AAB03B600CFA6E6 /* XpcClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C151E052AAB03B600CFA6E6 /* XpcClient.swift */; };
+		1C5C68B62B91B1CB00BF3F2E /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C5C68B52B91B1CB00BF3F2E /* Preferences.storyboard */; };
 		1C7D5DB92ADE702900FB5D23 /* PropertyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7D5DB52ADE702900FB5D23 /* PropertyCell.swift */; };
 		1C7D5DBA2ADE702900FB5D23 /* PropertyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7D5DB62ADE702900FB5D23 /* PropertyNode.swift */; };
 		1C7D5DBB2ADE702900FB5D23 /* IORPropertyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7D5DB72ADE702900FB5D23 /* IORPropertyController.swift */; };
@@ -36,6 +37,7 @@
 		1C151E012AAB004500CFA6E6 /* EService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EService.h; sourceTree = "<group>"; };
 		1C151E022AAB004500CFA6E6 /* swr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swr.c; sourceTree = "<group>"; };
 		1C151E052AAB03B600CFA6E6 /* XpcClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XpcClient.swift; sourceTree = "<group>"; };
+		1C5C68B52B91B1CB00BF3F2E /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		1C7D5DB52ADE702900FB5D23 /* PropertyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyCell.swift; sourceTree = "<group>"; };
 		1C7D5DB62ADE702900FB5D23 /* PropertyNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyNode.swift; sourceTree = "<group>"; };
 		1C7D5DB72ADE702900FB5D23 /* IORPropertyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IORPropertyController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,14 @@
 			path = Client;
 			sourceTree = "<group>";
 		};
+		1C5C68B42B91B1B100BF3F2E /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				1C5C68B52B91B1CB00BF3F2E /* Preferences.storyboard */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
 		1C7D5DB42ADE6FE400FB5D23 /* propertyController */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +139,7 @@
 		1CA412DB2AD2A8A5009830C4 /* viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
+				1C5C68B42B91B1B100BF3F2E /* Preferences */,
 				1CA412DC2AD2A8C8009830C4 /* Main */,
 			);
 			path = viewcontrollers;
@@ -213,6 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C5C68B62B91B1CB00BF3F2E /* Preferences.storyboard in Resources */,
 				1C151DE52AAAF9D500CFA6E6 /* Assets.xcassets in Resources */,
 				1C151DE82AAAF9D500CFA6E6 /* Main.storyboard in Resources */,
 			);
