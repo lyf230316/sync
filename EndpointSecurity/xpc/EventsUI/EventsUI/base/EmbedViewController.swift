@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import AppKit
 
 public class EmbedViewController: NSViewController {
     public weak var embedController: NSViewController? = nil

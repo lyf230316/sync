@@ -1234,7 +1234,10 @@ size_t swr_es_process_t_size(es_process_t *process) {
 	size += swr_es_string_token_t_size(&(process->signing_id));
 	size += swr_es_string_token_t_size(&(process->team_id));
 	size += swr_es_file_t_size(process->executable);
-	size += swr_es_file_t_size(process->tty);
+	size += sizeof(_Bool);
+	if (process->tty) {
+	    size += swr_es_file_t_size(process->tty);
+	}
 	size += sizeof(struct timeval);
 	size += swr_audit_token_t_size(&(process->responsible_audit_token));
 	size += swr_audit_token_t_size(&(process->parent_audit_token));
@@ -1263,7 +1266,14 @@ size_t swr_es_process_t_write(es_process_t *process, void *p) {
 	size += swr_es_string_token_t_write(&(process->signing_id), p+size);
 	size += swr_es_string_token_t_write(&(process->team_id), p+size);
 	size += swr_es_file_t_write(process->executable, p+size);
-	size += swr_es_file_t_write(process->tty, p+size);
+	if (process->tty) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_file_t_write(process->tty, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	*(struct timeval*)(p+size) = process->start_time;
 	size += sizeof(struct timeval);
 	size += swr_audit_token_t_write(&(process->responsible_audit_token), p+size);
@@ -1294,8 +1304,12 @@ size_t swr_es_process_t_read(es_process_t *process, void *p) {
 	size += swr_es_string_token_t_read(&(process->team_id), p+size);
 	process->executable = malloc(sizeof(es_file_t));
 	size += swr_es_file_t_read(process->executable, p+size);
-	process->tty = malloc(sizeof(es_file_t));
-	size += swr_es_file_t_read(process->tty, p+size);
+	_Bool tty_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (tty_has) {
+	    process->tty = malloc(sizeof(es_file_t));
+	    size += swr_es_file_t_read(process->tty, p+size);
+	}
 	process->start_time = *(struct timeval*)(p+size);
 	size += sizeof(struct timeval);
 	size += swr_audit_token_t_read(&(process->responsible_audit_token), p+size);
@@ -2491,7 +2505,10 @@ size_t swr_es_event_clone_t_read(es_event_clone_t *event_clone, void *p) {
 size_t swr_es_event_copyfile_t_size(es_event_copyfile_t *event_copyfile) {
     size_t size = 0;
 	size += swr_es_file_t_size(event_copyfile->source);
-	size += swr_es_file_t_size(event_copyfile->target_file);
+	size += sizeof(_Bool);
+	if (event_copyfile->target_file) {
+	    size += swr_es_file_t_size(event_copyfile->target_file);
+	}
 	size += swr_es_file_t_size(event_copyfile->target_dir);
 	size += swr_es_string_token_t_size(&(event_copyfile->target_name));
 	size += sizeof(mode_t);
@@ -2502,7 +2519,14 @@ size_t swr_es_event_copyfile_t_size(es_event_copyfile_t *event_copyfile) {
 size_t swr_es_event_copyfile_t_write(es_event_copyfile_t *event_copyfile, void *p) {
     size_t size = 0;
 	size += swr_es_file_t_write(event_copyfile->source, p+size);
-	size += swr_es_file_t_write(event_copyfile->target_file, p+size);
+	if (event_copyfile->target_file) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_file_t_write(event_copyfile->target_file, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	size += swr_es_file_t_write(event_copyfile->target_dir, p+size);
 	size += swr_es_string_token_t_write(&(event_copyfile->target_name), p+size);
 	*(mode_t*)(p+size) = event_copyfile->mode;
@@ -2516,8 +2540,12 @@ size_t swr_es_event_copyfile_t_read(es_event_copyfile_t *event_copyfile, void *p
     size_t size = 0;
 	event_copyfile->source = malloc(sizeof(es_file_t));
 	size += swr_es_file_t_read(event_copyfile->source, p+size);
-	event_copyfile->target_file = malloc(sizeof(es_file_t));
-	size += swr_es_file_t_read(event_copyfile->target_file, p+size);
+	_Bool target_file_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (target_file_has) {
+	    event_copyfile->target_file = malloc(sizeof(es_file_t));
+	    size += swr_es_file_t_read(event_copyfile->target_file, p+size);
+	}
 	event_copyfile->target_dir = malloc(sizeof(es_file_t));
 	size += swr_es_file_t_read(event_copyfile->target_dir, p+size);
 	size += swr_es_string_token_t_read(&(event_copyfile->target_name), p+size);
@@ -2756,7 +2784,10 @@ size_t swr_es_event_pty_close_t_read(es_event_pty_close_t *event_pty_close, void
 
 size_t swr_es_event_proc_check_t_size(es_event_proc_check_t *event_proc_check) {
     size_t size = 0;
-	size += swr_es_process_t_size(event_proc_check->target);
+	size += sizeof(_Bool);
+	if (event_proc_check->target) {
+	    size += swr_es_process_t_size(event_proc_check->target);
+	}
 	size += sizeof(es_proc_check_type_t);
 	size += sizeof(int);
     return size;
@@ -2764,7 +2795,14 @@ size_t swr_es_event_proc_check_t_size(es_event_proc_check_t *event_proc_check) {
 
 size_t swr_es_event_proc_check_t_write(es_event_proc_check_t *event_proc_check, void *p) {
     size_t size = 0;
-	size += swr_es_process_t_write(event_proc_check->target, p+size);
+	if (event_proc_check->target) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_process_t_write(event_proc_check->target, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	*(es_proc_check_type_t*)(p+size) = event_proc_check->type;
 	size += sizeof(es_proc_check_type_t);
 	*(int*)(p+size) = event_proc_check->flavor;
@@ -2774,8 +2812,12 @@ size_t swr_es_event_proc_check_t_write(es_event_proc_check_t *event_proc_check, 
 
 size_t swr_es_event_proc_check_t_read(es_event_proc_check_t *event_proc_check, void *p) {
     size_t size = 0;
-	event_proc_check->target = malloc(sizeof(es_process_t));
-	size += swr_es_process_t_read(event_proc_check->target, p+size);
+	_Bool target_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (target_has) {
+	    event_proc_check->target = malloc(sizeof(es_process_t));
+	    size += swr_es_process_t_read(event_proc_check->target, p+size);
+	}
 	event_proc_check->type = *(es_proc_check_type_t*)(p+size);
 	size += sizeof(es_proc_check_type_t);
 	event_proc_check->flavor = *(int*)(p+size);
@@ -2809,14 +2851,24 @@ size_t swr_es_event_searchfs_t_read(es_event_searchfs_t *event_searchfs, void *p
 
 size_t swr_es_event_proc_suspend_resume_t_size(es_event_proc_suspend_resume_t *event_proc_suspend_resume) {
     size_t size = 0;
-	size += swr_es_process_t_size(event_proc_suspend_resume->target);
+	size += sizeof(_Bool);
+	if (event_proc_suspend_resume->target) {
+	    size += swr_es_process_t_size(event_proc_suspend_resume->target);
+	}
 	size += sizeof(es_proc_suspend_resume_type_t);
     return size;
 }
 
 size_t swr_es_event_proc_suspend_resume_t_write(es_event_proc_suspend_resume_t *event_proc_suspend_resume, void *p) {
     size_t size = 0;
-	size += swr_es_process_t_write(event_proc_suspend_resume->target, p+size);
+	if (event_proc_suspend_resume->target) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_process_t_write(event_proc_suspend_resume->target, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	*(es_proc_suspend_resume_type_t*)(p+size) = event_proc_suspend_resume->type;
 	size += sizeof(es_proc_suspend_resume_type_t);
     return size;
@@ -2824,8 +2876,12 @@ size_t swr_es_event_proc_suspend_resume_t_write(es_event_proc_suspend_resume_t *
 
 size_t swr_es_event_proc_suspend_resume_t_read(es_event_proc_suspend_resume_t *event_proc_suspend_resume, void *p) {
     size_t size = 0;
-	event_proc_suspend_resume->target = malloc(sizeof(es_process_t));
-	size += swr_es_process_t_read(event_proc_suspend_resume->target, p+size);
+	_Bool target_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (target_has) {
+	    event_proc_suspend_resume->target = malloc(sizeof(es_process_t));
+	    size += swr_es_process_t_read(event_proc_suspend_resume->target, p+size);
+	}
 	event_proc_suspend_resume->type = *(es_proc_suspend_resume_type_t*)(p+size);
 	size += sizeof(es_proc_suspend_resume_type_t);
     return size;
@@ -2868,14 +2924,24 @@ size_t swr_es_event_trace_t_read(es_event_trace_t *event_trace, void *p) {
 size_t swr_es_event_remote_thread_create_t_size(es_event_remote_thread_create_t *event_remote_thread_create) {
     size_t size = 0;
 	size += swr_es_process_t_size(event_remote_thread_create->target);
-	size += swr_es_thread_state_t_size(event_remote_thread_create->thread_state);
+	size += sizeof(_Bool);
+	if (event_remote_thread_create->thread_state) {
+	    size += swr_es_thread_state_t_size(event_remote_thread_create->thread_state);
+	}
     return size;
 }
 
 size_t swr_es_event_remote_thread_create_t_write(es_event_remote_thread_create_t *event_remote_thread_create, void *p) {
     size_t size = 0;
 	size += swr_es_process_t_write(event_remote_thread_create->target, p+size);
-	size += swr_es_thread_state_t_write(event_remote_thread_create->thread_state, p+size);
+	if (event_remote_thread_create->thread_state) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_thread_state_t_write(event_remote_thread_create->thread_state, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
     return size;
 }
 
@@ -2883,8 +2949,12 @@ size_t swr_es_event_remote_thread_create_t_read(es_event_remote_thread_create_t 
     size_t size = 0;
 	event_remote_thread_create->target = malloc(sizeof(es_process_t));
 	size += swr_es_process_t_read(event_remote_thread_create->target, p+size);
-	event_remote_thread_create->thread_state = malloc(sizeof(es_thread_state_t));
-	size += swr_es_thread_state_t_read(event_remote_thread_create->thread_state, p+size);
+	_Bool thread_state_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (thread_state_has) {
+	    event_remote_thread_create->thread_state = malloc(sizeof(es_thread_state_t));
+	    size += swr_es_thread_state_t_read(event_remote_thread_create->thread_state, p+size);
+	}
     return size;
 }
 
@@ -3195,7 +3265,10 @@ size_t swr_es_event_xp_malware_remediated_t_size(es_event_xp_malware_remediated_
 	size += sizeof(bool);
 	size += swr_es_string_token_t_size(&(event_xp_malware_remediated->result_description));
 	size += swr_es_string_token_t_size(&(event_xp_malware_remediated->remediated_path));
-	size += swr_audit_token_t_size(event_xp_malware_remediated->remediated_process_audit_token);
+	size += sizeof(_Bool);
+	if (event_xp_malware_remediated->remediated_process_audit_token) {
+	    size += swr_audit_token_t_size(event_xp_malware_remediated->remediated_process_audit_token);
+	}
     return size;
 }
 
@@ -3209,7 +3282,14 @@ size_t swr_es_event_xp_malware_remediated_t_write(es_event_xp_malware_remediated
 	size += sizeof(bool);
 	size += swr_es_string_token_t_write(&(event_xp_malware_remediated->result_description), p+size);
 	size += swr_es_string_token_t_write(&(event_xp_malware_remediated->remediated_path), p+size);
-	size += swr_audit_token_t_write(event_xp_malware_remediated->remediated_process_audit_token, p+size);
+	if (event_xp_malware_remediated->remediated_process_audit_token) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_audit_token_t_write(event_xp_malware_remediated->remediated_process_audit_token, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
     return size;
 }
 
@@ -3223,8 +3303,12 @@ size_t swr_es_event_xp_malware_remediated_t_read(es_event_xp_malware_remediated_
 	size += sizeof(bool);
 	size += swr_es_string_token_t_read(&(event_xp_malware_remediated->result_description), p+size);
 	size += swr_es_string_token_t_read(&(event_xp_malware_remediated->remediated_path), p+size);
-	event_xp_malware_remediated->remediated_process_audit_token = malloc(sizeof(audit_token_t));
-	size += swr_audit_token_t_read(event_xp_malware_remediated->remediated_process_audit_token, p+size);
+	_Bool remediated_process_audit_token_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (remediated_process_audit_token_has) {
+	    event_xp_malware_remediated->remediated_process_audit_token = malloc(sizeof(audit_token_t));
+	    size += swr_audit_token_t_read(event_xp_malware_remediated->remediated_process_audit_token, p+size);
+	}
     return size;
 }
 
@@ -3539,8 +3623,14 @@ size_t swr_es_event_login_logout_t_read(es_event_login_logout_t *event_login_log
 
 size_t swr_es_event_btm_launch_item_add_t_size(es_event_btm_launch_item_add_t *event_btm_launch_item_add) {
     size_t size = 0;
-	size += swr_es_process_t_size(event_btm_launch_item_add->instigator);
-	size += swr_es_process_t_size(event_btm_launch_item_add->app);
+	size += sizeof(_Bool);
+	if (event_btm_launch_item_add->instigator) {
+	    size += swr_es_process_t_size(event_btm_launch_item_add->instigator);
+	}
+	size += sizeof(_Bool);
+	if (event_btm_launch_item_add->app) {
+	    size += swr_es_process_t_size(event_btm_launch_item_add->app);
+	}
 	size += swr_es_btm_launch_item_t_size(event_btm_launch_item_add->item);
 	size += swr_es_string_token_t_size(&(event_btm_launch_item_add->executable_path));
     return size;
@@ -3548,8 +3638,22 @@ size_t swr_es_event_btm_launch_item_add_t_size(es_event_btm_launch_item_add_t *e
 
 size_t swr_es_event_btm_launch_item_add_t_write(es_event_btm_launch_item_add_t *event_btm_launch_item_add, void *p) {
     size_t size = 0;
-	size += swr_es_process_t_write(event_btm_launch_item_add->instigator, p+size);
-	size += swr_es_process_t_write(event_btm_launch_item_add->app, p+size);
+	if (event_btm_launch_item_add->instigator) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_process_t_write(event_btm_launch_item_add->instigator, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
+	if (event_btm_launch_item_add->app) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_process_t_write(event_btm_launch_item_add->app, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	size += swr_es_btm_launch_item_t_write(event_btm_launch_item_add->item, p+size);
 	size += swr_es_string_token_t_write(&(event_btm_launch_item_add->executable_path), p+size);
     return size;
@@ -3557,10 +3661,18 @@ size_t swr_es_event_btm_launch_item_add_t_write(es_event_btm_launch_item_add_t *
 
 size_t swr_es_event_btm_launch_item_add_t_read(es_event_btm_launch_item_add_t *event_btm_launch_item_add, void *p) {
     size_t size = 0;
-	event_btm_launch_item_add->instigator = malloc(sizeof(es_process_t));
-	size += swr_es_process_t_read(event_btm_launch_item_add->instigator, p+size);
-	event_btm_launch_item_add->app = malloc(sizeof(es_process_t));
-	size += swr_es_process_t_read(event_btm_launch_item_add->app, p+size);
+	_Bool instigator_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (instigator_has) {
+	    event_btm_launch_item_add->instigator = malloc(sizeof(es_process_t));
+	    size += swr_es_process_t_read(event_btm_launch_item_add->instigator, p+size);
+	}
+	_Bool app_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (app_has) {
+	    event_btm_launch_item_add->app = malloc(sizeof(es_process_t));
+	    size += swr_es_process_t_read(event_btm_launch_item_add->app, p+size);
+	}
 	event_btm_launch_item_add->item = malloc(sizeof(es_btm_launch_item_t));
 	size += swr_es_btm_launch_item_t_read(event_btm_launch_item_add->item, p+size);
 	size += swr_es_string_token_t_read(&(event_btm_launch_item_add->executable_path), p+size);
@@ -3569,26 +3681,54 @@ size_t swr_es_event_btm_launch_item_add_t_read(es_event_btm_launch_item_add_t *e
 
 size_t swr_es_event_btm_launch_item_remove_t_size(es_event_btm_launch_item_remove_t *event_btm_launch_item_remove) {
     size_t size = 0;
-	size += swr_es_process_t_size(event_btm_launch_item_remove->instigator);
-	size += swr_es_process_t_size(event_btm_launch_item_remove->app);
+	size += sizeof(_Bool);
+	if (event_btm_launch_item_remove->instigator) {
+	    size += swr_es_process_t_size(event_btm_launch_item_remove->instigator);
+	}
+	size += sizeof(_Bool);
+	if (event_btm_launch_item_remove->app) {
+	    size += swr_es_process_t_size(event_btm_launch_item_remove->app);
+	}
 	size += swr_es_btm_launch_item_t_size(event_btm_launch_item_remove->item);
     return size;
 }
 
 size_t swr_es_event_btm_launch_item_remove_t_write(es_event_btm_launch_item_remove_t *event_btm_launch_item_remove, void *p) {
     size_t size = 0;
-	size += swr_es_process_t_write(event_btm_launch_item_remove->instigator, p+size);
-	size += swr_es_process_t_write(event_btm_launch_item_remove->app, p+size);
+	if (event_btm_launch_item_remove->instigator) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_process_t_write(event_btm_launch_item_remove->instigator, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
+	if (event_btm_launch_item_remove->app) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_process_t_write(event_btm_launch_item_remove->app, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	size += swr_es_btm_launch_item_t_write(event_btm_launch_item_remove->item, p+size);
     return size;
 }
 
 size_t swr_es_event_btm_launch_item_remove_t_read(es_event_btm_launch_item_remove_t *event_btm_launch_item_remove, void *p) {
     size_t size = 0;
-	event_btm_launch_item_remove->instigator = malloc(sizeof(es_process_t));
-	size += swr_es_process_t_read(event_btm_launch_item_remove->instigator, p+size);
-	event_btm_launch_item_remove->app = malloc(sizeof(es_process_t));
-	size += swr_es_process_t_read(event_btm_launch_item_remove->app, p+size);
+	_Bool instigator_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (instigator_has) {
+	    event_btm_launch_item_remove->instigator = malloc(sizeof(es_process_t));
+	    size += swr_es_process_t_read(event_btm_launch_item_remove->instigator, p+size);
+	}
+	_Bool app_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (app_has) {
+	    event_btm_launch_item_remove->app = malloc(sizeof(es_process_t));
+	    size += swr_es_process_t_read(event_btm_launch_item_remove->app, p+size);
+	}
 	event_btm_launch_item_remove->item = malloc(sizeof(es_btm_launch_item_t));
 	size += swr_es_btm_launch_item_t_read(event_btm_launch_item_remove->item, p+size);
     return size;
@@ -3605,9 +3745,15 @@ size_t swr_es_event_su_t_size(es_event_su_t *event_su) {
 	size += swr_es_string_token_t_size(&(event_su->to_username));
 	size += swr_es_string_token_t_size(&(event_su->shell));
 	size += sizeof(size_t);
-	size += swr_es_string_token_t_size(event_su->argv);
+	size += sizeof(_Bool);
+	if (event_su->argv) {
+	    size += swr_es_string_token_t_size(event_su->argv);
+	}
 	size += sizeof(size_t);
-	size += swr_es_string_token_t_size(event_su->env);
+	size += sizeof(_Bool);
+	if (event_su->env) {
+	    size += swr_es_string_token_t_size(event_su->env);
+	}
     return size;
 }
 
@@ -3627,10 +3773,24 @@ size_t swr_es_event_su_t_write(es_event_su_t *event_su, void *p) {
 	size += swr_es_string_token_t_write(&(event_su->shell), p+size);
 	*(size_t*)(p+size) = event_su->argc;
 	size += sizeof(size_t);
-	size += swr_es_string_token_t_write(event_su->argv, p+size);
+	if (event_su->argv) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_string_token_t_write(event_su->argv, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	*(size_t*)(p+size) = event_su->env_count;
 	size += sizeof(size_t);
-	size += swr_es_string_token_t_write(event_su->env, p+size);
+	if (event_su->env) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_string_token_t_write(event_su->env, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
     return size;
 }
 
@@ -3650,12 +3810,20 @@ size_t swr_es_event_su_t_read(es_event_su_t *event_su, void *p) {
 	size += swr_es_string_token_t_read(&(event_su->shell), p+size);
 	event_su->argc = *(size_t*)(p+size);
 	size += sizeof(size_t);
-	event_su->argv = malloc(sizeof(es_string_token_t));
-	size += swr_es_string_token_t_read(event_su->argv, p+size);
+	_Bool argv_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (argv_has) {
+	    event_su->argv = malloc(sizeof(es_string_token_t));
+	    size += swr_es_string_token_t_read(event_su->argv, p+size);
+	}
 	event_su->env_count = *(size_t*)(p+size);
 	size += sizeof(size_t);
-	event_su->env = malloc(sizeof(es_string_token_t));
-	size += swr_es_string_token_t_read(event_su->env, p+size);
+	_Bool env_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (env_has) {
+	    event_su->env = malloc(sizeof(es_string_token_t));
+	    size += swr_es_string_token_t_read(event_su->env, p+size);
+	}
     return size;
 }
 
@@ -3688,7 +3856,10 @@ size_t swr_es_sudo_reject_info_t_read(es_sudo_reject_info_t *sudo_reject_info, v
 size_t swr_es_event_sudo_t_size(es_event_sudo_t *event_sudo) {
     size_t size = 0;
 	size += sizeof(bool);
-	size += swr_es_sudo_reject_info_t_size(event_sudo->reject_info);
+	size += sizeof(_Bool);
+	if (event_sudo->reject_info) {
+	    size += swr_es_sudo_reject_info_t_size(event_sudo->reject_info);
+	}
 	size += sizeof(bool);
 	size += sizeof(uid_t);
 	size += swr_es_string_token_t_size(&(event_sudo->from_username));
@@ -3703,7 +3874,14 @@ size_t swr_es_event_sudo_t_write(es_event_sudo_t *event_sudo, void *p) {
     size_t size = 0;
 	*(bool*)(p+size) = event_sudo->success;
 	size += sizeof(bool);
-	size += swr_es_sudo_reject_info_t_write(event_sudo->reject_info, p+size);
+	if (event_sudo->reject_info) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_sudo_reject_info_t_write(event_sudo->reject_info, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	*(bool*)(p+size) = event_sudo->has_from_uid;
 	size += sizeof(bool);
 	*(uid_t*)(p+size) = event_sudo->from_uid.uid;
@@ -3722,8 +3900,12 @@ size_t swr_es_event_sudo_t_read(es_event_sudo_t *event_sudo, void *p) {
     size_t size = 0;
 	event_sudo->success = *(bool*)(p+size);
 	size += sizeof(bool);
-	event_sudo->reject_info = malloc(sizeof(es_sudo_reject_info_t));
-	size += swr_es_sudo_reject_info_t_read(event_sudo->reject_info, p+size);
+	_Bool reject_info_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (reject_info_has) {
+	    event_sudo->reject_info = malloc(sizeof(es_sudo_reject_info_t));
+	    size += swr_es_sudo_reject_info_t_read(event_sudo->reject_info, p+size);
+	}
 	event_sudo->has_from_uid = *(bool*)(p+size);
 	size += sizeof(bool);
 	event_sudo->from_uid.uid = *(uid_t*)(p+size);
@@ -3792,22 +3974,42 @@ size_t swr_es_event_profile_remove_t_read(es_event_profile_remove_t *event_profi
 size_t swr_es_event_authorization_petition_t_size(es_event_authorization_petition_t *event_authorization_petition) {
     size_t size = 0;
 	size += swr_es_process_t_size(event_authorization_petition->instigator);
-	size += swr_es_process_t_size(event_authorization_petition->petitioner);
+	size += sizeof(_Bool);
+	if (event_authorization_petition->petitioner) {
+	    size += swr_es_process_t_size(event_authorization_petition->petitioner);
+	}
 	size += sizeof(uint32_t);
 	size += sizeof(size_t);
-	size += swr_es_string_token_t_size(event_authorization_petition->rights);
+	size += sizeof(_Bool);
+	if (event_authorization_petition->rights) {
+	    size += swr_es_string_token_t_size(event_authorization_petition->rights);
+	}
     return size;
 }
 
 size_t swr_es_event_authorization_petition_t_write(es_event_authorization_petition_t *event_authorization_petition, void *p) {
     size_t size = 0;
 	size += swr_es_process_t_write(event_authorization_petition->instigator, p+size);
-	size += swr_es_process_t_write(event_authorization_petition->petitioner, p+size);
+	if (event_authorization_petition->petitioner) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_process_t_write(event_authorization_petition->petitioner, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	*(uint32_t*)(p+size) = event_authorization_petition->flags;
 	size += sizeof(uint32_t);
 	*(size_t*)(p+size) = event_authorization_petition->right_count;
 	size += sizeof(size_t);
-	size += swr_es_string_token_t_write(event_authorization_petition->rights, p+size);
+	if (event_authorization_petition->rights) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_string_token_t_write(event_authorization_petition->rights, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
     return size;
 }
 
@@ -3815,14 +4017,22 @@ size_t swr_es_event_authorization_petition_t_read(es_event_authorization_petitio
     size_t size = 0;
 	event_authorization_petition->instigator = malloc(sizeof(es_process_t));
 	size += swr_es_process_t_read(event_authorization_petition->instigator, p+size);
-	event_authorization_petition->petitioner = malloc(sizeof(es_process_t));
-	size += swr_es_process_t_read(event_authorization_petition->petitioner, p+size);
+	_Bool petitioner_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (petitioner_has) {
+	    event_authorization_petition->petitioner = malloc(sizeof(es_process_t));
+	    size += swr_es_process_t_read(event_authorization_petition->petitioner, p+size);
+	}
 	event_authorization_petition->flags = *(uint32_t*)(p+size);
 	size += sizeof(uint32_t);
 	event_authorization_petition->right_count = *(size_t*)(p+size);
 	size += sizeof(size_t);
-	event_authorization_petition->rights = malloc(sizeof(es_string_token_t));
-	size += swr_es_string_token_t_read(event_authorization_petition->rights, p+size);
+	_Bool rights_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (rights_has) {
+	    event_authorization_petition->rights = malloc(sizeof(es_string_token_t));
+	    size += swr_es_string_token_t_read(event_authorization_petition->rights, p+size);
+	}
     return size;
 }
 
@@ -3857,22 +4067,42 @@ size_t swr_es_authorization_result_t_read(es_authorization_result_t *authorizati
 size_t swr_es_event_authorization_judgement_t_size(es_event_authorization_judgement_t *event_authorization_judgement) {
     size_t size = 0;
 	size += swr_es_process_t_size(event_authorization_judgement->instigator);
-	size += swr_es_process_t_size(event_authorization_judgement->petitioner);
+	size += sizeof(_Bool);
+	if (event_authorization_judgement->petitioner) {
+	    size += swr_es_process_t_size(event_authorization_judgement->petitioner);
+	}
 	size += sizeof(int);
 	size += sizeof(size_t);
-	size += swr_es_authorization_result_t_size(event_authorization_judgement->results);
+	size += sizeof(_Bool);
+	if (event_authorization_judgement->results) {
+	    size += swr_es_authorization_result_t_size(event_authorization_judgement->results);
+	}
     return size;
 }
 
 size_t swr_es_event_authorization_judgement_t_write(es_event_authorization_judgement_t *event_authorization_judgement, void *p) {
     size_t size = 0;
 	size += swr_es_process_t_write(event_authorization_judgement->instigator, p+size);
-	size += swr_es_process_t_write(event_authorization_judgement->petitioner, p+size);
+	if (event_authorization_judgement->petitioner) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_process_t_write(event_authorization_judgement->petitioner, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	*(int*)(p+size) = event_authorization_judgement->return_code;
 	size += sizeof(int);
 	*(size_t*)(p+size) = event_authorization_judgement->result_count;
 	size += sizeof(size_t);
-	size += swr_es_authorization_result_t_write(event_authorization_judgement->results, p+size);
+	if (event_authorization_judgement->results) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_authorization_result_t_write(event_authorization_judgement->results, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
     return size;
 }
 
@@ -3880,14 +4110,22 @@ size_t swr_es_event_authorization_judgement_t_read(es_event_authorization_judgem
     size_t size = 0;
 	event_authorization_judgement->instigator = malloc(sizeof(es_process_t));
 	size += swr_es_process_t_read(event_authorization_judgement->instigator, p+size);
-	event_authorization_judgement->petitioner = malloc(sizeof(es_process_t));
-	size += swr_es_process_t_read(event_authorization_judgement->petitioner, p+size);
+	_Bool petitioner_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (petitioner_has) {
+	    event_authorization_judgement->petitioner = malloc(sizeof(es_process_t));
+	    size += swr_es_process_t_read(event_authorization_judgement->petitioner, p+size);
+	}
 	event_authorization_judgement->return_code = *(int*)(p+size);
 	size += sizeof(int);
 	event_authorization_judgement->result_count = *(size_t*)(p+size);
 	size += sizeof(size_t);
-	event_authorization_judgement->results = malloc(sizeof(es_authorization_result_t));
-	size += swr_es_authorization_result_t_read(event_authorization_judgement->results, p+size);
+	_Bool results_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (results_has) {
+	    event_authorization_judgement->results = malloc(sizeof(es_authorization_result_t));
+	    size += swr_es_authorization_result_t_read(event_authorization_judgement->results, p+size);
+	}
     return size;
 }
 
@@ -4259,7 +4497,10 @@ size_t swr_es_event_od_attribute_set_t_size(es_event_od_attribute_set_t *event_o
 	size += swr_es_string_token_t_size(&(event_od_attribute_set->record_name));
 	size += swr_es_string_token_t_size(&(event_od_attribute_set->attribute_name));
 	size += sizeof(size_t);
-	size += swr_es_string_token_t_size(event_od_attribute_set->attribute_values);
+	size += sizeof(_Bool);
+	if (event_od_attribute_set->attribute_values) {
+	    size += swr_es_string_token_t_size(event_od_attribute_set->attribute_values);
+	}
 	size += swr_es_string_token_t_size(&(event_od_attribute_set->node_name));
 	size += swr_es_string_token_t_size(&(event_od_attribute_set->db_path));
     return size;
@@ -4276,7 +4517,14 @@ size_t swr_es_event_od_attribute_set_t_write(es_event_od_attribute_set_t *event_
 	size += swr_es_string_token_t_write(&(event_od_attribute_set->attribute_name), p+size);
 	*(size_t*)(p+size) = event_od_attribute_set->attribute_value_count;
 	size += sizeof(size_t);
-	size += swr_es_string_token_t_write(event_od_attribute_set->attribute_values, p+size);
+	if (event_od_attribute_set->attribute_values) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_string_token_t_write(event_od_attribute_set->attribute_values, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	size += swr_es_string_token_t_write(&(event_od_attribute_set->node_name), p+size);
 	size += swr_es_string_token_t_write(&(event_od_attribute_set->db_path), p+size);
     return size;
@@ -4294,8 +4542,12 @@ size_t swr_es_event_od_attribute_set_t_read(es_event_od_attribute_set_t *event_o
 	size += swr_es_string_token_t_read(&(event_od_attribute_set->attribute_name), p+size);
 	event_od_attribute_set->attribute_value_count = *(size_t*)(p+size);
 	size += sizeof(size_t);
-	event_od_attribute_set->attribute_values = malloc(sizeof(es_string_token_t));
-	size += swr_es_string_token_t_read(event_od_attribute_set->attribute_values, p+size);
+	_Bool attribute_values_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (attribute_values_has) {
+	    event_od_attribute_set->attribute_values = malloc(sizeof(es_string_token_t));
+	    size += swr_es_string_token_t_read(event_od_attribute_set->attribute_values, p+size);
+	}
 	size += swr_es_string_token_t_read(&(event_od_attribute_set->node_name), p+size);
 	size += swr_es_string_token_t_read(&(event_od_attribute_set->db_path), p+size);
     return size;
@@ -4977,7 +5229,10 @@ size_t swr_es_message_t_size(es_message_t *message) {
 			break;
 	}
 
-	size += swr_es_thread_t_size(message->thread);
+	size += sizeof(_Bool);
+	if (message->thread) {
+	    size += swr_es_thread_t_size(message->thread);
+	}
 	size += sizeof(uint64_t);
     return size;
 }
@@ -5453,7 +5708,14 @@ size_t swr_es_message_t_write(es_message_t *message, void *p) {
 			break;
 	}
 
-	size += swr_es_thread_t_write(message->thread, p+size);
+	if (message->thread) {
+	    *(_Bool *)(p+size) = true;
+	    size += sizeof(_Bool);
+	    size += swr_es_thread_t_write(message->thread, p+size);
+	} else {
+	    *(_Bool *)(p+size) = false;
+	    size += sizeof(_Bool);
+	}
 	*(uint64_t*)(p+size) = message->global_seq_num;
 	size += sizeof(uint64_t);
     return size;
@@ -5966,8 +6228,12 @@ size_t swr_es_message_t_read(es_message_t *message, void *p) {
 			break;
 	}
 
-	message->thread = malloc(sizeof(es_thread_t));
-	size += swr_es_thread_t_read(message->thread, p+size);
+	_Bool thread_has = *(_Bool *)(p+size);
+	size += sizeof(_Bool);
+	if (thread_has) {
+	    message->thread = malloc(sizeof(es_thread_t));
+	    size += swr_es_thread_t_read(message->thread, p+size);
+	}
 	message->global_seq_num = *(uint64_t*)(p+size);
 	size += sizeof(uint64_t);
     return size;

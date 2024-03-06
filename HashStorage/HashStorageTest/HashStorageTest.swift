@@ -46,4 +46,15 @@ final class HashStorageTest: XCTestCase {
         let res = hashForFile("/Users/msi/Desktop/ast.json")
         print(res)
     }
+    
+    func testFileSize() {
+        let max = 25600
+        var sum = 0
+        var size = 1
+        while sum < max {
+            sum = sum + size
+            print("sum:\(sum), size:\(size)")
+            size = size * 2
+        }
+    }
 }

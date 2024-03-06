@@ -20,7 +20,7 @@
 		1C7D5DBB2ADE702900FB5D23 /* IORPropertyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7D5DB72ADE702900FB5D23 /* IORPropertyController.swift */; };
 		1C7D5DBC2ADE702900FB5D23 /* PropertyDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7D5DB82ADE702900FB5D23 /* PropertyDataCell.swift */; };
 		1CA412DF2AD2AC0E009830C4 /* EmbedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA412DE2AD2AC0E009830C4 /* EmbedViewController.swift */; };
-		1CA412E12AD2B1E3009830C4 /* OneTextFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA412E02AD2B1E3009830C4 /* OneTextFieldController.swift */; };
+		1CAA645A2B970362005FBF32 /* AppDelegate_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAA64592B970362005FBF32 /* AppDelegate_test.swift */; };
 		6E7C4A782AD2F47C00E5CE95 /* ContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C4A772AD2F47C00E5CE95 /* ContentController.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +43,7 @@
 		1C7D5DB72ADE702900FB5D23 /* IORPropertyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IORPropertyController.swift; sourceTree = "<group>"; };
 		1C7D5DB82ADE702900FB5D23 /* PropertyDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyDataCell.swift; sourceTree = "<group>"; };
 		1CA412DE2AD2AC0E009830C4 /* EmbedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedViewController.swift; sourceTree = "<group>"; };
-		1CA412E02AD2B1E3009830C4 /* OneTextFieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTextFieldController.swift; sourceTree = "<group>"; };
+		1CAA64592B970362005FBF32 /* AppDelegate_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate_test.swift; sourceTree = "<group>"; };
 		6E7C4A772AD2F47C00E5CE95 /* ContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +86,7 @@
 				1C151DE02AAAF9D400CFA6E6 /* AppDelegate.swift */,
 				1C151DE42AAAF9D500CFA6E6 /* Assets.xcassets */,
 				1C151DE92AAAF9D500CFA6E6 /* EventsUI.entitlements */,
+				1CAA64592B970362005FBF32 /* AppDelegate_test.swift */,
 			);
 			path = EventsUI;
 			sourceTree = "<group>";
@@ -151,7 +152,6 @@
 				1C7D5DB42ADE6FE400FB5D23 /* propertyController */,
 				1C151DE62AAAF9D500CFA6E6 /* Main.storyboard */,
 				1C151DE22AAAF9D400CFA6E6 /* MainViewController.swift */,
-				1CA412E02AD2B1E3009830C4 /* OneTextFieldController.swift */,
 				6E7C4A772AD2F47C00E5CE95 /* ContentController.swift */,
 			);
 			path = Main;
@@ -192,7 +192,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					1C151DDC2AAAF9D400CFA6E6 = {
@@ -240,10 +240,10 @@
 				1C151E062AAB03B600CFA6E6 /* XpcClient.swift in Sources */,
 				1C151E032AAB004500CFA6E6 /* swr.c in Sources */,
 				1C7D5DB92ADE702900FB5D23 /* PropertyCell.swift in Sources */,
-				1CA412E12AD2B1E3009830C4 /* OneTextFieldController.swift in Sources */,
 				1C151DE32AAAF9D400CFA6E6 /* MainViewController.swift in Sources */,
 				1C7D5DBC2ADE702900FB5D23 /* PropertyDataCell.swift in Sources */,
 				1C151DE12AAAF9D400CFA6E6 /* AppDelegate.swift in Sources */,
+				1CAA645A2B970362005FBF32 /* AppDelegate_test.swift in Sources */,
 				1CA412DF2AD2AC0E009830C4 /* EmbedViewController.swift in Sources */,
 				1C7D5DBB2ADE702900FB5D23 /* IORPropertyController.swift in Sources */,
 				1C7D5DBA2ADE702900FB5D23 /* PropertyNode.swift in Sources */,

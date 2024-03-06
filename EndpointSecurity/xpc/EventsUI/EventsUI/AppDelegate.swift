@@ -10,6 +10,7 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        xpc_test()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -23,5 +24,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
     }
+    
 }
 
+extension AppDelegate {
+    @IBAction func Preferences(_ sender: NSMenuItem) {
+        guard let ctl = NSStoryboard(name: "Preferences", bundle: nil).instantiateInitialController() as? NSViewController else {
+            abort()
+        }
+        NSApplication.shared.mainWindow?.contentViewController?.presentAsModalWindow(ctl)
+    }
+}

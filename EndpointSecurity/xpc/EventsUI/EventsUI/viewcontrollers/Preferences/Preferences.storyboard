@@ -36,7 +36,7 @@
         <!--Tab View Controller-->
         <scene sceneID="ant-3Y-ljR">
             <objects>
-                <tabViewController selectedTabViewItemIndex="1" id="tDD-dR-xek" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" id="tDD-dR-xek" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="服务" identifier="" id="hs7-V3-eC2"/>
                         <tabViewItem label="事件类型" identifier="" id="2P6-Qy-OJY"/>
@@ -64,13 +64,49 @@
             <objects>
                 <viewController id="Fjb-qc-thz" sceneMemberID="viewController">
                     <view key="view" id="n7t-K5-fFB">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="220"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="6Bv-vd-vsD">
+                                <rect key="frame" x="20" y="20" width="410" height="180"/>
+                                <subviews>
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G8E-sa-g9i">
+                                        <rect key="frame" x="-2" y="164" width="46" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="server:" id="44f-4r-MfK">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="byv-On-man">
+                                        <rect key="frame" x="0.0" y="128" width="410" height="21"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="com.caidev.EService" drawsBackground="YES" id="BzU-jU-wqb">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="G8E-sa-g9i" firstAttribute="leading" secondItem="6Bv-vd-vsD" secondAttribute="leading" id="4Kg-VW-95R"/>
+                                    <constraint firstItem="byv-On-man" firstAttribute="leading" secondItem="6Bv-vd-vsD" secondAttribute="leading" id="6td-hg-p6a"/>
+                                    <constraint firstAttribute="trailing" secondItem="byv-On-man" secondAttribute="trailing" id="TRD-NT-nSV"/>
+                                    <constraint firstItem="byv-On-man" firstAttribute="top" secondItem="G8E-sa-g9i" secondAttribute="bottom" constant="15" id="nEE-g4-0i5"/>
+                                    <constraint firstItem="G8E-sa-g9i" firstAttribute="top" secondItem="6Bv-vd-vsD" secondAttribute="top" id="xyh-yf-kNN"/>
+                                </constraints>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="6Bv-vd-vsD" firstAttribute="top" secondItem="n7t-K5-fFB" secondAttribute="top" constant="20" symbolic="YES" id="55p-Gi-fLW"/>
+                            <constraint firstAttribute="trailing" secondItem="6Bv-vd-vsD" secondAttribute="trailing" constant="20" symbolic="YES" id="DqY-zp-mC9"/>
+                            <constraint firstItem="6Bv-vd-vsD" firstAttribute="leading" secondItem="n7t-K5-fFB" secondAttribute="leading" constant="20" symbolic="YES" id="bXd-yI-Z2A"/>
+                            <constraint firstAttribute="bottom" secondItem="6Bv-vd-vsD" secondAttribute="bottom" constant="20" symbolic="YES" id="jFw-kJ-UNj"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="wOP-Dh-oGE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1224" y="-128"/>
+            <point key="canvasLocation" x="1117" y="-158"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="9qN-of-qvd">

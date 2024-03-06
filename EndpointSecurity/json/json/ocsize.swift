@@ -232,18 +232,45 @@ extension Struct {
     
     func onCustomStructPointer(_ mem: Member,_ ctx: String,_ indentation: String = "\t", ext: String = "") {
         if Self.debug {
-            Self.addLine("\(indentation)//\(#function)")
+            Self.addLine("\(indentation)//\(#function):\(mem.type)  \(mem.name)")
         }
         
         let otype = mem.orginType()
         switch Self.funType {
         case .size:
-            Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_size(\(ctx)\(mem.name));")
+            if mem.isNullable() { //有可能是null的指针
+                Self.addLine("\(indentation)size += sizeof(_Bool);")
+                Self.addLine("\(indentation)if (\(ctx)\(mem.name)) {")
+                Self.addLine("\(indentation)    size += \(funcPrefix)\(otype)_size(\(ctx)\(mem.name));")
+                Self.addLine("\(indentation)}")
+            } else {
+                Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_size(\(ctx)\(mem.name));")
+            }
         case .write:
-            Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_write(\(ctx)\(mem.name), p+size);")
+            if mem.isNullable() {
+                Self.addLine("\(indentation)if (\(ctx)\(mem.name)) {")
+                Self.addLine("\(indentation)    *(_Bool *)(p+size) = true;")
+                Self.addLine("\(indentation)    size += sizeof(_Bool);")
+                Self.addLine("\(indentation)    size += \(funcPrefix)\(otype)_write(\(ctx)\(mem.name), p+size);")
+                Self.addLine("\(indentation)} else {")
+                Self.addLine("\(indentation)    *(_Bool *)(p+size) = false;")
+                Self.addLine("\(indentation)    size += sizeof(_Bool);")
+                Self.addLine("\(indentation)}")
+            } else {
+                Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_write(\(ctx)\(mem.name), p+size);")
+            }
         case .read:
-            Self.addLine("\(indentation)\(ctx)\(mem.name) = malloc(sizeof(\(otype)));")
-            Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_read(\(ctx)\(mem.name), p+size);")
+            if mem.isNullable() {
+                Self.addLine("\(indentation)_Bool \(mem.name)_has = *(_Bool *)(p+size);")
+                Self.addLine("\(indentation)size += sizeof(_Bool);")
+                Self.addLine("\(indentation)if (\(mem.name)_has) {")
+                Self.addLine("\(indentation)    \(ctx)\(mem.name) = malloc(sizeof(\(otype)));")
+                Self.addLine("\(indentation)    size += \(funcPrefix)\(otype)_read(\(ctx)\(mem.name), p+size);")
+                Self.addLine("\(indentation)}")
+            } else {
+                Self.addLine("\(indentation)\(ctx)\(mem.name) = malloc(sizeof(\(otype)));")
+                Self.addLine("\(indentation)size += \(funcPrefix)\(otype)_read(\(ctx)\(mem.name), p+size);")
+            }
         case .headerfile:
             break
         case .toDic:

@@ -139,6 +139,10 @@ class Member {
         }
         return false
     }
+    
+    func isNullable() -> Bool {
+        type.contains("_Nullable")
+    }
 }
 
 class Struct {

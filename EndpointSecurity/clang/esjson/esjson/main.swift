@@ -12,7 +12,7 @@ var astDic: [String: AstBase] = [:]
 func astAnalys() {
 //    let jsonFile = "/Users/lyf/git/github/sync/EndpointSecurity/clang/EndpointSecurity.json"
 //    let jsonFile = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/clang/EndpointSecurity.json"
-    let jsonFile = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/clang/main.json"
+    let jsonFile = "/Users/lyf/git/github/sync/EndpointSecurity/clang/EndpointSecurity.json"
     let data = try! Data(contentsOf: URL(filePath: jsonFile))
     let dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
 
