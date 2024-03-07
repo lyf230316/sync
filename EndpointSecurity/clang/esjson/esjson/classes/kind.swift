@@ -26,6 +26,17 @@ class TypeDef: AstBase {
     
     override init(_ dic: [String: Any]) {
         qualType = (dic["type"] as! [String: Any])["qualType"] as! String
+        if let inners = dic["inner"] as? [[String: Any]] {
+            for inner in inners {
+                if let kind = inner["kind"] as? String {
+                    if kind == "BuiltinType" {
+                        let bt = BuiltinType(inner)
+                        astDic[bt.id] = bt
+                        allIds.append(bt.id)
+                    }
+                }
+            }
+        }
         super.init(dic)
     }
 }
@@ -35,12 +46,16 @@ class TypeDef: AstBase {
 class Field: AstBase {
     var type: String = ""
     var record: Record? = nil
+    var anonymous: Bool = false //匿名
     override init(_ dic: [String : Any]) {
         if let tdic = dic["type"] as? [String: Any] {
             if let t = tdic["qualType"] as? String {
                 let regex = try! NSRegularExpression(pattern: "\\(.*\\)", options: NSRegularExpression.Options.caseInsensitive)
                 let range = NSMakeRange(0, t.count)
                 let modString = regex.stringByReplacingMatches(in: t, options: [], range: range, withTemplate: "XX")
+                if modString != t {
+                    anonymous = true
+                }
                 type = modString
             }
         }
@@ -130,6 +145,24 @@ class Var: AstBase {
         }
         storageClass = dic["storageClass"] as! String
         mangledName = dic["mangledName"] as! String
+        super.init(dic)
+    }
+}
+
+class BuiltinType: AstBase {
+    var qualType: String
+    
+    override init(_ dic: [String: Any]) {
+        qualType = (dic["type"] as! [String: Any])["qualType"] as! String
+        super.init(dic)
+    }
+}
+
+class Pointer: AstBase {
+    var qualType: String
+    
+    override init(_ dic: [String: Any]) {
+        qualType = (dic["type"] as! [String: Any])["qualType"] as! String
         super.init(dic)
     }
 }
