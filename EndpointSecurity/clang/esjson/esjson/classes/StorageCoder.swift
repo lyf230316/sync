@@ -43,7 +43,11 @@ func buildInType(_ name: String) -> String {
 
 var typeDic: [String: String] = [:]
 
-class StorageCoder: Ccode {
+class StorageCoder {
+    
+}
+
+extension StorageCoder: Ccode {
     
     func Ccode(_ t: TypeDef) -> String {
         var ccode = ""
@@ -52,46 +56,77 @@ class StorageCoder: Ccode {
         return ccode
     }
     
-    func Ccode(_ record: Record) -> String {
+    func Ccode(_ record: Record, filedName: String? = nil) -> String {
         var ccode = ""
         if record.tagUsed == "struct" {
-            ccode.append("struct \(record.name){\n")
+            if record.name == "" {
+                ccode.append("struct {\n")
+            } else {
+                ccode.append("struct stg_\(record.name){\n")
+            }
             for fld in record.fields {
                 if fld.anonymous {
                     continue
                 }
-                if fld.name.hasPrefix("reserved") {
+                if fld.name.hasPrefix("reserved") || fld.name.hasPrefix("opaque") {
                     continue
                 }
                 if !fld.type.isEmpty {
-                    ccode.append("\t\(fld.type) \(fld.name);\n")
+                    if fld.type.hasPrefix("es_") && !buildInType(fld.type).hasPrefix("enum") {
+                        ccode.append("\tstg_\(fld.type) \(fld.name);\n")
+                    } else {
+                        ccode.append("\t\(fld.type) \(fld.name);\n")
+                    }
                 } else if let rcrd = fld.record {
-                    let cstr = Ccode(rcrd)
+                    let cstr = Ccode(rcrd, filedName: fld.name)
                     for ln in cstr.split(separator: "\n") {
                         ccode.append("\t\(ln)\n")
                     }
                 }
             }
-            ccode.append("};\n")
+            if let filedName = filedName {
+                ccode.append("} \(filedName);\n")
+            } else {
+                ccode.append("};\n")
+            }
         } else if record.tagUsed == "union" {
-            ccode.append("union \(record.name){\n")
+            if record.name == "" {
+                ccode.append("union {\n")
+            } else {
+                ccode.append("union stg_\(record.name){\n")
+            }
             for fld in record.fields {
                 if fld.anonymous {
                     continue
                 }
-                if fld.name.hasPrefix("reserved") {
+                if fld.name.hasPrefix("reserved") || fld.name.hasPrefix("opaque") {
                     continue
                 }
                 if !fld.type.isEmpty {
-                    ccode.append("\t\(fld.type) \(fld.name);\n")
+                    var codeType = fld.type
+                    if fld.type.hasPrefix("es_") {
+                        if !buildInType(fld.type).hasPrefix("enum") {
+                            codeType = "stg_\(fld.type)"
+                        }
+                    }
+                    if codeType.contains("* _Nonnull") || codeType.contains("* _Nullable") {
+                        
+                    } else {
+                        codeType = codeType + " * _Nonnull"
+                    }
+                    ccode.append("\t\(codeType) \(fld.name);\n")
                 } else if let rcrd = fld.record {
-                    let cstr = Ccode(rcrd)
+                    let cstr = Ccode(rcrd, filedName: fld.name)
                     for ln in cstr.split(separator: "\n") {
                         ccode.append("\t\(ln)\n")
                     }
                 }
             }
-            ccode.append("};\n")
+            if let filedName = filedName {
+                ccode.append("} \(filedName);\n")
+            } else {
+                ccode.append("};\n")
+            }
         }
         return ccode
     }

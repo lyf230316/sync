@@ -18,7 +18,7 @@ extension originCoder : Ccode {
         return ccode
     }
     
-    func Ccode(_ record: Record) -> String {
+    func Ccode(_ record: Record,filedName: String? = nil) -> String {
         var ccode = ""
         if record.tagUsed == "struct" {
             ccode.append("struct \(record.name){\n")

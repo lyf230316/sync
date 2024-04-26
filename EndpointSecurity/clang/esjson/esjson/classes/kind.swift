@@ -73,23 +73,33 @@ class Record: AstBase {
             completeDefinition = cd
         }
         tagUsed = dic["tagUsed"] as! String
+        fields = []
+        super.init(dic)
         if let fds = dic["inner"] as? [[String: Any]] {
             var fdarr: [Field] = []
-            fds.forEach { fd in
+            var i = 0
+            while i < fds.count {
+                let fd = fds[i];
                 if let kind = fd["kind"] as? String {
                     if kind == "FieldDecl" {
                         fdarr.append(Field(fd))
                     } else if kind == "RecordDecl" {
                         let rcd = Record(fd)
                         let fld = Field(fd)
+                        i += 1
+                        let next = fds[i];
+                        if let name = next["name"] as? String {
+                            fld.name = name
+                        }
                         fld.record = rcd
                         fdarr.append(fld)
                     }
                 }
+                i += 1
             }
             fields = fdarr
         }
-        super.init(dic)
+        
     }
 }
 

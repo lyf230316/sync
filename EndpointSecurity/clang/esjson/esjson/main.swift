@@ -43,13 +43,13 @@ func restoreDic(_ org: [String: Any]) -> [String: Any] {
 }
 
 func removeLocAndRange() {
-    let jsonFile = "/Users/lyf/git/github/sync/EndpointSecurity/clang/EndpointSecurity.json"
+    let jsonFile = "/Users/msi/Documents/GitHub/sync/EndpointSecurity/clang/EndpointSecurity.json"
     let data = try! Data(contentsOf: URL(filePath: jsonFile))
     var dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
     
     let ndic = restoreDic(dic)
     let ndata = try! JSONSerialization.data(withJSONObject: ndic)
-    try! ndata.write(to: URL(filePath: "/Users/lyf/git/github/sync/EndpointSecurity/clang/EndpointSecurity_l.json"), options: .atomic)
+    try! ndata.write(to: URL(filePath: "/Users/msi/Documents/GitHub/sync/EndpointSecurity/clang/EndpointSecurity_l.json"), options: .atomic)
 }
 
 removeLocAndRange()
@@ -57,7 +57,7 @@ removeLocAndRange()
 func astAnalys() {
     //    let jsonFile = "/Users/lyf/git/github/sync/EndpointSecurity/clang/EndpointSecurity.json"
     //    let jsonFile = "/Users/msi/git/github/lyf230316/sync/EndpointSecurity/clang/EndpointSecurity.json"
-    let jsonFile = "/Users/lyf/git/github/sync/EndpointSecurity/clang/EndpointSecurity_l.json"
+    let jsonFile = "/Users/msi/Documents/GitHub/sync/EndpointSecurity/clang/EndpointSecurity_l.json"
     let data = try! Data(contentsOf: URL(filePath: jsonFile))
     let dic = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
     
@@ -145,6 +145,9 @@ func astAnalys() {
         }
     }
     
+    let msg = nameDic["es_message_t"]
+    print(msg)
+    
     //源代码
     for (k, v) in astDic {
         let coder = originCoder()
@@ -159,6 +162,15 @@ func astAnalys() {
     }
     
     //便于存储的代码
+    var stg_h = """
+#ifndef swr_h
+#define swr_h
+
+#include <string.h>
+#include <stdlib.h>
+#include <EndpointSecurity/EndpointSecurity.h>
+
+"""
     for (k) in allIds {
         let v = astDic[k]
         let coder = StorageCoder()
@@ -167,21 +179,24 @@ func astAnalys() {
                 v.tagUsed == "union" {
                 if v.name.hasPrefix("es_") {
                     let code = coder.Ccode(v)
-                    print(code)
+                    stg_h.append(code)
+                    stg_h.append("\n")
                 }
             }
         } else if let v = v as? Enum {
             if v.name.hasPrefix("es_") {
                 let code = coder.Ccode(v)
-                print(code)
+                stg_h.append(code)
+                stg_h.append("\n")
             }
         } else if let v = v as? TypeDef {
             let code = coder.Ccode(v)
 //            print(code)
         }
     }
+    print(stg_h)
     
-    print(typeDic as NSDictionary)
+//    print(typeDic as NSDictionary)
 }
 
 
